@@ -1,0 +1,578 @@
+/**
+ * Infinite Ages: Genesis - Sci-Fi Styling System
+ * File: styles.css
+ * Purpose: Custom stylesheet for styling the dashboard layout, fonts, colors,
+ *          glassmorphic EVE-style panels, neon gradients, scrollbars,
+ *          and providing smooth hover transitions for buttons.
+ */
+
+/* Import premium futuristic typography */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Outfit:wght@300;400;600;700&display=swap');
+
+/* Modern CSS Reset & Variable Tokens */
+:root {
+  --font-header: 'Orbitron', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* HSL Tailored Harmonious Color Scheme */
+  --bg-deep: hsl(220, 25%, 6%);
+  --bg-mid: hsl(220, 20%, 10%);
+  --bg-panel: hsla(220, 20%, 12%, 0.75);
+  --border-neon: hsla(180, 80%, 40%, 0.25);
+  --border-neon-active: hsla(180, 100%, 50%, 0.6);
+  
+  --text-main: hsl(210, 20%, 90%);
+  --text-muted: hsl(210, 10%, 65%);
+  --text-cyan: hsl(180, 100%, 45%);
+  --text-cyan-glow: hsla(180, 100%, 45%, 0.2);
+  --text-orange: hsl(28, 100%, 50%);
+  
+  --accent-cyan: hsl(180, 100%, 45%);
+  --accent-orange: hsl(28, 100%, 50%);
+  --accent-danger: hsl(350, 80%, 50%);
+  --accent-success: hsl(140, 70%, 45%);
+
+  --shadow-neon: 0 0 15px hsla(180, 100%, 45%, 0.15);
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(at 10% 20%, hsla(230, 40%, 10%, 0.5) 0px, transparent 50%),
+    radial-gradient(at 90% 80%, hsla(180, 40%, 10%, 0.3) 0px, transparent 50%);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-block-size: 100dvb;
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  inline-size: 6px;
+  block-size: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-mid);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-cyan-glow);
+  border-radius: 3px;
+  border: 1px solid var(--border-neon);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-cyan);
+}
+
+/* Main Dashboard Header */
+.main-header {
+  background-color: var(--bg-mid);
+  border-block-end: 1px solid var(--border-neon);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.logo h1 {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, var(--text-main) 30%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo h1::after {
+  content: "GENESIS";
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--accent-orange);
+  border: 1px solid var(--accent-orange);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-inline-start: 0.5rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Custom file upload wrapper */
+.file-upload-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.file-upload-wrapper input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* 2D CSS Grid Layout Structure */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  flex: 1;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  max-inline-size: 1600px;
+  margin: 0 auto;
+  inline-size: 100%;
+  box-sizing: border-box;
+}
+
+/* Interactive Glassmorphic Panels */
+.panel {
+  background: var(--bg-panel);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-neon);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-neon), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.panel:hover {
+  border-color: var(--border-neon-active);
+  box-shadow: 0 0 20px hsla(180, 100%, 45%, 0.25);
+}
+
+.panel-header {
+  background: hsla(220, 20%, 8%, 0.9);
+  padding: 0.75rem 1rem;
+  border-block-end: 1px solid var(--border-neon);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-header h2 {
+  font-family: var(--font-header);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-cyan);
+  text-transform: uppercase;
+}
+
+.panel-body {
+  padding: 1.25rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Left & Right Sidebars specific alignment */
+.sidebar-left, .sidebar-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Center Panel (Story Narrative Area) */
+.story-panel {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  gap: 2rem;
+}
+
+.story-header h2 {
+  font-family: var(--font-header);
+  font-size: 1.3rem;
+  color: var(--accent-cyan);
+  border-block-end: 1px solid var(--border-neon);
+  padding-block-end: 0.5rem;
+  margin-block-end: 1rem;
+  letter-spacing: 1px;
+}
+
+.story-narrative {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-main);
+  flex-grow: 1;
+}
+
+.story-narrative p {
+  margin-block-end: 1rem;
+}
+
+.warning-text {
+  color: var(--accent-orange);
+  font-weight: bold;
+}
+
+.success-text {
+  color: var(--accent-success);
+  font-weight: bold;
+}
+
+/* Action Choice Buttons */
+.choices-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-block-start: auto;
+}
+
+.action-btn {
+  background: linear-gradient(135deg, hsla(180, 80%, 20%, 0.4), hsla(180, 80%, 10%, 0.4));
+  border: 1px solid var(--border-neon);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.action-btn:hover:not(.disabled) {
+  background: linear-gradient(135deg, hsla(180, 80%, 30%, 0.6), hsla(180, 80%, 15%, 0.6));
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px hsla(180, 100%, 45%, 0.3);
+  transform: translateX(4px);
+}
+
+.action-btn.disabled {
+  background: hsla(0, 0%, 20%, 0.15);
+  border-color: hsla(0, 0%, 50%, 0.15);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.requirement-tag {
+  font-size: 0.75rem;
+  color: var(--accent-orange);
+  font-family: var(--font-header);
+  border: 1px solid var(--accent-orange);
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+/* System Save/Seed Small Buttons */
+.sys-btn {
+  background: var(--bg-mid);
+  border: 1px solid var(--border-neon);
+  color: var(--text-main);
+  font-family: var(--font-header);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sys-btn:hover {
+  border-color: var(--accent-orange);
+  color: var(--accent-orange);
+  background: hsla(28, 100%, 50%, 0.05);
+}
+
+.sys-btn-accent {
+  background: linear-gradient(135deg, hsla(28, 100%, 40%, 0.4), hsla(28, 100%, 20%, 0.4));
+  border-color: var(--accent-orange);
+}
+
+.sys-btn-accent:hover {
+  background: linear-gradient(135deg, hsla(28, 100%, 50%, 0.6), hsla(28, 100%, 25%, 0.6));
+}
+
+/* Character Sheet UI Details */
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  border-block-end: 1px solid rgba(255, 255, 255, 0.05);
+  padding-block-end: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-val {
+  font-weight: 600;
+}
+
+.stat-val-cyan {
+  color: var(--text-cyan);
+}
+
+/* HP Progress Bar */
+.hp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-block-start: 0.5rem;
+}
+
+.hp-bar-outer {
+  background: var(--bg-mid);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.hp-bar-inner {
+  background: linear-gradient(90deg, var(--accent-danger), #ff4d4d);
+  height: 100%;
+  width: 100%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Inventory Cards UI Layout */
+.inventory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inventory-card {
+  background: hsla(220, 20%, 15%, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  transition: border-color var(--transition-fast);
+}
+
+.inventory-card:hover {
+  border-color: var(--text-cyan-glow);
+}
+
+.item-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.empty-card {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+/* Quest Log UI Elements */
+.quest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quest-item {
+  background: hsla(220, 20%, 15%, 0.6);
+  border-inline-start: 4px solid var(--accent-orange);
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quest-item.completed {
+  border-inline-start-color: var(--accent-success);
+  background: hsla(140, 70%, 10%, 0.2);
+}
+
+.quest-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.quest-status {
+  font-family: var(--font-header);
+  font-size: 0.65rem;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  color: var(--accent-orange);
+}
+
+.quest-item.completed .quest-status {
+  color: var(--accent-success);
+}
+
+/* Seed & Timeline Config Elements */
+.seed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.seed-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seed-value {
+  font-family: var(--font-header);
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.new-game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.05);
+  padding-block-start: 0.75rem;
+}
+
+.new-game-form input {
+  background: var(--bg-mid);
+  border: 1px solid var(--border-neon);
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  font-family: var(--font-header);
+  font-size: 0.75rem;
+  color: var(--text-cyan);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.new-game-form input:focus {
+  border-color: var(--accent-cyan);
+}
+
+/* Interactive Dice Panel */
+.dice-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.05);
+  padding-block-start: 0.75rem;
+}
+
+.dice-result {
+  font-family: var(--font-header);
+  font-size: 0.95rem;
+  color: var(--accent-orange);
+  font-weight: bold;
+}
+
+.dice-result.flash {
+  animation: neon-flash 0.5s ease-out;
+}
+
+@keyframes neon-flash {
+  0% { text-shadow: 0 0 10px var(--accent-orange); color: #fff; }
+  100% { text-shadow: none; color: var(--accent-orange); }
+}
+
+/* History Log Bottom Pane */
+.history-panel {
+  background: var(--bg-mid);
+  border: 1px solid var(--border-neon);
+  border-radius: 8px;
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  max-inline-size: 1600px;
+  inline-size: calc(100% - 3rem);
+  box-sizing: border-box;
+  align-self: center;
+  flex: 0 0 160px;
+}
+
+.history-panel .panel-body {
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.log-line {
+  color: var(--text-muted);
+}
+
+.log-timestamp {
+  color: var(--text-cyan);
+  font-family: var(--font-header);
+  font-weight: bold;
+  margin-inline-end: 0.5rem;
+}
+
+/* Mobile responsive media query */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .story-panel {
+    grid-column: 1;
+    order: -1; /* Display story narrative on top in mobile view */
+  }
+  
+  .history-panel {
+    margin: 0 1rem 1rem 1rem;
+    inline-size: calc(100% - 2rem);
+  }
+}

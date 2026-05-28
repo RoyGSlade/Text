@@ -1,0 +1,81 @@
+{
+  "pack": "merchant_guild",
+  "quests": [
+    {
+      "id": "guild:convoy_denied",
+      "tags": [
+        "role:guild",
+        "radiant",
+        "town:blackridge",
+        "building:merchant_guild",
+        "underdog"
+      ],
+      "title": "Convoy Denied",
+      "desc": "Help Eben move stock quietly to the barracks without Guild approval. Cale's thugs are watching.",
+      "requirements": {
+        "flagsNot": [
+          "guild_ebens_helped"
+        ],
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:guard_post"
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 20,
+        "rep": [
+          {
+            "target": "npc:guild_honest",
+            "amount": 15
+          },
+          {
+            "target": "faction:town_blackridge",
+            "amount": 5
+          }
+        ],
+        "flagsSet": [
+          "guild_ebens_helped",
+          "eben_ally"
+        ]
+      }
+    },
+    {
+      "id": "guild:price_of_safety",
+      "tags": [
+        "role:guild",
+        "story",
+        "town:blackridge",
+        "building:merchant_guild"
+      ],
+      "title": "The Price of Safety",
+      "desc": "Deliver a sealed tithe to City Hall. Try not to read it. Or do.",
+      "requirements": {
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "city_hall"
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 10,
+        "rep": [
+          {
+            "target": "npc:guild_exec",
+            "amount": 3
+          }
+        ]
+      }
+    }
+  ]
+}

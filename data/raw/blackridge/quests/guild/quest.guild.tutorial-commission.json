@@ -1,0 +1,69 @@
+{
+  "id": "quest.guild.tutorial-commission",
+  "title": "How To Not Die: Commissions & Permits",
+  "tags": [
+    "adventurer_guild",
+    "tutorial",
+    "legal"
+  ],
+  "desc": "Learn the Guild flow: permit, commission, verification, and payout rules.",
+  "stages": [
+    {
+      "id": "approach-desk",
+      "text": "Speak to the Head Clerk at the Adventurer Guild.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:spokeToHeadClerk"
+        ]
+      }
+    },
+    {
+      "id": "obtain-permit",
+      "text": "Obtain a Novice Permit from the Guild.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:permitTier>=1"
+        ]
+      }
+    },
+    {
+      "id": "accept-commission",
+      "text": "Take a legal commission from the job board.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.guild.commission",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "verify-stamp",
+      "text": "Get your commission stamped by City Hall or the on-duty inspector.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.guild.stamp-cityhall",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "briefing-complete",
+      "text": "Return to the Head Clerk for final briefing.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:tutorialGuildBriefed"
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 25
+        }
+      ]
+    }
+  ]
+}

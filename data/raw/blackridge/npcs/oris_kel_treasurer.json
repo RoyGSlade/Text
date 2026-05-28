@@ -1,0 +1,23 @@
+{
+  "id": "oris_kel_treasurer",
+  "town": "blackridge",
+  "roles": [
+    "treasurer",
+    "council"
+  ],
+  "buildingId": "city_hall",
+  "name": "Oris Kel",
+  "demeanor": "precise, unbothered, transactional",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Numbers don’t care about feelings."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Invoices in triplicate. Receipts in duplicate."
+    }
+  ]
+}

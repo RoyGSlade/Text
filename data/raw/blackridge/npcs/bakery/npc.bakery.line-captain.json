@@ -1,0 +1,40 @@
+{
+  "id": "npc.bakery.line-captain",
+  "town": "blackridge",
+  "roles": [
+    "town_watch",
+    "voucher_agent"
+  ],
+  "buildingId": "warm_loaf_bakery",
+  "name": "Corin Bale",
+  "demeanor": "orderly,jaded,fair",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "br:curfewActive",
+      "text": "Keep the queue tight. Night ops double the pay, not the patience."
+    },
+    {
+      "when": "!br:curfewActive",
+      "text": "Buy during daylight if you like lines. At night, we buy in bulk."
+    },
+    {
+      "when": "br:watchMorale>=70",
+      "text": "Watch is eating again. You had a hand in that."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "true",
+      "offers": [
+        {
+          "type": "item",
+          "itemId": "item.bakery.voucher-guard",
+          "price": 0,
+          "note": "Issued only during curfew to authorized carriers."
+        }
+      ]
+    }
+  ]
+}

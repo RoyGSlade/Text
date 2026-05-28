@@ -1,0 +1,565 @@
+{
+  "scenes": {
+    "scene.guild.entry_read-the-room_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:heist.guild.cased",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.guild.entry_read-the-room_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.guild.entry": {
+      "title": "Adventurer Guild: Entry Hall",
+      "textBlocks": [
+        {
+          "when": "br:curfewActive",
+          "text": "Lanternlight smears the marble. Night dockets stack two-deep; pay doubles if you live."
+        },
+        {
+          "text": "Queues coil. A stamping rhythm from the clerk’s desk is the closest thing to mercy."
+        }
+      ],
+      "choices": [
+        {
+          "id": "to-front-desk",
+          "text": "Approach the Head Clerk",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:spokeToHeadClerk",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "leadsTo": "scene.guild.front-desk"
+        },
+        {
+          "id": "to-job-board",
+          "text": "Check the Job Board",
+          "leadsTo": "scene.guild.job-board"
+        },
+        {
+          "id": "inspectors-window",
+          "text": "Visit the Inspector’s Window",
+          "leadsTo": "scene.guild.inspection"
+        },
+        {
+          "id": "read-the-room",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 10,
+          "onSuccess": "scene.guild.entry_read-the-room_success",
+          "onFailure": "scene.guild.entry_read-the-room_failure",
+          "text": "Read the room"
+        }
+      ]
+    },
+    "scene.guild.front-desk_upgrade-permit_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.guild.front-desk_tone-check_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:repClerksFriendly",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.guild.front-desk_tone-check_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:repClerksFriendly",
+          "op": "=",
+          "value": false
+        }
+      ]
+    },
+    "scene.guild.front-desk": {
+      "title": "Front Desk",
+      "textBlocks": [
+        {
+          "text": "Edrin Vale doesn’t look up. The stamp does."
+        }
+      ],
+      "choices": [
+        {
+          "id": "apply-novice-permit",
+          "requires": {
+            "credits": 100,
+            "flagsNot": [
+              "br:permitTier>=1"
+            ],
+            "flagsAny": [
+              "br:repGuildRespected",
+              "br:repAlliesCount5"
+            ]
+          },
+          "text": "Apply for Novice Permit (100 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -100
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:permitTier",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.guild.permit.novice",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "upgrade-permit",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=1"
+            ]
+          },
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 12,
+          "onSuccess": "scene.guild.permit-upgrade",
+          "onFailure": "scene.guild.front-desk_upgrade-permit_failure",
+          "text": "Upgrade Permit (Advanced→Mythic; price scales x3 each tier)"
+        },
+        {
+          "id": "clerk-briefing",
+          "text": "Request briefing on legal commissions",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:tutorialGuildBriefed",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "tone-check",
+          "type": "skillCheck",
+          "skill": "Insight",
+          "dc": 11,
+          "onSuccess": "scene.guild.front-desk_tone-check_success",
+          "onFailure": "scene.guild.front-desk_tone-check_failure",
+          "text": "Gauge the clerk’s mood"
+        }
+      ]
+    },
+    "scene.guild.permit-upgrade": {
+      "title": "Permit Upgrade Counter",
+      "textBlocks": [
+        {
+          "text": "Hessa Marr flips a rate card that triples every line. 'Think you can handle it? Paperwork can’t resurrect you.'"
+        }
+      ],
+      "choices": [
+        {
+          "id": "buy-advanced",
+          "requires": {
+            "credits": 300,
+            "flagsAny": [
+              "br:permitTier==1"
+            ]
+          },
+          "text": "Buy Advanced (300 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -300
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:permitTier",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.guild.permit.advanced",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "buy-expert",
+          "requires": {
+            "credits": 900,
+            "flagsAny": [
+              "br:permitTier==2"
+            ]
+          },
+          "text": "Buy Expert (900 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -900
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:permitTier",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.guild.permit.expert",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "buy-legendary",
+          "requires": {
+            "credits": 2700,
+            "flagsAny": [
+              "br:permitTier==3"
+            ]
+          },
+          "text": "Buy Legendary (2700 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -2700
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:permitTier",
+              "op": "=",
+              "value": 4
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.guild.permit.legendary",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "buy-mythic",
+          "requires": {
+            "credits": 8100,
+            "flagsAny": [
+              "br:permitTier==4"
+            ]
+          },
+          "text": "Buy Mythic (8100 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -8100
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:permitTier",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.guild.permit.mythic",
+              "qty": 1
+            }
+          ]
+        }
+      ]
+    },
+    "scene.guild.job-board_board-assess_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:bountyPriorityHigh",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.guild.job-board_board-assess_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:bountyPriorityHigh",
+          "op": "=",
+          "value": false
+        }
+      ]
+    },
+    "scene.guild.job-board": {
+      "title": "Job Board",
+      "textBlocks": [
+        {
+          "text": "Wooden slats groan under notices: monsters, escorts, and missing forms that go hunt you back."
+        },
+        {
+          "when": "br:curfewActive",
+          "text": "Night posts are marked with doubled payout and a black ribbon."
+        }
+      ],
+      "choices": [
+        {
+          "id": "post-wolves",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=1"
+            ]
+          },
+          "text": "Commission: Ravenous Wolves (10–25 cr; Beast)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:commission.type",
+              "op": "=",
+              "value": "wolves"
+            }
+          ]
+        },
+        {
+          "id": "post-megaspider",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=1"
+            ]
+          },
+          "text": "Commission: Mega Scorpion/Spider (25–50 cr; Mutated Bug)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:commission.type",
+              "op": "=",
+              "value": "megaspider"
+            }
+          ]
+        },
+        {
+          "id": "post-shadow",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=2"
+            ]
+          },
+          "text": "Commission: Shadow Eaters (100+ cr; Magical Sneak)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:commission.type",
+              "op": "=",
+              "value": "shadow"
+            }
+          ]
+        },
+        {
+          "id": "post-feedems",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=3"
+            ]
+          },
+          "text": "Commission: Feedems (250+ cr; Venom, Hit-and-Run)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:commission.type",
+              "op": "=",
+              "value": "feedems"
+            }
+          ]
+        },
+        {
+          "id": "post-bolobear",
+          "requires": {
+            "flagsAny": [
+              "br:permitTier>=4"
+            ]
+          },
+          "text": "Commission: BoloBear (1000+ cr; Huge, Multi-bite)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:commission.type",
+              "op": "=",
+              "value": "bolobear"
+            }
+          ]
+        },
+        {
+          "id": "board-refresh",
+          "requires": {
+            "flagsAny": [
+              "br:open"
+            ]
+          },
+          "text": "Wait for board refresh (hourly)",
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "br:bountyRefreshTick",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "board-assess",
+          "type": "skillCheck",
+          "skill": "Insight",
+          "dc": 12,
+          "onSuccess": "scene.guild.job-board_board-assess_success",
+          "onFailure": "scene.guild.job-board_board-assess_failure",
+          "text": "Assess board difficulty"
+        }
+      ]
+    },
+    "scene.guild.inspection_verify-commission_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "item.guild.stamp-cityhall",
+          "qty": 1
+        }
+      ]
+    },
+    "scene.guild.inspection_verify-commission_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.guild.inspection_recover-lost-gear_success": {
+      "actions": [
+        {
+          "type": "type",
+          "note": "GM/engine hook: enumerate lost items and charge per-item. Placeholder token issued."
+        },
+        {
+          "type": "addItem",
+          "itemId": "item.guild.recovery-claim",
+          "qty": 1
+        }
+      ]
+    },
+    "scene.guild.inspection_recover-lost-gear_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.guild.inspection_spot-odd-files_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "item.guild.file-lantern-proof",
+          "qty": 1
+        }
+      ]
+    },
+    "scene.guild.inspection_spot-odd-files_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:heist.guild.targetMarked",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.guild.inspection": {
+      "title": "Inspector’s Window",
+      "textBlocks": [
+        {
+          "text": "Hessa Marr flips a stamp and a ledger. 'If City Hall didn’t stamp it, I can… if it’s legit.'"
+        }
+      ],
+      "choices": [
+        {
+          "id": "verify-commission",
+          "requires": {
+            "have": [
+              {
+                "itemId": "item.guild.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 11,
+          "onSuccess": "scene.guild.inspection_verify-commission_success",
+          "onFailure": "scene.guild.inspection_verify-commission_failure",
+          "text": "Present commission for verification"
+        },
+        {
+          "id": "recover-lost-gear",
+          "type": "skillCheck",
+          "skill": "History",
+          "dc": 12,
+          "onSuccess": "scene.guild.inspection_recover-lost-gear_success",
+          "onFailure": "scene.guild.inspection_recover-lost-gear_failure",
+          "text": "Request magical item recovery (pay per item; recall details)"
+        },
+        {
+          "id": "spot-odd-files",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 13,
+          "onSuccess": "scene.guild.inspection_spot-odd-files_success",
+          "onFailure": "scene.guild.inspection_spot-odd-files_failure",
+          "text": "Notice odd lantern-route files"
+        }
+      ]
+    }
+  }
+}

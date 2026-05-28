@@ -1,0 +1,54 @@
+{
+  "id": "quest.bakery.convoy-stakeout",
+  "title": "Glowing Wagons",
+  "tags": [
+    "warm_loaf_bakery",
+    "stakeout",
+    "merchant-guild"
+  ],
+  "desc": "Use the Bakery as a pre-dawn stakeout to learn the glowing convoy schedule.",
+  "stages": [
+    {
+      "id": "choose-vantage",
+      "text": "Find a vantage point near the Bakery with line-of-sight to the eastern road.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:bakery.vantageChosen"
+        ]
+      }
+    },
+    {
+      "id": "watch-the-road",
+      "text": "Succeed on a Perception check to catch the convoy timing.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:convoy.windowKnown"
+        ]
+      }
+    },
+    {
+      "id": "log-details",
+      "text": "Record the schedule details.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.bakery.convoy-note",
+            "qty": 1
+          }
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 20
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:rumor.merchant.lantern-routes",
+          "op": "=",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

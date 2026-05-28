@@ -1,0 +1,18 @@
+{
+  "id": "mira_kestrel_signalmaster",
+  "town": "blackridge",
+  "roles": ["signalmaster","guard"],
+  "buildingId": "bldg:blackridge:watchtowers",
+  "name": "Mira Kestrel",
+  "demeanor": "precise, sleepless, zero patience for bureaucracy",
+  "repFaction": "watch",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "tier < known", "text": "If you’re here to sightsee, bring your own bandages." },
+    { "when": "tier >= known", "text": "Mirrors drift; monsters don’t. You helping or posing?" }
+  ],
+  "offerRules": {
+    "questTags": ["town:blackridge","building:watchtowers","siege"],
+    "limitPerVisit": 2
+  }
+}

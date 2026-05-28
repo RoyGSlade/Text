@@ -1,0 +1,297 @@
+{
+  "items": [
+    {
+      "id": "book.propaganda_quotes",
+      "name": "City Aphorisms: Second Emergency Edition",
+      "itemCategory": "book",
+      "description": "A curated bible of slogans. Useful for spotting edits in official minutes.",
+      "value": 1,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 5,
+      "tags": [
+        "book",
+        "propaganda",
+        "library"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/book_prop_quotes.png"
+    },
+    {
+      "id": "book.banned_histories",
+      "name": "Redacted Histories of Blackridge",
+      "itemCategory": "book",
+      "description": "A stitched volume of pre-siege records with pages torn out.",
+      "value": 4,
+      "weight": 0.4,
+      "rarity": "uncommon",
+      "stackSize": 2,
+      "tags": [
+        "book",
+        "lore",
+        "evidence"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/book_banned.png"
+    },
+    {
+      "id": "map.fragment.forest",
+      "name": "Torn Map Fragment: Northwood",
+      "itemCategory": "map_fragment",
+      "description": "A corner of parchment showing roots like rivers.",
+      "value": 2,
+      "weight": 0.05,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "map",
+        "fragment"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/map_frag_forest.png"
+    },
+    {
+      "id": "map.fragment.desert",
+      "name": "Torn Map Fragment: Salt Flats",
+      "itemCategory": "map_fragment",
+      "description": "Lines of wind-scour etched in haste.",
+      "value": 2,
+      "weight": 0.05,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "map",
+        "fragment"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/map_frag_desert.png"
+    },
+    {
+      "id": "map.regional.forest",
+      "name": "Reconstructed Map: Northwood",
+      "itemCategory": "map",
+      "description": "Veyna’s careful assembly of the Northwood bioregion with dungeon approaches.",
+      "value": 10,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "map",
+        "navigation",
+        "dungeon"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/map_forest.png"
+    },
+    {
+      "id": "cipher.key.alpha",
+      "name": "Cipher Key: Alpha",
+      "itemCategory": "key",
+      "description": "A substitution wheel used by Guild caravans.",
+      "value": 8,
+      "weight": 0.2,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "cipher",
+        "intel"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/cipher_alpha.png"
+    },
+    {
+      "id": "cipher.key.sun",
+      "name": "Cipher Key: Sun-Lens Codes",
+      "itemCategory": "key",
+      "description": "A sequence of marks used in lantern procurement logs.",
+      "value": 12,
+      "weight": 0.2,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "cipher",
+        "intel",
+        "lantern"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/cipher_sun.png"
+    },
+    {
+      "id": "ledger.shipments.redacted",
+      "name": "Redacted Shipment Ledger",
+      "itemCategory": "paper",
+      "description": "Torn account book. Pages scrubbed, not erased.",
+      "value": 3,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 3,
+      "tags": [
+        "ledger",
+        "intel"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/ledger_redacted.png"
+    },
+    {
+      "id": "ledger.shipments.decoded",
+      "name": "Decoded Shipment Ledger",
+      "itemCategory": "paper",
+      "description": "Reconstructed routes, caches, and fee skims.",
+      "value": 15,
+      "weight": 0.2,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "ledger",
+        "intel",
+        "decoded"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/ledger_decoded.png"
+    },
+    {
+      "id": "blueprint.sunlantern",
+      "name": "Blueprint: Sunlight Lantern",
+      "itemCategory": "blueprint",
+      "description": "Reverse-engineered plan for a portable sun-lens lantern.",
+      "value": 20,
+      "weight": 0.2,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "blueprint",
+        "lantern",
+        "heist"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/blueprint_sunlantern.png",
+      "craft": {
+        "produces": {
+          "itemId": "gear.sunlantern",
+          "qty": 1
+        },
+        "station": "bldg:blacksmith:forge",
+        "skillHints": [
+          "Science",
+          "Technology",
+          "Mechanics"
+        ],
+        "materials": [
+          {
+            "itemId": "mat.polished_glass",
+            "qty": 2
+          },
+          {
+            "itemId": "mat.brass_frame",
+            "qty": 1
+          },
+          {
+            "itemId": "mat.sun_salt",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "gear.sunlantern",
+      "name": "Sunlight Lantern",
+      "itemCategory": "tool",
+      "description": "Portable lens array projecting daylight-spectrum wards. Monsters hate it; merchants hate it more.",
+      "value": 80,
+      "weight": 2,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "tool",
+        "lantern",
+        "ward"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/gear_sunlantern.png",
+      "use": [
+        {
+          "type": "setFlag",
+          "flag": "world.nightTravelProtected",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "mat.polished_glass",
+      "name": "Polished Lens Glass",
+      "itemCategory": "material",
+      "description": "Carefully ground and polished glass discs.",
+      "value": 8,
+      "weight": 0.3,
+      "rarity": "uncommon",
+      "stackSize": 10,
+      "tags": [
+        "material",
+        "glass"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_lens_glass.png"
+    },
+    {
+      "id": "mat.brass_frame",
+      "name": "Brass Frame",
+      "itemCategory": "material",
+      "description": "Stamped brass skeleton for precision mounts.",
+      "value": 6,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "material",
+        "metal"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_brass.png"
+    },
+    {
+      "id": "mat.sun_salt",
+      "name": "Sun Salt",
+      "itemCategory": "material",
+      "description": "Crystalline reagent that stores light signatures.",
+      "value": 12,
+      "weight": 0.1,
+      "rarity": "rare",
+      "stackSize": 10,
+      "tags": [
+        "material",
+        "arcane"
+      ],
+      "tradable": true,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/mat_sun_salt.png"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "outfitter_fitter_nila",
+  "town": "blackridge",
+  "roles": ["fitter", "modder"],
+  "buildingId": "outfitter",
+  "name": "Nila Thread",
+  "demeanor": "quiet, ultra-precise, scissor-happy",
+  "repFaction": "faction_outfitter",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "true", "text": "Stand still. Your clothes are lying about you." }
+  ],
+  "offers": [
+    {
+      "id": "offer_add_hidden_pockets",
+      "label": "Add hidden pockets (modify one armor)",
+      "requires": { "have": [{ "itemId": "kit.disguise", "qty": 1 }] },
+      "actions": [
+        { "type": "gotoScene", "sceneId": "outfitter_mod_station" }
+      ]
+    },
+    {
+      "id": "offer_measurements_card",
+      "label": "Get your measurements card",
+      "requires": { "flagsNot": ["br:outfit.measurements_card"] },
+      "actions": [
+        { "type": "addItem", "itemId": "card.measurements", "qty": 1 },
+        { "type": "setFlag", "flag": "br:outfit.measurements_card", "op": "=", "value": true }
+      ]
+    }
+  ]
+}

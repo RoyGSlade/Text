@@ -1,0 +1,37 @@
+{
+  "id": "kaelen_blacksmith",
+  "town": "blackridge",
+  "roles": [
+    "blacksmith"
+  ],
+  "buildingId": "grimy_anvil",
+  "name": "Kaelen",
+  "demeanor": "gruff,cynical,secretly_hopeful",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < friendly",
+      "text": "What do you want? Don't waste my time."
+    },
+    {
+      "when": "tier == friendly",
+      "text": "Back again? Fine. Let's see what you need."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Good to see you. Let's forge a legend today."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:blacksmith",
+      "town:blackridge"
+    ],
+    "minTierByTag": {
+      "story": "friendly",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

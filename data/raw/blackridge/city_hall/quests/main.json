@@ -1,0 +1,97 @@
+{
+  "pack": "city_hall",
+  "quests": [
+    {
+      "id": "city:rubber_stamp",
+      "tags": [
+        "role:authority",
+        "story",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Rubber Stamp",
+      "desc": "Obtain a signed work order for legitimate travel.",
+      "requirements": {
+        "flagsNot": [
+          "fal:permit_granted"
+        ],
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "craftItem",
+            "itemId": "work_order_signed",
+            "qty": 1
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 0,
+        "items": [
+          {
+            "id": "work_order_signed",
+            "qty": 1
+          }
+        ],
+        "rep": [
+          {
+            "target": "npc:city_clerk",
+            "amount": 4
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "city_clerk"
+        }
+      },
+      "weight": 9
+    },
+    {
+      "id": "city:paper_bulwark",
+      "tags": [
+        "role:authority",
+        "radiant",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Paper Bulwark",
+      "desc": "File defensive allocations to reduce nightly panic.",
+      "requirements": {
+        "flagsNot": [
+          "town:morale_boosted"
+        ],
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:guard_post"
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 6,
+        "flagsSet": [
+          "town:morale_boosted"
+        ],
+        "rep": [
+          {
+            "target": "faction:red_guard",
+            "amount": 4
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_visit",
+        "params": {}
+      },
+      "weight": 6
+    }
+  ]
+}

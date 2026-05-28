@@ -1,0 +1,57 @@
+{
+  "pack": "blacksmith",
+  "quests": [
+    {
+      "id": "blacksmith:scrap_metal",
+      "tags": [
+        "role:blacksmith",
+        "radiant"
+      ],
+      "title": "Scrap Metal",
+      "desc": "Bring Kaelen 5 monster plates for repairs.",
+      "requirements": {
+        "flagsNot": [
+          "siege_active"
+        ],
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "gather",
+            "itemId": "monster_plate",
+            "qty": 5
+          }
+        }
+      ],
+      "rewards": {
+        "credits": {
+          "base": 40,
+          "scale": {
+            "tier:friendly": 1.15,
+            "tier:respected": 1.3
+          }
+        },
+        "rep": [
+          {
+            "target": "npc:kaelen_blacksmith",
+            "amount": 5
+          },
+          {
+            "target": "faction:red_guard",
+            "amount": 2
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "giverNpcId": "kaelen_blacksmith",
+          "turnInScene": "bldg:blackridge:grimy_anvil"
+        }
+      },
+      "weight": 8
+    }
+  ]
+}

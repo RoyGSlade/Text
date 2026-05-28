@@ -1,0 +1,13 @@
+{
+  "id": "grey_finch_smuggler",
+  "town": "blackridge",
+  "roles": ["smuggler","fixer"],
+  "buildingId": "bldg:blackridge:gates",
+  "name": "Grey Finch",
+  "demeanor": "pleasant, amoral, knows every shift bell",
+  "repFaction": "underground",
+  "greetings": [
+    { "when": "tier < known", "text": "The wall has doors you can’t see. I rent keys." },
+    { "when": "tier >= known", "text": "Two horn blasts tonight. We slip between them." }
+  ]
+}

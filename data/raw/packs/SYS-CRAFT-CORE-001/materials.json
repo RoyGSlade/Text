@@ -1,0 +1,6 @@
+{
+  "materials": [
+    { "id": "scrap_wood", "name": "Scrap Wood", "tier": 1, "tags": ["wood"] },
+    { "id": "ore.iron", "name": "Iron Ore", "tier": 1, "tags": ["metal", "tier1"] }
+  ]
+}

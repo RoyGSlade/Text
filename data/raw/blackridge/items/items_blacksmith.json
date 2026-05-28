@@ -1,0 +1,25 @@
+{
+  "pack": "blacksmith",
+  "items": [
+    { "id": "ingot.iron", "name": "Iron Ingot", "category": "component", "rarity": "common", "value": 8, "contraband": false, "tags": ["smithing","metal"] },
+    { "id": "ingot.steel", "name": "Steel Ingot", "category": "component", "rarity": "uncommon", "value": 18, "contraband": false, "tags": ["smithing","metal"] },
+    { "id": "kit.repair_basic", "name": "Repair Kit (Basic)", "category": "kit", "rarity": "common", "value": 15, "contraband": false, "tags": ["repair"] },
+    { "id": "kit.masterwork", "name": "Masterwork Kit", "category": "kit", "rarity": "rare", "value": 60, "contraband": false, "tags": ["repair","mod"] },
+    { "id": "barricade.brace_beam", "name": "Brace Beam", "category": "barricade", "rarity": "common", "value": 10, "contraband": false, "tags": ["defense"] },
+    { "id": "trap.spike_strip", "name": "Spike Strip", "category": "barricade", "rarity": "uncommon", "value": 16, "contraband": false, "tags": ["defense"], "use": [{"type":"setFlag","flag":"world.watchtower.spikes","value":true} ] },
+    { "id": "component.bracket.lantern", "name": "Lantern Bracket", "category": "component", "rarity": "common", "value": 12, "contraband": false, "tags": ["defense","lighting"] },
+    { "id": "pack.bolts", "name": "Bolt Pack", "category": "ammo", "rarity": "common", "value": 9, "contraband": false, "tags": ["defense"] },
+    { "id": "part.lens_shock", "name": "Shock Lens", "category": "component", "rarity": "rare", "value": 75, "contraband": true, "tags": ["sunlight","licensed"] },
+    { "id": "core.sunlight_emitter", "name": "Sunlight Emitter Core", "category": "component", "rarity": "epic", "value": 180, "contraband": true, "tags": ["sunlight","illegal"], "use": [{"type":"setFlag","flag":"br:lantern.sunlight.parts","value":true}] },
+    { "id": "oil.tool_hardening", "name": "Tool-Hardening Oil", "category": "consumable", "rarity": "uncommon", "value": 14, "contraband": false, "tags": ["smithing"] },
+    { "id": "tool.pry.covert", "name": "Covert Pry Tool", "category": "tool", "rarity": "uncommon", "value": 22, "contraband": false, "tags": ["heist","lockpick"], "use": [{"type":"skill_bonus","skill":"Skulduggery","amount":1,"duration":"scene"}] },
+    { "id": "kit.watchtower", "name": "Watchtower Kit", "category": "kit", "rarity": "uncommon", "value": 0, "contraband": false, "tags": ["defense"], "use": [{"type":"incFlag","flag":"br:gate.defense","value":1}] },
+    { "id": "doc.ledger_extract.smith", "name": "Ledger Extract: Anvil Orders", "category": "document", "rarity": "uncommon", "value": 1, "contraband": false, "tags": ["evidence"] },
+    { "id": "scrap.sunlight_blueprint", "name": "Blueprint Scrap: Sunlight Bracket", "category": "document", "rarity": "uncommon", "value": 1, "contraband": false, "tags": ["evidence"] }
+  ],
+  "mods": [
+    { "id": "true_edge_i", "name": "True Edge I", "category": "weapon_mod", "rarity": "uncommon", "value": 20, "tags": ["edge"], "desc": "Slightly increased crit window." },
+    { "id": "guarded_grip_i", "name": "Guarded Grip I", "category": "weapon_mod", "rarity": "uncommon", "value": 20, "tags": ["grip"], "desc": "Reduced fumble chance." },
+    { "id": "shock_hardened_edge_i", "name": "Shock-Hardened Edge I", "category": "weapon_mod", "rarity": "rare", "value": 45, "tags": ["edge","shock"], "desc": "Bonus vs husks and shadow spawn." }
+  ]
+}

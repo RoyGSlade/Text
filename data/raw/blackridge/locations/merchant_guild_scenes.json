@@ -1,0 +1,387 @@
+{
+  "area": "merchant_guild",
+  "scenes": {
+    "mg_front_hall_choice1_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "permit.hq_attire",
+          "qty": 1
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:mg.hq.access",
+          "op": "=",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Continue",
+          "leadsTo": "mg_hq_lobby"
+        }
+      ]
+    },
+    "mg_front_hall_choice1_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "mg_front_hall": {
+      "title": "Merchant Guild Storefront",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Polished stone, gold filigree, and a smell like paper cuts. Androids with blank chips stand perfectly still."
+        },
+        {
+          "when": "br:siege.level >= 2",
+          "text": "A sign reads: 'Shortages Today.' Prices walk uphill."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Browse wares (public market)",
+          "requires": {
+            "flagsAny": [
+              "br:mg.unlocked",
+              "br:merchant_guild.open"
+            ]
+          },
+          "leadsTo": "mg_public_market"
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 14,
+          "text": "Request an appointment at HQ.",
+          "onSuccess": "mg_front_hall_choice1_success",
+          "onFailure": "mg_front_hall_choice1_failure"
+        },
+        {
+          "text": "Go to Contracts",
+          "leadsTo": "mg_contracts_counter"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "mg_public_market_choice0_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "lantern.guild_basic",
+          "qty": 1
+        }
+      ]
+    },
+    "mg_public_market_choice0_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:lantern.markup",
+          "value": 1
+        }
+      ]
+    },
+    "mg_public_market_choice2_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:mg.ledger.roomKnown",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "mg_public_market_choice2_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "mg_public_market": {
+      "title": "Public Market",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Lanterns hum behind glass. Ingots stacked like bribes. A cannon brochure that says 'Not For Sale' three times."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 15,
+          "text": "Haggle lower markup on a basic lantern.",
+          "onSuccess": "mg_public_market_choice0_success",
+          "onFailure": "mg_public_market_choice0_failure"
+        },
+        {
+          "text": "Buy raw iron ingot",
+          "requires": {
+            "flagsAny": [
+              "br:mg.unlocked"
+            ]
+          },
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "ingot.iron",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 13,
+          "text": "Notice a rotated key behind the counter.",
+          "onSuccess": "mg_public_market_choice2_success",
+          "onFailure": "mg_public_market_choice2_failure"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "mg_front_hall"
+        }
+      ]
+    },
+    "mg_contracts_counter_choice2_success": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:lantern.markup",
+          "value": -1
+        }
+      ]
+    },
+    "mg_contracts_counter_choice2_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:lantern.markup",
+          "value": 1
+        }
+      ]
+    },
+    "mg_contracts_counter": {
+      "title": "Contracts Counter",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "A clerk stamps forms so fast the ink dries out of fear."
+        },
+        {
+          "when": "br:mg.ban.active",
+          "text": "A sign slides into place: 'Service Denied'."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Escort a weekly convoy (sign up)",
+          "requires": {
+            "flagsAny": [
+              "br:mg.unlocked",
+              "br:mg.convoy.scheduleKnown",
+              "br:merchant_guild.open"
+            ],
+            "flagsNot": [
+              "br:mg.ban.active"
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:mg.convoy.active",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "text": "Take a cart repair order",
+          "requires": {
+            "flagsAny": [
+              "br:mg.unlocked"
+            ],
+            "flagsNot": [
+              "br:mg.ban.active"
+            ]
+          },
+          "actions": [
+            {
+              "type": "startQuest",
+              "questId": "mg_side_lost_manifest"
+            }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 16,
+          "text": "Shave the lantern markup for your next purchase.",
+          "onSuccess": "mg_contracts_counter_choice2_success",
+          "onFailure": "mg_contracts_counter_choice2_failure"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "mg_front_hall"
+        }
+      ]
+    },
+    "mg_convoy_dispatch_choice0_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "token.route",
+          "qty": 1
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:mg.convoy.scheduleKnown",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "mg_convoy_dispatch_choice0_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:mg.heist.alert",
+          "value": 1
+        },
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "mg_convoy_dispatch": {
+      "title": "Convoy Dispatch",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "A chalkboard lists routes in a code everyone pretends not to understand."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 16,
+          "text": "Ghost past Dispatch to copy the route list.",
+          "onSuccess": "mg_convoy_dispatch_choice0_success",
+          "onFailure": "mg_convoy_dispatch_choice0_failure"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "mg_front_hall"
+        }
+      ]
+    },
+    "mg_hq_lobby_choice0_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:mg.ledger.roomKnown",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "mg_hq_lobby_choice0_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:mg.heist.alert",
+          "value": 1
+        }
+      ]
+    },
+    "mg_hq_lobby": {
+      "title": "Guild Headquarters Lobby",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Gold inlay, velvet ropes, and portraits that follow the richest person in the room."
+        },
+        {
+          "when": "br:siege.level >= 2",
+          "text": "The ropes are replaced by androids. The androids are replaced by thicker androids."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 17,
+          "text": "Study the vault’s timed lock from a distance.",
+          "onSuccess": "mg_hq_lobby_choice0_success",
+          "onFailure": "mg_hq_lobby_choice0_failure"
+        },
+        {
+          "text": "Return to storefront",
+          "leadsTo": "mg_front_hall"
+        }
+      ]
+    },
+    "mg_loading_yard_choice0_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "doc.convoy_manifest",
+          "qty": 1
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:mg.manifest.crate_found",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "mg_loading_yard_choice0_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:mg.heist.alert",
+          "value": 1
+        }
+      ]
+    },
+    "mg_loading_yard": {
+      "title": "Loading Yard",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Crates, ropes, a pulley that dreams of the sky."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 13,
+          "text": "Find the misplaced crate with the manifest.",
+          "onSuccess": "mg_loading_yard_choice0_success",
+          "onFailure": "mg_loading_yard_choice0_failure"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "mg_front_hall"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "npc.bakery.night-baker",
+  "town": "blackridge",
+  "roles": [
+    "baker",
+    "stakeout_contact"
+  ],
+  "buildingId": "warm_loaf_bakery",
+  "name": "Orun Pike",
+  "demeanor": "bleary,helpful,paranoid",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "br:curfewActive",
+      "text": "Keep your shadow off the dough. And your eyes on the road east; the glow hits before the crows."
+    },
+    {
+      "when": "!br:curfewActive",
+      "text": "Come back before dawn if you want the real show."
+    },
+    {
+      "when": "br:convoy.windowKnown",
+      "text": "You clocked the schedule? Then you know when the Guild’s board spikes."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "true",
+      "offers": [
+        {
+          "type": "item",
+          "itemId": "item.bakery.snack-guard",
+          "price": 3
+        },
+        {
+          "type": "item",
+          "itemId": "item.bakery.ration-pack",
+          "price": 6
+        }
+      ]
+    }
+  ]
+}

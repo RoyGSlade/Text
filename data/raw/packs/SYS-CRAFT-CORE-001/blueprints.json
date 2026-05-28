@@ -1,0 +1,36 @@
+{
+  "blueprints": {
+    "tool.hammer_t1": {
+      "name": "Hammer",
+      "stationTag": "metalworking",
+      "dc": 8,
+      "time": 60,
+      "inputs": [
+        { "materialId": "ore.iron", "qty": 1 },
+        { "materialId": "scrap_wood", "qty": 1 }
+      ],
+      "success": { "item": "tool.hammer_t1", "qualityExpr": "1d20" }
+    },
+    "tool.hatchet": {
+      "name": "Hatchet",
+      "stationTag": "woodworking",
+      "dc": 10,
+      "time": 60,
+      "inputs": [
+        { "materialId": "ore.iron", "qty": 1 },
+        { "materialId": "scrap_wood", "qty": 1 }
+      ],
+      "tools": ["tool.hammer_t1"],
+      "success": { "item": "tool.hatchet", "qualityExpr": "1d20" }
+    },
+    "weapon.knife_simple": {
+      "name": "Simple Knife",
+      "stationTag": "metalworking",
+      "dc": 10,
+      "time": 60,
+      "inputs": [ { "materialId": "ore.iron", "qty": 1 } ],
+      "tools": ["tool.hatchet"],
+      "success": { "item": "weapon.knife_simple", "qualityExpr": "1d20" }
+    }
+  }
+}

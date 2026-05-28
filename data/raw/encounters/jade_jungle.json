@@ -1,0 +1,39 @@
+{
+  "zone": "jade_jungle",
+  "rollEverySteps": 1,
+  "chance": 0.5,
+  "tables": [
+    {
+      "time": "day",
+      "entries": [
+        {
+          "id": "enc:jungle:stalkers",
+          "weight": 7,
+          "when": "!weather:rain",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:jungle:mists",
+          "weight": 3,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    },
+    {
+      "time": "night",
+      "entries": [
+        {
+          "id": "enc:jungle:howls",
+          "weight": 6,
+          "when": "!dungeon:alpha:heart_destroyed",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:jungle:still",
+          "weight": 4,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    }
+  ]
+}

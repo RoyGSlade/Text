@@ -1,0 +1,69 @@
+{
+  "id": "clinic_alchemist",
+  "town": "blackridge",
+  "roles": [
+    "healer",
+    "alchemist"
+  ],
+  "buildingId": "clinic",
+  "name": "Vessa",
+  "demeanor": "curious,clinical,reckless",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Stand still. Your blood says things your mouth won’t."
+    },
+    {
+      "when": "tier == known",
+      "text": "Bring me anything that bleeds weird. Preferably not you."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Ah, my favorite reagent delivery system."
+    },
+    {
+      "when": "guards_drugged",
+      "text": "The data was… clarifying. Next batch will be kinder. Probably."
+    }
+  ],
+  "dialogueChoices": [
+    {
+      "text": "[Medical 2] Your sterilization coils are running too hot.",
+      "requires": {
+        "skillLevel": {
+          "skill": "Medical",
+          "level": 2
+        }
+      },
+      "response": "Vessa squints. \"You practice? Hm. You’re right.\"",
+      "rewards": {
+        "items": [
+          {
+            "id": "refined_venom",
+            "qty": 1
+          }
+        ],
+        "rep": [
+          {
+            "target": "npc:clinic_alchemist",
+            "amount": 5
+          }
+        ]
+      }
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:healer",
+      "town:blackridge",
+      "building:clinic"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

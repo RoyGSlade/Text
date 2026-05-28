@@ -1,0 +1,131 @@
+{
+  "biomes": [
+    {
+      "id": "prairie",
+      "label": "Open Prairie",
+      "nodeDensity": 0.25,
+      "timeTables": {
+        "day": [
+          { "node": "hemp_stalk", "weight": 3 }
+        ],
+        "night": [
+          { "node": "hemp_stalk", "weight": 1 }
+        ]
+      },
+      "traversalTags": ["flat", "grassy"],
+      "weatherModifiers": { "rain": 0.1, "wind": 0.2 },
+      "pointsOfInterest": ["abandoned_wagon", "lone_tree"],
+      "hasDungeonHeart": false,
+      "resources": ["plant.hemp"]
+    },
+    {
+      "id": "swamp",
+      "label": "Misty Swamp",
+      "nodeDensity": 0.4,
+      "timeTables": {
+        "day": [
+          { "node": "mire_root", "weight": 3 }
+        ],
+        "night": [
+          { "node": "mire_root", "weight": 2 }
+        ]
+      },
+      "traversalTags": ["waterlogged", "difficult"],
+      "weatherModifiers": { "rain": 0.2, "fog": 0.3 },
+      "pointsOfInterest": ["sunken_ruins", "glowing_bog"],
+      "hasDungeonHeart": false,
+      "resources": ["herb.mire_root"]
+    },
+    {
+      "id": "mountain_peak",
+      "label": "Mountain Peak",
+      "nodeDensity": 0.3,
+      "timeTables": {
+        "day": [
+          { "node": "copper_vein", "weight": 2 }
+        ],
+        "night": [
+          { "node": "copper_vein", "weight": 1 }
+        ]
+      },
+      "traversalTags": ["steep", "rocky"],
+      "weatherModifiers": { "snow": -0.1, "wind": 0.3 },
+      "pointsOfInterest": ["abandoned_mine", "eagle_nest"],
+      "hasDungeonHeart": true,
+      "resources": ["ore.copper"]
+    },
+    {
+      "id": "desert",
+      "label": "Arid Desert",
+      "nodeDensity": 0.15,
+      "timeTables": {
+        "day": [
+          { "node": "aloe_cluster", "weight": 2 }
+        ],
+        "night": [
+          { "node": "aloe_cluster", "weight": 1 }
+        ]
+      },
+      "traversalTags": ["hot", "arid"],
+      "weatherModifiers": { "heat": 0.4, "sandstorm": -0.3 },
+      "pointsOfInterest": ["oasis", "ancient_obelisk"],
+      "hasDungeonHeart": false,
+      "resources": ["plant.aloe"]
+    },
+    {
+      "id": "tundra",
+      "label": "Frozen Tundra",
+      "nodeDensity": 0.2,
+      "timeTables": {
+        "day": [
+          { "node": "frost_crystal_node", "weight": 1 }
+        ],
+        "night": [
+          { "node": "frost_crystal_node", "weight": 2 }
+        ]
+      },
+      "traversalTags": ["freezing", "open"],
+      "weatherModifiers": { "snow": 0.4, "wind": 0.2 },
+      "pointsOfInterest": ["ice_cavern", "frozen_lake"],
+      "hasDungeonHeart": false,
+      "resources": ["stone.frost_crystal"]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "hemp_stalk",
+      "yields": [ { "materialId": "plant.hemp", "qtyRange": [1,3] } ],
+      "toolsNeeded": ["tool.knife"],
+      "dc": 6,
+      "respawn": 1
+    },
+    {
+      "id": "mire_root",
+      "yields": [ { "materialId": "herb.mire_root", "qtyRange": [1,2] } ],
+      "toolsNeeded": ["tool.shovel"],
+      "dc": 10,
+      "respawn": 3
+    },
+    {
+      "id": "copper_vein",
+      "yields": [ { "materialId": "ore.copper", "qtyRange": [1,3] } ],
+      "toolsNeeded": ["tool.pickaxe"],
+      "dc": 12,
+      "respawn": 4
+    },
+    {
+      "id": "aloe_cluster",
+      "yields": [ { "materialId": "plant.aloe", "qtyRange": [1,2] } ],
+      "toolsNeeded": ["tool.knife"],
+      "dc": 8,
+      "respawn": 2
+    },
+    {
+      "id": "frost_crystal_node",
+      "yields": [ { "materialId": "stone.frost_crystal", "qtyRange": [1,1] } ],
+      "toolsNeeded": ["tool.pickaxe"],
+      "dc": 14,
+      "respawn": 5
+    }
+  ]
+}

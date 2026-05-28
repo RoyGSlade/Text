@@ -1,0 +1,40 @@
+{
+  "zone": "storm_coast",
+  "rollEverySteps": 2,
+  "chance": 0.3,
+  "tables": [
+    {
+      "time": "day",
+      "entries": [
+        {
+          "id": "enc:coast:watch",
+          "weight": 4,
+          "when": "!weather:storm",
+          "scene": "enc:forest:quiet"
+        },
+        {
+          "id": "enc:coast:bandits",
+          "weight": 6,
+          "when": "!dungeon:alpha:heart_destroyed",
+          "scene": "enc:forest:ambush_goblins"
+        }
+      ]
+    },
+    {
+      "time": "night",
+      "entries": [
+        {
+          "id": "enc:coast:storms",
+          "weight": 5,
+          "when": "weather:storm",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:coast:calm",
+          "weight": 5,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    }
+  ]
+}

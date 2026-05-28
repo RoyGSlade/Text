@@ -1,0 +1,15 @@
+{
+  "Melee": {
+    "2": { "meleeReactionArmor": 3 },
+    "3": { "meleeDamageBonus": 3 }
+  },
+  "Gunning": {
+    "3": { "extraAttacks": 1 }
+  },
+  "Navigation": {
+    "1": { "travelSpeedBonus": 5 }
+  },
+  "Perception": {
+    "3": { "inspectBonus": 2 }
+  }
+}

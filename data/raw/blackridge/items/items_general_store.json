@@ -1,0 +1,172 @@
+{
+  "items": [
+    {
+      "id": "kit.survival_basic",
+      "name": "Basic Survival Kit",
+      "itemCategory": "kit",
+      "description": "Bandages, flint, twine, and optimism.",
+      "value": 20,
+      "rarity": "common",
+      "tags": ["survival", "starter"],
+      "contraband": "none",
+      "use": {
+        "actions": [
+          { "type": "addItem", "itemId": "tool.flint", "qty": 1 },
+          { "type": "addItem", "itemId": "tool.twine", "qty": 1 },
+          { "type": "addItem", "itemId": "rations.pack", "qty": 1 }
+        ]
+      }
+    },
+    {
+      "id": "tool.water_filter",
+      "name": "Water Filter",
+      "itemCategory": "tool",
+      "description": "Removes regrets and particulates.",
+      "value": 18,
+      "rarity": "uncommon",
+      "tags": ["water", "survival"],
+      "contraband": "none"
+    },
+    {
+      "id": "camp.tent",
+      "name": "Canvas Tent",
+      "itemCategory": "camp",
+      "description": "Keeps the weather out and the snoring in.",
+      "value": 35,
+      "rarity": "uncommon",
+      "tags": ["camp", "shelter"],
+      "contraband": "none"
+    },
+    {
+      "id": "camp.bedroll",
+      "name": "Bedroll",
+      "itemCategory": "camp",
+      "description": "A polite invitation to sleep terribly.",
+      "value": 8,
+      "rarity": "common",
+      "tags": ["camp", "sleep"],
+      "contraband": "none"
+    },
+    {
+      "id": "tool.rope",
+      "name": "Rope",
+      "itemCategory": "tool",
+      "description": "Fifty feet of creative problem solving.",
+      "value": 6,
+      "rarity": "common",
+      "tags": ["rope", "utility"],
+      "contraband": "none"
+    },
+    {
+      "id": "tool.flint",
+      "name": "Flint & Steel",
+      "itemCategory": "tool",
+      "description": "Instant campfire, batteries not included.",
+      "value": 5,
+      "rarity": "common",
+      "tags": ["fire", "survival"],
+      "contraband": "none"
+    },
+    {
+      "id": "tool.twine",
+      "name": "Twine",
+      "itemCategory": "tool",
+      "description": "Holds together plans and packages.",
+      "value": 2,
+      "rarity": "common",
+      "tags": ["craft"],
+      "contraband": "none"
+    },
+    {
+      "id": "kit.repair",
+      "name": "Repair Kit",
+      "itemCategory": "kit",
+      "description": "Patches gear, not mistakes.",
+      "value": 16,
+      "rarity": "common",
+      "tags": ["repair", "tools"],
+      "contraband": "none"
+    },
+    {
+      "id": "trap.snare",
+      "name": "Snare Kit",
+      "itemCategory": "tool",
+      "description": "Catch something before it catches you.",
+      "value": 10,
+      "rarity": "common",
+      "tags": ["hunting", "survival"],
+      "contraband": "low"
+    },
+    {
+      "id": "camp.tarp",
+      "name": "Oilcloth Tarp",
+      "itemCategory": "camp",
+      "description": "Roof, sail, sled, or secret: your call.",
+      "value": 9,
+      "rarity": "common",
+      "tags": ["camp", "utility"],
+      "contraband": "none"
+    },
+    {
+      "id": "canteen.steel",
+      "name": "Steel Canteen",
+      "itemCategory": "tool",
+      "description": "Hydration with gravitas.",
+      "value": 7,
+      "rarity": "common",
+      "tags": ["water"],
+      "contraband": "none"
+    },
+    {
+      "id": "rations.pack",
+      "name": "Rations Pack",
+      "itemCategory": "consumable",
+      "description": "Calories with a moral lesson.",
+      "value": 6,
+      "rarity": "common",
+      "tags": ["food", "camp"],
+      "contraband": "none"
+    },
+    {
+      "id": "doc.shelf_tag.tight",
+      "name": "Shelf Tag: Shortage",
+      "itemCategory": "quest",
+      "description": "Proof of ‘temporary’ price hikes.",
+      "value": 0,
+      "rarity": "common",
+      "tags": ["evidence", "economy"],
+      "contraband": "low"
+    },
+    {
+      "id": "doc.shelf_tag.normal",
+      "name": "Shelf Tag: Standard",
+      "itemCategory": "quest",
+      "description": "Price as the city pretends it should be.",
+      "value": 0,
+      "rarity": "common",
+      "tags": ["evidence", "economy"],
+      "contraband": "none"
+    },
+    {
+      "id": "doc.shelf_tag.loose",
+      "name": "Shelf Tag: Discount",
+      "itemCategory": "quest",
+      "description": "When someone, somewhere, didn’t get robbed this week.",
+      "value": 0,
+      "rarity": "common",
+      "tags": ["evidence", "economy"],
+      "contraband": "none"
+    },
+    {
+      "id": "voucher.discount",
+      "name": "Discount Voucher",
+      "itemCategory": "key",
+      "description": "Lowers your total without lowering your dignity.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": ["voucher", "economy"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "voucher.discount", "op": "=", "value": true } ] }
+    }
+  ]
+}

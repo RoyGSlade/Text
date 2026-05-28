@@ -1,0 +1,33 @@
+{
+  "id": "joric_trainer",
+  "town": "blackridge",
+  "roles": [
+    "trainer",
+    "veteran_guard",
+    "town_watch"
+  ],
+  "buildingId": "barracks",
+  "name": "\"One-Eye\" Joric",
+  "demeanor": "gruff, demanding, secretly proud",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "You want to fight? First, learn how to stand."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Sweat in the yard saves blood on the wall. Ready for another lesson?"
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "town:blackridge",
+      "building:barracks",
+      "role:training",
+      "role:watch"
+    ],
+    "limitPerVisit": 1
+  }
+}

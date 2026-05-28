@@ -1,0 +1,66 @@
+{
+  "id": "npc.guild.head-clerk",
+  "town": "blackridge",
+  "roles": [
+    "guild_clerk",
+    "commission_officer"
+  ],
+  "buildingId": "adventurer_guild",
+  "name": "Edrin Vale",
+  "demeanor": "efficient,political,careful",
+  "repFaction": "adventurer_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "!br:repGuildRespected",
+      "text": "Forms in triplicate. Permit, commission, stamp. If you can’t keep up, the monsters will thin the line for us."
+    },
+    {
+      "when": "br:repGuildRespected && !br:repClerksFriendly",
+      "text": "You again. Results talk. Paperwork whispers. Which one are you bringing me?"
+    },
+    {
+      "when": "br:repClerksFriendly",
+      "text": "Your docket’s been pre-sorted. Don’t make me regret the favoritism."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "!br:braceletActive",
+      "offers": [
+        {
+          "type": "item",
+          "itemId": "item.guild.bracelet-tracker",
+          "price": 0,
+          "note": "Mandatory issue. For your safety. And our audits."
+        }
+      ]
+    },
+    {
+      "when": "br:permitTier<1",
+      "offers": [
+        {
+          "type": "service",
+          "serviceId": "service.guild.apply-permit-novice"
+        }
+      ]
+    },
+    {
+      "when": "br:permitTier>=1",
+      "offers": [
+        {
+          "type": "quest",
+          "questId": "quest.guild.tutorial-commission"
+        },
+        {
+          "type": "quest",
+          "questId": "quest.guild.missing-party-d17"
+        },
+        {
+          "type": "quest",
+          "questId": "quest.guild.ledger-heist"
+        }
+      ]
+    }
+  ]
+}

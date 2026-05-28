@@ -1,0 +1,114 @@
+{
+  "pack": "merchant_guild",
+  "quests": [
+    {
+      "id": "mg_main_ledgers",
+      "tags": [
+        "main",
+        "merchant",
+        "heist"
+      ],
+      "title": "Gilded Numbers",
+      "desc": "The Guild’s wealth is math used as a weapon. Find the ledgers, decide what to do with them.",
+      "requirements": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "stages": [
+        {
+          "id": "stage1_gain_access",
+          "text": "Enter the Merchant Guild HQ during open hours or learn a back-door vector.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.hq.access",
+              "br:mg.ledger.roomKnown"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:mg.rep",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "stage2_find_room",
+          "text": "Locate the sealed ledger room and identify its security layers.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.ledger.roomKnown"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:mg.heist.alert",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "stage3_extract_proof",
+          "text": "Obtain an excerpt that proves price-fixing and black routes.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "doc.ledger.extract",
+                "qty": 1
+              }
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "setFlag",
+              "flag": "br:mg.ledger.proof_collected",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "stage4_decide_fate",
+          "text": "Expose the Guild or leverage the proof for yourself.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.proof.exposed",
+              "br:mg.proof.blackmailed"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:lantern.markup",
+              "value": -1
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:mg.rep",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 150
+        },
+        {
+          "type": "item",
+          "itemId": "permit.hq_attire",
+          "qty": 1
+        }
+      ],
+      "instantiate": {
+        "template": "quest:linear_four_stage",
+        "params": {
+          "area": "merchant_guild"
+        }
+      }
+    }
+  ]
+}

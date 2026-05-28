@@ -1,0 +1,32 @@
+{
+  "id": "clinic_nurse_triage",
+  "town": "blackridge",
+  "roles": ["nurse", "triage"],
+  "buildingId": "clinic",
+  "name": "Sorin Hale",
+  "demeanor": "brisk, tired, humane",
+  "repFaction": "faction_clinic",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "br:siege.level >= 2", "text": "If you can stand, you can wait. If you can speak, you can help." },
+    { "when": "br:siege.level < 2", "text": "Deep breath. What hurts most? Be honest." }
+  ],
+  "offers": [
+    {
+      "id": "offer_triage_help",
+      "label": "Assist triage during surge",
+      "requires": { "flagsAny": ["br:clinic.unlocked"], "requiresFlag": "br:siege.level >= 2" },
+      "actions": [
+        { "type": "gotoScene", "sceneId": "clinic_triage_tent" }
+      ]
+    },
+    {
+      "id": "offer_quarantine_access",
+      "label": "Request access to quarantine ward",
+      "requires": { "flagsAny": ["br:clinic.unlocked"], "requiresFlag": "br:clinic.rep >= 1" },
+      "actions": [
+        { "type": "gotoScene", "sceneId": "clinic_quarantine" }
+      ]
+    }
+  ]
+}

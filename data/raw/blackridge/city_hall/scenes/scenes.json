@@ -1,0 +1,470 @@
+{
+  "scenes": {
+    "town:blackridge:city_hall_district": {
+      "text": "Blackridge spreads like a civic sermon: orderly avenues, too many guards, not enough laughter.",
+      "choices": [
+        {
+          "text": "City Hall",
+          "leadsTo": "bldg:blackridge:city_hall"
+        },
+        {
+          "text": "Messenger’s Hall",
+          "leadsTo": "bldg:blackridge:city_hall:messengers"
+        },
+        {
+          "text": "Business Registry",
+          "leadsTo": "bldg:blackridge:business_registry"
+        },
+        {
+          "text": "Guard Station",
+          "leadsTo": "bldg:blackridge:city_hall:guard_station"
+        },
+        {
+          "text": "North Gate",
+          "leadsTo": "gate:blackridge:north"
+        },
+        {
+          "text": "West Gate",
+          "leadsTo": "gate:blackridge:west"
+        },
+        {
+          "text": "East Gate",
+          "leadsTo": "gate:blackridge:east"
+        },
+        {
+          "text": "Southeast Gate",
+          "leadsTo": "gate:blackridge:southeast"
+        },
+        {
+          "text": "Southwest Gate",
+          "leadsTo": "gate:blackridge:southwest"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall": {
+      "textBlocks": [
+        {
+          "default": true,
+          "text": "Marble floors, gold inlay, chandeliers like suns. Two guard towers outside say: don’t even try."
+        },
+        {
+          "when": "fal:suspicion>=3",
+          "text": "Doors lock faster. Eyes track you like a rumor."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Approach the Public Counter",
+          "leadsTo": "bldg:blackridge:city_hall:counter"
+        },
+        {
+          "text": "Council Chamber",
+          "leadsTo": "bldg:blackridge:city_hall:council"
+        },
+        {
+          "text": "Permit Office",
+          "leadsTo": "bldg:blackridge:city_hall:permit_lobby"
+        },
+        {
+          "text": "Messenger’s Hall",
+          "leadsTo": "bldg:blackridge:city_hall:messengers"
+        },
+        {
+          "text": "Leave City Hall",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:counter": {
+      "text": "Toma Quill sorts stamped forms. Dara Flint’s smile is a paper-cut.",
+      "choices": [
+        {
+          "text": "“I need travel papers.”",
+          "leadsTo": "bldg:blackridge:city_hall:permit_lobby"
+        },
+        {
+          "text": "Ask about the 'renovations' downstairs",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:rumor_vault",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall"
+        },
+        {
+          "text": "Pay Guild fee (20c) for a receipt",
+          "actions": [
+            {
+              "type": "addCredits",
+              "amount": -20
+            },
+            {
+              "type": "addItem",
+              "itemId": "receipt.guild_fee",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:counter"
+        },
+        {
+          "text": "Back to foyer",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:business_registry": {
+      "text": "A bored registrar flips pages with priestly authority.",
+      "choices": [
+        {
+          "text": "Register an emergency commission (45c)",
+          "actions": [
+            {
+              "type": "addCredits",
+              "amount": -45
+            },
+            {
+              "type": "addItem",
+              "itemId": "doc.commission",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "town:blackridge"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:permit_lobby": {
+      "text": "A placard: REQUIRED — Commission, Guild Fee Receipt, City Stamp.",
+      "choices": [
+        {
+          "text": "Present legitimate commission + fee",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.commission",
+                "qty": 1
+              },
+              {
+                "itemId": "receipt.guild_fee",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "permit.commission",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "fal:permit_granted",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:permit_success"
+        },
+        {
+          "text": "Present forged commission",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.commission_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "bldg:blackridge:city_hall:permit_inspect"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:permit_inspect": {
+      "text": "Dara holds the paper to the light. “Stamp ring’s too clean.”",
+      "choices": [
+        {
+          "text": "Talk fast (Bureaucracy DC 14)",
+          "type": "skillCheck",
+          "skill": "Bureaucracy",
+          "dc": 14,
+          "onSuccess": "bldg:blackridge:city_hall:permit_success",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Slip away while she squints (Stealth DC 13)",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 13,
+          "onSuccess": "city_hall",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Accept arrest",
+          "leadsTo": "blackridge:prison:intake"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:permit_success": {
+      "text": "Three stamps land like hammers. “Approved for limited egress.”",
+      "choices": [
+        {
+          "text": "Pocket the permit",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:council": {
+      "text": "Four seats: Mayor Sel Varyn, Oris Kel, a Merchant Guild rep, an Adventurer Guild rep. Citizens plead. The refrain: “It’s too dangerous. We must weather the storm.”",
+      "choices": [
+        {
+          "text": "Record the minutes (Bureaucracy DC 11)",
+          "type": "skillCheck",
+          "skill": "Bureaucracy",
+          "dc": 11,
+          "onSuccess": "bldg:blackridge:city_hall:council_recorded",
+          "onFailure": "bldg:blackridge:city_hall:council"
+        },
+        {
+          "text": "Watch Oris present a receivership bill",
+          "leadsTo": "bldg:blackridge:city_hall:council_bill"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:council_recorded": {
+      "text": "You keep a steady hand and a colder heart. The refrain is always the same. You won’t forget it.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:council_seen",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to the hearing",
+          "leadsTo": "bldg:blackridge:city_hall:council"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:council_bill": {
+      "text": "“Emergency Receivership for Failing Merchants.” The blacksmith’s mark is circled.",
+      "choices": [
+        {
+          "text": "Copy phrasing (History DC 12)",
+          "type": "skillCheck",
+          "skill": "History",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:city_hall:council_bill_done",
+          "onFailure": "bldg:blackridge:city_hall:council"
+        },
+        {
+          "text": "Memorize names (Perception DC 12)",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:city_hall:council_bill_done",
+          "onFailure": "bldg:blackridge:city_hall:council"
+        },
+        {
+          "text": "Do nothing",
+          "leadsTo": "bldg:blackridge:city_hall:council"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:council_bill_done": {
+      "text": "Ink dries. Names etch themselves somewhere behind your eyes.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:bill_copied",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to council",
+          "leadsTo": "bldg:blackridge:city_hall:council"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:messengers": {
+      "text": "Kett Bram juggles wax, ribbons, and rumors.",
+      "choices": [
+        {
+          "text": "Ask about routes",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:kett_allied",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:messengers"
+        },
+        {
+          "text": "Commission a forged writ (30c)",
+          "actions": [
+            {
+              "type": "addCredits",
+              "amount": -30
+            },
+            {
+              "type": "addItem",
+              "itemId": "doc.writ_forged",
+              "qty": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:messengers"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:guard_station": {
+      "text": "Hal Voss chews on a bitter leaf and a worse schedule.",
+      "choices": [
+        {
+          "text": "Offer to rotate patrols (Bureaucracy DC 10)",
+          "type": "skillCheck",
+          "skill": "Bureaucracy",
+          "dc": 10,
+          "onSuccess": "bldg:blackridge:city_hall:guard_trust",
+          "onFailure": "city_hall"
+        },
+        {
+          "text": "Vouch for the Clinic’s supplies (Science DC 10)",
+          "type": "skillCheck",
+          "skill": "Science",
+          "dc": 10,
+          "onSuccess": "bldg:blackridge:city_hall:guard_trust",
+          "onFailure": "city_hall"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:guard_trust": {
+      "text": "“Fine. I’ll open a window later. You didn’t hear that.”",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:hal_trusted",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to City Hall",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "blackridge:prison:intake": {
+      "text": "Cold bench. Inked ledger. “Name.” A stack of books waits in a wire basket.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:prison_active",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Serve time (read)",
+          "leadsTo": "blackridge:prison:reading"
+        }
+      ]
+    },
+    "blackridge:prison:reading": {
+      "text": "Bars. Pages. Silence that teaches.",
+      "choices": [
+        {
+          "text": "Read ‘On Forms and Power’ (flags:learn:Bureaucracy)",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "learn:Bureaucracy",
+              "value": true
+            }
+          ],
+          "leadsTo": "blackridge:prison:wait"
+        },
+        {
+          "text": "Read ‘Inkcraft’ (flags:learn:Artist)",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "learn:Artist",
+              "value": true
+            }
+          ],
+          "leadsTo": "blackridge:prison:wait"
+        },
+        {
+          "text": "Read ‘Citizens’ Minutes’ (flags:learn:History)",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "learn:History",
+              "value": true
+            }
+          ],
+          "leadsTo": "blackridge:prison:wait"
+        }
+      ]
+    },
+    "blackridge:prison:wait": {
+      "text": "Time crawls. Somewhere, a bell marks a change of watch.",
+      "choices": [
+        {
+          "text": "Release",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:prison_active",
+              "value": false
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:blacksmith:rooftop_intro": {
+      "text": "The blacksmith eyes the rooftops, then you. “You don’t look like you’ll fall.”",
+      "choices": [
+        {
+          "text": "Trade tips about resin anchors",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:blacksmith_recruited",
+              "value": true
+            }
+          ],
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    }
+  }
+}

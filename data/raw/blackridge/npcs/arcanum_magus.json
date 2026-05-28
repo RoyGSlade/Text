@@ -1,0 +1,39 @@
+{
+  "id": "arcanum_magus",
+  "town": "blackridge",
+  "roles": [
+    "mage",
+    "lore"
+  ],
+  "buildingId": "arcanum_tower",
+  "name": "Master Orim",
+  "demeanor": "paranoid,playful,ancient",
+  "repFaction": "arcanum",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "I knew you’d come. Eventually. Or earlier. Time is slippery."
+    },
+    {
+      "when": "tier == known",
+      "text": "Monsters are tantrums given shape. We must teach them silence."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You carry a peculiar absence. Let’s fill it with answers."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:mage",
+      "town:blackridge",
+      "building:arcanum_tower"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

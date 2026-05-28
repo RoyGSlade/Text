@@ -1,0 +1,18 @@
+{
+  "repTiers": [
+    "stranger",
+    "known",
+    "friendly",
+    "respected",
+    "honored",
+    "outlaw"
+  ],
+  "tierThresholds": {
+    "outlaw": -20,
+    "stranger": 0,
+    "known": 5,
+    "friendly": 15,
+    "respected": 35,
+    "honored": 60
+  }
+}

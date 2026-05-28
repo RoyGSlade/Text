@@ -1,0 +1,1028 @@
+{
+  "items": [
+    {
+      "id": "permit.commission",
+      "name": "Egress Permit",
+      "itemCategory": "permit",
+      "description": "Stamped authorization to exit Blackridge’s gates for one listed assignment. Expires at dawn.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "paper",
+        "legal",
+        "gatepass"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/permit_commission.png"
+    },
+    {
+      "id": "art.painting_small",
+      "name": "Small Painting",
+      "itemCategory": "art",
+      "description": "A small original canvas. Might fetch a decent price.",
+      "value": 15,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "art"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Small Painting"
+    },
+    {
+      "id": "permit.patrol",
+      "name": "Patrol Badge",
+      "itemCategory": "permit",
+      "description": "Issued to wall guards and auxiliaries for sanctioned movement during daylight.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "badge",
+        "legal",
+        "gatepass"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/badge_patrol.png"
+    },
+    {
+      "id": "permit.nightWatch",
+      "name": "Night Watch Writ",
+      "itemCategory": "permit",
+      "description": "Signed authorization for movement after curfew while on official watch business.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "paper",
+        "legal",
+        "curfew"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/writ_nightwatch.png"
+    },
+    {
+      "id": "doc.commission",
+      "name": "Legitimate Commission",
+      "itemCategory": "paper",
+      "description": "A verified work order issued by a trusted local business. Dara’s favorite flavor of paperwork.",
+      "value": 5,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "paper",
+        "business",
+        "permit_input"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/commission_legit.png"
+    },
+    {
+      "id": "doc.commission_forged",
+      "name": "Forged Commission",
+      "itemCategory": "paper",
+      "description": "A convincing imitation. Smells faintly of hot wax, panic, and consequences.",
+      "value": 1,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "paper",
+        "forgery",
+        "risky"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/commission_forged.png"
+    },
+    {
+      "id": "receipt.guild_fee",
+      "name": "Guild Fee Receipt",
+      "itemCategory": "paper",
+      "description": "Proof of payment to the Adventurer Guild’s ‘processing’ jar.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 10,
+      "tags": [
+        "paper",
+        "receipt",
+        "permit_input"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/receipt_guild.png"
+    },
+    {
+      "id": "doc.writ_forged",
+      "name": "Forged Escort Writ",
+      "itemCategory": "paper",
+      "description": "Sealed writ claiming merchant escort duty. Passes a glance, fails a stare.",
+      "value": 2,
+      "weight": 0,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": [
+        "paper",
+        "forgery",
+        "gatepass"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/writ_forged.png"
+    },
+    {
+      "id": "doc.arcanum_five_sources",
+      "name": "Arcanum Dossier: Five Sources",
+      "itemCategory": "paper",
+      "description": "Maps and countermeasures for five dungeon hearts surrounding Blackridge.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "legendary",
+      "stackSize": 1,
+      "tags": [
+        "paper",
+        "lore",
+        "evidence"
+      ],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/dossier_arcanum.png"
+    },
+    {
+      "id": "doc.old_mayor_memo",
+      "name": "Old Mayor’s Memo",
+      "itemCategory": "paper",
+      "description": "A shaky note warning of encroaching Merchant Guild control and ‘temporary’ powers.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "paper",
+        "lore",
+        "evidence"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/memo_old_mayor.png"
+    },
+    {
+      "id": "gear.rooftop_kit",
+      "name": "Rooftop Infiltration Kit",
+      "itemCategory": "tool",
+      "description": "Resin anchors, treated rope, and glass-sand pads for silent climbs and roof entries.",
+      "value": 35,
+      "weight": 3.5,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "tool",
+        "climb",
+        "heist"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/kit_rooftop.png",
+      "equip": {
+        "slot": "hands",
+        "effects": [
+          {
+            "type": "modifySkillDC",
+            "skill": "Mechanics",
+            "op": "-",
+            "value": 1
+          },
+          {
+            "type": "modifySkillDC",
+            "skill": "Stealth",
+            "op": "-",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "recipe.rooftop_kit",
+      "name": "Blueprint: Rooftop Kit",
+      "itemCategory": "blueprint",
+      "description": "Instructions for crafting a Rooftop Infiltration Kit using ironbark, kelp fiber, and glass sand.",
+      "value": 10,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "blueprint",
+        "crafting",
+        "heist"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/blueprint_rooftop.png",
+      "craft": {
+        "produces": {
+          "itemId": "gear.rooftop_kit",
+          "qty": 1
+        },
+        "station": "home:workbench",
+        "skillHints": [
+          "Science",
+          "Technology",
+          "Mechanics"
+        ],
+        "materials": [
+          {
+            "itemId": "mat.ironbark",
+            "qty": 2
+          },
+          {
+            "itemId": "mat.kelp_fiber",
+            "qty": 1
+          },
+          {
+            "itemId": "mat.glass_sand",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "mat.ironbark",
+      "name": "Ironbark Strut",
+      "itemCategory": "material",
+      "description": "Dense timber that laughs at nails. Preferred by people who hate falling.",
+      "value": 6,
+      "weight": 1,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material",
+        "wood"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_ironbark.png"
+    },
+    {
+      "id": "mat.kelp_fiber",
+      "name": "Kelp Fiber Weave",
+      "itemCategory": "material",
+      "description": "Salt-cured fiber with surprising tensile strength.",
+      "value": 4,
+      "weight": 0.3,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material",
+        "fiber"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_kelp.png"
+    },
+    {
+      "id": "mat.glass_sand",
+      "name": "Glass Sand",
+      "itemCategory": "material",
+      "description": "Powdered glass that grips stone like a grudge. Do not inhale. Or lick. Obviously.",
+      "value": 3,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 50,
+      "tags": [
+        "material",
+        "abrasive"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_glass_sand.png"
+    },
+    {
+      "id": "furniture.writers_desk_set",
+      "name": "Writer’s Desk, Ink, and Wax",
+      "itemCategory": "furniture",
+      "description": "Home station enabling careful planning and forgery work. Smug sense of legitimacy sold separately.",
+      "value": 25,
+      "weight": 20,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "station",
+        "home",
+        "forgery"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/station_writers_desk.png",
+      "use": [
+        {
+          "type": "unlockAction",
+          "actionId": "craft:forgery_planning"
+        }
+      ]
+    },
+    {
+      "id": "item.warding_chimes",
+      "name": "Warding Chimes",
+      "itemCategory": "consumable",
+      "description": "Glass and brass chimes that disrupt heat-breath and mask rune echoes for a heartbeat.",
+      "value": 12,
+      "weight": 0.2,
+      "rarity": "rare",
+      "stackSize": 5,
+      "tags": [
+        "consumable",
+        "anti-magic",
+        "boss_counter"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/consumable_chimes.png",
+      "use": [
+        {
+          "type": "setFlag",
+          "flag": "combat.buff.warding_chime",
+          "op": "=",
+          "value": true
+        },
+        {
+          "type": "modifySkillDC",
+          "skill": "Combat",
+          "op": "-",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "ammo.bolts_barbed_glass",
+      "name": "Barbed Glass Bolts",
+      "itemCategory": "ammo",
+      "description": "Shards set in resin tips. Shreds gilded plating like pride.",
+      "value": 8,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 20,
+      "tags": [
+        "ammo",
+        "piercing",
+        "boss_counter"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/ammo_glass_bolts.png"
+    },
+    {
+      "id": "permit.patrol_forged",
+      "name": "Forged Patrol Badge",
+      "itemCategory": "permit",
+      "description": "A convincing replica of a Watch badge. Might pass a cursory inspection.",
+      "value": 75,
+      "weight": 0,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "badge",
+        "forgery"
+      ],
+      "tradable": true,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/badge_patrol_forged.png"
+    },
+    {
+      "id": "defense_stock.scrap_metal",
+      "name": "Scrap Metal",
+      "itemCategory": "material",
+      "description": "Bits of broken tools and old armor. Roric can find a use for it.",
+      "value": 2,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 99,
+      "tags": [
+        "material",
+        "metal"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_scrap.png"
+    },
+    {
+      "id": "defense_stock.beast_gland",
+      "name": "Caustic Beast Gland",
+      "itemCategory": "material",
+      "description": "A gland from a predatory beast. Useful for alchemical traps.",
+      "value": 15,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 20,
+      "tags": [
+        "material",
+        "alchemical"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/mat_gland.png"
+    },
+    {
+      "id": "crate.defense_stock",
+      "name": "Defense Crate",
+      "itemCategory": "delivery",
+      "description": "A bundled crate of defense materials ready for turn-in.",
+      "value": 0,
+      "weight": 5,
+      "rarity": "common",
+      "stackSize": 5,
+      "tags": [
+        "delivery",
+        "crate"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/crate_defense.png"
+    },
+    {
+      "id": "alpha_beast_hide",
+      "name": "Alpha Beast Hide",
+      "itemCategory": "material",
+      "description": "Hide from a dominant beast.",
+      "value": 0,
+      "weight": 1,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": [
+        "material"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Alpha Beast Hide"
+    },
+    {
+      "id": "angry_shard",
+      "name": "Angry Shard",
+      "itemCategory": "misc",
+      "description": "A shard pulsing with unsettling warmth.",
+      "value": 0,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "quest"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Angry Shard"
+    },
+    {
+      "id": "blackmail_package",
+      "name": "Blackmail Package",
+      "itemCategory": "misc",
+      "description": "Sealed letters meant to coerce a target.",
+      "value": 5,
+      "weight": 1,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "parcel"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Blackmail Package"
+    },
+    {
+      "id": "coded_ledger",
+      "name": "Coded Ledger",
+      "itemCategory": "misc",
+      "description": "Numbers and runes await decryption.",
+      "value": 0,
+      "weight": 1,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": [
+        "document"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Coded Ledger"
+    },
+    {
+      "id": "copper_tubing",
+      "name": "Copper Tubing",
+      "itemCategory": "material",
+      "description": "Lengths of flexible copper pipe.",
+      "value": 2,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Copper Tubing"
+    },
+    {
+      "id": "credits",
+      "name": "Credits",
+      "itemCategory": "misc",
+      "description": "Standard minted coinage.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 9999,
+      "tags": [
+        "currency"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Credits"
+    },
+    {
+      "id": "doc.convoy_manifest",
+      "name": "Convoy Manifest",
+      "itemCategory": "misc",
+      "description": "Itemized record for caravan cargo.",
+      "value": 0,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "document"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Convoy Manifest"
+    },
+    {
+      "id": "fine_cloth",
+      "name": "Fine Cloth",
+      "itemCategory": "material",
+      "description": "Quality fabric favored by tailors.",
+      "value": 3,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Fine Cloth"
+    },
+    {
+      "id": "glass_vial",
+      "name": "Glass Vial",
+      "itemCategory": "material",
+      "description": "Empty vial awaiting contents.",
+      "value": 1,
+      "weight": 0.1,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Glass Vial"
+    },
+    {
+      "id": "iron_fittings",
+      "name": "Iron Fittings",
+      "itemCategory": "material",
+      "description": "Hooks and hinges of simple iron.",
+      "value": 2,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 20,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Iron Fittings"
+    },
+    {
+      "id": "monster_gland",
+      "name": "Monster Gland",
+      "itemCategory": "material",
+      "description": "A still throbbing organ from a beast.",
+      "value": 0,
+      "weight": 0.2,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": [
+        "material"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Monster Gland"
+    },
+    {
+      "id": "monster_plate",
+      "name": "Monster Plate",
+      "itemCategory": "material",
+      "description": "Plate-like bone from an enormous creature.",
+      "value": 0,
+      "weight": 3,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": [
+        "material"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Monster Plate"
+    },
+    {
+      "id": "permit.hq_attire",
+      "name": "HQ Attire Permit",
+      "itemCategory": "misc",
+      "description": "Authorization to wear guild uniforms inside headquarters.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": [
+        "permit"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for HQ Attire Permit"
+    },
+    {
+      "id": "reinforced_plate",
+      "name": "Reinforced Plate",
+      "itemCategory": "material",
+      "description": "Metal plating ready for armor smithing.",
+      "value": 0,
+      "weight": 4,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": [
+        "material"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Reinforced Plate"
+    },
+    {
+      "id": "scrap_cloth",
+      "name": "Scrap Cloth",
+      "itemCategory": "material",
+      "description": "Torn fabric useful for patching.",
+      "value": 1,
+      "weight": 0.2,
+      "rarity": "common",
+      "stackSize": 50,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Scrap Cloth"
+    },
+    {
+      "id": "scrap_wood",
+      "name": "Scrap Wood",
+      "itemCategory": "material",
+      "description": "Splintered lumber for crafting.",
+      "value": 1,
+      "weight": 0.5,
+      "rarity": "common",
+      "stackSize": 50,
+      "tags": [
+        "material"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Scrap Wood"
+    },
+    {
+      "id": "work_order_signed",
+      "name": "Signed Work Order",
+      "itemCategory": "misc",
+      "description": "Official document approving labor.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "document"
+      ],
+      "tradable": false,
+      "contraband": false,
+      "questItem": true,
+      "icon": "icons/placeholder.png",
+      "iconTodo": "Replace placeholder icon for Signed Work Order"
+    },
+    {
+      "id": "weapon.training_sword",
+      "name": "Training Sword",
+      "itemCategory": "weapon",
+      "description": "A dull blade used for practice.",
+      "value": 10,
+      "weight": 2,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "weapon",
+        "blade"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "damage": "1d6",
+      "damageProfile": {
+        "physical": "1d6"
+      },
+      "durability": {
+        "current": 20,
+        "max": 20
+      },
+      "quality": "standard",
+        "iconTodo": "Replace placeholder icon for Training Sword",
+        "tier": "d"
+      },
+    {
+      "id": "unarmed",
+      "name": "Fists",
+      "itemCategory": "weapon",
+      "description": "Bare-knuckled resolve.",
+      "value": 0,
+      "weight": 0,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": ["weapon", "unarmed"],
+      "tradable": false,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/fists.png",
+      "damage": "1d4",
+      "damageProfile": { "physical": "1d4" },
+      "durability": { "current": 999, "max": 999 },
+      "quality": "standard",
+      "tier": "d"
+    },
+    {
+      "id": "broken_pipe",
+      "name": "Broken Pipe",
+      "itemCategory": "weapon",
+      "description": "Rusty length of pipe with jagged edge.",
+      "value": 1,
+      "weight": 3,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": ["weapon", "improvised"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/broken_pipe.png",
+      "damage": "1d6",
+      "damageProfile": { "physical": "1d6" },
+      "durability": { "current": 10, "max": 10 },
+      "quality": "worn",
+      "tier": "d"
+    },
+    {
+      "id": "crowbar",
+      "name": "Crowbar",
+      "itemCategory": "weapon",
+      "description": "Sturdy pry bar that doubles as a club.",
+      "value": 12,
+      "weight": 5,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": ["weapon", "blunt"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/crowbar.png",
+      "damage": "1d6",
+      "damageProfile": { "physical": "1d6" },
+      "durability": { "current": 25, "max": 25 },
+      "quality": "standard",
+      "tier": "c"
+    },
+    {
+      "id": "knife",
+      "name": "Survival Knife",
+      "itemCategory": "weapon",
+      "description": "Simple blade suited for cutting or defense.",
+      "value": 15,
+      "weight": 1,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": ["weapon", "blade"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/knife.png",
+      "damage": "1d6",
+      "damageProfile": { "physical": "1d6" },
+      "durability": { "current": 20, "max": 20 },
+      "quality": "standard",
+      "tier": "c"
+    },
+    {
+      "id": "short_sword",
+      "name": "Short Sword",
+      "itemCategory": "weapon",
+      "description": "Balanced blade favored by novices.",
+      "value": 25,
+      "weight": 3,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": ["weapon", "blade"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/short_sword.png",
+      "damage": "1d8",
+      "damageProfile": { "physical": "1d8" },
+      "durability": { "current": 30, "max": 30 },
+      "quality": "standard",
+      "tier": "b"
+    },
+    {
+      "id": "hunting_bow",
+      "name": "Hunting Bow",
+      "itemCategory": "weapon",
+      "description": "Wooden bow for game and skirmish.",
+      "value": 30,
+      "weight": 2,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": ["weapon", "ranged"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/hunting_bow.png",
+      "damage": "1d8",
+      "damageProfile": { "physical": "1d8" },
+      "durability": { "current": 25, "max": 25 },
+      "quality": "standard",
+      "tier": "b"
+    },
+    {
+      "id": "laser_pistol",
+      "name": "Laser Pistol",
+      "itemCategory": "weapon",
+      "description": "Compact energy sidearm.",
+      "value": 120,
+      "weight": 2.5,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": ["weapon", "ranged"],
+      "tradable": true,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/laser_pistol.png",
+      "damage": "1d6",
+      "damageProfile": { "energy": "1d6" },
+      "durability": { "current": 50, "max": 50 },
+      "quality": "standard",
+      "tier": "a"
+    },
+    {
+      "id": "plasma_rifle",
+      "name": "Plasma Rifle",
+      "itemCategory": "weapon",
+      "description": "Experimental rifle that fires superheated bolts.",
+      "value": 1000,
+      "weight": 6,
+      "rarity": "legendary",
+      "stackSize": 1,
+      "tags": ["weapon", "ranged"],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/plasma_rifle.png",
+      "damage": "1d10",
+      "damageProfile": { "energy": "1d10" },
+      "durability": { "current": 80, "max": 80 },
+      "quality": "masterwork",
+      "tier": "s"
+    },
+    {
+      "id": "armor.leather_vest",
+      "name": "Leather Vest",
+      "itemCategory": "armor",
+      "description": "Light torso protection.",
+      "value": 8,
+      "weight": 3,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "armor",
+        "leather"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "armorTags": [
+        "light",
+        "leather"
+      ],
+      "armorRating": 11,
+      "durability": {
+        "current": 15,
+        "max": 15
+      },
+      "quality": "worn",
+      "iconTodo": "Replace placeholder icon for Leather Vest"
+    },
+    {
+      "id": "consumable.tonic_energizing",
+      "name": "Energizing Tonic",
+      "itemCategory": "consumable",
+      "description": "A sharp herbal drink that quickens the reflexes.",
+      "value": 5,
+      "weight": 0.1,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": [
+        "potion"
+      ],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/placeholder.png",
+      "use": {
+        "status": "energized",
+        "durabilityLoss": 1
+      },
+      "durability": {
+        "current": 1,
+        "max": 1
+      },
+      "quality": "standard",
+      "iconTodo": "Replace placeholder icon for Energizing Tonic"
+    }
+  ]
+}

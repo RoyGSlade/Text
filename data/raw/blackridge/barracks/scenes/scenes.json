@@ -1,0 +1,462 @@
+{
+  "scenes": {
+    "bldg:blackridge:barracks": {
+      "textBlocks": [
+        {
+          "default": true,
+          "text": "The Barracks courtyard is a whirl of disciplined activity. The air smells of steel, sweat, and oil. Guards drill in the yard while Joric watches from the shade."
+        },
+        {
+          "when": "brg:siege_tense",
+          "text": "Everything is taut as bowstring. No jokes, no slack, just blades and breath."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Report to Command",
+          "leadsTo": "bldg:blackridge:barracks:command"
+        },
+        {
+          "text": "Visit the Quartermaster",
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        },
+        {
+          "text": "Head to the Training Yard",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        },
+        {
+          "text": "Check the Bunks",
+          "leadsTo": "bldg:blackridge:barracks:bunks"
+        },
+        {
+          "text": "Leave the Barracks",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:command": {
+      "text": "A wall map crawls with pins. The margin reads: 'Anything that moves after dusk is either ours or dead soon.'",
+      "choices": [
+        {
+          "text": "Start a Night Patrol (requires badge, night)",
+          "requires": {
+            "flagsAny": [
+              "brg:badge_acquired",
+              "world:isNight"
+            ]
+          },
+          "leadsTo": "bldg:blackridge:barracks:patrol_start"
+        },
+        {
+          "text": "Back to the courtyard",
+          "leadsTo": "bldg:blackridge:barracks"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:quartermaster": {
+      "text": "Roric is counting arrowheads. The inventory ledger looks like it could stop a sword.",
+      "choices": [
+        {
+          "text": "Turn in Scrap Metal (x1 → +1 progress)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "defense_stock.scrap_metal",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "defense_stock.scrap_metal",
+              "qty": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "brg:defense_progress",
+              "value": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        },
+        {
+          "text": "Turn in Beast Gland (x1 → +3 progress)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "defense_stock.beast_gland",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "defense_stock.beast_gland",
+              "qty": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "brg:defense_progress",
+              "value": 3
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        },
+        {
+          "text": "Bundle 10 progress into a Defense Crate",
+          "leadsTo": "bldg:blackridge:barracks:bundle_crate"
+        },
+        {
+          "text": "Turn in a Defense Crate",
+          "requires": {
+            "have": [
+              {
+                "itemId": "crate.defense_stock",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "crate.defense_stock",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:turnin_crate_complete"
+        },
+        {
+          "text": "Back to the courtyard",
+          "leadsTo": "bldg:blackridge:barracks"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:bundle_crate": {
+      "text": "Roric eyes your ledger marks. Ten points make a crate; nothing less.",
+      "choices": [
+        {
+          "text": "Consolidate to a Defense Crate",
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "brg:defense_progress",
+              "value": -10
+            },
+            {
+              "type": "addItem",
+              "itemId": "crate.defense_stock",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        },
+        {
+          "text": "Not yet",
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:turnin_crate_complete": {
+      "text": "Roric stamps the slip. \"You keep us standing.\"",
+      "actions": [
+        {
+          "type": "addCredits",
+          "amount": 20
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to Quartermaster",
+          "leadsTo": "bldg:blackridge:barracks:quartermaster"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:training_yard": {
+      "text": "Joric watches recruits with a critical eye. A row of battered dummies waits for humiliation.",
+      "choices": [
+        {
+          "text": "Request the Watch trial",
+          "requires": {
+            "flagsNot": [
+              "brg:badge_acquired"
+            ]
+          },
+          "leadsTo": "bldg:blackridge:barracks:trial_start"
+        },
+        {
+          "text": "Request skill training (Melee, 50c)",
+          "requires": {},
+          "actions": [
+            {
+              "type": "addCredits",
+              "amount": -50
+            },
+            {
+              "type": "setFlag",
+              "flag": "learn:Melee",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        },
+        {
+          "text": "Study the badge design",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "brg:badge_design_known",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:badge_design_learned"
+        },
+        {
+          "text": "Forge a replica badge (Mechanics DC 13, needs 2x Scrap + 15c)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "defense_stock.scrap_metal",
+                "qty": 2
+              }
+            ]
+          },
+          "leadsTo": "bldg:blackridge:barracks:forge_badge"
+        },
+        {
+          "text": "Back to the courtyard",
+          "leadsTo": "bldg:blackridge:barracks"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:badge_design_learned": {
+      "text": "You note weight, finish, and stamp depth. Enough to fake it later.",
+      "choices": [
+        {
+          "text": "Back to the yard",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:forge_badge": {
+      "text": "You heat, press, and enamel. It will fool the lazy, maybe even the sober.",
+      "choices": [
+        {
+          "text": "Commit the forgery (Mechanics DC 13)",
+          "type": "skillCheck",
+          "skill": "Mechanics",
+          "dc": 13,
+          "onSuccess": "bldg:blackridge:barracks:forge_badge_success",
+          "onFailure": "bldg:blackridge:barracks:forge_badge_fail"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:forge_badge_success": {
+      "text": "It flashes like authority. From far enough away, it is.",
+      "actions": [
+        {
+          "type": "removeItem",
+          "itemId": "defense_stock.scrap_metal",
+          "qty": 2
+        },
+        {
+          "type": "addCredits",
+          "amount": -15
+        },
+        {
+          "type": "addItem",
+          "itemId": "permit.patrol_forged",
+          "qty": 1
+        }
+      ],
+      "choices": [
+        {
+          "text": "Pocket it",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:forge_badge_fail": {
+      "text": "The enamel runs. The stamp bites wrong. Roric will laugh later.",
+      "choices": [
+        {
+          "text": "Abandon the mess",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:trial_start": {
+      "text": "Joric cracks his knuckles. \"Three parts. Marksmanship, melee, observation. Pass all three, you get a badge.\"",
+      "choices": [
+        {
+          "text": "Begin the Marksmanship trial (Ranged DC 12)",
+          "type": "skillCheck",
+          "skill": "Ranged",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:barracks:trial_melee",
+          "onFailure": "bldg:blackridge:barracks:trial_fail"
+        },
+        {
+          "text": "Nevermind",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:trial_melee": {
+      "text": "You land a solid hit on the dummy. Joric grunts. \"Not bad. Now, face me.\"",
+      "choices": [
+        {
+          "text": "Begin the Melee trial (Melee DC 13)",
+          "type": "skillCheck",
+          "skill": "Melee",
+          "dc": 13,
+          "onSuccess": "bldg:blackridge:barracks:trial_observe",
+          "onFailure": "bldg:blackridge:barracks:trial_fail"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:trial_observe": {
+      "text": "You parry his strike. He nods. \"You can fight. But can you see? That cart—what's wrong with it?\"",
+      "choices": [
+        {
+          "text": "Begin the Observation trial (Perception DC 12)",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:barracks:trial_success",
+          "onFailure": "bldg:blackridge:barracks:trial_fail"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:trial_success": {
+      "text": "\"Left axle's cracked. Good eye.\" Joric tosses you a badge. \"Don't disgrace it.\"",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "brg:trial_passed",
+          "value": true
+        },
+        {
+          "type": "addItem",
+          "itemId": "permit.patrol",
+          "qty": 1
+        }
+      ],
+      "choices": [
+        {
+          "text": "Thank him and return to the yard",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:trial_fail": {
+      "text": "Joric sighs. \"Not today. Come back when you can keep your feet under you.\"",
+      "choices": [
+        {
+          "text": "Return to the yard",
+          "leadsTo": "bldg:blackridge:barracks:training_yard"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:bunks": {
+      "text": "Rows of hammocks and one very judgmental cat. Elara waves you over.",
+      "choices": [
+        {
+          "text": "Chat with Elara about last night",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "brg:rumor_night_noises",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:barracks:bunks"
+        },
+        {
+          "text": "Back to the courtyard",
+          "leadsTo": "bldg:blackridge:barracks"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:patrol_start": {
+      "text": "Night dampens the world. The wall gate yawns like a dare.",
+      "choices": [
+        {
+          "text": "Slip along the outer road (Stealth DC 12)",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:barracks:patrol_scene2",
+          "onFailure": "bldg:blackridge:barracks:patrol_skirmish"
+        },
+        {
+          "text": "Walk the torchline (Perception DC 11)",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 11,
+          "onSuccess": "bldg:blackridge:barracks:patrol_scene2",
+          "onFailure": "bldg:blackridge:barracks:patrol_skirmish"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:patrol_scene2": {
+      "text": "Wind shakes brush. A glint. Not a star.",
+      "choices": [
+        {
+          "text": "Loose an arrow (Ranged DC 12)",
+          "type": "skillCheck",
+          "skill": "Ranged",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:barracks:patrol_return",
+          "onFailure": "bldg:blackridge:barracks:patrol_skirmish"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:patrol_skirmish": {
+      "text": "Something fast and too curious. You drive it off, but not before it snarls your nerves.",
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "brg:suspicion",
+          "value": 1
+        }
+      ],
+      "choices": [
+        {
+          "text": "Regroup and return",
+          "leadsTo": "bldg:blackridge:barracks:patrol_return"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:patrol_return": {
+      "text": "The gate closes behind you. Torches burn like small suns.",
+      "choices": [
+        {
+          "text": "Debrief with Roric",
+          "leadsTo": "bldg:blackridge:barracks:patrol_debrief"
+        }
+      ]
+    },
+    "bldg:blackridge:barracks:patrol_debrief": {
+      "text": "Roric notes your route and raises an eyebrow. \"You came back. That counts.\"",
+      "actions": [
+        {
+          "type": "addCredits",
+          "amount": 50
+        },
+        {
+          "type": "setFlag",
+          "flag": "brg:patrol_completed_tonight",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to Command",
+          "leadsTo": "bldg:blackridge:barracks:command"
+        }
+      ]
+    }
+  }
+}

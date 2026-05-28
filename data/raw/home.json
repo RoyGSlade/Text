@@ -1,0 +1,83 @@
+{
+  "upgrades": {
+    "bed_t1": {
+      "name": "Sturdy Cot",
+      "cost": 20,
+      "desc": "A proper place to sleep. Fully restores HP, stamina, and focus when resting at home.",
+      "effects": { "restFull": true }
+    },
+    "workshop_t1": {
+      "name": "Basic Workshop",
+      "cost": 30,
+      "desc": "Workbench, hand tools, and parts bins. Unlocks workshop crafting at home.",
+      "effects": { "stations": ["workbench"] }
+    },
+    "workshop_t2": {
+      "name": "Advanced Workshop",
+      "cost": 60,
+      "desc": "Sturdier benches and tools. Reduces crafting DC by 1 and unlocks advanced workbench recipes.",
+      "effects": { "stations": ["workbench"], "dcBonus": -1 }
+    },
+    "workshop_t3": {
+      "name": "Master Workshop",
+      "cost": 120,
+      "desc": "Precision gear and stock. Reduces crafting DC by 2 and unlocks masterwork blueprints.",
+      "effects": { "stations": ["workbench"], "dcBonus": -2 }
+    },
+    "kitchen_t1": {
+      "name": "Camp Kitchen",
+      "cost": 25,
+      "desc": "A burner, pot, and utensils. Unlocks simple cooking at home.",
+      "effects": { "stations": ["kitchen"] }
+    },
+    "kitchen_t2": {
+      "name": "Field Kitchen",
+      "cost": 50,
+      "desc": "Adds oven and herbs. Reduces cooking DC by 1 and unlocks hearty recipes.",
+      "effects": { "stations": ["kitchen"], "dcBonus": -1 }
+    },
+    "kitchen_t3": {
+      "name": "Chef's Kitchen",
+      "cost": 100,
+      "desc": "Full pantry and gear. Reduces cooking DC by 2 and unlocks gourmet recipes.",
+      "effects": { "stations": ["kitchen"], "dcBonus": -2 }
+    },
+    "studio_t1": {
+      "name": "Art Studio",
+      "cost": 25,
+      "desc": "Canvas, pigments, and a drafting table. Unlocks art creation and selling at home.",
+      "effects": { "stations": ["studio"] }
+    },
+    "studio_t2": {
+      "name": "Drafting Studio",
+      "cost": 50,
+      "desc": "Better lighting and tools. Reduces art DC by 1 and unlocks detailed pieces.",
+      "effects": { "stations": ["studio"], "dcBonus": -1 }
+    },
+    "studio_t3": {
+      "name": "Master Studio",
+      "cost": 100,
+      "desc": "Premium materials and space. Reduces art DC by 2 and unlocks masterworks.",
+      "effects": { "stations": ["studio"], "dcBonus": -2 }
+    },
+    "forgery_t1": {
+      "name": "Forgery Bench",
+      "cost": 35,
+      "desc": "Seals, inks, and lamp-black. Unlocks basic forgery at home.",
+      "effects": { "stations": ["forgery"] }
+    },
+    "forgery_t2": {
+      "name": "Forgery Lab",
+      "cost": 70,
+      "desc": "Special inks and presses. Reduces forgery DC by 1 and unlocks complex documents.",
+      "effects": { "stations": ["forgery"], "dcBonus": -1 }
+    },
+    "forgery_t3": {
+      "name": "Master Forgery Suite",
+      "cost": 140,
+      "desc": "Precision tools and archives. Reduces forgery DC by 2 and unlocks masterpiece forgeries.",
+      "effects": { "stations": ["forgery"], "dcBonus": -2 }
+    }
+  }
+}
+

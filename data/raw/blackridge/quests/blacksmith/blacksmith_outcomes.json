@@ -1,0 +1,70 @@
+{
+  "pack": "blacksmith_outcomes",
+  "quests": [
+    {
+      "id": "smith_outcome_appeal",
+      "tags": ["blacksmith","outcome"],
+      "title": "Legal Reinstatement",
+      "desc": "File a Library brief with Lyrene Holt and push the hearing.",
+      "requirements": { "flagsAny": ["flag:library_evidence.smith_case","flag:br:lantern.sunlight.parts"] },
+      "objectives": [
+        { "id": "file", "title": "File brief", "desc": "Present to Clerk.", "completion": { "flagsAny": ["flag:library_filed.smith"] } },
+        { "id": "hearing", "title": "Attend hearing", "desc": "Day must pass.", "completion": { "flagsAny": ["flag:br:smith.hearing.done"] } }
+      ],
+      "rewards": {
+        "flags": [
+          {"key":"br:smith.arrested","value":false},
+          {"key":"br:smith.rescued","value":true},
+          {"key":"br:smith.reinstated","value":true},
+          {"key":"br:lantern.markup","delta":-1},
+          {"key":"br:lantern.markup","min":0}
+        ],
+        "xp": 100
+      },
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    },
+    {
+      "id": "smith_outcome_break",
+      "tags": ["blacksmith","outcome"],
+      "title": "Covert Workshop",
+      "desc": "Pull Kaelen from B2 through the tunnels and light an off-grid forge.",
+      "requirements": { "flagsAny": ["flag:br:tunnel.entry.smith"] },
+      "objectives": [
+        { "id": "break", "title": "Open Cell B2", "desc": "Navigate gaol tunnels.", "completion": { "flagsAny": ["flag:br:gaol.b2.open"] } },
+        { "id": "setup", "title": "Provision tools", "desc": "Bring oil and two iron/steel ingots.", "completion": { "have": [{"id":"oil.tool_hardening","qty":1},{"id":"ingot.iron","qty":2}] } }
+      ],
+      "rewards": {
+        "flags": [
+          {"key":"br:smith.covert","value":true},
+          {"key":"br:smith.arrested","value":false},
+          {"key":"br:suspicion","delta":2},
+          {"key":"br:smith.covert.locationKnown","value":true}
+        ],
+        "xp": 120
+      },
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    },
+    {
+      "id": "smith_outcome_exile",
+      "tags": ["blacksmith","outcome"],
+      "title": "Exile Forge",
+      "desc": "Move the operation outside the gate, no permits, no contracts.",
+      "requirements": {},
+      "objectives": [
+        { "id": "stock", "title": "Stock the wagon", "desc": "Acquire 2× Brace Beam and 1× Spike Strip.", "completion": { "have": [{"id":"barricade.brace_beam","qty":2},{"id":"trap.spike_strip","qty":1}] } }
+      ],
+      "rewards": {
+        "flags": [
+          {"key":"br:smith.exile","value":true},
+          {"key":"br:gate.defense","delta":-1}
+        ],
+        "items": [{"id":"kit.masterwork","qty":1}],
+        "xp": 80
+      },
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    }
+  ]
+}

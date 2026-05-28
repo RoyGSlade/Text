@@ -1,0 +1,252 @@
+{
+  "items": [
+    {
+      "id": "letter.arcanum_invite",
+      "name": "Pigeon-Mail Invitation",
+      "itemCategory": "quest",
+      "description": "A letter that recognizes your name before you say it.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": [
+        "arcanum",
+        "entry",
+        "paper"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "quest.note.sticky_memory_hint",
+      "name": "Sticky Note: \"You forgot something\"",
+      "itemCategory": "quest",
+      "description": "A note that reattaches itself to your forehead when ignored.",
+      "value": 0,
+      "rarity": "common",
+      "tags": [
+        "memory",
+        "hint",
+        "arcanum"
+      ],
+      "contraband": "low",
+      "use": {
+        "actions": [
+          {
+            "type": "incFlag",
+            "flag": "br:player.memory_focus",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "reagent.goblin_teeth",
+      "name": "Goblin Teeth",
+      "itemCategory": "reagent",
+      "description": "Currency, apparently. Sharp and socially unacceptable.",
+      "value": 5,
+      "rarity": "common",
+      "tags": [
+        "reagent",
+        "radiant",
+        "trade"
+      ],
+      "contraband": "low"
+    },
+    {
+      "id": "component.rotating_floor_fragment",
+      "name": "Rotating Floor Fragment",
+      "itemCategory": "component",
+      "description": "A triangulated wedge that insists the room should spin.",
+      "value": 12,
+      "rarity": "uncommon",
+      "tags": [
+        "mechanism",
+        "arcanum"
+      ],
+      "contraband": "medium"
+    },
+    {
+      "id": "blueprint.jump_boots",
+      "name": "Blueprint: Jump Boots",
+      "itemCategory": "blueprint",
+      "description": "Schematics for spring-latticed boots that borrow momentum from tomorrow.",
+      "value": 40,
+      "rarity": "rare",
+      "tags": [
+        "blueprint",
+        "movement",
+        "arcanum"
+      ],
+      "contraband": "medium",
+      "craft": {
+        "produces": "device.jump_boots",
+        "requires": [
+          {
+            "itemId": "component.rotating_floor_fragment",
+            "qty": 1
+          },
+          {
+            "itemId": "reagent.goblin_teeth",
+            "qty": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "device.jump_boots",
+      "name": "Jump Boots",
+      "itemCategory": "device",
+      "description": "Laced with deferred gravity. Try not to look down.",
+      "value": 80,
+      "rarity": "rare",
+      "tags": [
+        "equip",
+        "boots",
+        "movement"
+      ],
+      "contraband": "medium",
+      "use": {
+        "actions": [
+          {
+            "type": "setFlag",
+            "flag": "br:player.jump_boost",
+            "op": "=",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "trinket.memory_bookmark",
+      "name": "Memory Bookmark",
+      "itemCategory": "trinket",
+      "description": "Reminds your mind which page it's on.",
+      "value": 25,
+      "rarity": "uncommon",
+      "tags": [
+        "memory",
+        "focus"
+      ],
+      "contraband": "low",
+      "use": {
+        "actions": [
+          {
+            "type": "incFlag",
+            "flag": "br:suspicion",
+            "value": -1
+          }
+        ]
+      }
+    },
+    {
+      "id": "weapon.phantom_sabre",
+      "name": "Phantom Sabre",
+      "itemCategory": "weapon",
+      "description": "Feels weightless until it meets something that shouldn’t exist.",
+      "value": 120,
+      "rarity": "rare",
+      "tags": [
+        "weapon",
+        "melee",
+        "arcanum"
+      ],
+      "contraband": "high"
+    },
+    {
+      "id": "armor.mindweave_robes",
+      "name": "Mindweave Robes",
+      "itemCategory": "armor",
+      "description": "Threads that catch stray thoughts and line them up neatly.",
+      "value": 110,
+      "rarity": "rare",
+      "tags": [
+        "armor",
+        "intelligence"
+      ],
+      "contraband": "medium",
+      "use": {
+        "actions": [
+          {
+            "type": "incFlag",
+            "flag": "br:stat.intelligence",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "quest.fence_painted_receipt",
+      "name": "Fence Contract: Completed",
+      "itemCategory": "quest",
+      "description": "Ink barely dry. Splattered with a color that doesn't exist yet.",
+      "value": 0,
+      "rarity": "common",
+      "tags": [
+        "quest",
+        "errand"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "arcanum.memory.fragment.cityhall",
+      "name": "Memory Fragment: City Hall Basement",
+      "itemCategory": "quest",
+      "description": "A captured recollection humming with bureaucratic anxiety.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": [
+        "memory",
+        "arcanum"
+      ],
+      "contraband": "high"
+    },
+    {
+      "id": "arcanum.memory.fragment.library",
+      "name": "Memory Fragment: Library Stack",
+      "itemCategory": "quest",
+      "description": "A shelved thought that refuses to be cataloged.",
+      "value": 0,
+      "rarity": "common",
+      "tags": [
+        "memory",
+        "arcanum"
+      ],
+      "contraband": "medium"
+    },
+    {
+      "id": "scroll.remembering",
+      "name": "Spell: Remembering",
+      "itemCategory": "scroll",
+      "description": "A ribbon of syntax that anchors moments before they float away.",
+      "value": 60,
+      "rarity": "rare",
+      "tags": [
+        "spell",
+        "memory"
+      ],
+      "contraband": "high",
+      "use": {
+        "actions": [
+          {
+            "type": "setFlag",
+            "flag": "br:player.remembering_unlocked",
+            "op": "=",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "waypoint.catacombs",
+      "name": "Waypoint: Catacombs",
+      "itemCategory": "key",
+      "description": "Marks a route where the city pretends not to have bones.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": [
+        "waypoint",
+        "dungeon"
+      ],
+      "contraband": "low"
+    }
+  ]
+}

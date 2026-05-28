@@ -1,0 +1,42 @@
+{
+  "id": "city_clerk",
+  "town": "blackridge",
+  "roles": [
+    "authority",
+    "bureaucrat"
+  ],
+  "buildingId": "city_hall",
+  "name": "Brina",
+  "demeanor": "brisk,untiring,petty",
+  "repFaction": "council",
+  "repPersonal": false,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Form 17-B for forms 1 through 16."
+    },
+    {
+      "when": "tier == known",
+      "text": "Work orders require signatures that outrank my patience."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Your paperwork travels faster now. Don’t get used to it."
+    },
+    {
+      "when": "corruption_exposed",
+      "text": "If the mob asks, I was never here."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:authority",
+      "town:blackridge",
+      "building:city_hall"
+    ],
+    "minTierByTag": {
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "mg_engineer_pyra",
+  "town": "blackridge",
+  "roles": [
+    "lantern_engineer"
+  ],
+  "buildingId": "merchant_guild_store",
+  "name": "Pyra Ansel",
+  "demeanor": "perfectionist, scornful, curious",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "true",
+      "text": "Lanterns are simple: light goes in, money comes out. Don't ask me about cannons or skyships."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_repair_lantern",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ],
+        "have": [
+          {
+            "itemId": "lantern.guild_basic",
+            "qty": 1
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:lantern.markup",
+          "value": 1
+        }
+      ],
+      "text": "Request lantern repair",
+      "leadsTo": "mg_lantern_bench"
+    }
+  ]
+}

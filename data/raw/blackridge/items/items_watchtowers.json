@@ -1,0 +1,82 @@
+{
+  "items": [
+    {
+      "id": "kit.mirror_array",
+      "name": "Signal Mirror Array",
+      "itemCategory": "tool",
+      "description": "Polished plates and mounts to boost beacon coverage along the wall.",
+      "value": 25,
+      "weight": 4.0,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": ["tool","watch","upgrade","mirror"],
+      "tradable": false,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/kit_mirror_array.png"
+    },
+    {
+      "id": "fuel.lamp_oil_crate",
+      "name": "Crate of Beacon Oil",
+      "itemCategory": "material",
+      "description": "Thick-burning oil for night beacons and horns’ flare-pots.",
+      "value": 18,
+      "weight": 6.0,
+      "rarity": "common",
+      "stackSize": 3,
+      "tags": ["material","fuel","watch"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/fuel_beacon_oil.png"
+    },
+    {
+      "id": "lens.polished_glass_large",
+      "name": "Large Polished Lens",
+      "itemCategory": "material",
+      "description": "Overground glass for long-throw signaling and monster-spotting.",
+      "value": 20,
+      "weight": 2.0,
+      "rarity": "uncommon",
+      "stackSize": 2,
+      "tags": ["material","glass","watch","upgrade"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/lens_large.png"
+    },
+    {
+      "id": "horn.resonant",
+      "name": "Resonant Signal Horn",
+      "itemCategory": "tool",
+      "description": "Deep-bore horn that cuts through siege din. Not neighbor-friendly.",
+      "value": 12,
+      "weight": 1.2,
+      "rarity": "common",
+      "stackSize": 1,
+      "tags": ["tool","horn","watch"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/horn_resonant.png"
+    },
+    {
+      "id": "manual.scout_fieldcraft",
+      "name": "Fieldcraft Manual: Scout Basics",
+      "itemCategory": "book",
+      "description": "Training regimen that sharpens perception routes and ambush avoidance.",
+      "value": 10,
+      "weight": 0.5,
+      "rarity": "uncommon",
+      "stackSize": 1,
+      "tags": ["book","training","watch"],
+      "tradable": true,
+      "contraband": false,
+      "questItem": false,
+      "icon": "icons/manual_scout.png",
+      "use": [
+        { "type": "setFlag", "flag": "br:training.scout_basic", "op": "=", "value": true }
+      ]
+    }
+  ]
+}

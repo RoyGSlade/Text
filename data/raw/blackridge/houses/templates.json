@@ -1,0 +1,25 @@
+{
+  "templates": [
+    {
+      "id": "house:poor_single",
+      "name": "Lean-to",
+      "inviteRule": {
+        "requiresTierWithNpc": {
+          "npcId": "sera_healer",
+          "tier": "friendly"
+        }
+      },
+      "scenes": {
+        "enter": {
+          "text": "A single room, neat and bare.",
+          "choices": [
+            {
+              "text": "Leave",
+              "leadsTo": "town:blackridge"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

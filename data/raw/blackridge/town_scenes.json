@@ -1,0 +1,91 @@
+{
+  "scenes": {
+    "town:blackridge": {
+      "text": "Blackridge: woodsmoke, clamor, and wary eyes.",
+      "choices": [
+        {
+          "text": "Visit Grimy Anvil",
+          "leadsTo": "bldg:blackridge:grimy_anvil"
+        },
+        {
+          "text": "Visit City Hall",
+          "leadsTo": "bldg:blackridge:city_hall"
+        },
+        {
+          "text": "Visit the Library",
+          "leadsTo": "bldg:blackridge:library"
+        },
+        {
+          "text": "Visit the Barracks",
+          "leadsTo": "bldg:blackridge:barracks"
+        },
+        {
+          "text": "[Quest] Check the loose brick",
+          "requires": {
+            "flagsAny": [
+              "espionage_stash_location_known"
+            ],
+            "flagsNot": [
+              "corruption_plot_resolved"
+            ]
+          },
+          "type": "startQuest",
+          "questId": "espionage:the_lever",
+          "leadsTo": "town:blackridge:well"
+        },
+        {
+          "text": "Visit the Tavern",
+          "leadsTo": "bldg:blackridge:tavern"
+        },
+        {
+          "text": "Visit the Merchant Guild",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "[Quest] Apply for Adventurer Guild permit",
+          "type": "startQuest",
+          "questId": "quest.guild.tutorial-commission",
+          "leadsTo": "scene.guild.entry"
+        },
+        {
+          "text": "[Quest] Seek Merchant Guild contracts",
+          "type": "startQuest",
+          "questId": "mg_main_ledgers",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "[Quest] Volunteer for watch duty",
+          "type": "startQuest",
+          "questId": "br:watch:night_alerts",
+          "leadsTo": "bldg:blackridge:watchtowers"
+        },
+        {
+          "text": "Explore the outskirts",
+          "leadsTo": "town:blackridge:forest_outskirts"
+        },
+        {
+          "text": "Head to the forest",
+          "leadsTo": "cell:forest:1,0"
+        }
+      ]
+    },
+    "rumor:rudy": {
+      "text": "Rudy leans in. \"South fence rattles with something that hates singing. Guards hum now.\"",
+      "choices": [
+        {
+          "text": "Noted",
+          "leadsTo": "bldg:blackridge:tavern"
+        }
+      ]
+    },
+    "rumor:bill": {
+      "text": "Bill mutters. \"Old well east of town. Heard a crystal hum. Might be wind. Wind doesn’t hum.\"",
+      "choices": [
+        {
+          "text": "Noted",
+          "leadsTo": "bldg:blackridge:tavern"
+        }
+      ]
+    }
+  }
+}

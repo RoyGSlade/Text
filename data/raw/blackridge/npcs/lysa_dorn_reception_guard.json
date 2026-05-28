@@ -1,0 +1,22 @@
+{
+  "id": "lysa_dorn_reception_guard",
+  "town": "blackridge",
+  "roles": [
+    "guard"
+  ],
+  "buildingId": "city_hall",
+  "name": "Lysa Dorn",
+  "demeanor": "professional, skeptical, fair",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "No weapons past the line. No speeches either."
+    },
+    {
+      "when": "tier >= known",
+      "text": "If you’re bleeding, the Clinic can vouch you through."
+    }
+  ]
+}

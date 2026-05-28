@@ -1,0 +1,42 @@
+{
+  "id": "npc.guild.inspector",
+  "town": "blackridge",
+  "roles": [
+    "inspector",
+    "stamp_officer"
+  ],
+  "buildingId": "adventurer_guild",
+  "name": "Hessa Marr",
+  "demeanor": "observant,procedural,quietly-defiant",
+  "repFaction": "adventurer_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "!br:repGuildRespected",
+      "text": "Hold still. The seal bites if you forged it. Kidding. Mostly."
+    },
+    {
+      "when": "br:repGuildRespected && !br:repClerksFriendly",
+      "text": "You move fast. Make sure your paperwork keeps up."
+    },
+    {
+      "when": "br:repClerksFriendly",
+      "text": "Between us, double-check City Hall’s serials. They’ve ‘lost’ pages before."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "true",
+      "offers": [
+        {
+          "type": "service",
+          "serviceId": "service.guild.verify-commission"
+        },
+        {
+          "type": "service",
+          "serviceId": "service.guild.recover-lost-gear"
+        }
+      ]
+    }
+  ]
+}

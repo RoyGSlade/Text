@@ -1,0 +1,141 @@
+{
+  "pack": "library_ledgers",
+  "quests": [
+    {
+      "id": "lib:ledger:lost_and_found",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "evidence"
+      ],
+      "title": "Lost Shipment Ledger",
+      "desc": "Recover a redacted ledger and decode it to expose smuggling routes.",
+      "requirements": {
+        "flagsNot": [
+          "lib:ledger_decoded"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_find_ledger",
+          "text": "Obtain a Redacted Shipment Ledger.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "ledger.shipments.redacted",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2_find_key",
+          "text": "Acquire Cipher Key: Sun-Lens Codes.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "cipher.key.sun",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3_decode",
+          "text": "Use Restricted Archives to decode the ledger.",
+          "completionCheck": {
+            "flagsAny": [
+              "player_visited:bldg:blackridge:library:restricted"
+            ]
+          }
+        },
+        {
+          "id": "s4_produce_report",
+          "text": "Compile the decoded ledger.",
+          "onComplete": [
+            {
+              "type": "addItem",
+              "itemId": "ledger.shipments.decoded",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:ledger_decoded",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "ledger.shipments.decoded",
+                "qty": 1
+              }
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "lyrene_holt_chief"
+        }
+      },
+      "weight": 9
+    },
+    {
+      "id": "lib:ledger:receivership_paper_trail",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "evidence"
+      ],
+      "title": "Receivership Paper Trail",
+      "desc": "Cross-reference council bills with decoded routes to prove price-gouging and shop seizures.",
+      "requirements": {
+        "flagsAny": [
+          "fal:bill_copied",
+          "lib:ledger_decoded"
+        ],
+        "flagsNot": [
+          "lib:trail_compiled"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_cross_reference",
+          "text": "Bring the council bill notes and the decoded ledger to Lyrene.",
+          "completionCheck": {
+            "flagsAny": [
+              "fal:bill_copied"
+            ]
+          }
+        },
+        {
+          "id": "s2_compile_dossier",
+          "text": "Compile the paper trail report in the Reading Hall.",
+          "onComplete": [
+            {
+              "type": "setFlag",
+              "flag": "lib:trail_compiled",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "flagsAny": [
+              "lib:trail_compiled"
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "lyrene_holt_chief"
+        }
+      },
+      "weight": 7
+    }
+  ]
+}

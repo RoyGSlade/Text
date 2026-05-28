@@ -1,0 +1,35 @@
+{
+  "id": "gs_runner_jor",
+  "town": "blackridge",
+  "roles": ["runner", "convoy_spotter"],
+  "buildingId": "general_store",
+  "name": "Jor Tamber",
+  "demeanor": "winded, honest, proud of his bruises",
+  "repFaction": "faction_general_store",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:econ.convoy_news", "text": "You keep buying rope; I keep running news. Ask me about convoys." },
+    { "when": "br:econ.convoy_news", "text": "Routes changed again. Chalkboard’s a mess." }
+  ],
+  "offers": [
+    {
+      "id": "offer_hear_news",
+      "label": "Hear Jor’s convoy bulletin",
+      "requires": { "flagsAny": ["br:gs.unlocked"], "flagsNot": ["br:econ.convoy_news"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:econ.convoy_news", "op": "=", "value": true }
+      ]
+    },
+    {
+      "id": "offer_tip_jor",
+      "label": "Tip Jor for better intel (uses grease chit)",
+      "requires": { "have": [{ "itemId": "chit.grease_money", "qty": 1 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "chit.grease_money", "qty": 1 },
+        { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": true },
+        { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false },
+        { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": false }
+      ]
+    }
+  ]
+}

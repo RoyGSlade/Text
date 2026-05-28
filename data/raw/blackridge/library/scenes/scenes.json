@@ -1,0 +1,343 @@
+{
+  "scenes": {
+    "bldg:blackridge:library": {
+      "textBlocks": [
+        {
+          "default": true,
+          "text": "Blackridge Public Library. Light through stained glass paints lies and truths alike."
+        },
+        {
+          "when": "brg:blacksmith_arrested",
+          "text": "A notice on the door: 'Unrelated safety inspection ongoing'—which means nothing good."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Reading Hall",
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        },
+        {
+          "text": "Map Wing",
+          "leadsTo": "bldg:blackridge:library:map_wing"
+        },
+        {
+          "text": "Public Info Desk",
+          "leadsTo": "bldg:blackridge:library:info_desk"
+        },
+        {
+          "text": "Workshop (research lab)",
+          "leadsTo": "bldg:blackridge:library:workshop"
+        },
+        {
+          "text": "Ask about Restricted Archives",
+          "leadsTo": "bldg:blackridge:library:restricted_gate"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:library:info_desk": {
+      "text": "Tobin taps a quill. 'Questions answered, truths obfuscated. Your choice.'",
+      "choices": [
+        {
+          "text": "Ask for city rumors",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:rumors_heard",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library"
+        },
+        {
+          "text": "Trade a riddle (Insight DC 11)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:cipher_desk"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "bldg:blackridge:library:reading_hall": {
+      "text": "Rows of tables. Marginalia blossoms like moss.",
+      "choices": [
+        {
+          "text": "Study propaganda quotes (Literacy + lore entry)",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:studied_quotes",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        },
+        {
+          "text": "Read banned histories quietly (Stealth DC 11)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:read_banned",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        },
+        {
+          "text": "Use the Cipher Desk",
+          "leadsTo": "bldg:blackridge:library:cipher_desk"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "bldg:blackridge:library:cipher_desk": {
+      "text": "Disks, pins, and a wax board for notes.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "player_visited:bldg:blackridge:library:cipher_desk",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Decode caravan marks (have Cipher Key: Alpha)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "cipher.key.alpha",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:caches_decoded",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        },
+        {
+          "text": "Decode sun-lens procurement (have Cipher Key: Sun-Lens)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "cipher.key.sun",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:lantern_codes_understood",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library:reading_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:library:map_wing": {
+      "text": "Veyna’s desk is a topography avalanche.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "player_visited:bldg:blackridge:library:map_wing",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Assemble Northwood map (Literacy or Investigation DC 11)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:map_forest_done",
+              "value": true
+            },
+            {
+              "type": "addItem",
+              "itemId": "map.regional.forest",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:map_wing"
+        },
+        {
+          "text": "Ask for hidden path notes (Insight DC 12)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:hidden_paths_known",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:map_wing"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "bldg:blackridge:library:restricted_gate": {
+      "text": "Lyrene studies you. 'Access requires purpose and caution.'",
+      "choices": [
+        {
+          "text": "Request access (Diplomacy DC 12)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:restricted"
+        },
+        {
+          "text": "Slip the latch later (Stealth DC 13 at night)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:restricted"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "bldg:blackridge:library:restricted": {
+      "text": "Restricted stacks. Air like locked ink.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "player_visited:bldg:blackridge:library:restricted",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Decode shipment ledger (Technology or Literacy DC 12)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "ledger.shipments.decoded",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:ledger_decoded",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:restricted"
+        },
+        {
+          "text": "Search for hidden caches (Investigation DC 13)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:secret_cache_leads",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:restricted"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "bldg:blackridge:library:workshop": {
+      "text": "Benches, prisms, a battered calorimeter. Sun-salt stains the stone.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "player_visited:bldg:blackridge:library:workshop",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Test sun-salt resonance (Science or Technology DC 12)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:sun_salt_tested",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:workshop"
+        },
+        {
+          "text": "Draft Sunlight Lantern blueprint (requires dossier + decoded ledger)",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.arcanum_five_sources",
+                "qty": 1
+              },
+              {
+                "itemId": "ledger.shipments.decoded",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "blueprint.sunlantern",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:lantern_research_started",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:workshop"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library"
+        }
+      ]
+    },
+    "home:blackridge:lyrene_visit": {
+      "text": "A quiet knock. Lyrene steps in with a wrapped book. 'Hope is contagious. Let’s risk it.'",
+      "choices": [
+        {
+          "text": "Accept the package (Cipher Key: Sun-Lens)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "cipher.key.sun",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:lyrene_contacted_home",
+              "value": true
+            }
+          ],
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    }
+  }
+}

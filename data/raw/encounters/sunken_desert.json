@@ -1,0 +1,39 @@
+{
+  "zone": "sunken_desert",
+  "rollEverySteps": 3,
+  "chance": 0.4,
+  "tables": [
+    {
+      "time": "day",
+      "entries": [
+        {
+          "id": "enc:sunken:scorch",
+          "weight": 5,
+          "when": "!dungeon:alpha:heart_destroyed && !weather:rain",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:sunken:still",
+          "weight": 5,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    },
+    {
+      "time": "night",
+      "entries": [
+        {
+          "id": "enc:sunken:raiders",
+          "weight": 8,
+          "when": "!weather:storm",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:sunken:cool_sands",
+          "weight": 2,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    }
+  ]
+}

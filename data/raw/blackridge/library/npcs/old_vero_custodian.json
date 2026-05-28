@@ -1,0 +1,22 @@
+{
+  "id": "old_vero_custodian",
+  "town": "blackridge",
+  "roles": [
+    "custodian"
+  ],
+  "buildingId": "library",
+  "name": "Old Vero",
+  "demeanor": "quiet, haunted",
+  "repFaction": "arcanum",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Mind the wax. Floors remember."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Some doors walk you, if you ask nicely."
+    }
+  ]
+}

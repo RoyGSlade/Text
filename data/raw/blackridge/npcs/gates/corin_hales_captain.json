@@ -1,0 +1,18 @@
+{
+  "id": "corin_hales_captain",
+  "town": "blackridge",
+  "roles": ["gate_captain","guard"],
+  "buildingId": "bldg:blackridge:gates",
+  "name": "Corin Hales",
+  "demeanor": "professional, exhausted, allergic to bribes",
+  "repFaction": "watch",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "tier < known", "text": "Papers. Clear eyes. No drama." },
+    { "when": "tier >= known", "text": "Keep dusk behind you and your pockets empty." }
+  ],
+  "offerRules": {
+    "questTags": ["town:blackridge","building:gates"],
+    "limitPerVisit": 2
+  }
+}

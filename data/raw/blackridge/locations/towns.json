@@ -1,0 +1,22 @@
+{
+  "towns": [
+    {
+      "id": "blackridge",
+      "zone": "forest",
+      "entryCell": "cell:forest:1,0",
+      "buildings": [
+        "grimy_anvil",
+        "warm_loaf_bakery",
+        "city_hall",
+        "clinic",
+        "tavern",
+        "guard_post",
+        "merchant_guild",
+        "adventurer_guild",
+        "barracks",
+        "library",
+        "arcanum_tower"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "scenes": {
+    "bldg:blackridge:gates": {
+      "textBlocks": [
+        { "default": true, "text": "Five gates, five roads, one headache. Stamps smack parchment. Horns mark the hour." },
+        { "when": "flag:br:curfew", "text": "Barricades stack high. Lantern-glare turns faces into masks." }
+      ],
+      "choices": [
+        { "text": "Gate Counter", "leadsTo": "bldg:blackridge:gates:counter" },
+        { "text": "Gatehouse Alcove", "leadsTo": "bldg:blackridge:gates:alcove" },
+        { "text": "North Gate (Forest)", "leadsTo": "gate:blackridge:north" },
+        { "text": "West Gate (Desert)", "leadsTo": "gate:blackridge:west" },
+        { "text": "East Gate (Marsh)", "leadsTo": "gate:blackridge:east" },
+        { "text": "South Gate (Coast)", "leadsTo": "gate:blackridge:south" },
+        { "text": "Highroad Gate (Mountains)", "leadsTo": "gate:blackridge:highroad" },
+        { "text": "Leave", "leadsTo": "town:blackridge" }
+      ]
+    },
+
+    "bldg:blackridge:gates:counter": {
+      "text": "Jessa Quill’s stamp hand could kill a fly at ten paces.",
+      "choices": [
+        { "text": "Present Commission Permit", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ] }, "actions": [ { "type": "setFlag", "flag": "br:paperwork.valid", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:gates:counter" },
+        { "text": "Present Patrol Badge", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "actions": [ { "type": "setFlag", "flag": "br:paperwork.valid", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:gates:counter" },
+        { "text": "Present Night Watch Writ (Curfew)", "requires": { "flagsAny": ["br:curfew"], "have": [ { "itemId": "permit.nightWatch", "qty": 1 } ] }, "actions": [ { "type": "setFlag", "flag": "br:paperwork.night", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:gates:counter" },
+        { "text": "Use Counterfeit Stamp Ring (apply to commission)", "requires": { "have": [ { "itemId": "permit.commission", "qty": 1 }, { "itemId": "stamp.ring.counterfeit", "qty": 1 } ] }, "actions": [ { "type": "setFlag", "flag": "br:paperwork.fake", "op": "=", "value": true }, { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:gates:copy_desk" },
+        { "text": "Offer Quiet Arrangement (spend Voucher)", "requires": { "have": [ { "itemId": "token.bribe_voucher", "qty": 1 } ] }, "actions": [ { "type": "addItem", "itemId": "token.bribe_voucher", "qty": -1 }, { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:gates:counter" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "bldg:blackridge:gates:alcove": {
+      "text": "A rain-cut niche in the gatehouse stone. Smells like oil and secrets.",
+      "choices": [
+        { "text": "Meet Grey Finch (Persuasion DC 12)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:finch_contact", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:gates:alcove" },
+        { "text": "Copy a shift page (Stealth DC 12)", "type": "skillCheck", "actions": [ { "type": "addItem", "itemId": "paper.gate_ledger_page", "qty": 1 }, { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:gates:alcove" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "bldg:blackridge:gates:copy_desk": {
+      "text": "Ink pad, blotter, and a guilty conscience.",
+      "choices": [
+        { "text": "Affix counterfeit stamp (Stealth DC 12)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:paperwork.fake_applied", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:gates:copy_desk" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates:counter" }
+      ]
+    },
+
+    "gate:blackridge:north": {
+      "text": "North Gate. Pines beyond, gold light within.",
+      "choices": [
+        { "text": "Exit (Commission)", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ], "flagsAny": ["br:paperwork.valid","br:paperwork.fake_applied"] }, "leadsTo": "cell:forest:0,0" },
+        { "text": "Exit (Patrol)", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "leadsTo": "cell:forest:0,0" },
+        { "text": "Exit (Night Writ)", "requires": { "flagsAny": ["br:curfew","br:paperwork.night"] }, "leadsTo": "cell:forest:0,0" },
+        { "text": "Bribe the clerk (50c)", "actions": [ { "type": "addCredits", "amount": -50 }, { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 } ], "leadsTo": "cell:forest:0,0" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "gate:blackridge:west": {
+      "text": "West Gate. Salt wind and a ledger heavier than law.",
+      "choices": [
+        { "text": "Exit (Commission)", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ], "flagsAny": ["br:paperwork.valid","br:paperwork.fake_applied"] }, "leadsTo": "cell:desert:0,0" },
+        { "text": "Exit (Patrol)", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "leadsTo": "cell:desert:0,0" },
+        { "text": "Exit (Night Writ)", "requires": { "flagsAny": ["br:curfew","br:paperwork.night"] }, "leadsTo": "cell:desert:0,0" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "gate:blackridge:east": {
+      "text": "East Gate. Marsh breath and cattail hush.",
+      "choices": [
+        { "text": "Exit (Commission)", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ], "flagsAny": ["br:paperwork.valid","br:paperwork.fake_applied"] }, "leadsTo": "cell:marsh:0,0" },
+        { "text": "Exit (Patrol)", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "leadsTo": "cell:marsh:0,0" },
+        { "text": "Exit (Night Writ)", "requires": { "flagsAny": ["br:curfew","br:paperwork.night"] }, "leadsTo": "cell:marsh:0,0" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "gate:blackridge:south": {
+      "text": "South Gate. Gulls argue with the wall.",
+      "choices": [
+        { "text": "Exit (Commission)", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ], "flagsAny": ["br:paperwork.valid","br:paperwork.fake_applied"] }, "leadsTo": "cell:coast:0,0" },
+        { "text": "Exit (Patrol)", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "leadsTo": "cell:coast:0,0" },
+        { "text": "Exit (Night Writ)", "requires": { "flagsAny": ["br:curfew","br:paperwork.night"] }, "leadsTo": "cell:coast:0,0" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "gate:blackridge:highroad": {
+      "text": "Highroad Gate. Cliffs ahead, weather behind.",
+      "choices": [
+        { "text": "Exit (Commission)", "requires": { "flagsNot": ["br:curfew"], "have": [ { "itemId": "permit.commission", "qty": 1 } ], "flagsAny": ["br:paperwork.valid","br:paperwork.fake_applied"] }, "leadsTo": "cell:mountain:0,0" },
+        { "text": "Exit (Patrol)", "requires": { "have": [ { "itemId": "permit.patrol", "qty": 1 } ] }, "leadsTo": "cell:mountain:0,0" },
+        { "text": "Exit (Night Writ)", "requires": { "flagsAny": ["br:curfew","br:paperwork.night"] }, "leadsTo": "cell:mountain:0,0" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "heists": [
+    {
+      "id": "mg_vault_ledgers",
+      "title": "The Sealed Ledger Room",
+      "objectives": [
+        {
+          "id": "obj_scope_security",
+          "text": "Identify the defenses: staffed clerk, timed lock, rotating key, alarm glyph, android patrol."
+        },
+        {
+          "id": "obj_get_extract",
+          "text": "Secure a stamped ledger extract without triggering permanent lockdown."
+        }
+      ],
+      "entryVectors": [
+        {
+          "id": "ev_auditor_papers",
+          "name": "Fake Auditor Papers",
+          "requires": {
+            "have": [
+              {
+                "itemId": "badge.audit_fake",
+                "qty": 1
+              }
+            ],
+            "flagsAny": [
+              "br:open"
+            ]
+          },
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Diplomacy",
+              "dc": 15,
+              "text": "Talk past the receptionist with your badge.",
+              "onSuccess": [
+                {
+                  "type": "setFlag",
+                  "flag": "br:mg.hq.access",
+                  "op": "=",
+                  "value": true
+                }
+              ],
+              "onFailure": [
+                {
+                  "type": "incFlag",
+                  "flag": "br:mg.heist.alert",
+                  "value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ev_roof_winch",
+          "name": "Rooftop Semaphore Winch",
+          "requires": {
+            "flagsAny": [
+              "br:mg.convoy.scheduleKnown"
+            ]
+          },
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 17,
+              "text": "Climb the winch unnoticed.",
+              "onSuccess": [],
+              "onFailure": [
+                {
+                  "type": "incFlag",
+                  "flag": "br:mg.heist.alert",
+                  "value": 1
+                },
+                {
+                  "type": "incFlag",
+                  "flag": "br:suspicion",
+                  "value": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ev_crate_smuggle",
+          "name": "Crate Smuggle via Loading Yard",
+          "requires": {
+            "have": [
+              {
+                "itemId": "pass.convoy_basic",
+                "qty": 1
+              }
+            ]
+          },
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 16,
+              "text": "Ride a crate inside.",
+              "onSuccess": [],
+              "onFailure": [
+                {
+                  "type": "incFlag",
+                  "flag": "br:mg.heist.alert",
+                  "value": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "securityLayers": [
+        {
+          "id": "sec_timed_lock",
+          "name": "Timed Lock",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Technology",
+            "dc": 18,
+            "text": "Scramble the timer quietly.",
+            "onSuccess": [],
+            "onFailure": [
+              {
+                "type": "incFlag",
+                "flag": "br:mg.heist.alert",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "sec_rotating_key",
+          "name": "Rotating Key",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Perception",
+            "dc": 14,
+            "text": "Spot the rotated key behind the false panel.",
+            "onSuccess": [],
+            "onFailure": [
+              {
+                "type": "incFlag",
+                "flag": "br:mg.heist.alert",
+                "value": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "sec_alarm_glyph",
+          "name": "Alarm Glyph",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Arcana",
+            "dc": 16,
+            "text": "Mute the glyph with a counter-sigil.",
+            "onSuccess": [],
+            "onFailure": [
+              {
+                "type": "incFlag",
+                "flag": "br:mg.heist.alert",
+                "value": 2
+              }
+            ]
+          }
+        },
+        {
+          "id": "sec_android_patrol",
+          "name": "Android Patrol",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Stealth",
+            "dc": 17,
+            "text": "Pass between patrol cones.",
+            "onSuccess": [],
+            "onFailure": [
+              {
+                "type": "incFlag",
+                "flag": "br:mg.heist.alert",
+                "value": 2
+              },
+              {
+                "type": "incFlag",
+                "flag": "br:suspicion",
+                "value": 1
+              }
+            ]
+          }
+        }
+      ],
+      "payoff": {
+        "success": [
+          {
+            "type": "addItem",
+            "itemId": "doc.ledger.extract",
+            "qty": 1
+          }
+        ],
+        "failure": [
+          {
+            "type": "setFlag",
+            "flag": "br:mg.ban.active",
+            "op": "=",
+            "value": true
+          },
+          {
+            "type": "incFlag",
+            "flag": "br:suspicion",
+            "value": 3
+          }
+        ]
+      }
+    }
+  ]
+}

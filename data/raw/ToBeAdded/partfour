@@ -1,0 +1,79 @@
+16) Helper Functions (engine)
+
+canEnter(districtId) → checks passes, rep tiers, bribe, Stability.
+
+encounterChance(cellId, timeOfDay) → baseline + modifiers, capped 85%.
+
+rollForecast() → Navigation preview.
+
+applyStormEffects() → visibility, sandShift increment, hazard swaps.
+
+shiftSand() → corridor swaps for sandShiftable.
+
+resolveCounterContracts(hoursRemaining) → assassination retaliation windows.
+
+applySetBonuses() → compute set perks from equipped items.
+
+updateClinicStockFromMPI() and updateBlackMarketFromMPI().
+
+17) Progression Loops
+
+Hazard → Hunt → Craft → Gate: storms cause Sand Lung → hunt Sandworm → craft respirator/tonic → unlock deeper night dunes.
+
+Economy → Faction: expose scales → MPI rises → co-op vendor opens filter refills & fair salts → clinic stock improves; Matriarchy rep lifts.
+
+Underground Risk → Power: accept hit → counter-contract risk 48h → craft anti-hex balm/Purify to survive blowback.
+
+Cult Pressure → Debate: high pressure punishes streets → collect records → debate Orion → pressure drops; palace routes open.
+
+18) Balance & QA Checklist
+
+Drop rates: elite 10–18%; boss shards 25%.
+
+Craft times: T1 15–30m; T2 45–90m; T3 2–3h; Rush doubles fail chance.
+
+Contraband: checks primarily in Noble and Queen’s Circle (tiers 10/25/40%).
+
+Filter wear: respirator −10 per storm, −5 per sandworm fight.
+
+Stress test cap: storm + night + low Stability must not exceed 85%.
+
+Safe cells: at least two safe cells adjacent to every oasis even during storms.
+
+Three profile walks on example seed:
+Civic path → Stability ≥ +1 mid-arc.
+Profit path → MPI ≤ 35; cheaper Black Market, more night pressure.
+Shadow path → variable Stability; high counter-contract risk; ensure anti-hex matters.
+
+19) What Changed vs. Rough Draft (applied fixes)
+
+Deyla reframed as neutral-predatory; dynamic fees/stock; not Guild.
+
+Added three global tracks with citywide mechanical effects.
+
+District entry gates specified and centralized via canEnter.
+
+Shadow companion (ally.thal) implemented mechanically, not as party bloat.
+
+Counter-contract rule for assassinations (48h).
+
+MPI as the hard economic lever tied to clinic and Black Market inventories.
+
+Cult teeth: “Speed Fervor” action theft, blessing-as-curse, and public debate with proof gates.
+
+Outcome stamps standardized to drive content, not scene sprawl.
+
+Constants.js thresholds unified; stop inventing numbers mid-quest.
+
+Grid/temple/dungeon placement rules + seed anchors supplied for deterministic generation.
+
+20) Copy-Paste ID Index (for data authors)
+
+Materials: mat.sandworm_sac, mat.desert_glass, mat.desert_glass.pure, mat.obsidian_shard, mat.wyvern_membrane, mat.sandsteel_ore, mat.carapace_plate, mat.chitin_plate
+Components: comp.resin_core, comp.resin_core.pure, comp.refraction_lens, comp.vitrified_heart, comp.assay_core, comp.wraithsilk, comp.cipher_plate
+Essence: essence.djinn, essence.djinn.pure, essence.flame_sac
+Blueprints: bp.respirator_mask.t1, bp.sandglass_goggles.t2, bp.mirage_mantle.t3, bp.wyvernscale_hauberk.t3, bp.sandsteel_scimitar.t2, bp.sandglass_halberd.t3, bp.storm_tent.single_use, bp.tar_bomb.t2, bp.glass_caltrops, bp.wishbound_mod.t3
+Medicines: med.sand_lung_tonic.t2, med.heat_buffer.t1, med.clear_sight_drops.t1, med.antivenom.universal.t2, med.anti_hex_balm.t3, med.stimulant.sand_dash.t2, med.sedative.nightwatch.t1, med.hydration_salts.t1, med.purify.talisman.t3
+Monsters: mob.sandworm.alpha, mob.scarab.glassswarm, mob.scorpion.stinger_major, mob.mirage.stalker, mob.mummy.tarbound, mob.sand_elemental.glassborn, mob.wyvern.fireobsidian, mob.bone_choir, mob.djinn.contractor, mob.sandwraith.tithe, mob.golem.crystal.loadbearer
+Bosses: boss.nightwidow.kethra, boss.sandlord.rachid, boss.bookman, boss.malkhet.whispered, boss.censor.tar
+Lore/Proofs: inscription.savi.canon, inscription.silence.seal, tablet.measure.ledger, item.ledger.extract, item.cargo.tag, item.mock_reliquary

@@ -1,0 +1,739 @@
+{
+  "scenes": {
+    "bldg:blackridge:grimy_anvil": {
+      "text": "Sparks and the ring of hammers. The Grimy Anvil never sleeps.",
+      "choices": [
+        {
+          "text": "Greet",
+          "type": "greetNpc",
+          "npcId": "kaelen_blacksmith",
+          "leadsTo": "bldg:blackridge:grimy_anvil"
+        },
+        {
+          "text": "Ask for work",
+          "type": "askWork",
+          "npcId": "kaelen_blacksmith",
+          "leadsTo": "bldg:blackridge:grimy_anvil"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall": {
+      "textBlocks": [
+        {
+          "default": true,
+          "text": "Grand doors, small mercy. The Mayor’s smile files its own edges."
+        },
+        {
+          "when": "mayor_blackmailed",
+          "text": "Guards avert their eyes. Her door is always, ominously, open."
+        },
+        {
+          "when": "corruption_exposed",
+          "text": "City Hall boils with fury and thrown petitions."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Audience with the Mayor",
+          "type": "greetNpc",
+          "npcId": "mayor",
+          "leadsTo": "bldg:blackridge:city_hall"
+        },
+        {
+          "text": "[Confrontation] Bring the evidence to Mayor Sel",
+          "requires": {
+            "flagsAny": [
+              "espionage_package_acquired"
+            ],
+            "flagsNot": [
+              "corruption_plot_resolved"
+            ]
+          },
+          "leadsTo": "scene:confront_mayor"
+        },
+        {
+          "text": "Speak to the clerk",
+          "type": "greetNpc",
+          "npcId": "city_clerk",
+          "leadsTo": "bldg:blackridge:city_hall"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:clinic": {
+      "text": "Candle smoke, iron tools, and a wall of tinctures. Somewhere, a saw hums.",
+      "choices": [
+        {
+          "text": "Greet the alchemist",
+          "type": "greetNpc",
+          "npcId": "clinic_alchemist",
+          "leadsTo": "bldg:blackridge:clinic"
+        },
+        {
+          "text": "Consult the doctor",
+          "type": "greetNpc",
+          "npcId": "clinic_doctor",
+          "leadsTo": "bldg:blackridge:clinic"
+        },
+        {
+          "text": "Trade gossip at the desk",
+          "type": "greetNpc",
+          "npcId": "clinic_reception",
+          "leadsTo": "bldg:blackridge:clinic"
+        },
+        {
+          "text": "[Lead] Tella's juicy gossip about the Guild's 'private ledger'",
+          "type": "startQuest",
+          "questId": "espionage:loose_lips",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "Ask for work",
+          "type": "askWork",
+          "npcId": "clinic_alchemist",
+          "leadsTo": "bldg:blackridge:clinic"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:tavern": {
+      "text": "Low rafters, louder stories. Guards crowd benches; the stew judges everyone equally.",
+      "choices": [
+        {
+          "text": "Talk to the barkeep",
+          "type": "greetNpc",
+          "npcId": "tavern_barkeep",
+          "leadsTo": "bldg:blackridge:tavern"
+        },
+        {
+          "text": "Buy Rudy a drink (2 cr.)",
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 8,
+          "onSuccess": "bldg:blackridge:tavern:bribe_rudy",
+          "onFailure": "bldg:blackridge:tavern"
+        },
+        {
+          "text": "Buy Bill a drink (2 cr.)",
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 8,
+          "onSuccess": "bldg:blackridge:tavern:bribe_bill",
+          "onFailure": "bldg:blackridge:tavern"
+        },
+        {
+          "text": "Ask for work",
+          "type": "askWork",
+          "npcId": "tavern_barkeep",
+          "leadsTo": "bldg:blackridge:tavern"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:tavern:bribe_rudy": {
+      "text": "Rudy slurps. \"Right. Secrets are thirsty work.\"",
+      "actions": [
+        {
+          "type": "takeCredits",
+          "amount": 2
+        },
+        {
+          "type": "setFlag",
+          "flag": "rumor:rudy:open",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Hear Rudy's rumor",
+          "leadsTo": "rumor:rudy"
+        }
+      ]
+    },
+    "bldg:blackridge:tavern:bribe_bill": {
+      "text": "Bill wipes his beard. \"Knew you had a generous face.\"",
+      "actions": [
+        {
+          "type": "takeCredits",
+          "amount": 2
+        },
+        {
+          "type": "setFlag",
+          "flag": "rumor:bill:open",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Hear Bill's rumor",
+          "leadsTo": "rumor:bill"
+        }
+      ]
+    },
+    "bldg:blackridge:guard_post": {
+      "text": "Maps, quotas, and a ledger of the dead. The Captain’s hands won’t stop shaking.",
+      "choices": [
+        {
+          "text": "Report to the Captain",
+          "type": "greetNpc",
+          "npcId": "guard_captain",
+          "leadsTo": "bldg:blackridge:guard_post"
+        },
+        {
+          "text": "[Quest] Give the guards Vessa's tonic",
+          "requires": {
+            "questActive": "clinic:field_test"
+          },
+          "leadsTo": "scene:clinic_tonic_decision"
+        },
+        {
+          "text": "Show your signed work order",
+          "requires": {
+            "flagsNot": [
+              "fal:permit_granted"
+            ],
+            "have": [
+              {
+                "itemId": "work_order_signed",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:permit_granted",
+              "value": true
+            },
+            {
+              "type": "removeItem",
+              "itemId": "work_order_signed",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "permit:granted_scene"
+        },
+        {
+          "text": "Request passage out of the city",
+          "requires": {
+            "flagsAny": [
+              "fal:permit_granted"
+            ]
+          },
+          "leadsTo": "town:blackridge:gate"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "scene:clinic_tonic_decision": {
+      "text": "Captain Rel pores over patrol charts. The vial weighs heavy.",
+      "choices": [
+        {
+          "text": "[Deception] Dump the vial in the water barrel",
+          "actions": [
+            {
+              "type": "completeQuestObjective",
+              "questId": "clinic:field_test",
+              "objectiveId": 0
+            },
+            {
+              "type": "setFlag",
+              "flag": "guards_drugged",
+              "value": true
+            },
+            {
+              "type": "adjustRep",
+              "target": "npc:guard_captain",
+              "amount": -5
+            },
+            {
+              "type": "adjustRep",
+              "target": "npc:clinic_alchemist",
+              "amount": 10
+            }
+          ],
+          "leadsTo": "bldg:blackridge:guard_post"
+        },
+        {
+          "text": "[Honesty] Ask for volunteers",
+          "actions": [
+            {
+              "type": "completeQuestObjective",
+              "questId": "clinic:field_test",
+              "objectiveId": 0
+            },
+            {
+              "type": "setFlag",
+              "flag": "guards_informed_consent",
+              "value": true
+            },
+            {
+              "type": "adjustRep",
+              "target": "npc:guard_captain",
+              "amount": 10
+            },
+            {
+              "type": "adjustRep",
+              "target": "npc:clinic_alchemist",
+              "amount": 5
+            }
+          ],
+          "leadsTo": "bldg:blackridge:guard_post"
+        }
+      ]
+    },
+    "town:blackridge:gate": {
+      "text": "Scarred gates tower above. A guard checks your papers.",
+      "choices": [
+        {
+          "text": "Leave Blackridge",
+          "requires": {
+            "flagsAny": [
+              "fal:permit_granted"
+            ]
+          },
+          "leadsTo": "town:blackridge"
+        },
+        {
+          "text": "Stay a while longer",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "permit:granted_scene": {
+      "text": "Rel stamps your order with a heavy thud. \"Approved. Try not to die.\"",
+      "choices": [
+        {
+          "text": "Nod and go",
+          "leadsTo": "bldg:blackridge:guard_post"
+        }
+      ]
+    },
+    "bldg:blackridge:merchant_guild": {
+      "textBlocks": [
+        {
+          "default": true,
+          "text": "Polished floors, unpolished morals. Spices and desperation mingle."
+        },
+        {
+          "when": "guild_blackmailed",
+          "text": "Paranoia fogs the hall. Cale tracks you like prey."
+        },
+        {
+          "when": "corruption_exposed",
+          "text": "The Guild Hall feels like a tomb. Profits died first."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Speak to Director Cale",
+          "type": "greetNpc",
+          "npcId": "guild_exec",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "[Quest] Investigate Cale's office for the ledger",
+          "requires": {
+            "questActive": "espionage:loose_lips"
+          },
+          "leadsTo": "scene:guild_office_investigation"
+        },
+        {
+          "text": "[Confrontation] Bring the evidence to Director Cale",
+          "requires": {
+            "flagsAny": [
+              "espionage_package_acquired"
+            ],
+            "flagsNot": [
+              "corruption_plot_resolved"
+            ]
+          },
+          "leadsTo": "scene:confront_cale"
+        },
+        {
+          "text": "Speak to Slick Jon",
+          "type": "greetNpc",
+          "npcId": "guild_hawker",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "Speak with Eben",
+          "type": "greetNpc",
+          "npcId": "guild_honest",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "scene:guild_office_investigation": {
+      "text": "Cale's office is ajar; a clerk rustles papers nearby. Move fast.",
+      "choices": [
+        {
+          "text": "[Stealth] Pick the desk lock",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 13,
+          "onSuccess": "scene:ledger_stolen_success",
+          "onFailure": "scene:ledger_stolen_failure"
+        },
+        {
+          "text": "[Business] Bribe Slick Jon (50 cr.)",
+          "type": "skillCheck",
+          "skill": "Business",
+          "dc": 10,
+          "onSuccess": "scene:ledger_bribe_success",
+          "onFailure": "scene:ledger_bribe_failure"
+        },
+        {
+          "text": "[Alliance] Ask Eben for help",
+          "requires": {
+            "flagsAny": [
+              "eben_ally"
+            ]
+          },
+          "leadsTo": "scene:ledger_eben_help"
+        }
+      ]
+    },
+    "scene:ledger_bribe_success": {
+      "text": "Jon causes an expensive disaster. You grab the ledger.",
+      "actions": [
+        {
+          "type": "takeCredits",
+          "amount": 50
+        },
+        {
+          "type": "addItem",
+          "itemId": "coded_ledger",
+          "qty": 1
+        },
+        {
+          "type": "completeQuestObjective",
+          "questId": "espionage:loose_lips",
+          "objectiveId": 0
+        }
+      ],
+      "choices": [
+        {
+          "text": "Disappear into the street",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "scene:ledger_bribe_failure": {
+      "text": "Jon pockets your coin and shrugs. The clerk never moves. Brutal lesson.",
+      "choices": [
+        {
+          "text": "Fume and leave",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        }
+      ]
+    },
+    "scene:ledger_eben_help": {
+      "text": "Eben presses a key into your palm. \"Quickly, for the town.\" You retrieve the ledger.",
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "coded_ledger",
+          "qty": 1
+        },
+        {
+          "type": "completeQuestObjective",
+          "questId": "espionage:loose_lips",
+          "objectiveId": 0
+        }
+      ],
+      "rewards": {
+        "rep": [
+          {
+            "target": "npc:guild_honest",
+            "amount": 10
+          }
+        ]
+      },
+      "choices": [
+        {
+          "text": "Return the key and vanish",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "scene:ledger_stolen_success": {
+      "text": "Cheap lock, cheaper clerk. Ledger secured.",
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "coded_ledger",
+          "qty": 1
+        },
+        {
+          "type": "completeQuestObjective",
+          "questId": "espionage:loose_lips",
+          "objectiveId": 0
+        }
+      ],
+      "choices": [
+        {
+          "text": "Slip away",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "scene:ledger_stolen_failure": {
+      "text": "Pick snaps. Clerk stares. Not today.",
+      "rewards": {
+        "rep": [
+          {
+            "target": "faction:merchant_guild",
+            "amount": -5
+          }
+        ]
+      },
+      "choices": [
+        {
+          "text": "Back off",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        }
+      ]
+    },
+    "scene:arcanum_tower_decipher_ledger": {
+      "text": "Orim’s eyes sparkle. \"Ah, embezzlement and porcelain. The drop is in the well’s loose brick.\"",
+      "actions": [
+        {
+          "type": "removeItem",
+          "itemId": "coded_ledger",
+          "qty": 1
+        },
+        {
+          "type": "completeQuestObjective",
+          "questId": "espionage:the_cipher",
+          "objectiveId": 0
+        }
+      ],
+      "choices": [
+        {
+          "text": "Thank him and leave",
+          "leadsTo": "bldg:blackridge:arcanum_tower"
+        }
+      ]
+    },
+    "scene:confront_mayor": {
+      "text": "Sel’s mask slips when she sees the package. \"Name your price. Don’t say justice.\"",
+      "choices": [
+        {
+          "text": "[Blackmail] I want a council seat and a stipend",
+          "type": "skillCheck",
+          "skill": "Speech",
+          "dc": 14,
+          "onSuccess": "scene:mayor_blackmail_success",
+          "onFailure": "scene:mayor_blackmail_failure"
+        },
+        {
+          "text": "[Rebel] Your reign is over. I’m taking this to the Guard.",
+          "leadsTo": "scene:corruption_exposed_choice"
+        }
+      ]
+    },
+    "scene:mayor_blackmail_success": {
+      "text": "She laughs without humor. \"Welcome to the circle. Now leave.\"",
+      "actions": [
+        {
+          "type": "adjustRep",
+          "target": "faction:council",
+          "amount": 25
+        },
+        {
+          "type": "adjustRep",
+          "target": "faction:town_blackridge",
+          "amount": -20
+        },
+        {
+          "type": "setFlag",
+          "flag": "mayor_blackmailed",
+          "value": true
+        },
+        {
+          "type": "setFlag",
+          "flag": "corruption_plot_resolved",
+          "value": true
+        }
+      ],
+      "rewards": {
+        "credits": 500,
+        "items": [
+          {
+            "id": "city_hall_key",
+            "qty": 1
+          }
+        ]
+      },
+      "choices": [
+        {
+          "text": "Leave her to simmer",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "scene:mayor_blackmail_failure": {
+      "text": "Her smile sharpens. \"Ambition without leverage is comedy.\" Guards edge closer.",
+      "choices": [
+        {
+          "text": "Retreat with dignity, or something like it",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "scene:corruption_exposed_choice": {
+      "text": "You declare your intent. \"You’re signing this town’s death warrant,\" she hisses.",
+      "actions": [
+        {
+          "type": "adjustRep",
+          "target": "faction:council",
+          "amount": -50
+        },
+        {
+          "type": "adjustRep",
+          "target": "faction:merchant_guild",
+          "amount": -50
+        },
+        {
+          "type": "adjustRep",
+          "target": "faction:town_blackridge",
+          "amount": 30
+        },
+        {
+          "type": "setFlag",
+          "flag": "corruption_exposed",
+          "value": true
+        },
+        {
+          "type": "setFlag",
+          "flag": "corruption_plot_resolved",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "It's done",
+          "leadsTo": "bldg:blackridge:guard_post"
+        }
+      ]
+    },
+    "scene:confront_cale": {
+      "text": "Cale’s smile is a ledger entry. It vanishes when you show the package.",
+      "choices": [
+        {
+          "text": "[Blackmail] The Guild answers to me now",
+          "type": "skillCheck",
+          "skill": "Speech",
+          "dc": 14,
+          "onSuccess": "scene:cale_blackmail_success",
+          "onFailure": "scene:cale_blackmail_failure"
+        },
+        {
+          "text": "[Expose] I’m taking this to the Guard",
+          "leadsTo": "scene:corruption_exposed_choice"
+        }
+      ]
+    },
+    "scene:cale_blackmail_success": {
+      "text": "Cale wilts. \"Fine. Discounts. Silence.\"",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "guild_blackmailed",
+          "value": true
+        },
+        {
+          "type": "setFlag",
+          "flag": "corruption_plot_resolved",
+          "value": true
+        },
+        {
+          "type": "adjustRep",
+          "target": "faction:merchant_guild",
+          "amount": 15
+        },
+        {
+          "type": "adjustRep",
+          "target": "faction:town_blackridge",
+          "amount": -10
+        },
+        {
+          "type": "setFlag",
+          "flag": "shopmult:guild",
+          "value": 95
+        }
+      ],
+      "choices": [
+        {
+          "text": "Leave him to panic",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        }
+      ]
+    },
+    "scene:cale_blackmail_failure": {
+      "text": "Cale’s guards step in. \"Bluff called.\"",
+      "choices": [
+        {
+          "text": "Back away slowly",
+          "leadsTo": "bldg:blackridge:merchant_guild"
+        }
+      ]
+    },
+    "bldg:blackridge:arcanum_tower": {
+      "text": "A crooked spire stitches the sky. The air hums like a held breath.",
+      "choices": [
+        {
+          "text": "Call for the Magus",
+          "type": "greetNpc",
+          "npcId": "arcanum_magus",
+          "leadsTo": "bldg:blackridge:arcanum_tower"
+        },
+        {
+          "text": "Have Orim look at this mess",
+          "requires": {
+            "have": [
+              {
+                "itemId": "coded_ledger",
+                "qty": 1
+              }
+            ]
+          },
+          "type": "startQuest",
+          "questId": "espionage:the_cipher",
+          "leadsTo": "scene:arcanum_tower_decipher_ledger"
+        },
+        {
+          "text": "Ask for work",
+          "type": "askWork",
+          "npcId": "arcanum_magus",
+          "leadsTo": "bldg:blackridge:arcanum_tower"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    }
+  }
+}

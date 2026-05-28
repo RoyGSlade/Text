@@ -1,0 +1,22 @@
+{
+  "id": "sister_illya_archivist",
+  "town": "blackridge",
+  "roles": [
+    "archivist"
+  ],
+  "buildingId": "library",
+  "name": "Sister Illya",
+  "demeanor": "stern, incorruptible, protective mother",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Vault closed. Renovations continue."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Records live. They accuse when read."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "id": "stamp.ring.counterfeit",
+      "name": "Counterfeit Gate Stamp Ring",
+      "itemCategory": "tool",
+      "description": "Imprints a passable day-stamp on paper commissions. Fails close inspection.",
+      "value": 30,
+      "weight": 0.2,
+      "rarity": "rare",
+      "stackSize": 1,
+      "tags": ["forgery","gate","illegal"],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/stamp_ring_fake.png"
+    },
+    {
+      "id": "paper.gate_ledger_page",
+      "name": "Gate Ledger Page (Copied)",
+      "itemCategory": "paper",
+      "description": "Shift rosters and convoy windows. Good for timing escapes.",
+      "value": 6,
+      "weight": 0.1,
+      "rarity": "uncommon",
+      "stackSize": 5,
+      "tags": ["intel","gate","schedule"],
+      "tradable": false,
+      "contraband": true,
+      "questItem": true,
+      "icon": "icons/ledger_page_gate.png"
+    },
+    {
+      "id": "token.bribe_voucher",
+      "name": "Quiet Arrangement Token",
+      "itemCategory": "paper",
+      "description": "A discreet ‘donation’ receipt accepted by certain clerks at certain hours.",
+      "value": 50,
+      "weight": 0,
+      "rarity": "uncommon",
+      "stackSize": 3,
+      "tags": ["bribe","gate"],
+      "tradable": false,
+      "contraband": true,
+      "questItem": false,
+      "icon": "icons/token_bribe.png"
+    }
+  ]
+}

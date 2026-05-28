@@ -1,0 +1,134 @@
+{
+  "pack": "library_maps",
+  "quests": [
+    {
+      "id": "lib:maps:assemble_forest",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "maps"
+      ],
+      "title": "True Map: Northwood",
+      "desc": "Bring forest map fragments to Veyna and assemble a regional map.",
+      "requirements": {
+        "flagsNot": [
+          "lib:map_forest_done"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_collect_fragments",
+          "text": "Collect at least 3 Northwood map fragments.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "map.fragment.forest",
+                "qty": 3
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2_visit_map_wing",
+          "text": "Visit the Map Wing to request assembly.",
+          "completionCheck": {
+            "flagsAny": [
+              "player_visited:bldg:blackridge:library:map_wing"
+            ]
+          }
+        },
+        {
+          "id": "s3_assemble",
+          "text": "Aid Veyna in assembly (Literacy or Investigation).",
+          "onComplete": [
+            {
+              "type": "addItem",
+              "itemId": "map.regional.forest",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:map_forest_done",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "flagsAny": [
+              "lib:map_forest_done"
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "veyna_cartographer"
+        }
+      },
+      "weight": 8
+    },
+    {
+      "id": "lib:maps:coded_caches",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "cipher"
+      ],
+      "title": "Coded Caches",
+      "desc": "Decode caravan marks to reveal hidden stash points.",
+      "requirements": {
+        "flagsNot": [
+          "lib:caches_decoded"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_get_cipher",
+          "text": "Acquire Cipher Key: Alpha.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "cipher.key.alpha",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2_decode_wall",
+          "text": "Use the Cipher Desk in the Reading Hall.",
+          "completionCheck": {
+            "flagsAny": [
+              "player_visited:bldg:blackridge:library:cipher_desk"
+            ]
+          }
+        },
+        {
+          "id": "s3_compile_routes",
+          "text": "Compile the cache coordinates.",
+          "onComplete": [
+            {
+              "type": "setFlag",
+              "flag": "lib:caches_decoded",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "flagsAny": [
+              "lib:caches_decoded"
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "tobin_clerk"
+        }
+      },
+      "weight": 6
+    }
+  ]
+}

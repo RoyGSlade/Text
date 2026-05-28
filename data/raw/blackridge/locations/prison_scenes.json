@@ -1,0 +1,73 @@
+{
+  "scenes": {
+    "gaol_cell_block_b": {
+      "id": "gaol_cell_block_b",
+      "title": "Cell Block B",
+      "textBlocks": [
+        {
+          "when": "br:prison.tension <= 2",
+          "text": "Damp stone, colder eyes. The silence is heavy and watchful."
+        },
+        {
+          "when": "br:prison.tension > 2 && br:prison.tension <= 4",
+          "text": "A low murmur comes from the cells. Inmates watch your every move. Guards walk in pairs, hands on their clubs."
+        },
+        {
+          "when": "br:prison.tension > 4",
+          "text": "The block is a chorus of shouts and rattling bars. It feels like the stone itself is about to crack."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Talk to Knuck Sela (if present)",
+          "leadsTo": "scene:gaol_smuggler"
+        },
+        {
+          "text": "Attempt to calm the inmates (Diplomacy DC 14, Lowers Tension)",
+          "requires": {
+            "flagsAny": [
+              "br:prison.tension > 2"
+            ]
+          },
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 14,
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:prison.tension",
+              "op": "+",
+              "value": -1
+            }
+          ]
+        },
+        {
+          "text": "Incite the inmates (Intimidate DC 13, Raises Tension)",
+          "requires": {
+            "flagsAny": [
+              "br:prison.tension > 2"
+            ]
+          },
+          "type": "skillCheck",
+          "skill": "Intimidate",
+          "dc": 13,
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:prison.tension",
+              "op": "+",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "text": "Search for tunnel seam (Perception DC 12)",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "leadsTo": "scene:gaol_tunnel_works"
+        }
+      ]
+    }
+  }
+}

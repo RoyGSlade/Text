@@ -1,0 +1,101 @@
+{
+  "heists": [
+    {
+      "id": "butcher_cold_room",
+      "title": "Cold Room Quiet",
+      "objectives": [
+        { "id": "obj_scope", "text": "Scope the cold room and ledger without alerting Kessa or the guards." },
+        { "id": "obj_get_batch", "text": "Secure a Black Meat batch or ledger scrap for evidence." }
+      ],
+      "entryVectors": [
+        {
+          "id": "ev_rear_alley",
+          "name": "Rear Alley Door",
+          "requires": { "flagsAny": ["br:butcher.midnight_known"] },
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 15,
+              "text": "Slip in behind a delivery cart.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 1 },
+                { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ev_ceiling_hooks",
+          "name": "Ceiling Hooks",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Perception",
+              "dc": 13,
+              "text": "Traverse the hooks without clanking chains.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        }
+      ],
+      "securityLayers": [
+        {
+          "id": "sec_squeak_floor",
+          "name": "Squeaky Floorboards",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Stealth",
+            "dc": 14,
+            "text": "Weight the boards with meat hooks as counterbalance.",
+            "success": [],
+            "failure": [ { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 1 } ]
+          }
+        },
+        {
+          "id": "sec_ledger_lock",
+          "name": "Ledger Lock",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Technology",
+            "dc": 15,
+            "text": "Pick the clasp without leaving a smear.",
+            "success": [
+              { "type": "setFlag", "flag": "br:butcher.ledger.scrap", "op": "=", "value": true }
+            ],
+            "failure": [ { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 1 } ]
+          }
+        },
+        {
+          "id": "sec_bloodhound",
+          "name": "Bloodhound Nose",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Arcana",
+            "dc": 15,
+            "text": "Mask your scent with smoke and salt.",
+            "success": [],
+            "failure": [
+              { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 2 }
+            ]
+          }
+        }
+      ],
+      "payoff": {
+        "success": [
+          { "type": "addItem", "itemId": "food.black_meat", "qty": 1 },
+          { "type": "addItem", "itemId": "doc.rumor_scrap", "qty": 1 }
+        ],
+        "failure": [
+          { "type": "setFlag", "flag": "br:butcher.ban.active", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 2 }
+        ]
+      }
+    }
+  ]
+}

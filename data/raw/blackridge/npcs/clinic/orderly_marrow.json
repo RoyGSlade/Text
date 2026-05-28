@@ -1,0 +1,23 @@
+{
+  "id": "clinic_orderly_marrow",
+  "town": "blackridge",
+  "roles": ["orderly", "security"],
+  "buildingId": "clinic",
+  "name": "Marrow",
+  "demeanor": "stern, fair, enormous",
+  "repFaction": "faction_clinic",
+  "repPersonal": false,
+  "greetings": [
+    { "when": "true", "text": "Don’t run. People think I can’t catch them. People are wrong." }
+  ],
+  "offers": [
+    {
+      "id": "offer_warn_after_hours",
+      "label": "Ask about after-hours policy",
+      "requires": { "flagsAny": ["br:clinic.unlocked"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:clinic.after_hours_known", "op": "=", "value": true }
+      ]
+    }
+  ]
+}

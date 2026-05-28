@@ -1,0 +1,43 @@
+{
+  "id": "npc.guild.runner",
+  "town": "blackridge",
+  "roles": [
+    "runner",
+    "tipster"
+  ],
+  "buildingId": "adventurer_guild",
+  "name": "Tovin Reed",
+  "demeanor": "harried,optimistic,loose-lipped",
+  "repFaction": "adventurer_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "br:curfewActive",
+      "text": "Night docket’s stacked. Pay’s double, risk’s double, funerals are on you."
+    },
+    {
+      "when": "!br:curfewActive",
+      "text": "If you’re fast, the board refresh hits at the top of the hour. Four parties hunting, tops."
+    },
+    {
+      "when": "br:repClerksFriendly",
+      "text": "Psst. Merchant convoys slipped past Watchtower West at dawn. Odd lantern crates."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "true",
+      "offers": [
+        {
+          "type": "tip",
+          "flagSet": {
+            "flag": "br:rumor.merchant.lantern-routes",
+            "value": true
+          },
+          "price": 5,
+          "note": "Convoy windows and routes."
+        }
+      ]
+    }
+  ]
+}

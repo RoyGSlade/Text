@@ -1,0 +1,57 @@
+{
+  "pack": "prison_main",
+  "quests": [
+    {
+      "id": "prison_main_powderkeg",
+      "tags": ["prison", "main", "faction"],
+      "title": "The Powder Keg",
+      "desc": "The Blackridge Gaol is a battleground of wills. Decide the fate of the prison by siding with the lawful but ruthless Warden, the corrupt but pragmatic Deputy, or the desperate and volatile inmates.",
+      "stages": [
+        {
+          "id": "s1_the_lay_of_the_land",
+          "text": "Witness the tension. Talk to Garr, Veit, and Knuck Sela to understand the three-way power struggle.",
+          "completionCheck": { "flagsAny": ["br:prison.warden.approach", "br:prison.deputy.approach", "br:prison.inmate.approach"] }
+        },
+        {
+          "id": "s2_a_foot_in_the_door",
+          "text": "Gain leverage. Acquire a piece of significant evidence (Veit's smuggling routes, a hint about the Black Cells, or proof of inmate unrest).",
+          "completionCheck": { "flagsAny": ["br:prison.deputy.evidence.partial", "br:prison.black_cells.known", "br:prison.tension>=2"] }
+        },
+        {
+          "id": "s3_choose_your_path",
+          "text": "Commit to a faction. Your choice will lock you into one of three distinct final acts.",
+          "choices": [
+            { "text": "Path of Order: Work with Warden Garr.", "flag": "br:prison.path.order" },
+            { "text": "Path of Corruption: Work with Deputy Veit.", "flag": "br:prison.path.corruption" },
+            { "text": "Path of Chaos: Work with Knuck Sela and the inmates.", "flag": "br:prison.path.chaos" }
+          ],
+          "completionCheck": { "flagsAny": ["br:prison.path.order", "br:prison.path.corruption", "br:prison.path.chaos"] }
+        },
+        {
+          "id": "s4_climax_order",
+          "text": "(Order) Expose Deputy Veit's corruption and help the Warden perform a full security sweep, crushing inmate resistance.",
+          "requires": { "flagsAny": ["br:prison.path.order"] },
+          "completionCheck": { "flagsAny": ["br:prison.deputy.arrested", "br:prison.tension<=0"] }
+        },
+        {
+          "id": "s4_climax_corruption",
+          "text": "(Corruption) Frame Warden Garr using falsified evidence or expose her Black Cells operation, allowing Deputy Veit to seize control.",
+          "requires": { "flagsAny": ["br:prison.path.corruption"] },
+          "completionCheck": { "flagsAny": ["br:prison.warden.disgraced"] }
+        },
+        {
+          "id": "s4_climax_chaos",
+          "text": "(Chaos) Sabotage key security points, arm the inmates, and incite a full-blown prison riot.",
+          "requires": { "flagsAny": ["br:prison.path.chaos"] },
+          "completionCheck": { "flagsAny": ["br:prison.riot.active"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 300 },
+        { "type": "setFlag", "flag": "br:prison.control", "op": "=", "value": "warden", "when": "flag:br:prison.deputy.arrested" },
+        { "type": "setFlag", "flag": "br:prison.control", "op": "=", "value": "deputy", "when": "flag:br:prison.warden.disgraced" },
+        { "type": "setFlag", "flag": "br:prison.control", "op": "=", "value": "inmate", "when": "flag:br:prison.riot.active" }
+      ]
+    }
+  ]
+}

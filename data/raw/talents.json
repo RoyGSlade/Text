@@ -1,0 +1,50 @@
+[
+  {
+    "id": "quick_strike",
+    "name": "Quick Strike",
+    "description": "Deliver a swift attack for extra damage.",
+    "cost": { "stamina": 5 },
+    "cooldown": 1,
+    "effect": { "damageBonus": 5 }
+  },
+  {
+    "id": "meditate",
+    "name": "Meditate",
+    "description": "Center your mind to restore focus.",
+    "cost": { "focus": 5 },
+    "cooldown": 3,
+    "effect": { "focusRestore": 10 }
+  },
+  {
+    "id": "shield_block",
+    "name": "Shield Block",
+    "description": "Brace to reduce incoming damage for one turn.",
+    "cost": { "stamina": 8 },
+    "cooldown": 4,
+    "effect": { "damageBlock": 5 }
+  },
+  {
+    "id": "second_wind",
+    "name": "Second Wind",
+    "description": "Catch your breath to regain stamina.",
+    "cost": { "focus": 4 },
+    "cooldown": 5,
+    "effect": { "staminaRestore": 10 }
+  },
+  {
+    "id": "blessed_light",
+    "name": "Blessed Light",
+    "description": "Cleric talent that channels healing energy.",
+    "cost": { "focus": 6 },
+    "cooldown": 4,
+    "effect": { "heal": 8 }
+  },
+  {
+    "id": "shadowstep",
+    "name": "Shadowstep",
+    "description": "Rogue talent: vanish and strike swiftly, gaining an extra action.",
+    "cost": { "stamina": 6 },
+    "cooldown": 6,
+    "effect": { "actionGain": 1 }
+  }
+]

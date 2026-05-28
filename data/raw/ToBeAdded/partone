@@ -1,0 +1,166 @@
+1) Stable IDs, Directories, and Constants
+1.1 Stable IDs (anchor these; do not rename)
+
+Districts: district.alacai.noble, district.alacai.queen, district.alacai.weight, district.alacai.village, district.alacai.market, district.alacai.blackmarket, loc.alacai.outskirts.gauntlet
+
+Factions: faction.matriarchy, faction.merchant, faction.underground, faction.cult
+
+Quests: quest.alacai.escort, quest.alacai.illness, quest.alacai.merchantwar, quest.alacai.underground, quest.alacai.cult
+
+Passes/Flags: ally.thal, pass.queen_intro, pass.forged_circle, pass.blackmarket_rune
+
+Tracks: track.cityStability, track.mpi, track.cultPressure, track.sandShift
+
+Outcome stamps:
+illness.resolution = cured|dead|regent
+merchant.control = weak|balanced|dominant
+underground.mode = fractured|cohesive|predatory
+cult.status = exposed|contested|ascendant
+
+1.2 Centralized constants (engine/constants.js)
+
+Reputation tiers (Matriarchy/Merchant/Underground): −900, −600, −300, −100, 0, 100, 300, 600, 900
+
+Cult reputation tiers: −600, −300, −100, 0, 100, 300, 600, 800
+
+Stability tiers: −3 panic, −2 unrest, −1 brittle, 0 steady, +1 calm, +2 coordinated, +3 proud
+
+MPI tiers: 0–25 crisis, 26–50 squeezed, 51–75 fair, 76–100 flourishing
+
+Encounter cap: 85% (after all modifiers)
+
+Detection tiers (contraband): 10%, 25%, 40%
+
+1.3 World tracks (world.json)
+{
+  "track": {
+    "cityStability": 0,
+    "mpi": 50,
+    "cultPressure": 25,
+    "sandShift": 0
+  },
+  "lore": {
+    "savi": { "canon": 0 },
+    "measure": { "ledger": 0 },
+    "silence": { "seal": 0 }
+  },
+  "flags": {
+    "illness": { "resolution": "cured|dead|regent" },
+    "merchant": { "control": "balanced" },
+    "underground": { "mode": "cohesive" },
+    "cult": { "status": "contested" }
+  },
+  "access": {
+    "ally": { "thal": 0 },
+    "pass": {
+      "queen_intro": 0,
+      "forged_circle": 0,
+      "blackmarket_rune": 0
+    }
+  }
+}
+
+2) Global Systems
+2.1 City Stability (−3..+3)
+
+−3 Panic: riots, +25% mugging, clinics overwhelmed, curfews by whoever pays the guards.
+
+−2 Unrest: crowd surges can steal a grid action; Black Market bolder.
+
+−1 Brittle: pickpockets frequent; Matriarchy patrols thin.
+
+0 Steady: baseline.
+
++1 Calm: fewer street crimes; clinic schedules hold.
+
++2 Coordinated: volunteer patrols; relief kitchens; rare-cure queue opens.
+
++3 Proud: festivals; −20% street crime; nobles behave.
+
+2.2 Miner Payout Index (MPI 0..100)
+
+0–25 Crisis: evictions surge; “Desperation-tier” Village quests; Black Market crystal stock +2 tiers.
+
+26–50 Squeezed: protests, heavier Merchant presence; clinic drug prices creep.
+
+51–75 Fair: citizen thefts dip.
+
+76–100 Flourishing: Thieves flip to “Robin Hood” mode (merchant raids > citizen muggings).
+
+Economic levers:
+Every −10 MPI → +5% theft in Stone Village, Black Market crystal +1 tier.
+Every +10 MPI → clinic rare-cure stock improves; Black Market crystal −1 tier.
+
+2.3 Cult Pressure (0..100)
+
+0–25 Low: sermons are noise.
+
+26–60 Rising: street “Speed Fervor” rushes may steal a player action in public scenes.
+
+61–100 High: “blessing booths” apply micro-curses; palace access gets blocked by bribes.
+
+2.4 Reputation couplers
+
+High Cult soft-caps Matriarchy rep ceiling until Orion is exposed.
+
+High Underground triggers friction with both civics unless laundered via “community jobs” or official contracts.
+
+3) Districts and Access
+3.1 Entry rules (centralize in canEnter(districtId))
+
+Noble District: attire check or 100-credit deposit; fail → escorted out, etiquette flagged 24h.
+
+Queen’s Circle: pass.queen_intro or rep.matriarchy ≥ 100 or pass.forged_circle.
+
+Black Market: discover Whispering Alley rune + entrance fee scaled to visible wealth, or Orlen vouches after “Seized Home.”
+
+3.2 District briefs
+
+Noble: Emerald Spire Bathhouse, Gilded Library, Silk Bazaar. Private clinics mint “legal impunity” receipts.
+
+Queen’s Circle: palace, duchess halls, Healing Hand Clinic, Grand Archives.
+Shadow companion: ally.thal=1 → stealth routes, 1 emergency extract/day, +10% guard-path success.
+
+Grand Stone Weight Station: Great Scales, assay offices. Bug the scales to expose tare scheme.
+
+Stone Village: families, seized homes, rumor hub (Eris), recruitable Orlen. Events shift with MPI.
+
+Market (day)/Black Market (night): Iron Will Smithy, Desert Sundries. Deyla’s Den: neutral-predatory auctions; fees drop with Merchant rep; stock quality rises with Underground rep.
+
+Outskirts & Gauntlet Entry: city edge to Lich Gauntlet; named roamers at night can “visit.”
+
+4) Factions
+
+Matriarchy (civic): clinics, passes, adjudication. Failure: Queen dies/displaced; Stability tanks; rare cures rationed.
+
+Merchant Guild (economic): judges, scales, warehousing, supply gating. Failure: exposés stick; MPI rises; nobles stop cover.
+
+Underground (private): routes, secrets, deniable force. Failure: internal cannibalism; Deyla blacklist; counter-contracts.
+
+Cult of Orion (public pseudo-religious): crowds, cursed “blessings,” fear leverage. Failure: debate loss + record leaks; harassment collapses.
+
+Deyla alignment fix: neutral-predatory. Not Guild. Guild rep reduces auction fees; Underground rep unlocks stock tiers.
+
+5) Key NPCs (motivation • leverage • secrets • breakpoints)
+
+Queen Aramia: protect social compact • legitimacy, clinics • poison vector hides in noble supply • miss 2 windows → escalates; cure needs ledger + antidote.
+
+Duchess Mira: break Guild; build co-ops • miners, procurement • quiet legal team • deliver proof → unlock “Seizure Writs.”
+
+Duchess Selinne: stability first • nobles, backchannels • blackmail-prone • can become regent or be hardened.
+
+Lady Velira: stop reforms • salons, private guards • bathhouse hub; poisoning ring • core antagonist in Illness arc.
+
+Royal Physician Jorren: survival/penance • sickroom access • falsified charts • redeem for clinic buffs or expose.
+
+Captain Thal: protect Queen • keys/routes/loyal guards • dead-drops • ally.thal=1 gives mechanical routes without party bloat.
+
+Master Deyla: margins > morality • auctions, contracts • duplicated “insurance” ledger • hand ledger to Matriarchy → Seizure Writs once; to Merchants → −15% Black Market fees 48h.
+
+Orion Ophemium: influence via fear • crowds, curses • staged miracles bought from Deyla • public debate pivot.
+
+Eris (Tavern): community survival • rumor mesh • eviction list + judge name.
+
+Foreman Calder: dignity for labor • strike leverage • tunnel bypass for assay; ties thieves.
+
+Orlen (Exiled Miner): claw back life • local muscle • becomes thief lieutenant or bandit captain.

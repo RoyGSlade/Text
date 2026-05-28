@@ -1,0 +1,169 @@
+{
+  "items": [
+    {
+      "id": "lantern.guild_basic",
+      "name": "Guild Lantern",
+      "itemCategory": "device",
+      "description": "Licensed light with unlicensed pricing.",
+      "value": 40,
+      "rarity": "common",
+      "tags": [
+        "lantern",
+        "light"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "fuel.lantern_oil",
+      "name": "Lantern Oil (Premium)",
+      "itemCategory": "consumable",
+      "description": "Burns bright. Burns budgets.",
+      "value": 8,
+      "rarity": "common",
+      "tags": [
+        "fuel",
+        "lantern"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "part.lens_shock",
+      "name": "Shock Lens",
+      "itemCategory": "component",
+      "description": "Concentrates light into discouragement.",
+      "value": 55,
+      "rarity": "uncommon",
+      "tags": [
+        "lantern",
+        "component"
+      ],
+      "contraband": "medium"
+    },
+    {
+      "id": "ingot.iron",
+      "name": "Iron Ingot",
+      "itemCategory": "material",
+      "description": "Monopoly-grade metal bar.",
+      "value": 20,
+      "rarity": "common",
+      "tags": [
+        "metal",
+        "craft"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "pass.convoy_basic",
+      "name": "Convoy Pass",
+      "itemCategory": "key",
+      "description": "Lets you ride shotgun on a bad idea.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": [
+        "convoy",
+        "access"
+      ],
+      "contraband": "low"
+    },
+    {
+      "id": "token.route",
+      "name": "Route Token",
+      "itemCategory": "quest",
+      "description": "Encodes a weekly path in plausible deniability.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": [
+        "convoy",
+        "route"
+      ],
+      "contraband": "medium"
+    },
+    {
+      "id": "doc.ledger.extract",
+      "name": "Ledger Extract",
+      "itemCategory": "quest",
+      "description": "Stamped proof of price-fixing and black routes.",
+      "value": 0,
+      "rarity": "rare",
+      "tags": [
+        "evidence",
+        "merchant"
+      ],
+      "contraband": "high"
+    },
+    {
+      "id": "seal.counterfeit",
+      "name": "Counterfeit Seal",
+      "itemCategory": "tool",
+      "description": "Makes any lantern look blessed by greed.",
+      "value": 35,
+      "rarity": "uncommon",
+      "tags": [
+        "forgery",
+        "lantern"
+      ],
+      "contraband": "high",
+      "use": {
+        "actions": [
+          {
+            "type": "setFlag",
+            "flag": "br:mg.counterfeit.coopted",
+            "op": "=",
+            "value": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "badge.audit_fake",
+      "name": "Fake Auditor’s Badge",
+      "itemCategory": "disguise",
+      "description": "Authority at a glance, felony on inspection.",
+      "value": 30,
+      "rarity": "uncommon",
+      "tags": [
+        "disguise",
+        "heist"
+      ],
+      "contraband": "high"
+    },
+    {
+      "id": "chit.grease_money",
+      "name": "Grease Money Chit",
+      "itemCategory": "currency",
+      "description": "For when rules need lubrication.",
+      "value": 10,
+      "rarity": "common",
+      "tags": [
+        "bribe"
+      ],
+      "contraband": "medium"
+    },
+    {
+      "id": "form.bulk_order",
+      "name": "Bulk Order Form",
+      "itemCategory": "quest",
+      "description": "Paperwork that weighs more than iron.",
+      "value": 0,
+      "rarity": "common",
+      "tags": [
+        "merchant",
+        "paper"
+      ],
+      "contraband": "none"
+    },
+    {
+      "id": "chip.android_blank",
+      "name": "Android Memory Chip (Blank)",
+      "itemCategory": "component",
+      "description": "Security by amnesia.",
+      "value": 90,
+      "rarity": "rare",
+      "tags": [
+        "android",
+        "security"
+      ],
+      "contraband": "high"
+    }
+  ]
+}

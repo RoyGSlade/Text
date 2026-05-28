@@ -1,0 +1,71 @@
+{
+  "pack": "clinic",
+  "quests": [
+    {
+      "id": "clinic:field_test",
+      "tags": [
+        "role:healer",
+        "story",
+        "town:blackridge",
+        "building:clinic"
+      ],
+      "title": "An Unwilling Tincture",
+      "desc": "Administer Vessa's Placidus Tincture to a Guard squad. Results may include calm or corpses.",
+      "requirements": {
+        "flagsNot": [
+          "clinic_tonic_quest_complete"
+        ],
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "custom",
+            "id": "administer_tonic"
+          },
+          "hint": "Administer Vessa's tonic at the Guard Post."
+        }
+      ],
+      "rewards": {
+        "credits": 15,
+        "flagsSet": [
+          "clinic_tonic_quest_complete"
+        ]
+      }
+    },
+    {
+      "id": "clinic:specimen_run",
+      "tags": [
+        "role:healer",
+        "radiant",
+        "town:blackridge",
+        "building:clinic"
+      ],
+      "title": "Specimen With Teeth",
+      "desc": "Collect 2 intact monster glands for Vessa.",
+      "requirements": {
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "gather",
+            "itemId": "monster_gland",
+            "qty": 2
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 10,
+        "rep": [
+          {
+            "target": "npc:clinic_alchemist",
+            "amount": 6
+          }
+        ]
+      }
+    }
+  ]
+}

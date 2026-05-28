@@ -1,0 +1,48 @@
+{
+  "id": "mg_custodian_nightjar",
+  "town": "blackridge",
+  "roles": [
+    "night_custodian"
+  ],
+  "buildingId": "merchant_guild_store",
+  "name": "Nightjar",
+  "demeanor": "sleepy, superstitious, bribable",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "true",
+      "text": "I polish the gold until I can see the crimes in it."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_bribe_night_access",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ],
+        "have": [
+          {
+            "itemId": "chit.grease_money",
+            "qty": 1
+          }
+        ]
+      },
+      "actions": [
+        {
+          "type": "removeItem",
+          "itemId": "chit.grease_money",
+          "qty": 1
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:mg.ledger.roomKnown",
+          "op": "=",
+          "value": true
+        }
+      ],
+      "text": "Slip a bribe for off-hours access"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "start": {
+    "text": "You arrive at the outskirts of Blackridge. Smoke curls above rooftops; the forest presses close.",
+    "choices": [
+      { "text": "Enter town", "leadsTo": "town:blackridge" },
+      { "text": "Head into the forest", "leadsTo": "cell:forest:1,0" },
+      { "text": "Go Home", "leadsTo": "home" }
+    ]
+  },
+  "combat_victory": {
+    "text": "You prevail. The path ahead opens.",
+    "choices": [
+      { "text": "Continue", "leadsTo": "town:blackridge" }
+    ]
+  },
+  "game_over": {
+    "text": "You fall. Darkness closes in.",
+    "choices": [
+      { "text": "Try again", "leadsTo": "start" }
+    ]
+  },
+  "home": {
+    "text": "Your home. A quiet refuge to rest, tinker, and hone your craft.",
+    "choices": [
+      { "text": "Rest", "type": "restAtHome", "leadsTo": "home" },
+      { "text": "Workshop", "leadsTo": "home_workshop", "visibleWhenFlag": "home:upgrade:workshop_t1 || home:upgrade:workshop_t2 || home:upgrade:workshop_t3" },
+      { "text": "Kitchen", "leadsTo": "home_kitchen", "visibleWhenFlag": "home:upgrade:kitchen_t1 || home:upgrade:kitchen_t2 || home:upgrade:kitchen_t3" },
+      { "text": "Art Studio", "leadsTo": "home_studio", "visibleWhenFlag": "home:upgrade:studio_t1 || home:upgrade:studio_t2 || home:upgrade:studio_t3" },
+      { "text": "Forgery Bench", "leadsTo": "home_forgery", "visibleWhenFlag": "home:upgrade:forgery_t1 || home:upgrade:forgery_t2 || home:upgrade:forgery_t3" },
+      { "text": "Practice Skills", "leadsTo": "home_practice" },
+      { "text": "Upgrades", "leadsTo": "home_upgrades" },
+      { "text": "Leave Home", "leadsTo": "start" }
+    ]
+  },
+  "home_upgrades": {
+    "text": "Invest in your home to unlock new stations and perks.",
+    "choices": [
+      { "text": "Buy Sturdy Cot (20c)", "type": "buyUpgrade", "upgradeId": "bed_t1", "hiddenWhenFlag": "home:upgrade:bed_t1", "leadsTo": "home_upgrades" },
+      { "text": "Buy Basic Workshop (30c)", "type": "buyUpgrade", "upgradeId": "workshop_t1", "hiddenWhenFlag": "home:upgrade:workshop_t1", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Workshop (60c)", "type": "buyUpgrade", "upgradeId": "workshop_t2", "visibleWhenFlag": "home:upgrade:workshop_t1", "hiddenWhenFlag": "home:upgrade:workshop_t2", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Workshop to Master (120c)", "type": "buyUpgrade", "upgradeId": "workshop_t3", "visibleWhenFlag": "home:upgrade:workshop_t2", "hiddenWhenFlag": "home:upgrade:workshop_t3", "leadsTo": "home_upgrades" },
+      { "text": "Buy Camp Kitchen (25c)", "type": "buyUpgrade", "upgradeId": "kitchen_t1", "hiddenWhenFlag": "home:upgrade:kitchen_t1", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Kitchen (50c)", "type": "buyUpgrade", "upgradeId": "kitchen_t2", "visibleWhenFlag": "home:upgrade:kitchen_t1", "hiddenWhenFlag": "home:upgrade:kitchen_t2", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Kitchen to Master (100c)", "type": "buyUpgrade", "upgradeId": "kitchen_t3", "visibleWhenFlag": "home:upgrade:kitchen_t2", "hiddenWhenFlag": "home:upgrade:kitchen_t3", "leadsTo": "home_upgrades" },
+      { "text": "Buy Art Studio (25c)", "type": "buyUpgrade", "upgradeId": "studio_t1", "hiddenWhenFlag": "home:upgrade:studio_t1", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Art Studio (50c)", "type": "buyUpgrade", "upgradeId": "studio_t2", "visibleWhenFlag": "home:upgrade:studio_t1", "hiddenWhenFlag": "home:upgrade:studio_t2", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Art Studio to Master (100c)", "type": "buyUpgrade", "upgradeId": "studio_t3", "visibleWhenFlag": "home:upgrade:studio_t2", "hiddenWhenFlag": "home:upgrade:studio_t3", "leadsTo": "home_upgrades" },
+      { "text": "Buy Forgery Bench (35c)", "type": "buyUpgrade", "upgradeId": "forgery_t1", "hiddenWhenFlag": "home:upgrade:forgery_t1", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Forgery Bench (70c)", "type": "buyUpgrade", "upgradeId": "forgery_t2", "visibleWhenFlag": "home:upgrade:forgery_t1", "hiddenWhenFlag": "home:upgrade:forgery_t2", "leadsTo": "home_upgrades" },
+      { "text": "Upgrade Forgery Bench to Master (140c)", "type": "buyUpgrade", "upgradeId": "forgery_t3", "visibleWhenFlag": "home:upgrade:forgery_t2", "hiddenWhenFlag": "home:upgrade:forgery_t3", "leadsTo": "home_upgrades" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  },
+  "home_workshop": {
+    "text": "Your bench is tidy, tools at the ready.",
+    "choices": [
+      { "text": "Craft: Basic Patch", "type": "craftLite", "recipeId": "basic_patch", "leadsTo": "home_workshop" },
+      { "text": "Craft: Repair (cloth)", "type": "craftLite", "recipeId": "repair_cloth", "leadsTo": "home_workshop" },
+      { "text": "Attach Patch", "type": "craftLite", "recipeId": "attach_patch", "leadsTo": "home_workshop" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  },
+  "home_kitchen": {
+    "text": "Pots simmer and spices linger in the air.",
+    "choices": [
+      { "text": "Cook: Energizing Tonic", "type": "craftLite", "recipeId": "cook_tonic", "leadsTo": "home_kitchen" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  },
+  "home_forgery": {
+    "text": "Seals and waxes line the bench, shadows pooling.",
+    "choices": [
+      { "text": "Forge: Escort Writ", "type": "craftLite", "recipeId": "forge_writ", "leadsTo": "home_forgery" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  },
+  "home_studio": {
+    "text": "Canvas and sketches clutter the studio walls.",
+    "choices": [
+      { "text": "Paint: Small Canvas", "type": "craftLite", "recipeId": "paint_small", "leadsTo": "home_studio" },
+      { "text": "Sell Artwork", "type": "sellByTag", "tag": "art", "multiplier": 1, "leadsTo": "home_studio" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  },
+  "home_practice": {
+    "text": "A quiet hour to practice, refine, and train.",
+    "choices": [
+      { "text": "Practice: Perception (+1 success)", "type": "practiceSkill", "skill": "Perception", "amount": 1, "minutes": 30, "leadsTo": "home_practice" },
+      { "text": "Practice: Mechanics (+1 success)", "type": "practiceSkill", "skill": "Mechanics", "amount": 1, "minutes": 30, "leadsTo": "home_practice" },
+      { "text": "Practice: Artist (+1 success)", "type": "practiceSkill", "skill": "Artist", "amount": 1, "minutes": 30, "leadsTo": "home_practice" },
+      { "text": "Back", "leadsTo": "home" }
+    ]
+  }
+}

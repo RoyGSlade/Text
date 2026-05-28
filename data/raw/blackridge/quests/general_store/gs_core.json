@@ -1,0 +1,48 @@
+{
+  "pack": "general_store",
+  "quests": [
+    {
+      "id": "gs_price_signal",
+      "tags": ["main", "economy", "tutorial"],
+      "title": "Signal, Not Noise",
+      "desc": "Lessa claims prices track convoys and siege pressure. Prove it or prove her a liar.",
+      "requirements": {},
+      "stages": [
+        {
+          "id": "stage1_observe",
+          "text": "Observe a price swing after a convoy event or siege uptick.",
+          "completionCheck": { "flagsAny": ["br:econ.tight", "br:econ.loose"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:gs.rep", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:gs.rep1plus", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage2_influence",
+          "text": "Deliver a resupply crate OR defend a convoy route once.",
+          "completionCheck": {
+            "flagsAny": ["br:gs.resupply.delivered", "br:convoy.defended"]
+          },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false }
+          ]
+        },
+        {
+          "id": "stage3_report",
+          "text": "Report findings to the Library (truth) or the Merchant Guild (spin).",
+          "completionCheck": { "flagsAny": ["br:report.library.filed", "br:report.merchant.filed"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:gs.rep", "op": "+", "value": 1 }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 90 },
+        { "type": "item", "itemId": "kit.survival_basic", "qty": 1 }
+      ],
+      "instantiate": { "template": "quest:linear_three_stage", "params": { "area": "general_store" } }
+    }
+  ]
+}

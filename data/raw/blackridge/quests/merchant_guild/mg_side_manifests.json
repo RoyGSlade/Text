@@ -1,0 +1,115 @@
+{
+  "pack": "merchant_guild",
+  "quests": [
+    {
+      "id": "mg_side_lost_manifest",
+      "tags": [
+        "side",
+        "convoy",
+        "merchant"
+      ],
+      "title": "Paper Trail",
+      "desc": "A convoy manifest went missing. Find it before the Watch does.",
+      "requirements": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "stages": [
+        {
+          "id": "stage1_search_yard",
+          "text": "Search the loading yard for the misplaced crate.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.manifest.crate_found"
+            ]
+          }
+        },
+        {
+          "id": "stage2_return_manifest",
+          "text": "Return the manifest without alerting Dispatch.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "doc.convoy_manifest",
+                "qty": 1
+              }
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:mg.rep",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 60
+        },
+        {
+          "type": "item",
+          "itemId": "pass.convoy_basic",
+          "qty": 1
+        }
+      ]
+    },
+    {
+      "id": "mg_side_loan_shark",
+      "tags": [
+        "side",
+        "collections",
+        "morality"
+      ],
+      "title": "Collections Call",
+      "desc": "A debtor defaulted. Retrieve coin or property. Or mercy, if your spine still works.",
+      "requirements": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "stages": [
+        {
+          "id": "stage1_locate_debtor",
+          "text": "Locate the debtor in town.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.debtor.located"
+            ]
+          }
+        },
+        {
+          "id": "stage2_resolve",
+          "text": "Resolve the debt: squeeze coin, seize collateral, or forgive the debt.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.debt.paid",
+              "br:mg.debt.collateral",
+              "br:mg.debt.forgiven"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:mg.rep",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 50
+        },
+        {
+          "type": "credits",
+          "amount": 20
+        }
+      ]
+    }
+  ]
+}

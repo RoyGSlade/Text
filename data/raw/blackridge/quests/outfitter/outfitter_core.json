@@ -1,0 +1,40 @@
+{
+  "pack": "outfitter",
+  "quests": [
+    {
+      "id": "outfitter_weather_or_not",
+      "tags": ["main", "tutorial", "outfitter"],
+      "title": "Weather or Not",
+      "desc": "Prove you understand how clothing removes biome penalties, then choose your lie: merchant or watch.",
+      "requirements": {},
+      "stages": [
+        {
+          "id": "stage1_get_gear",
+          "text": "Acquire one protection each: cold OR storm OR sand.",
+          "completionCheck": {
+            "flagsAny": ["br:biome.coldProtected", "br:biome.stormProtected", "br:biome.sandProtected"]
+          }
+        },
+        {
+          "id": "stage2_test_fit",
+          "text": "Use your gear in the fitting demo or step into a matching biome.",
+          "completionCheck": { "flagsAny": ["br:outfit.demo.passed", "br:biome.tested"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:outfit.rep", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:outfit.rep1plus", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage3_choose_disguise",
+          "text": "Obtain Merchant Livery or Watch Uniform (fake).",
+          "completionCheck": { "flagsAny": ["br:disguise.merchant", "br:disguise.guard"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 90 },
+        { "type": "item", "itemId": "kit.disguise", "qty": 1 }
+      ],
+      "instantiate": { "template": "quest:linear_three_stage", "params": { "area": "outfitter" } }
+    }
+  ]
+}

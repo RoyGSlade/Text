@@ -1,0 +1,30 @@
+{
+  "pack": "butcher",
+  "quests": [
+    {
+      "id": "butcher_black_sausage",
+      "tags": ["side", "investigation", "ethics"],
+      "title": "Black Sausage",
+      "desc": "Someone’s doping sausage with nightmare-stilling extract. Decide if it gets purged or pushed.",
+      "requirements": { "flagsAny": ["br:butcher.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_find_batch",
+          "text": "Find a Black Meat batch in the cold room or during midnight stock.",
+          "completionCheck": { "have": [{ "itemId": "food.black_meat", "qty": 1 }] }
+        },
+        {
+          "id": "stage2_decide",
+          "text": "Destroy the batch or sell it to the Guild quietly.",
+          "completionCheck": { "flagsAny": ["br:black_meat.destroyed", "br:black_meat.sold"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 70 }
+      ]
+    }
+  ]
+}

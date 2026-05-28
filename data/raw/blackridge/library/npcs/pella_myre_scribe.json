@@ -1,0 +1,22 @@
+{
+  "id": "pella_myre_scribe",
+  "town": "blackridge",
+  "roles": [
+    "scribe"
+  ],
+  "buildingId": "library",
+  "name": "Pella Myre",
+  "demeanor": "precise, anxious, principled",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Minutes reflect the record, not the myth."
+    },
+    {
+      "when": "tier >= known",
+      "text": "I keep a true copy. Keep me safe."
+    }
+  ]
+}

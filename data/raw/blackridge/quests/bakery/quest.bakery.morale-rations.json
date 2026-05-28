@@ -1,0 +1,68 @@
+{
+  "id": "quest.bakery.morale-rations",
+  "title": "Bread Before Blood",
+  "tags": [
+    "warm_loaf_bakery",
+    "morale",
+    "town_watch"
+  ],
+  "desc": "Help stabilize Watch morale by delivering fresh rations before dawn.",
+  "stages": [
+    {
+      "id": "queue-at-dawn",
+      "text": "Join the pre-dawn breadline at the Bakery.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:bakery.queueJoined"
+        ]
+      }
+    },
+    {
+      "id": "purchase-rations",
+      "text": "Acquire 3 ration packs from Mara or Orun.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.bakery.ration-pack",
+            "qty": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "deliver-to-watch",
+      "text": "Deliver rations to the Watch contact at the bakery line.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:bakery.rationsDelivered"
+        ]
+      }
+    },
+    {
+      "id": "report-mara",
+      "text": "Report back to Mara.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:bakery.maraPaid"
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 30
+        },
+        {
+          "type": "incFlag",
+          "flag": "br:watchMorale",
+          "value": 5
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:repBakersFriendly",
+          "op": "=",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "mg_clerk_sellan",
+  "town": "blackridge",
+  "roles": [
+    "contracts_clerk"
+  ],
+  "buildingId": "merchant_guild_store",
+  "name": "Sellan Quay",
+  "demeanor": "efficient, false-friendly, bored",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "true",
+      "text": "Escorts, repairs, repossessions. We move goods; we move problems. Which are you?"
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_escort",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ],
+        "requiresFlag": "br:mg.ban.active == false"
+      },
+      "text": "Sign up for a convoy escort",
+      "leadsTo": "mg_convoy_dispatch"
+    },
+    {
+      "id": "offer_repair_cart",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "actions": [
+        {
+          "type": "startQuest",
+          "questId": "mg_side_manifests"
+        }
+      ],
+      "text": "Take a cart repair order"
+    }
+  ]
+}

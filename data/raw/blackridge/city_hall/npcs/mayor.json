@@ -1,0 +1,42 @@
+{
+  "id": "mayor",
+  "town": "blackridge",
+  "roles": [
+    "authority",
+    "politician"
+  ],
+  "buildingId": "city_hall",
+  "name": "Sel Varyn",
+  "demeanor": "poised,sardonic,calculating",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "mayor_blackmailed",
+      "text": "Ah, my associate. Don’t mistake my cooperation for weakness."
+    },
+    {
+      "when": "corruption_exposed",
+      "text": "You’ve doomed us for applause. Get out."
+    },
+    {
+      "when": "tier < known",
+      "text": "Another petitioner. Drab. Be brief."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You’re an effective tool. Let’s keep you sharp."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:authority",
+      "town:blackridge",
+      "building:city_hall"
+    ],
+    "minTierByTag": {
+      "story": "known"
+    },
+    "limitPerVisit": 1
+  }
+}

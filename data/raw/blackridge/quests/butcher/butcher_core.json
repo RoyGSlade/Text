@@ -1,0 +1,48 @@
+{
+  "pack": "butcher",
+  "quests": [
+    {
+      "id": "butcher_midnight_line",
+      "tags": ["main", "butcher", "rumor"],
+      "title": "Midnight Line",
+      "desc": "Earn Kessa’s trust, witness the midnight stock from the wall, and turn whispers into leverage.",
+      "requirements": {},
+      "stages": [
+        {
+          "id": "stage1_earn_trust",
+          "text": "Sell any monster parts to Kessa.",
+          "completionCheck": { "flagsAny": ["br:butcher.trust"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:butcher.midnight_known", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage2_midnight_visit",
+          "text": "Visit the back door after midnight to see the guard drop.",
+          "completionCheck": { "flagsAny": ["br:butcher.midnight_open", "br:butcher.midnight_seen"] }
+        },
+        {
+          "id": "stage3_collect_rumor",
+          "text": "Collect a tangible rumor or proof from a guard or ledger.",
+          "completionCheck": { "flagsAny": ["br:rumor.wall_breach_east", "br:rumor.convoy_ambush", "br:butcher.ledger.scrap"] },
+          "onComplete": [
+            { "type": "addItem", "itemId": "doc.rumor_scrap", "qty": 1 }
+          ]
+        },
+        {
+          "id": "stage4_report_or_trade",
+          "text": "Report to Keepers (truth) or trade to Merchant Guild (leverage).",
+          "completionCheck": { "flagsAny": ["br:report.library.filed", "br:report.merchant.filed"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:watch.morale", "op": "+", "value": 1 }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 120 },
+        { "type": "item", "itemId": "food.guards_broth", "qty": 2 }
+      ],
+      "instantiate": { "template": "quest:linear_four_stage", "params": { "area": "butcher" } }
+    }
+  ]
+}

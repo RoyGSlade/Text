@@ -1,0 +1,22 @@
+{
+  "id": "jaxen_rook_auditor",
+  "town": "blackridge",
+  "roles": [
+    "auditor"
+  ],
+  "buildingId": "city_hall",
+  "name": "Jaxen Rook",
+  "demeanor": "smug, guild-aligned",
+  "repFaction": "adventurer_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Compliance failure. Grievance noted."
+    },
+    {
+      "when": "tier >= known",
+      "text": "You follow rules quickly. I follow money faster."
+    }
+  ]
+}

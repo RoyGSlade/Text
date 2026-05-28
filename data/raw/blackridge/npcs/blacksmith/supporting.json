@@ -1,0 +1,51 @@
+{
+  "id": "blacksmith_supporting_cast",
+  "town": "blackridge",
+  "npcs": [
+    {
+      "id": "lio_verren",
+      "roles": ["apprentice"],
+      "buildingId": "grimy_anvil",
+      "name": "Lio Verren",
+      "demeanor": "eager, curious, blunt",
+      "factionLean": "keepers_curious",
+      "reportsToCityHall": false
+    },
+    {
+      "id": "dorran_lure",
+      "roles": ["watch_inspector"],
+      "buildingId": "city_hall_watch",
+      "name": "Inspector Dorran Lure",
+      "demeanor": "rigid, suspicious",
+      "factionLean": "watch_internal",
+      "reportsToCityHall": true
+    },
+    {
+      "id": "pyra_ansel_buyer",
+      "roles": ["guild_buyer"],
+      "buildingId": "merchant_guild_house",
+      "name": "Pyra Ansel",
+      "demeanor": "clinical, bright, transactional",
+      "factionLean": "merchant_guild",
+      "reportsToCityHall": false
+    },
+    {
+      "id": "maela_scriv",
+      "roles": ["neighbor"],
+      "buildingId": "grimy_anvil_adjacent",
+      "name": "Maela Scriv",
+      "demeanor": "nosy, talkative",
+      "factionLean": "civic",
+      "reportsToCityHall": true
+    },
+    {
+      "id": "hal_voss",
+      "roles": ["watch_sergeant", "barracks_signoff"],
+      "buildingId": "barracks_blackridge",
+      "name": "Sgt. Hal Voss",
+      "demeanor": "terse, duty-first",
+      "factionLean": "watch",
+      "reportsToCityHall": true
+    }
+  ]
+}

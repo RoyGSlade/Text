@@ -1,0 +1,118 @@
+{
+  "items": [
+    {
+      "id": "food.guards_broth",
+      "name": "Guard’s Broth",
+      "itemCategory": "food",
+      "description": "Hot, salty, and stubborn. Keeps watchmen on their feet.",
+      "value": 8,
+      "rarity": "common",
+      "tags": ["stamina", "butcher"],
+      "contraband": "none",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:status.stamina_boost", "op": "=", "value": true }
+        ]
+      }
+    },
+    {
+      "id": "food.stamina_jerky",
+      "name": "Monster Jerky",
+      "itemCategory": "food",
+      "description": "Chewy. Powerful. Possibly illegal in three provinces.",
+      "value": 10,
+      "rarity": "common",
+      "tags": ["stamina", "trail"],
+      "contraband": "low",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:status.stamina_boost", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "food.stamina_stew",
+      "name": "Stamina Stew",
+      "itemCategory": "food",
+      "description": "Nightbloom and gland simmered into courage.",
+      "value": 14,
+      "rarity": "uncommon",
+      "tags": ["stamina", "quest"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:status.stamina_boost", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "drink.guards_tea",
+      "name": "Guard’s Tea",
+      "itemCategory": "drink",
+      "description": "Stops the hands from shaking long enough to sign a report.",
+      "value": 6,
+      "rarity": "common",
+      "tags": ["calming", "trade"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": -1 } ] }
+    },
+    {
+      "id": "food.black_meat",
+      "name": "Black Meat",
+      "itemCategory": "food",
+      "description": "Doped sausage that kills fear and good sense.",
+      "value": 20,
+      "rarity": "rare",
+      "tags": ["contraband", "doping"],
+      "contraband": "high",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:status.stamina_boost", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+        ]
+      }
+    },
+    {
+      "id": "monster.claw",
+      "name": "Monster Claw",
+      "itemCategory": "monster_part",
+      "description": "Fresh enough to argue back.",
+      "value": 4,
+      "rarity": "common",
+      "tags": ["monster", "trade"],
+      "contraband": "low"
+    },
+    {
+      "id": "monster.hide",
+      "name": "Monster Hide",
+      "itemCategory": "monster_part",
+      "description": "Stretches like bad promises.",
+      "value": 6,
+      "rarity": "common",
+      "tags": ["monster", "trade"],
+      "contraband": "none"
+    },
+    {
+      "id": "monster.gland",
+      "name": "Adrenal Gland",
+      "itemCategory": "monster_part",
+      "description": "The part that says 'run harder.'",
+      "value": 9,
+      "rarity": "uncommon",
+      "tags": ["monster", "reagent"],
+      "contraband": "medium"
+    },
+    {
+      "id": "doc.rumor_scrap",
+      "name": "Rumor Scrap",
+      "itemCategory": "quest",
+      "description": "Half a sentence, twice the trouble.",
+      "value": 0,
+      "rarity": "common",
+      "tags": ["evidence", "rumor"],
+      "contraband": "none"
+    },
+    {
+      "id": "note.midnight_backdoor",
+      "name": "Note: Midnight Back Door",
+      "itemCategory": "quest",
+      "description": "Directions to the butcher’s rear entrance. Smells like smoke and secrets.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": ["access", "butcher"],
+      "contraband": "low"
+    }
+  ]
+}

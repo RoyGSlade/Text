@@ -1,0 +1,47 @@
+{
+  "id": "guard_captain",
+  "town": "blackridge",
+  "roles": [
+    "guard",
+    "gate"
+  ],
+  "buildingId": "guard_post",
+  "name": "Captain Rel",
+  "demeanor": "anxious,obedient,earnest",
+  "repFaction": "red_guard",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "corruption_exposed",
+      "text": "You did the right thing. It’s a mess, but right."
+    },
+    {
+      "when": "mayor_blackmailed",
+      "text": "City Hall is… cooperative. Too cooperative."
+    },
+    {
+      "when": "guards_informed_consent",
+      "text": "Thanks for being straight about that tonic."
+    },
+    {
+      "when": "fal:permit_granted",
+      "text": "Permit checks out. Try not to die; paperwork is awful."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Good to see someone I trust."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:guard",
+      "town:blackridge",
+      "building:guard_post"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

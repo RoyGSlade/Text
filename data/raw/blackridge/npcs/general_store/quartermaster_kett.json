@@ -1,0 +1,21 @@
+{
+  "id": "gs_quartermaster_kett",
+  "town": "blackridge",
+  "roles": ["quartermaster", "backroom"],
+  "buildingId": "general_store",
+  "name": "Kett Wril",
+  "demeanor": "dry, inventory-obsessed, lawful-ish",
+  "repFaction": "faction_general_store",
+  "repPersonal": false,
+  "greetings": [
+    { "when": "true", "text": "Stock’s tight. Don’t ask for a skyship in a backpack." }
+  ],
+  "offers": [
+    {
+      "id": "offer_backroom_access",
+      "label": "Request access to backroom supply",
+      "requires": { "flagsAny": ["br:gs.rep1plus"] },
+      "actions": [ { "type": "gotoScene", "sceneId": "gs_backroom" } ]
+    }
+  ]
+}

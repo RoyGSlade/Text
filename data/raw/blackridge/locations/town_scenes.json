@@ -1,0 +1,66 @@
+{
+  "scenes": {
+    "town:blackridge:well": {
+      "text": "The town well gapes. One brick on the north rim sits loose.",
+      "choices": [
+        {
+          "text": "[Quest] Pry the loose brick",
+          "requires": {
+            "questActive": "espionage:the_lever"
+          },
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "blackmail_package",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "espionage_package_acquired",
+              "value": true
+            },
+            {
+              "type": "completeQuestObjective",
+              "questId": "espionage:the_lever",
+              "objectiveId": 0
+            }
+          ],
+          "leadsTo": "town:blackridge:well_package_found"
+        },
+        {
+          "text": "Draw water",
+          "leadsTo": "town:blackridge"
+        },
+        {
+          "text": "Return to town square",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "town:blackridge:well_package_found": {
+      "text": "Oilskin bundle in hand: deeds, confessions, perfume. The town’s throat, in paper.",
+      "choices": [
+        {
+          "text": "Confront Mayor Sel",
+          "leadsTo": "scene:confront_mayor"
+        },
+        {
+          "text": "Confront Director Cale",
+          "leadsTo": "scene:confront_cale"
+        },
+        {
+          "text": "Show Captain Rel",
+          "leadsTo": "bldg:blackridge:guard_post"
+        }
+      ]
+    },
+    "town:blackridge:forest_outskirts": {
+      "text": "Trees crowd the path outside Blackridge; birdcalls cut through distant axes.",
+      "choices": [
+        { "text": "Forage for herbs", "leadsTo": "town:blackridge:forest_outskirts" },
+        { "text": "Head deeper into the forest", "leadsTo": "cell:forest:1,0" },
+        { "text": "Return to town", "leadsTo": "town:blackridge" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "presetPersonas": [
+    {
+      "name": "Shadow Operative",
+      "personality": "Quiet, calculating, and lethal when cornered.",
+      "motivation": 1,
+      "plan": 4,
+      "hardship": 3,
+      "goals": 4,
+      "empathy": 5,
+      "traits": [
+        { "category": "neutral", "index": 2 },
+        { "category": "positive", "index": 0 },
+        { "category": "negative", "index": 2 }
+      ],
+      "contacts": [0, 1],
+      "description": "Wears nondescript clothing, always watching, rarely speaking."
+    },
+    {
+      "name": "Wandering Scholar",
+      "personality": "Inquisitive and gentle, with a thirst for ancient knowledge.",
+      "motivation": 3,
+      "plan": 5,
+      "hardship": 4,
+      "goals": 5,
+      "empathy": 6,
+      "traits": [
+        { "category": "positive", "index": 3 },
+        { "category": "neutral", "index": 3 },
+        { "category": "negative", "index": 3 }
+      ],
+      "contacts": [4, 5],
+      "description": "Cloaked in robes, glasses perched on nose, ink stains on hands."
+    }
+  ],
+  "personalityTypes": [
+    {
+      "name": "Cunning Idealist",
+      "description": "Quick-witted and passionate, always plotting but never cruel."
+    },
+    {
+      "name": "Grizzled Veteran",
+      "description": "Wry and hardened by loss, lives by experience not optimism."
+    },
+    {
+      "name": "Curious Innocent",
+      "description": "Wide-eyed, finds beauty in chaos, dreams big."
+    },
+    {
+      "name": "Brooding Outsider",
+      "description": "Mistrustful of others, prefers watching from the shadows."
+    },
+    {
+      "name": "Charismatic Leader",
+      "description": "Inspires loyalty through strength of personality."
+    },
+    {
+      "name": "Reluctant Hero",
+      "description": "Burdened with responsibility, seeks peace but finds conflict."
+    }
+  ],
+  "motivations": [
+    "To restore a lost family legacy",
+    "Escape a dark past and start anew",
+    "Prove their worth to the galaxy",
+    "Gain knowledge forbidden to their kind"
+  ],
+  "plans": [
+    "Track and eliminate a target",
+    "Amass wealth via illicit means",
+    "Redeem themselves in the eyes of their family",
+    "Forge a new identity",
+    "Infiltrate the syndicate and dismantle it from within",
+    "Decipher lost scrolls and uncover hidden truths"
+  ],
+  "hardships": [
+    "Orphaned at a young age",
+    "Was experimented on",
+    "Lived through a war",
+    "Betrayed by a former comrade",
+    "Banished for defying tradition"
+  ],
+  "goals": [
+    {
+      "short": "Find a safe house",
+      "long": "Establish a new identity and disappear"
+    },
+    {
+      "short": "Master a rare skill",
+      "long": "Teach it to others and leave a legacy"
+    },
+    {
+      "short": "Win the tournament",
+      "long": "Be recognized as the greatest fighter alive"
+    },
+    {
+      "short": "Recover a stolen heirloom",
+      "long": "Return honor to the family name"
+    },
+    {
+      "short": "Gain trust within the organization",
+      "long": "Destroy the network from the inside"
+    },
+    {
+      "short": "Locate the Library of Dust",
+      "long": "Publish a revolutionary theory about ancient magic"
+    }
+  ],
+  "empathy": [
+    "Highly empathetic",
+    "Mildly empathetic",
+    "Neutral",
+    "Detached",
+    "Completely callous",
+    "Selective - trusts few but protects them fiercely",
+    "Deeply empathetic, always listening"
+  ],
+  "traits": {
+    "positive": [
+      "Loyal",
+      "Honest",
+      "Wise",
+      "Curious"
+    ],
+    "neutral": [
+      "Soft-spoken",
+      "Bold",
+      "Stealthy",
+      "Bookish"
+    ],
+    "negative": [
+      "Ruthless",
+      "Calculating",
+      "Paranoid",
+      "Absent-minded"
+    ]
+  },
+  "contacts": [
+    {
+      "name": "Jax",
+      "relationship": "Ex-handler",
+      "note": "Knows too much",
+      "category": "Negative"
+    },
+    {
+      "name": "Mira",
+      "relationship": "Black market medic",
+      "note": "Still owes you a favor",
+      "category": "Neutral"
+    },
+    {
+      "name": "Voss",
+      "relationship": "Smuggler",
+      "note": "Reliable when paid",
+      "category": "Neutral"
+    },
+    {
+      "name": "Reyna",
+      "relationship": "Detective",
+      "note": "Wants you to turn over a new leaf",
+      "category": "Positive"
+    },
+    {
+      "name": "Thalor",
+      "relationship": "Mentor",
+      "note": "Believes in your potential",
+      "category": "Positive"
+    },
+    {
+      "name": "Sylvia",
+      "relationship": "Archivist",
+      "note": "Access to ancient knowledge",
+      "category": "Positive"
+    },
+    {
+      "name": "Corvin",
+      "relationship": "Rival",
+      "note": "Always one step ahead",
+      "category": "Negative"
+    },
+    {
+      "name": "Elira",
+      "relationship": "Sibling",
+      "note": "Keeps your family secrets",
+      "category": "Positive"
+    }
+  ],
+  "appearanceDetails": {
+    "eyeColors": [
+      "Blue",
+      "Green",
+      "Brown",
+      "Hazel",
+      "Grey",
+      "Amber",
+      "Violet"
+    ],
+    "hairColors": [
+      "Black",
+      "Blonde",
+      "Red",
+      "Brown",
+      "White",
+      "Grey",
+      "Blue",
+      "Silver"
+    ],
+    "hairStyles": [
+      "Short",
+      "Long",
+      "Curly",
+      "Bald",
+      "Braided",
+      "Mohawk",
+      "Shaved sides",
+      "Wavy"
+    ],
+    "height": [
+      "Short",
+      "Average",
+      "Tall",
+      "Towering",
+      "Diminutive"
+    ],
+    "build": [
+      "Slim",
+      "Athletic",
+      "Stocky",
+      "Heavyset",
+      "Lithe",
+      "Burly"
+    ],
+    "skinTones": [
+      "Pale",
+      "Light",
+      "Olive",
+      "Tan",
+      "Brown",
+      "Dark",
+      "Bronze"
+    ],
+    "features": [
+      "Scarred",
+      "Tattooed",
+      "Pierced",
+      "Freckled",
+      "Clean-cut",
+      "Weathered",
+      "Elegant"
+    ],
+    "voice": [
+      "Gravelly",
+      "Soft-spoken",
+      "Deep",
+      "High-pitched",
+      "Monotone",
+      "Sing-song",
+      "Raspy"
+    ]
+  }
+}

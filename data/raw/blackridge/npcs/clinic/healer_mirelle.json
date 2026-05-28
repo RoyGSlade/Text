@@ -1,0 +1,47 @@
+{
+  "id": "clinic_healer_mirelle",
+  "town": "blackridge",
+  "roles": ["healer", "apothecary", "teacher"],
+  "buildingId": "clinic",
+  "name": "Mirelle Vaust",
+  "demeanor": "calm, exacting, zero patience for politics",
+  "repFaction": "faction_clinic",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:clinic.unlocked", "text": "If you can read this sign, you’re alive enough to queue. Next." },
+    { "when": "br:clinic.unlocked && br:clinic.drugged_tutorial_started && !br:clinic.drugged_cleared", "text": "Eyes unfocused. Pulse quick. Sit. Don’t argue." },
+    { "when": "br:clinic.drugged_cleared && br:clinic.rep < 2", "text": "You can walk straight now. Try not to make it my problem again." },
+    { "when": "br:clinic.rep >= 2", "text": "Back so soon? There’s work if you want it and guilt if you don’t." }
+  ],
+  "offers": [
+    {
+      "id": "offer_start_detox",
+      "label": "Admit: Drugged traveler intake",
+      "requires": { "flagsAny": ["br:clinic.unlocked"], "flagsNot": ["br:clinic.drugged_tutorial_started"] },
+      "actions": [
+        { "type": "startQuest", "questId": "clinic_detox" },
+        { "type": "setFlag", "flag": "br:clinic.drugged_tutorial_started", "op": "=", "value": true },
+        { "type": "gotoScene", "sceneId": "clinic_intake" }
+      ]
+    },
+    {
+      "id": "offer_request_antidote",
+      "label": "Request antidote dose (cost: supplies or favor)",
+      "requires": {
+        "flagsAny": ["br:clinic.unlocked"],
+        "flagsNot": ["br:clinic.antidote.shortage == true"]
+      },
+      "actions": [
+        { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 1 }
+      ]
+    },
+    {
+      "id": "offer_teach_first_aid",
+      "label": "Training: emergency first aid (high DC)",
+      "requires": { "flagsAny": ["br:clinic.unlocked"] },
+      "actions": [
+        { "type": "gotoScene", "sceneId": "clinic_training" }
+      ]
+    }
+  ]
+}

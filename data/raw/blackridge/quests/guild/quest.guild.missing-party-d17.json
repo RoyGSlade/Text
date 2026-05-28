@@ -1,0 +1,69 @@
+{
+  "id": "quest.guild.missing-party-d17",
+  "title": "Missing Party D-17",
+  "tags": [
+    "adventurer_guild",
+    "investigation"
+  ],
+  "desc": "Track a novice party last seen leaving East Gate at dusk. One survivor is rumored alive.",
+  "stages": [
+    {
+      "id": "read-ledger",
+      "text": "Read dispatch D-17 in the Guild records.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:readLedgerD17"
+        ]
+      }
+    },
+    {
+      "id": "collect-clues",
+      "text": "Collect 3 clues: bootprint cast, bloodied bandage, watch log fragment.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.guild.clue-bootprint",
+            "qty": 1
+          },
+          {
+            "itemId": "item.guild.clue-bandage",
+            "qty": 1
+          },
+          {
+            "itemId": "item.guild.clue-watchlog",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "locate-survivor",
+      "text": "Identify the survivor’s direction of flight using History or Perception at the trail fork.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:survivorD17.directionKnown"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "text": "Report to the Inspector.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:reportD17"
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 60
+        },
+        {
+          "type": "addItem",
+          "itemId": "item.guild.permit-stamp-d17",
+          "qty": 1
+        }
+      ]
+    }
+  ]
+}

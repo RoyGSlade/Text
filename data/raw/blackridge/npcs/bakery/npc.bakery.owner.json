@@ -1,0 +1,46 @@
+{
+  "id": "npc.bakery.owner",
+  "town": "blackridge",
+  "roles": [
+    "baker",
+    "morale_vendor"
+  ],
+  "buildingId": "warm_loaf_bakery",
+  "name": "Mara Kestrel",
+  "demeanor": "pragmatic,tired,quietly-kind",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "br:curfewActive",
+      "text": "Pre-dawn queue forms at the back. Night-guard snacks pay in cash, not promises."
+    },
+    {
+      "when": "!br:curfewActive",
+      "text": "If you’re after convoy gossip, the glow’s visible an hour before sunrise."
+    },
+    {
+      "when": "br:repBakersFriendly",
+      "text": "You helped feed the watch. Oven’s yours when it cools."
+    }
+  ],
+  "offerRules": [
+    {
+      "when": "true",
+      "offers": [
+        {
+          "type": "quest",
+          "questId": "quest.bakery.morale-rations"
+        },
+        {
+          "type": "quest",
+          "questId": "quest.bakery.convoy-stakeout"
+        },
+        {
+          "type": "quest",
+          "questId": "quest.bakery.ledger-heist"
+        }
+      ]
+    }
+  ]
+}

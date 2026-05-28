@@ -1,0 +1,22 @@
+{
+  "id": "toma_quill_clerk",
+  "town": "blackridge",
+  "roles": [
+    "clerk"
+  ],
+  "buildingId": "city_hall",
+  "name": "Toma Quill",
+  "demeanor": "overworked, procedural, decent",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Form 17-B, stamp G. Queue three. Don’t sigh at me."
+    },
+    {
+      "when": "tier >= known",
+      "text": "I can float one paper a day. Choose well."
+    }
+  ]
+}

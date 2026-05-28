@@ -1,0 +1,180 @@
+{
+  "pack": "blacksmith",
+  "building": {
+    "id": "grimy_anvil",
+    "town": "blackridge",
+    "name": "The Grimy Anvil",
+    "entryScene": "smith_entry",
+    "open": "07:00",
+    "close": "17:00"
+  },
+  "scenes": [
+    {
+      "id": "smith_entry",
+      "title": "The Grimy Anvil",
+      "text": [
+        "Heat ripples from the forge mouth. Braces and bolt crates squat in a tidy row. Ink-stained chits crowd the counter."
+      ],
+      "choices": [
+        { "text": "Approach the counter", "goto": "smith_counter", "visibleWhenFlag": "!br:smith.ban.active" },
+        { "text": "Check barricade rack", "goto": "smith_barricade", "visibleWhenFlag": "!br:smith.ban.active" },
+        { "text": "Slip toward the Tool Cage", "goto": "smith_tool_cage", "hiddenWhenFlag": "!br:disguise.guard && !br:smith.rep1" },
+        { "text": "Try the Ledger Office (Merchant audit)", "goto": "smith_ledger_office", "hiddenWhenFlag": "!br:disguise.merchant" },
+        { "text": "Circle to the back alley", "goto": "smith_back_alley" },
+        { "text": "Climb to the roof vent (night)", "goto": "smith_roof_vent", "timeBetween": ["21:00","05:00"] },
+        { "text": "Leave", "goto": "town_blackridge_hub" }
+      ]
+    },
+    {
+      "id": "smith_counter",
+      "title": "Counter",
+      "text": [
+        "Rulda flips pages with a nervous thumb. Space for stamped orders, space for fines that nobody wants to pay."
+      ],
+      "choices": [
+        { "text": "Tier I repair: Standard (8 cr + Iron/Kit)", "goto": "smith_do_repair_t1_std" },
+        { "text": "Tier I repair: Precision (8 cr + Iron/Kit, DC+5 for mod)", "goto": "smith_do_repair_t1_precise" },
+        { "text": "Tier II repair: Standard (18 cr + Steel+Oil)", "goto": "smith_do_repair_t2_std" },
+        { "text": "Tier II repair: Precision (18 cr + Steel+Oil, DC+6 for mod)", "goto": "smith_do_repair_t2_precise" },
+        { "text": "Tier III repair: Standard (45 cr + Masterwork)", "goto": "smith_do_repair_t3_std" },
+        { "text": "Tier III repair: Precision (30 cr + Steel×2 + Shock Lens, DC+7 for mod; permit or guard access)", "goto": "smith_do_repair_t3_precise" },
+        { "text": "Commission barricade order", "goto": "smith_barricade" },
+        { "text": "Ask about Kaelen", "goto": "smith_counter_kaelen" },
+        { "text": "Loiter after close (risk inspection)", "goto": "smith_counter_loiter", "timeBetween": ["17:00","21:00"] },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_counter_kaelen",
+      "title": "Kaelen’s Situation",
+      "text": [
+        "“Inspector Lure has him in B2. If you have lawful leverage, take it to Lyrene at the Library. If you don’t, don’t make my day worse.”"
+      ],
+      "choices": [
+        { "text": "Note the details", "actions": [{"type":"setFlag","flag":"hint.gaol.b2","value":true}], "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_counter_loiter",
+      "title": "After Close",
+      "text": [ "The floorboards complain. The street quiets into curfew." ],
+      "choices": [
+        { "text": "Keep your head down (Stealth DC 11)", "requires": { "skillCheck": {"skill":"Stealth","dc":11} }, "actions": [{"type":"incFlag","flag":"br:suspicion","value":0}], "goto": "smith_entry" },
+        { "text": "You get spotted (on fail): Ban + Heat", "requires": { "skillCheck": {"skill":"Stealth","dc":-1, "failOnly": true} }, "actions": [{"type":"setFlag","flag":"br:smith.ban.active","value":true},{"type":"incFlag","flag":"br:suspicion","value":1},{"type":"incFlag","flag":"br:smith.heist.alert","value":1}], "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t1_std",
+      "title": "Tier I Repair — Standard",
+      "text": ["You present the worn gear."],
+      "choices": [
+        { "text": "Use Iron Ingot", "requires": { "have": [{"itemId":"ingot.iron","qty":1}], "credits": 8, "skillCheck": {"skill":"Smithing","dc":8} }, "actions": [{"type":"removeItem","itemId":"ingot.iron","qty":1},{"type":"takeCredits","amount":8},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Use Repair Kit (Basic)", "requires": { "have": [{"itemId":"kit.repair_basic","qty":1}], "credits": 8, "skillCheck": {"skill":"Smithing","dc":8} }, "actions": [{"type":"removeItem","itemId":"kit.repair_basic","qty":1},{"type":"takeCredits","amount":8},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t1_precise",
+      "title": "Tier I Repair — Precision",
+      "text": ["You steady the work for a truer edge."],
+      "choices": [
+        { "text": "Use Iron/Kit (DC 13, mod True Edge I)", "requires": { "have": [{"itemId":"ingot.iron","qty":1}], "credits": 8, "skillCheck": {"skill":"Smithing","dc":13} }, "actions": [{"type":"removeItem","itemId":"ingot.iron","qty":1},{"type":"takeCredits","amount":8},{"type":"apply_mod","modId":"true_edge_i"},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t2_std",
+      "title": "Tier II Repair — Standard",
+      "text": ["Reinforcement and polish."],
+      "choices": [
+        { "text": "Steel + Oil (DC 12)", "requires": { "have": [{"itemId":"ingot.steel","qty":1},{"itemId":"oil.tool_hardening","qty":1}], "credits": 18, "skillCheck": {"skill":"Smithing","dc":12} }, "actions": [{"type":"removeItem","itemId":"ingot.steel","qty":1},{"type":"removeItem","itemId":"oil.tool_hardening","qty":1},{"type":"takeCredits","amount":18},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t2_precise",
+      "title": "Tier II Repair — Precision",
+      "text": ["You regrind, retemper, and rewrap the grip."],
+      "choices": [
+        { "text": "Steel + Oil (DC 18, mod Guarded Grip I)", "requires": { "have": [{"itemId":"ingot.steel","qty":1},{"itemId":"oil.tool_hardening","qty":1}], "credits": 18, "skillCheck": {"skill":"Smithing","dc":18} }, "actions": [{"type":"removeItem","itemId":"ingot.steel","qty":1},{"type":"removeItem","itemId":"oil.tool_hardening","qty":1},{"type":"takeCredits","amount":18},{"type":"apply_mod","modId":"guarded_grip_i"},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t3_std",
+      "title": "Tier III Repair — Standard",
+      "text": ["Masterwork attention."],
+      "choices": [
+        { "text": "Masterwork Kit (DC 15)", "requires": { "have": [{"itemId":"kit.masterwork","qty":1}], "credits": 45, "skillCheck": {"skill":"Smithing","dc":15} }, "actions": [{"type":"removeItem","itemId":"kit.masterwork","qty":1},{"type":"takeCredits","amount":45},{"type":"setFlag","flag":"quest.smith.repairs1","value":true,"when": "!flag:quest.smith.repairs1"},{"type":"setFlag","flag":"quest.smith.repairs2","value":true,"when":"flag:quest.smith.repairs1"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_do_repair_t3_precise",
+      "title": "Tier III Repair — Precision",
+      "text": ["Shock tempering walks the line between genius and indictment."],
+      "choices": [
+        { "text": "Steel×2 + Shock Lens (DC 22, mod Shock-Hardened Edge I; permit or guard req.)", "requires": { "have": [{"itemId":"ingot.steel","qty":2},{"itemId":"part.lens_shock","qty":1}], "credits": 30, "skillCheck": {"skill":"Smithing","dc":22}, "flagsAny": ["br:permit.shock_temper","br:disguise.guard"] }, "actions": [{"type":"removeItem","itemId":"ingot.steel","qty":2},{"type":"removeItem","itemId":"part.lens_shock","qty":1},{"type":"takeCredits","amount":30},{"type":"apply_mod","modId":"shock_hardened_edge_i"},{"type":"incFlag","flag":"br:suspicion","value":1,"when":"!flag:br:permit.shock_temper && flag:br:disguise.guard"}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_counter" }
+      ]
+    },
+    {
+      "id": "smith_barricade",
+      "title": "Barricade Rack",
+      "text": ["Braces, spikes, brackets, and bolt packs wait for the next wall alarm."],
+      "choices": [
+        { "text": "Assemble Watchtower Kit", "requires": { "have": [{"itemId":"barricade.brace_beam","qty":1},{"itemId":"trap.spike_strip","qty":1},{"itemId":"pack.bolts","qty":1},{"itemId":"component.bracket.lantern","qty":1}] }, "actions": [{"type":"removeItem","itemId":"barricade.brace_beam","qty":1},{"type":"removeItem","itemId":"trap.spike_strip","qty":1},{"type":"removeItem","itemId":"pack.bolts","qty":1},{"type":"removeItem","itemId":"component.bracket.lantern","qty":1},{"type":"addItem","itemId":"kit.watchtower","qty":1},{"type":"incFlag","flag":"br:gate.defense","value":1}], "goto": "smith_counter" },
+        { "text": "Submit signed work order (Sgt. Hal Voss)", "requires": { "flagsAny": ["br:order.signed.voss"], "have": [{"itemId":"kit.watchtower","qty":1}] }, "actions": [{"type":"removeItem","itemId":"kit.watchtower","qty":1},{"type":"incFlag","flag":"br:watch.morale","value":1},{"type":"setFlag","flag":"br:smith.order.pending","value":false}], "goto": "smith_counter" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_tool_cage",
+      "title": "Tool Cage",
+      "text": ["Keyed mesh and heavy jigs stare back at you."],
+      "choices": [
+        { "text": "Borrow under guard authority", "requiresFlag": "br:disguise.guard", "actions": [{"type":"addItem","itemId":"tool.pry.covert","qty":1}], "goto": "smith_entry" },
+        { "text": "Pick the lock quietly (DC 12)", "requires": { "skillCheck": {"skill":"Skulduggery","dc":12} }, "actions": [{"type":"addItem","itemId":"tool.pry.covert","qty":1},{"type":"incFlag","flag":"br:smith.heist.alert","value":1}], "goto": "smith_entry" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_ledger_office",
+      "title": "Order Ledger Office",
+      "text": ["A warded safe hums under the desk. Ledgers bleed ink from overuse."],
+      "choices": [
+        { "text": "Audit as Merchant", "requiresFlag": "br:disguise.merchant", "actions": [{"type":"setFlag","flag":"br:smith.rep1","value":true},{"type":"incFlag","flag":"br:suspicion","value":-1}], "goto": "smith_entry" },
+        { "text": "Crack the safe (Arcanum DC 14)", "requires": { "skillCheck": {"skill":"Arcanum","dc":14} }, "actions": [{"type":"addItem","itemId":"doc.ledger_extract.smith","qty":1},{"type":"incFlag","flag":"br:smith.heist.alert","value":2}], "goto": "smith_entry" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_back_alley",
+      "title": "Back Alley",
+      "text": ["Coal dust, ash bins, loose grate. Patrol boots echo here after midnight."],
+      "choices": [
+        { "text": "Probe the tunnel grate (Survival DC 10)", "requires": { "skillCheck": {"skill":"Survival","dc":10} }, "actions": [{"type":"setFlag","flag":"br:tunnel.entry.smith","value":true}], "goto": "smith_entry" },
+        { "text": "Wait for curfew patrol (risk + heat)", "timeBetween": ["21:00","05:00"], "actions": [{"type":"incFlag","flag":"br:suspicion","value":1}], "goto": "smith_entry" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_roof_vent",
+      "title": "Roof Vent",
+      "text": ["Slate slick with dew. The vent breathes forge heat."],
+      "choices": [
+        { "text": "Drop into the office (Athletics DC 10)", "requires": { "skillCheck": {"skill":"Athletics","dc":10} }, "actions": [{"type":"setFlag","flag":"br:entry.roof.smith","value":true}], "goto": "smith_ledger_office" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    },
+    {
+      "id": "smith_scrap_cache",
+      "title": "Secret Scrap Cache",
+      "text": ["Shards of tempered glass and burnt sketches under slag."],
+      "choices": [
+        { "text": "Search for blueprint scraps (Perception DC 11)", "requires": { "skillCheck": {"skill":"Perception","dc":11} }, "actions": [{"type":"addItem","itemId":"scrap.sunlight_blueprint","qty":1},{"type":"setFlag","flag":"br:lantern.sunlight.parts","value":true},{"type":"setFlag","flag":"br:smith.arrestClock.started","value":true},{"type":"setFlag","flag":"br:smith.arrestClock.ticks","value":0}], "goto": "smith_entry" },
+        { "text": "Back", "goto": "smith_entry" }
+      ]
+    }
+  ]
+}

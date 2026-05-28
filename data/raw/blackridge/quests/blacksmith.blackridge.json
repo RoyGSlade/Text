@@ -1,0 +1,59 @@
+{
+  "pack": "blacksmith.blackridge",
+  "quests": [
+    {
+      "id": "blacksmith:perfect_hide",
+      "tags": [
+        "role:blacksmith",
+        "story",
+        "town:blackridge"
+      ],
+      "title": "The Perfect Hide",
+      "desc": "Hunt an alpha beast. Kaelen can armor the Guard with its hide.",
+      "requirements": {
+        "minNpcTier": "friendly"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "kill",
+            "target": "alpha_beast",
+            "qty": 1
+          }
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "gather",
+            "itemId": "alpha_beast_hide",
+            "qty": 1
+          }
+        }
+      ],
+      "rewards": {
+        "item": "custom_guard_armor",
+        "rep": [
+          {
+            "target": "npc:kaelen_blacksmith",
+            "amount": 20
+          },
+          {
+            "target": "faction:red_guard",
+            "amount": 15
+          }
+        ],
+        "unlockQuest": "blacksmith:scrap_metal"
+      },
+      "instantiate": {
+        "template": "spawn_dungeon",
+        "params": {
+          "poiTemplate": "heart_forest",
+          "nearTown": "blackridge",
+          "radiusCells": 3
+        }
+      },
+      "weight": 2
+    }
+  ]
+}

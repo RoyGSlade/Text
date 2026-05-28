@@ -1,0 +1,22 @@
+{
+  "id": "kett_bram_courier",
+  "town": "blackridge",
+  "roles": [
+    "courier"
+  ],
+  "buildingId": "city_hall",
+  "name": "Kett Bram",
+  "demeanor": "nosy, fast, subversive",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Seals, stamps, gossip. Pick two."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Wax molds travel faster than truth."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "pack": "blacksmith",
+  "heists": [
+    {
+      "id": "smith_order_ledger_safe",
+      "name": "Order Ledger Safe",
+      "space": "Ledger Office",
+      "windows": [
+        { "timeBetween": ["07:00","17:00"], "guard": "clerk present", "dcMods": { "Skulduggery": 2 } },
+        { "timeBetween": ["21:00","05:00"], "guard": "patrol sweep", "dcMods": { "Stealth": 2 } }
+      ],
+      "layers": [
+        { "type": "lock", "skill": "Skulduggery", "dc": 12, "bypass": ["key_drawer", "tool.pry.covert"] },
+        { "type": "glyph", "skill": "Arcanum", "dc": 14, "bypass": ["glyph_dispel","oil_quiet"] },
+        { "type": "floor_squeak", "skill": "Stealth", "dc": 11, "bypass": ["oil_quiet"] }
+      ],
+      "risks": {
+        "fail": [
+          { "type": "flag", "key": "br:smith.heist.alert", "amount": 2 },
+          { "type": "flag", "key": "br:suspicion", "amount": 1 }
+        ]
+      },
+      "rewards": [
+        { "type": "item", "id": "doc.ledger_extract.smith", "qty": 1 }
+      ]
+    },
+    {
+      "id": "smith_tool_cage_lift",
+      "name": "Tool Cage Lift",
+      "space": "Tool Cage",
+      "layers": [
+        { "type": "lock", "skill": "Skulduggery", "dc": 12, "bypass": ["guard_access"] }
+      ],
+      "risks": { "fail": [ { "type": "flag", "key": "br:smith.heist.alert", "amount": 1 } ] },
+      "rewards": [ { "type": "item", "id": "tool.pry.covert", "qty": 1 } ]
+    }
+  ]
+}

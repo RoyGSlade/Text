@@ -1,0 +1,30 @@
+{
+  "id": "lyrene_holt_chief",
+  "town": "blackridge",
+  "roles": [
+    "librarian",
+    "archivist"
+  ],
+  "buildingId": "library",
+  "name": "Lyrene Holt",
+  "demeanor": "stern, fair, quietly rebellious",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Shelves are public. Truth is not. Choose carefully."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Bring me pages that breathe, not pamphlets that lie."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "town:blackridge",
+      "building:library"
+    ],
+    "limitPerVisit": 2
+  }
+}

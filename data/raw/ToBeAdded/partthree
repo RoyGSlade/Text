@@ -1,0 +1,102 @@
+11) Lich Gauntlet & Temples
+11.1 Lich Gauntlet (5 levels)
+
+Forecourt at ridge/ruin boundary; shortcut exits unlock after L2 and L4.
+
+Lore links per level: L1 ledger scraps, L2 cult hymn tablets, L3 merchant cargo tags, L4 djinn contract shard, L5 nexus glyph.
+
+Kill Lich → night roamers −10%, clinic supply stable 7 days.
+
+11.2 Five God-Temples
+
+Savi (Speed/Discipline): salt edge; timed plates; reward inscription.savi.canon + mantle clue.
+
+Measure (Justice/Trade): near Weight route; weigh-truth puzzle; reward tablet.measure.ledger (+success vs. Hareth).
+
+Mercy (Health/Balance): oasis rim; triage under time; reward tonic upgrade + clinic favor.
+
+Horizon (Travel/Wayfinding): ridge with sightlines; mirror alignment; reward +1 Navigation forecast cell + lens cache.
+
+Silence (Truth vs. Noise): embedded ruin with baffles; sound-pattern memory; reward inscription.silence.seal (once/day break Cult chant).
+
+Placement constraints: min 5-cell separation, biome placement mix as above.
+
+12) Encounter Math
+12.1 Baselines (overworld)
+
+Day: dunes 12%, ridges 8%, salt 14%, ruins 10%, oasis 6%
+
+Night: dunes 45%, ridges 30%, salt 55%, ruins 40%, oasis 20%
+
+12.2 Modifiers
+
+Storm: +20% (cap 85%); adds storm entries.
+
+Stability: each step below 0 → +5% in adjacent outskirts; above 0 → −5%.
+
+Cult Pressure ≥60: +5% in ruins and market-adjacent tiles (cult mobs).
+
+Caravan track: −5% day (guards), +10% night (ambush).
+
+Oasis: −5% day/−10% night if Stability ≥ +1; inverted if ≤ −2.
+
+Named miniboss patrol: 5% per night segment within 2 cells of patrol graph.
+
+12.3 Spawn weights (samples)
+
+dune_sea day: scarab 30, stinger 25, mirage 10, sandworm 8, patrol 5, nothing 22
+
+dune_sea night: sandworm 20, stinger 25, sandwraith 15, patrol 10, bone_choir 5, nothing 25
+
+rocky_ridge day: scorpion 20, bone_choir 10, patrol 10, nothing 60
+
+obsidian night: wyvern 8, glassborn 22, wraith 10, patrol 10, nothing 50
+
+ruin night: bone_choir 20, tarbound 15, cult cell 10, assassin op 5, nothing 50
+
+salt night: sandlord patrol 5, wraith 15, stinger 15, nothing 65
+
+13) Orion: Lore Trail and Public Debate
+13.1 Canon flags (need any 2)
+
+lore.savi.canon=1 (Savi inscription): “Speed as preparation.”
+
+lore.silence.seal=1 (oath seal).
+
+lore.measure.ledger=1 (Scales tablet condemning falsified ledgers).
+
+13.2 Material proofs (need any 1)
+
+item.ledger.extract (Deyla’s ledger extract: “glory powder,” djinn essence to Orion proxies).
+
+item.cargo.tag (L3 Gauntlet, joint shipments to “OO Ministries”).
+
+item.mock_reliquary (Temple of Silence prop casing identical to Orion’s props).
+
+13.3 Debate event: “Sermon at the Salt Flat”
+
+Skill chain: Rhetoric/Insight/Lore.
+
+Win: track.cultPressure −20, Stability +1, Cult spawn weights reduced 3 days; Orion flees or unlocks atonement chain.
+
+Lose: 24h harassment events; palace DCs +2; retry with missing proof.
+
+14) Economy & Items Interaction
+
+Deyla’s Ledger:
+To Matriarchy → one-time Seizure Writs to legally seize a Merchant warehouse.
+To Merchants → −15% Black Market fees for 48h; public prices +5% during that window if Stability < 0.
+
+Respirator filters: durability ticks; refills via miner co-op vendor (fair) or Deyla (markup).
+
+Cooling Amulet: cross-biome env.cold_resist=1 tag. Keep it relevant.
+
+15) City Perimeter Hooks (grid meets politics)
+
+Adjacent to gate cells: (1,7), (1,8), (1,9).
+
+Stability ≤ −2: +10% night ambush on those cells (guards slack/bought).
+
+Stability ≥ +2: −10% night encounter on those cells (patrols).
+
+MPI ≤ 25: eviction caravans leave gate; repeatable escort/sabotage POIs spawn on nearby tracks.

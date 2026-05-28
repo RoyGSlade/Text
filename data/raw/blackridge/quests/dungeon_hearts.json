@@ -1,0 +1,81 @@
+{
+  "pack": "dungeon_hearts",
+  "quests": [
+    {
+      "id": "heart:forest",
+      "tags": ["dungeon", "biome:forest"],
+      "title": "Purify the Forest Heart",
+      "desc": "Locate and shatter the heart festering near the North Gate.",
+      "stages": [
+        { "id": 0, "completionCheck": { "flagsAny": ["br:dungeon:forest:heart_destroyed"] } }
+      ],
+      "rewards": { "credits": 100 },
+      "instantiate": {
+        "template": "spawn_dungeon",
+        "params": {
+          "poiTemplate": "heart_forest",
+          "nearTown": "blackridge",
+          "radiusCells": 3
+        }
+      },
+      "weight": 1
+    },
+    {
+      "id": "heart:desert",
+      "tags": ["dungeon", "biome:desert"],
+      "title": "Quench the Dune Core",
+      "desc": "Destroy the burning heart near the West Gate dunes.",
+      "stages": [
+        { "id": 0, "completionCheck": { "flagsAny": ["br:dungeon:desert:heart_destroyed"] } }
+      ],
+      "rewards": { "credits": 100 },
+      "instantiate": {
+        "template": "spawn_dungeon",
+        "params": {
+          "poiTemplate": "heart_desert",
+          "nearTown": "blackridge",
+          "radiusCells": 3
+        }
+      },
+      "weight": 1
+    },
+    {
+      "id": "heart:jungle",
+      "tags": ["dungeon", "biome:jungle"],
+      "title": "Scorch the Canopy Growth",
+      "desc": "Burn out the fungal heart past the Southeast Gate.",
+      "stages": [
+        { "id": 0, "completionCheck": { "flagsAny": ["br:dungeon:jungle:heart_destroyed"] } }
+      ],
+      "rewards": { "credits": 100 },
+      "instantiate": {
+          "template": "spawn_dungeon",
+          "params": {
+            "poiTemplate": "heart_jungle",
+            "nearTown": "blackridge",
+            "radiusCells": 3
+          }
+      },
+      "weight": 1
+    },
+    {
+      "id": "heart:plains",
+      "tags": ["dungeon", "biome:plains"],
+      "title": "Silence the Cairn Beat",
+      "desc": "Crush the buried heart beyond the Southwest Gate.",
+      "stages": [
+        { "id": 0, "completionCheck": { "flagsAny": ["br:dungeon:plains:heart_destroyed"] } }
+      ],
+      "rewards": { "credits": 100 },
+      "instantiate": {
+          "template": "spawn_dungeon",
+          "params": {
+            "poiTemplate": "heart_plains",
+            "nearTown": "blackridge",
+            "radiusCells": 3
+          }
+      },
+      "weight": 1
+    }
+  ]
+}

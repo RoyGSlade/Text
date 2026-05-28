@@ -1,0 +1,266 @@
+6) Questlines
+6.1 Entry: The Troupe’s Escort
+
+Rescue performers to gain pass.queen_intro. Fail path: Underground/miner scramble; distrust flags.
+
+6.2 The Queen’s Illness (major)
+
+A) Cure and Expose: trace taint → flip Jorren → get ledger (steal/bribe) → confront Velira at bathhouse.
+Result: Stability +2, Matriarchy ++, Merchant −, rare-cure queue opens, palace fast lane; illness.resolution=cured.
+
+B) Too Late / Fail: wrong lead/missed windows → regent (Selinne or merchant proxy).
+Result: Stability −2, Merchant ++, Cult +, nobles +20% prices, curfews; illness.resolution=dead.
+
+C) Complicity: assist merchants with fake “stabilizer”; remove loyal duchess via Assassin contract.
+Result: Underground +, Merchant +, permanent −100 cap on Matriarchy ceiling; archive key; illness.resolution=regent.
+
+6.3 Merchant War (major)
+
+Weight of a City: bug scales → MPI +15, Stability +1.
+
+Pay Dirt: broker miner co-op with Mira → co-op vendor, MPI +20, Merchant −.
+
+The Long Buyout: help Hareth secure 3 warehouses → MPI −25, Merchant +, small Underground + via kickbacks.
+
+6.4 Black Market & Guilds (major, optional)
+
+Entry via rune + fee or Orlen vouch after “Seized Home.”
+
+Contracts have a 48h counter-contract window from opposing factions.
+
+Silent Skylight: remove palace archivist (30% later hit on you).
+
+Red Ledger: steal Merchant assay ledger; deliver to Deyla (Underground +) or Matriarchy (Matriarchy +, Underground −).
+
+Thieves Charter: “People’s Cut” redirects 30% heists to village relief; fewer citizen thefts, more merchant raids.
+
+6.5 Cult of Orion (major, optional)
+
+False Blessing: +2 initiative then “Speed Debt” skips one action for 3 encounters.
+
+Exposé path: retrieve temple records → public debate mini-challenge.
+Win: cultPressure −20, Stability +1, access to genuine temple lore.
+Lose: 24h harassment; palace DCs +2; retry after acquiring missing proof.
+
+6.6 Street Stories (modular by Stability)
+
+≤ −2: Bread Riot, Clinic Queue Stampede, Eviction Night.
+
+−1..+1: Sick Child, Seized Home, Urchin Band.
+
+≥ +2: Community Feast, Volunteer Patrols, Surgeons need reagents.
+
+7) Hazards, Night Pressure, Dungeon Tie-ins
+
+Sandstorms: Blindness, Sand Lung stacks; storms spike track.sandShift +40.
+
+Mitigations: goggles, respirator (filters wear), storm tent.
+
+Night: 15% → 75% encounter range; named miniboss patrols.
+
+Gauntlet clear (Lich King L5): reduce city night roamers by 10%; clinic supply stabilizes for 7 in-game days; merchants pivot to “security fees” unless blunted politically.
+
+8) Monsters (unique roster)
+
+Overworld
+
+mob.sandworm.alpha (T3, deep dunes): tremor ambush; drops mat.sandworm_sac, mat.sandsteel_ore, etc.
+
+mob.scarab.glassswarm (T2, ruins/oases): flash Blindness; drops mat.desert_glass, comp.refraction_lens.
+
+mob.scorpion.stinger_major (T2, dunes): venom stacks; antivenom pre-dose matters.
+
+mob.mirage.stalker (T2, heat haze): illusion clones; counter with Clear Sight drops.
+
+Undead / Gauntlet
+
+mob.mummy.tarbound (T2, L2): tar slow; ignites → comp.resin_core.
+
+mob.sand_elemental.glassborn (T3, L3/L4): reflect when “glassed”; drops comp.vitrified_heart.
+
+mob.wyvern.fireobsidian (T3 elite, caverns): glasses sand tiles; drops mat.obsidian_shard, mat.wyvern_membrane.
+
+mob.bone_choir (T2, catacombs): chorus shriek debuff.
+
+Djinn / Cult
+
+mob.djinn.contractor (T3, talk-first): wish temptations; drops essence.djinn.
+
+mob.sandwraith.tithe (T2, roaming night): steals equipped consumables; lantern counters.
+
+mob.golem.crystal.loadbearer (T3, Weight Station events): powered by assay cores.
+
+Named night minibosses (5% patrol tiles)
+
+boss.nightwidow.kethra → schema.venom_skein, mat.blackweb
+
+boss.sandlord.rachid → weapon.unique.sandglass_halberd shard
+
+boss.bookman → comp.cipher_plate (+Matriarchy evidence rolls 24h)
+
+boss.malkhet.whispered → essence.djinn.pure, schema.mirage_mantle
+
+boss.censor.tar → schema.tar_seal_trap, comp.resin_core.pure
+
+Drop/balance knobs
+
+Elite mats 10–18% drop; boss unique shards 25%.
+
+Encounter cap 85% after modifiers.
+
+9) Crafting, Gear, Medicines
+9.1 Stations & Tags
+
+Glassworks: ["glass","heat"] t1–3
+
+Forge: ["forge","heat"] t1–3
+
+Apothecary: ["alchemist","mortar"] t1–3
+
+Arcane Loom: ["loom","arcane"] t1–2
+
+Tinkertable: ["tinker","precision"] t1–2
+
+9.2 Materials & Components
+
+Materials: mat.sandsteel_ore, mat.desert_glass, .pure, mat.obsidian_shard, mat.wyvern_membrane, mat.carapace_plate, mat.chitin_plate
+
+Components: comp.resin_core, .pure, comp.refraction_lens, comp.vitrified_heart, comp.assay_core, comp.wraithsilk
+
+Essences: essence.djinn, .pure, essence.flame_sac
+
+9.3 Blueprints (examples; keep detection where noted)
+
+Head/Face
+
+bp.respirator_mask.t1 → item.respirator_mask.t1
+Prevents Sand Lung; filter durability 100 (−10 per storm, −5 per worm fight). Legal.
+
+bp.sandglass_goggles.t2 → Blindness immunity; illusion Perception buff. Legal.
+
+Body/Cloak
+
+bp.mirage_mantle.t3 → 1/encounter free Disengage; advantage vs. Mirage Stalker. Suspicious in Noble (10% detection).
+
+bp.wyvernscale_hauberk.t3 → env.heat_resist=1, fire resist. Legal.
+
+Weapons
+
+bp.sandsteel_scimitar.t2 → +crit vs. “glassed.” Legal.
+
+bp.sandglass_halberd.t3 (boss shard) → line attack glassing sand; restricted in Queen’s Circle.
+
+Tools/Consumables
+
+bp.storm_tent.single_use → safe wait 5 real min. Legal.
+
+bp.tar_bomb.t2 → slow field; ignites into heavy DoT. Contraband in Noble (25%).
+
+bp.glass_caltrops → Bleed + anti-charge. Gray.
+
+Mods/Enchants
+
+bp.wishbound_mod.t3 → pick minor boon; stacking >1 adds hidden “Speed Debt” counter. Cult aggro chance.
+
+Craft timings: T1 15–30m, T2 45–90m, T3 2–3h; Rush doubles fail chance.
+Cooling Amulet: cross-biome tag gearTag.env.cold_resist=1 future-proofed.
+
+9.4 Medicines (status-tight)
+
+med.sand_lung_tonic.t2 → remove 1 Sand Lung; +inhalant resist 24h; −1 Stamina regen 30m.
+
+med.heat_buffer.t1 → ignore first 2 heat exhaustion ticks, 6h; thirst spike on expire.
+
+med.clear_sight_drops.t1 → cure Blindness; +illusion Perception 30m; light sensitivity side.
+
+med.antivenom.universal.t2 → cures Poison; +Poison Resist 1h; −5% max Stamina 15m.
+
+med.anti_hex_balm.t3 → remove minor curse; weaken major 1 tier; Cult rep nudge − if witnessed.
+
+med.stimulant.sand_dash.t2 → +Initiative/Sprint 20m; 20% Crash for 10m.
+
+med.sedative.nightwatch.t1 → reduce Fear; steadies night ambush rolls 30m; small −Accuracy.
+
+med.hydration_salts.t1 → clear 1 Exhaustion; block next tick 2h.
+
+med.purify.talisman.t3 (Arcane Loom) → 1/day Purify; 7 uses per charge; Cult detection tick.
+
+9.5 Sets
+
+Desert Operative (T2): respirator, goggles, scimitar, caltrops → dunes evasion vs. burrowers; caltrops extra bleed on scarabs/scorpions.
+
+Mirage Walker (T3): mantle, wishbound mod, clear sight → illusion checks advantaged; 1/day auto-cancel a clone.
+
+Wyvernbreaker (T3): hauberk, halberd, heat buffer → fire zones shrink 25%; halberd +1 line reach on glassed tiles.
+
+10) Grid & Generation
+10.1 Grid model
+
+Size: default 16×16 cells.
+
+Cell schema: id, x,y, terrainTag, elevation, cover, sandShiftable, travelCost, visibility, hazardWeight, encounterTier, poiId, spawnTableId
+
+Terrain tags: dune_sea, rocky_ridge, obsidian_field, oasis_basin, ruin_cluster, salt_flat, caravan_track
+
+Movement costs: dune +0.5, ridge +0.25, obsidian +0.75, salt −0.25, caravan −0.5 (base 1)
+
+Visibility: base 3 cells; storms reduce to 1.
+
+10.2 Navigation & Sandshift
+
+rollForecast() reveals storm corridor 2–4 cells ahead; highlights low-cost routes.
+
+track.sandShift: storms +40; every +25 triggers swaps for sandShiftable corridors; oases/temples/gauntlet fixed.
+
+10.3 Fast travel
+
+Unlock at Oases, Watchtowers, Gauntlet forecourt; night use requires Stability ≥ −1.
+
+10.4 Generation pipeline (seedable)
+
+Seed: e.g., ALACAI-SEED-7F.
+
+Inner 8×8: dunes/ridges 60/40.
+
+East wedge: obsidian_field near wyvern caverns.
+
+Oasis pockets south/northwest (2–3 cells each).
+
+Two salt_flat lanes as fast corridors.
+
+City gate on west edge; Outskirts one cell east.
+
+Caravan tracks 2–3 winding routes gate→oases→Weight spur.
+
+Gauntlet forecourt: 6–10 cells from gate, ridge/ruin boundary, ≥4 cells from any temple.
+
+Five temples: min 5-cell separation; one near obsidian, one dunes, one oasis rim, one embedded ruin, one salt edge.
+
+Spawn minor POIs: watchtowers, bandit camps, scavenger pits, collapsed tunnels.
+
+Assign spawnTableId by terrain/region; mark miniboss patrol graph along open terrain and salt flats.
+
+Bake travelCost/cover/hazardWeight.
+
+10.5 Example seed anchors (for QA)
+
+Gate (0,8) → Outskirts (1,8)
+
+Caravan tracks: (1,8)→(4,8)→(6,9)→(9,11); and (1,8)→(5,6)→(8,5)
+
+Oases: (6,9), (12,3), (10,14)
+
+Obsidian field: centered (12,10)
+
+Gauntlet forecourt: (9,11)
+
+Temples:
+Savi (4,13), Measure (7,7), Mercy (6,9 south), Horizon (3,4), Silence (11,12)
+
+Watchtowers: (5,10), (8,7)
+
+Bandits: (2,6) dunes off track
+
+Wyvern cavern: (13,10)
+
+Hidden tunnel: (10,12) → (7,9)

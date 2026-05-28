@@ -1,0 +1,226 @@
+{
+  "pack": "library_lanterns",
+  "quests": [
+    {
+      "id": "lib:lanterns:research_start",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "lantern"
+      ],
+      "title": "Light The Way",
+      "desc": "Reverse-engineer the merchant sun-lantern monopoly from Arcanum notes and ledgers.",
+      "requirements": {
+        "flagsAny": [
+          "fal:dossier_taken"
+        ],
+        "flagsNot": [
+          "lib:lantern_research_started"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_read_sources",
+          "text": "Study the Arcanum dossier and decoded shipments.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "doc.arcanum_five_sources",
+                "qty": 1
+              },
+              {
+                "itemId": "ledger.shipments.decoded",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2_visit_lab",
+          "text": "Use the Library Workshop to test sun-salt reactions (Science or Technology).",
+          "completionCheck": {
+            "flagsAny": [
+              "player_visited:bldg:blackridge:library:workshop"
+            ]
+          }
+        },
+        {
+          "id": "s3_unlock_blueprint",
+          "text": "Draft a safe portable design.",
+          "onComplete": [
+            {
+              "type": "addItem",
+              "itemId": "blueprint.sunlantern",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:lantern_research_started",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "blueprint.sunlantern",
+                "qty": 1
+              }
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "lyrene_holt_chief"
+        }
+      },
+      "weight": 10
+    },
+    {
+      "id": "lib:lanterns:bring_to_blacksmith",
+      "tags": [
+        "town:blackridge",
+        "lantern",
+        "blacksmith"
+      ],
+      "title": "Prototype At The Forge",
+      "desc": "Bring the blueprint to the Blacksmith to fabricate a prototype.",
+      "requirements": {
+        "flagsAny": [
+          "lib:lantern_research_started"
+        ],
+        "flagsNot": [
+          "lib:lantern_proto_forged"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_visit_blacksmith",
+          "text": "Visit the Blacksmith with the blueprint.",
+          "completionCheck": {
+            "flagsAny": [
+              "player_visited:bldg:blackridge:blacksmith:rooftop_intro"
+            ]
+          }
+        },
+        {
+          "id": "s2_forge",
+          "text": "Provide required materials for the prototype.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "mat.polished_glass",
+                "qty": 2
+              },
+              {
+                "itemId": "mat.brass_frame",
+                "qty": 1
+              },
+              {
+                "itemId": "mat.sun_salt",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s3_consequences",
+          "text": "News spreads. Consequences follow.",
+          "onComplete": [
+            {
+              "type": "addItem",
+              "itemId": "gear.sunlantern",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "lib:lantern_proto_forged",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "brg:blacksmith_arrested",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "gear.sunlantern",
+                "qty": 1
+              }
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "lyrene_holt_chief"
+        }
+      },
+      "weight": 10
+    },
+    {
+      "id": "lib:lanterns:reassure_lyrene",
+      "tags": [
+        "town:blackridge",
+        "building:library",
+        "story"
+      ],
+      "title": "Pages With Teeth",
+      "desc": "Bring hopeful books and full pages to Lyrene to restore her nerve.",
+      "requirements": {
+        "flagsNot": [
+          "lib:lyrene_contacted_home"
+        ]
+      },
+      "stages": [
+        {
+          "id": "s1_bring_books",
+          "text": "Deliver any two distinct lore books or full pages to the Library.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "book.propaganda_quotes",
+                "qty": 1
+              },
+              {
+                "itemId": "book.banned_histories",
+                "qty": 1
+              }
+            ]
+          }
+        },
+        {
+          "id": "s2_trigger_visit",
+          "text": "Lyrene will contact you at home.",
+          "onComplete": [
+            {
+              "type": "setFlag",
+              "flag": "lib:lyrene_contacted_home",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "completionCheck": {
+            "flagsAny": [
+              "lib:lyrene_contacted_home"
+            ]
+          }
+        }
+      ],
+      "instantiate": {
+        "template": "quest_dialogue_craft",
+        "params": {
+          "viaNpc": "lyrene_holt_chief"
+        }
+      },
+      "weight": 6
+    }
+  ]
+}

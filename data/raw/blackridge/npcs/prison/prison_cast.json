@@ -1,0 +1,14 @@
+{
+  "id": "prison_cast",
+  "town": "blackridge",
+  "npcs": [
+    { "id": "warden_isola_garr", "roles": ["warden", "antagonist_order"], "buildingId": "gaol_blackridge", "name": "Warden Isola Garr", "demeanor": "precise, unsentimental, rule-bound", "notes": "Goal: Maintain absolute order, even at a high moral cost. Hates the messiness of Veit's corruption and the inmates' defiance." },
+    { "id": "deputy_jor_veit", "roles": ["deputy_warden", "antagonist_corruption"], "buildingId": "gaol_blackridge", "name": "Deputy Jor Veit", "demeanor": "pragmatic, quietly corrupt, ambitious", "notes": "Goal: Seize control of the prison's illicit economy. Views Garr as a naive obstacle and the inmates as customers." },
+    { "id": "scribe_lyd_ink", "roles": ["records_clerk", "pawn"], "buildingId": "gaol_blackridge", "name": "Lyd 'Ink' Marven", "demeanor": "pedantic, anxious, bribe-curious", "notes": "Caught between Garr's strict audits and Veit's threats. A key weak point in the prison's bureaucracy." },
+    { "id": "gaoler_husk_bram", "roles": ["gaoler", "moral_compass"], "buildingId": "gaol_blackridge", "name": "Husk Bram", "demeanor": "tired, superstitious, oddly kind", "notes": "Disgusted by the corruption and cruelty. Can be convinced to look the other way for a good cause, providing access and information." },
+    { "id": "smuggler_knuck_sela", "roles": ["inmate_fixer", "antagonist_chaos"], "buildingId": "gaol_blackridge", "name": "\u201cKnuck\u201d Sela", "demeanor": "sardonic, practical, price-forward", "notes": "Goal: Survive and profit. Manages inmate favors and contraband. If tension gets high enough, she can orchestrate a full-scale riot." },
+    { "id": "keeper_adept_lyrene", "roles": ["library_advocate", "external_ally"], "buildingId": "gaol_blackridge", "name": "Lyrene Holt", "demeanor": "calm, incisive", "notes": "The player's primary channel for exposing illegal prison activities to the outside world, triggering the 'Legal' outcomes." },
+    { "id": "prisoner_maro_ink", "roles": ["political_prisoner", "asset"], "buildingId": "gaol_blackridge", "name": "Maro 'Ink' Dast", "demeanor": "paranoid, exacting", "notes": "Holds evidence against a powerful Merchant Guild official. Getting him out is a major side quest with city-wide implications." },
+    { "id": "prisoner_tams_vekh", "roles": ["inmate_blackcells", "ghost"], "buildingId": "gaol_blackridge", "name": "Tams Vekh", "demeanor": "erased, whispering", "notes": "The living proof of the Black Cells. Rescuing them provides undeniable evidence against Warden Garr." }
+  ]
+}

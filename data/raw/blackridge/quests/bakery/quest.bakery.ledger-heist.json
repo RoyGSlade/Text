@@ -1,0 +1,64 @@
+{
+  "id": "quest.bakery.ledger-heist",
+  "title": "Crumbs in the Ledger",
+  "tags": [
+    "warm_loaf_bakery",
+    "heist",
+    "censorship",
+    "merchant-guild"
+  ],
+  "desc": "Slip into the Bakery’s backroom to copy ration stamps and pull order slips tied to convoy routes.",
+  "stages": [
+    {
+      "id": "case-bakery",
+      "text": "Case the Bakery after midnight and map patrols.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.bakery.cased"
+        ]
+      }
+    },
+    {
+      "id": "copy-stamp",
+      "text": "Create a wax copy of the ration stamp.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.bakery.stampCopied"
+        ]
+      }
+    },
+    {
+      "id": "steal-slips",
+      "text": "Steal order slips referencing lantern shipments.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.bakery.order-slips",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "exit-clean",
+      "text": "Exit without triggering an arrest.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.bakery.exfiltrated"
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 120
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:merchantFixing",
+          "op": "=",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

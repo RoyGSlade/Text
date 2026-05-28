@@ -1,0 +1,309 @@
+{
+  "scenes": {
+    "gate:blackridge:north": {
+      "text": "North Gate. Pines beyond, gold light within. Two watchmen and a ledger that weighs more than law.",
+      "choices": [
+        {
+          "text": "Show patrol badge",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.patrol",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:forest:0,0"
+        },
+        {
+          "text": "Present commission permit",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:forest:0,0"
+        },
+        {
+          "text": "Present forged escort writ",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.writ_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:forest:0,0"
+        },
+        {
+          "text": "Bribe the clerk (50c)",
+          "actions": [
+            {
+              "type": "addCredits",
+              "amount": -50
+            },
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:forest:0,0"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "gate:blackridge:west": {
+      "text": "West Gate faces a pale horizon. Heat bakes the ledger’s wax.",
+      "choices": [
+        {
+          "text": "Show patrol badge",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.patrol",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:desert:0,0"
+        },
+        {
+          "text": "Present commission permit",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:desert:0,0"
+        },
+        {
+          "text": "Present forged escort writ",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.writ_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:desert:0,0"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "gate:blackridge:east": {
+      "text": "East Gate. Air tastes like brine and promises.",
+      "choices": [
+        {
+          "text": "Show patrol badge",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.patrol",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:coast:0,0"
+        },
+        {
+          "text": "Present commission permit",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:coast:0,0"
+        },
+        {
+          "text": "Present forged escort writ",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.writ_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:coast:0,0"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "gate:blackridge:southeast": {
+      "text": "Southeast Gate. Humidity tries the locks.",
+      "choices": [
+        {
+          "text": "Show patrol badge",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.patrol",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:jungle:0,0"
+        },
+        {
+          "text": "Present commission permit",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:jungle:0,0"
+        },
+        {
+          "text": "Present forged escort writ",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.writ_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:jungle:0,0"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "gate:blackridge:southwest": {
+      "text": "Southwest Gate overlooks quiet mounds and loud grass.",
+      "choices": [
+        {
+          "text": "Show patrol badge",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.patrol",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:plains:0,0"
+        },
+        {
+          "text": "Present commission permit",
+          "requires": {
+            "flagsNot": [
+              "fal:curfew"
+            ],
+            "have": [
+              {
+                "itemId": "permit.commission",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "cell:plains:0,0"
+        },
+        {
+          "text": "Present forged escort writ",
+          "requires": {
+            "have": [
+              {
+                "itemId": "doc.writ_forged",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "cell:plains:0,0"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    }
+  }
+}

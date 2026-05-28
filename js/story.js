@@ -59,8 +59,11 @@ window.IAG_STORY = (function() {
           label: "Attempt to hack the Locked Relay Door",
           next: "locked_door",
           // Requirements preview
-          requires: { flag: "has_bypass_chip", errorMsg: "You need a bypass chip or mechanic credentials to interact with this locked system." },
-          effects: [{ type: "log", value: "You used the Cracked Data Chip as a bypass key!" }]
+          requires: { worldFlag: "has_bypass_chip", errorMsg: "You need a bypass chip or mechanic credentials to interact with this locked system." },
+          effects: [
+            { type: "setQuestStatus", questId: "investigate_relay", value: "completed" },
+            { type: "log", value: "You used the Cracked Data Chip as a bypass key!" }
+          ]
         },
         {
           label: "Return to the central Town Square to search for answers",
@@ -68,7 +71,7 @@ window.IAG_STORY = (function() {
         }
       ]
     },
-
+ 
     mechanic_npc: {
       id: "mechanic_npc",
       title: "Void Mechanic: Garin",
@@ -82,7 +85,7 @@ window.IAG_STORY = (function() {
           requires: { item: "Cracked Data Chip", errorMsg: "You do not have a data chip in your inventory." },
           effects: [
             { type: "removeItem", value: "Cracked Data Chip" },
-            { type: "setFlag", key: "has_bypass_chip", value: true },
+            { type: "setWorldFlag", flag: "has_bypass_chip", value: true },
             { type: "addCredits", value: 50 },
             { type: "log", value: "Garin repaired the chip, configured a security key, and rewarded you with 50 credits!" }
           ]
@@ -93,7 +96,7 @@ window.IAG_STORY = (function() {
         }
       ]
     },
-
+ 
     locked_door: {
       id: "locked_door",
       title: "Relay Control Room",
@@ -112,20 +115,39 @@ window.IAG_STORY = (function() {
       ]
     }
   };
-
+ 
   // Helper to get scene by ID
   function getScene(id) {
     return scenes[id] || scenes.arrival;
   }
-
+ 
   // Applies side-effects when selecting a choice
   function applyEffect(state, effect) {
+    if (!effect || !effect.type) {
+      console.warn("Invalid effect applied: null or missing type attribute", effect);
+      return;
+    }
+
+    // Keep track of last executed effect in state for dev drawer debug
+    state.lastEffect = effect;
+
     switch (effect.type) {
       case "log":
         window.IAG_STATE.addHistoryLog(effect.value);
         break;
-      case "setFlag":
-        state.questFlags[effect.key] = effect.value;
+      case "setWorldFlag":
+        if (!effect.flag) {
+          console.error("setWorldFlag effect is missing 'flag' key:", effect);
+          break;
+        }
+        state.worldFlags[effect.flag] = effect.value;
+        break;
+      case "setQuestStatus":
+        if (!effect.questId) {
+          console.error("setQuestStatus effect is missing 'questId' key:", effect);
+          break;
+        }
+        state.questFlags[effect.questId] = effect.value;
         break;
       case "removeItem":
         const idx = state.inventory.indexOf(effect.value);
@@ -142,26 +164,40 @@ window.IAG_STORY = (function() {
       case "resetGame":
         window.IAG_STATE.initializeNewGame();
         break;
+      default:
+        console.warn(`Unknown effect type encountered: ${effect.type}`, effect);
     }
   }
-
+ 
   // Evaluates if a choice option is selectable based on current state
   function checkRequirement(state, requires) {
     if (!requires) return { satisfied: true };
-
+ 
     if (requires.item) {
       const satisfied = state.inventory.includes(requires.item);
       return { satisfied, errorMsg: requires.errorMsg };
     }
-
-    if (requires.flag) {
-      const satisfied = !!state.questFlags[requires.flag];
+ 
+    if (requires.worldFlag) {
+      const satisfied = !!state.worldFlags[requires.worldFlag];
       return { satisfied, errorMsg: requires.errorMsg };
     }
 
+    if (requires.questStatus) {
+      const { questId, status } = requires.questStatus;
+      const satisfied = state.questFlags[questId] === status;
+      return { satisfied, errorMsg: requires.errorMsg };
+    }
+
+    // Backwards compatibility fallback for generic "flag" requirement
+    if (requires.flag) {
+      const satisfied = !!state.questFlags[requires.flag] || !!state.worldFlags[requires.flag];
+      return { satisfied, errorMsg: requires.errorMsg };
+    }
+ 
     return { satisfied: true };
   }
-
+ 
   return {
     getScene,
     applyEffect,

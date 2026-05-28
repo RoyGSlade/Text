@@ -31,6 +31,8 @@ window.IAG_STATE = (function() {
     questFlags: {
       investigate_relay: "active" // active, completed, failed
     },
+    worldFlags: {},
+    rngCounter: 0,
     combat: null,
     history: [
       "Awakened in the outer ring sector."
@@ -49,8 +51,10 @@ window.IAG_STATE = (function() {
   function initializeNewGame(customSeed) {
     currentGameState = JSON.parse(JSON.stringify(defaultState));
     currentGameState.seed = customSeed || generateSeed();
+    currentGameState.rngCounter = 0;
+    currentGameState.worldFlags = {};
     // Initialize RNG engine
-    currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed);
+    currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
     
     saveToLocalStorage();
     return currentGameState;
@@ -72,8 +76,10 @@ window.IAG_STATE = (function() {
         const parsed = JSON.parse(data);
         if (parsed.version === defaultState.version) {
           currentGameState = parsed;
-          // Rebuild RNG engine with loaded seed
-          currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed);
+          currentGameState.rngCounter = currentGameState.rngCounter || 0;
+          currentGameState.worldFlags = currentGameState.worldFlags || {};
+          // Rebuild RNG engine with loaded seed and counter
+          currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
           return true;
         }
       } catch (e) {
@@ -104,7 +110,9 @@ window.IAG_STATE = (function() {
       const parsed = JSON.parse(jsonString);
       if (parsed.version && parsed.seed && parsed.character) {
         currentGameState = parsed;
-        currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed);
+        currentGameState.rngCounter = currentGameState.rngCounter || 0;
+        currentGameState.worldFlags = currentGameState.worldFlags || {};
+        currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
         saveToLocalStorage();
         addHistoryLog("Game state imported successfully.");
         return true;

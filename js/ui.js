@@ -34,7 +34,18 @@ window.IAG_UI = (function() {
       customSeedInput: document.getElementById("custom-seed-input"),
       
       diceRollBtn: document.getElementById("dice-roll-btn"),
-      diceResult: document.getElementById("dice-result")
+      diceResult: document.getElementById("dice-result"),
+
+      // Dev notes elements
+      devDrawer: document.getElementById("dev-drawer"),
+      devToggleBtn: document.getElementById("dev-toggle-btn"),
+      closeDevBtn: document.getElementById("close-dev-btn"),
+      devSceneId: document.getElementById("dev-scene-id"),
+      devSeed: document.getElementById("dev-seed"),
+      devRngCounter: document.getElementById("dev-rng-counter"),
+      devLastEffect: document.getElementById("dev-last-effect"),
+      devWorldFlags: document.getElementById("dev-world-flags"),
+      devQuestFlags: document.getElementById("dev-quest-flags")
     };
   }
 
@@ -75,17 +86,16 @@ window.IAG_UI = (function() {
       elements.questList.innerHTML = "";
       let hasQuests = false;
       for (const [key, value] of Object.entries(state.questFlags)) {
-        // Show actual quests, ignore raw internal helper flags like "has_bypass_chip"
-        if (key === "investigate_relay") {
-          hasQuests = true;
-          const questEl = document.createElement("div");
-          questEl.className = `quest-item ${value}`;
-          questEl.innerHTML = `
-            <div class="quest-title">Investigate the broken relay</div>
-            <div class="quest-status">${value.toUpperCase()}</div>
-          `;
-          elements.questList.appendChild(questEl);
-        }
+        hasQuests = true;
+        const questEl = document.createElement("div");
+        questEl.className = `quest-item ${value}`;
+        // Beautify/normalize the quest key for display
+        const displayTitle = key.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        questEl.innerHTML = `
+          <div class="quest-title">${displayTitle}</div>
+          <div class="quest-status">${value.toUpperCase()}</div>
+        `;
+        elements.questList.appendChild(questEl);
       }
       if (!hasQuests) {
         elements.questList.innerHTML = `<div class="empty-card">No Active Quests</div>`;
@@ -108,7 +118,21 @@ window.IAG_UI = (function() {
       });
     }
 
-    // 6. Story narrative core scene
+    // 6. Dev Notes drawer values
+    if (elements.devSceneId) elements.devSceneId.textContent = state.sceneId;
+    if (elements.devSeed) elements.devSeed.textContent = state.seed;
+    if (elements.devRngCounter) elements.devRngCounter.textContent = state.rngCounter !== undefined ? state.rngCounter : 0;
+    if (elements.devLastEffect) {
+      elements.devLastEffect.textContent = state.lastEffect ? JSON.stringify(state.lastEffect) : "None";
+    }
+    if (elements.devWorldFlags) {
+      elements.devWorldFlags.textContent = JSON.stringify(state.worldFlags || {}, null, 2);
+    }
+    if (elements.devQuestFlags) {
+      elements.devQuestFlags.textContent = JSON.stringify(state.questFlags || {}, null, 2);
+    }
+
+    // 7. Story narrative core scene
     renderStoryScene(state.sceneId);
   }
 
@@ -157,16 +181,28 @@ window.IAG_UI = (function() {
       
       // Update scene ID
       state.sceneId = option.next;
-      
-      // Update quest log for locked door
-      if (option.next === "locked_door") {
-        state.questFlags.investigate_relay = "completed";
-      }
     });
   }
 
   // Configures UI action bindings (buttons, save controls, RNG checks)
   function bindEvents() {
+    // Bind Dev Drawer toggle controls
+    if (elements.devToggleBtn) {
+      elements.devToggleBtn.addEventListener("click", () => {
+        if (elements.devDrawer) {
+          elements.devDrawer.classList.toggle("active");
+        }
+      });
+    }
+
+    if (elements.closeDevBtn) {
+      elements.closeDevBtn.addEventListener("click", () => {
+        if (elements.devDrawer) {
+          elements.devDrawer.classList.remove("active");
+        }
+      });
+    }
+
     if (elements.exportBtn) {
       elements.exportBtn.addEventListener("click", () => {
         window.IAG_STATE.exportSaveToFile();

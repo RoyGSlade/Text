@@ -15,6 +15,9 @@
       <h1>Infinite Ages</h1>
     </div>
     <div class="header-controls">
+      <!-- Developer Notes Toggle -->
+      <button class="sys-btn sys-btn-accent" id="dev-toggle-btn">Dev Notes</button>
+      
       <!-- Import save -->
       <div class="file-upload-wrapper">
         <button class="sys-btn" id="import-btn">Import Save</button>
@@ -143,6 +146,77 @@
       <!-- Logs printed dynamically via ui.js -->
     </div>
   </footer>
+
+  <!-- Developer & Help Notes Panel (Drawer) -->
+  <div class="dev-drawer" id="dev-drawer">
+    <div class="dev-drawer-header">
+      <h3>Educational Dev Inspector</h3>
+      <button class="close-dev-btn" id="close-dev-btn">&times;</button>
+    </div>
+    <div class="dev-drawer-body">
+      <section class="dev-section">
+        <h4>Active Systems & State Data</h4>
+        <div class="dev-meta-grid">
+          <div class="dev-meta-item">
+            <span class="dev-meta-label">Active Scene ID:</span>
+            <span class="dev-meta-value" id="dev-scene-id">arrival</span>
+          </div>
+          <div class="dev-meta-item">
+            <span class="dev-meta-label">Active Seed:</span>
+            <span class="dev-meta-value" id="dev-seed">IA-000000</span>
+          </div>
+          <div class="dev-meta-item">
+            <span class="dev-meta-label">RNG Roll Counter:</span>
+            <span class="dev-meta-value" id="dev-rng-counter">0</span>
+          </div>
+          <div class="dev-meta-item">
+            <span class="dev-meta-label">Last Executed Effect:</span>
+            <span class="dev-meta-value" id="dev-last-effect">None</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="dev-section">
+        <h4>World Flags Map</h4>
+        <pre class="dev-code" id="dev-world-flags">{}</pre>
+      </section>
+
+      <section class="dev-section">
+        <h4>Quest Flags Map</h4>
+        <pre class="dev-code" id="dev-quest-flags">{}</pre>
+      </section>
+
+      <section class="dev-section">
+        <h4>File Architecture & Ownership Map</h4>
+        <div class="file-ownership-table">
+          <div class="file-owner-row header">
+            <span>File Location</span>
+            <span>Subsystem Role</span>
+          </div>
+          <div class="file-owner-row">
+            <span class="file-path">js/state.js</span>
+            <span>State Management & LocalStorage Persistence</span>
+          </div>
+          <div class="file-owner-row">
+            <span class="file-path">js/engine.js</span>
+            <span>Seeded Deterministic Mechanics (Mulberry32 RNG, rolls)</span>
+          </div>
+          <div class="file-owner-row">
+            <span class="file-path">js/story.js</span>
+            <span>Interactive Narrative Graph, strict effects & rules</span>
+          </div>
+          <div class="file-owner-row">
+            <span class="file-path">js/ui.js</span>
+            <span>DOM Element Binding, Render Cycles & Event Listeners</span>
+          </div>
+          <div class="file-owner-row">
+            <span class="file-path">js/app.js</span>
+            <span>Application bootstrap & autosave recovery</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 
   <!-- App Core Modular Scripts -->
   <script src="js/data.js"></script>

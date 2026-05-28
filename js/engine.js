@@ -9,7 +9,7 @@
 window.IAG_ENGINE = (function() {
   // Simple Mulberry32 seeded RNG generator
   // Returns a float from 0 (inclusive) to 1 (exclusive)
-  function createRandomGenerator(seedString) {
+  function createRandomGenerator(seedString, initialCounter = 0) {
     // Generate a numeric hash from the seed string
     let h = 2166136261 >>> 0;
     for (let i = 0; i < seedString.length; i++) {
@@ -17,6 +17,11 @@ window.IAG_ENGINE = (function() {
     }
     
     let a = h >>> 0;
+    // Pre-advance the RNG state by the initial counter
+    for (let i = 0; i < initialCounter; i++) {
+      a = (a + 0x6D2B79F5) >>> 0;
+    }
+
     return function() {
       let t = a += 0x6D2B79F5;
       t = Math.imul(t ^ (t >>> 15), t | 1);
@@ -27,11 +32,15 @@ window.IAG_ENGINE = (function() {
 
   // Returns a random number in [min, max] inclusive using the state's generator
   function randomRange(state, min, max) {
+    if (state.rngCounter === undefined) {
+      state.rngCounter = 0;
+    }
     if (!state.rng) {
       // Lazy-initialize RNG if state doesn't have it active
-      state.rng = createRandomGenerator(state.seed || "DEFAULT-SEED");
+      state.rng = createRandomGenerator(state.seed || "DEFAULT-SEED", state.rngCounter);
     }
     const r = state.rng();
+    state.rngCounter++;
     return Math.floor(r * (max - min + 1)) + min;
   }
 

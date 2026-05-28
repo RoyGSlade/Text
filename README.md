@@ -38,7 +38,7 @@ No React, no bundlers, no npm, and no external libraries. Built using standard b
 You can launch and play the game using any standard local web server or directly by opening the file in your browser:
 
 ### Option A: Open directly in your browser
-Simply locate `/home/roygslade/Desktop/Text/index.html` on your filesystem and open it in Google Chrome, Firefox, Safari, or Microsoft Edge.
+Simply locate `/Text/index.html` on your filesystem and open it in Google Chrome, Firefox, Safari, or Microsoft Edge.
 
 ### Option B: Run a quick local development server
 If you have Python installed, run this terminal command from your workspace directory:

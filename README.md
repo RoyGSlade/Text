@@ -65,6 +65,14 @@ Then navigate to `http://localhost:8000` in your web browser.
 - **Interactive Timeline Gating**: Strict story-choice locking and gating mechanism that blocks entry into the station story stream until the player verifies and confirms their character profile.
 - **Expanded Character HUD**: Re-designed left sidebar HUD displaying Level, Credits, HP, Attributes, Movement Speed, Vision Type, Resistance, and Special Traits.
 
+### Milestone 2.1: Starter Skill Selection & Deterministic Checks (Completed)
+- **Wizard Skill Selections**: Added dynamic Starter Skill selection cards rendering directly from `window.IAG_DATA.races[selectedRaceId].skill_options`.
+- **Validation Constraints**: Upgraded verification gating; character naming, species selection, profession selection, and starter skill specialization must all be active before identity confirmation.
+- **Active Skills HUD**: Populated selected skills and their corresponding ranks inside the left sidebar character dashboard under a newly styled "Specialized Skills" sub-panel.
+- **Seeded d20 Engine Checks**: Integrated the gamebook engine `{ type: "skillCheck" }` narrative effect executing d20 rolls against challenge rating DC 10 with full dynamic modifier lookups.
+- **Quest Branching Options**: Rewrote the Relay Exterior platform choices to support Mechanics checks that log roll totals deterministically, set success/failure world flags, and unlock bypass paths.
+- **Inspector Debugger**: Added d20 check history display panels to the developer notes drawer for quick testing.
+
 ### Upcoming Milestones
 - **Milestone 3**: Skill checks based on attributes, advantage/disadvantage modifier calculations.
 - **Milestone 4**: Interactive gamebook story effects and quest flags.

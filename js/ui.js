@@ -13,6 +13,7 @@ window.IAG_UI = (function() {
   let selectedRaceId = "";
   let selectedProfessionId = "";
   let selectedHumanBonusAttr = "intelligence"; // Default attribute bonus for humans
+  let selectedStarterSkillId = ""; // Track selected starter skill rank 1
 
   function initCache() {
     elements = {
@@ -42,8 +43,13 @@ window.IAG_UI = (function() {
       characterNameInput: document.getElementById("character-name-input"),
       raceCardList: document.getElementById("race-card-list"),
       professionCardList: document.getElementById("profession-card-list"),
+      starterSkillCardList: document.getElementById("starter-skill-card-list"),
       characterPreview: document.getElementById("character-preview"),
       confirmCharacterBtn: document.getElementById("confirm-character-btn"),
+      
+      // Specialized Skills elements
+      charSkillsContainer: document.getElementById("char-skills-container"),
+      charSkillsEmpty: document.getElementById("char-skills-empty"),
       
       inventoryList: document.getElementById("inventory-list"),
       questList: document.getElementById("quest-list"),
@@ -71,6 +77,7 @@ window.IAG_UI = (function() {
       devSeed: document.getElementById("dev-seed"),
       devRngCounter: document.getElementById("dev-rng-counter"),
       devLastEffect: document.getElementById("dev-last-effect"),
+      devLastSkillCheck: document.getElementById("dev-last-skill-check"),
       devWorldFlags: document.getElementById("dev-world-flags"),
       devQuestFlags: document.getElementById("dev-quest-flags")
     };
@@ -124,6 +131,31 @@ window.IAG_UI = (function() {
         elements.charSpecialContainer.style.display = "flex";
       } else {
         elements.charSpecialContainer.style.display = "none";
+      }
+    }
+
+    // Render active skills in the sidebar Profile
+    if (elements.charSkillsContainer) {
+      // Remove previously appended skill items
+      const previousSkills = elements.charSkillsContainer.querySelectorAll(".skill-item-line");
+      previousSkills.forEach(el => el.remove());
+      
+      const skills = state.character.skills || {};
+      const skillEntries = Object.entries(skills);
+      
+      if (skillEntries.length === 0) {
+        if (elements.charSkillsEmpty) elements.charSkillsEmpty.style.display = "block";
+      } else {
+        if (elements.charSkillsEmpty) elements.charSkillsEmpty.style.display = "none";
+        skillEntries.forEach(([skillId, level]) => {
+          const item = document.createElement("div");
+          item.className = "stat-item skill-item-line";
+          item.innerHTML = `
+            <span class="stat-label">${formatSkillName(skillId)}</span>
+            <span class="stat-val stat-val-cyan">Rank ${level}</span>
+          `;
+          elements.charSkillsContainer.appendChild(item);
+        });
       }
     }
 
@@ -186,6 +218,11 @@ window.IAG_UI = (function() {
     if (elements.devLastEffect) {
       elements.devLastEffect.textContent = state.lastEffect ? JSON.stringify(state.lastEffect) : "None";
     }
+    if (elements.devLastSkillCheck) {
+      elements.devLastSkillCheck.textContent = state.lastSkillCheck
+        ? `${state.lastSkillCheck.skill.toUpperCase()} (DC ${state.lastSkillCheck.challenge}): Rolled ${state.lastSkillCheck.roll} + ${state.lastSkillCheck.modifier} = ${state.lastSkillCheck.total} (${state.lastSkillCheck.success ? "SUCCESS" : "FAILURE"})`
+        : "None";
+    }
     if (elements.devWorldFlags) {
       elements.devWorldFlags.textContent = JSON.stringify(state.worldFlags || {}, null, 2);
     }
@@ -208,10 +245,63 @@ window.IAG_UI = (function() {
       .join(", ");
   }
 
+  // Formatting helper for skill IDs
+  function formatSkillName(skillId) {
+    if (!skillId) return "Unknown";
+    return skillId
+      .split("_")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+
+  // Renders the available starter skills based on chosen species
+  function renderStarterSkills(skillOptions) {
+    const container = document.getElementById("starter-skill-selection-container");
+    if (!container || !elements.starterSkillCardList) return;
+
+    if (!skillOptions || skillOptions.length === 0) {
+      container.style.display = "none";
+      elements.starterSkillCardList.innerHTML = "";
+      return;
+    }
+
+    container.style.display = "block";
+    elements.starterSkillCardList.innerHTML = "";
+
+    skillOptions.forEach(skillId => {
+      const card = document.createElement("div");
+      card.className = "selection-card skill-card";
+      card.dataset.id = skillId;
+      card.innerHTML = `
+        <div class="card-header">
+          <h4>${formatSkillName(skillId)}</h4>
+          <span class="badge badge-skill">Rank 1</span>
+        </div>
+        <p class="card-desc">Specialized expertise in the ${formatSkillName(skillId)} discipline, granting advanced capability modifiers.</p>
+      `;
+      card.addEventListener("click", () => {
+        selectedStarterSkillId = skillId;
+        document.querySelectorAll("#starter-skill-card-list .selection-card").forEach(c => c.classList.remove("selected"));
+        card.classList.add("selected");
+        updateCreationPreview();
+        validateCharacterCreation();
+      });
+      elements.starterSkillCardList.appendChild(card);
+    });
+  }
+
   // Initializes the character creation layout (renders cards and binds onboarding events)
   function initializeCreationWizard() {
     const races = window.IAG_DATA.races;
     const professions = window.IAG_DATA.professions;
+
+    selectedRaceId = "";
+    selectedProfessionId = "";
+    selectedStarterSkillId = "";
+
+    // Hide skill selection container initially
+    const container = document.getElementById("starter-skill-selection-container");
+    if (container) container.style.display = "none";
 
     // Render biological species selection grid
     if (elements.raceCardList) {
@@ -235,8 +325,13 @@ window.IAG_UI = (function() {
         `;
         card.addEventListener("click", () => {
           selectedRaceId = raceId;
+          selectedStarterSkillId = ""; // Reset starter skill on species change
           document.querySelectorAll("#race-card-list .selection-card").forEach(c => c.classList.remove("selected"));
           card.classList.add("selected");
+          
+          // Render skill selections based on the new race selection
+          renderStarterSkills(race.skill_options);
+          
           updateCreationPreview();
           validateCharacterCreation();
         });
@@ -349,6 +444,7 @@ window.IAG_UI = (function() {
           <div class="preview-item"><span class="lbl">Codename:</span> <span class="val highlighted">${name || "(Requires Codename)"}</span></div>
           <div class="preview-item"><span class="lbl">Species:</span> <span class="val">${race ? race.name : "Unchosen"}</span></div>
           <div class="preview-item"><span class="lbl">Profession:</span> <span class="val">${profession ? profession.name : "Unchosen"}</span></div>
+          <div class="preview-item"><span class="lbl">Starter Skill:</span> <span class="val highlighted">${selectedStarterSkillId ? formatSkillName(selectedStarterSkillId) : "Unchosen"}</span></div>
           <div class="preview-item"><span class="lbl">Starting Credits:</span> <span class="val">${profession ? profession.starting_credits : 0} cr</span></div>
           <div class="preview-item"><span class="lbl">Movement Speed:</span> <span class="val">${race ? race.movement : 0} ft</span></div>
           <div class="preview-item"><span class="lbl">Vision capabilities:</span> <span class="val">${race ? race.vision : "Unchosen"}</span></div>
@@ -400,7 +496,7 @@ window.IAG_UI = (function() {
   // Validates character creation onboarding inputs
   function validateCharacterCreation() {
     const name = elements.characterNameInput ? elements.characterNameInput.value.trim() : "";
-    const isValid = name.length > 0 && selectedRaceId !== "" && selectedProfessionId !== "";
+    const isValid = name.length > 0 && selectedRaceId !== "" && selectedProfessionId !== "" && selectedStarterSkillId !== "";
     if (elements.confirmCharacterBtn) {
       elements.confirmCharacterBtn.disabled = !isValid;
     }
@@ -409,7 +505,7 @@ window.IAG_UI = (function() {
   // Saves finalized choices and completes character creation
   function confirmCharacterSelection() {
     const name = elements.characterNameInput ? elements.characterNameInput.value.trim() : "";
-    if (name.length === 0 || selectedRaceId === "" || selectedProfessionId === "") return;
+    if (name.length === 0 || selectedRaceId === "" || selectedProfessionId === "" || selectedStarterSkillId === "") return;
 
     const races = window.IAG_DATA.races;
     const professions = window.IAG_DATA.professions;
@@ -425,6 +521,12 @@ window.IAG_UI = (function() {
       state.character.vision = race.vision;
       state.character.resistance = race.resistance;
       state.character.special = race.special || "";
+      
+      // Apply skills setup
+      state.character.skills = {};
+      if (selectedStarterSkillId) {
+        state.character.skills[selectedStarterSkillId] = 1;
+      }
       state.character.skillOptions = race.skill_options || [];
 
       // Apply attribute scores starting at 0 + race bonus
@@ -447,13 +549,17 @@ window.IAG_UI = (function() {
       // Completion flag
       state.characterCreationComplete = true;
 
-      // History log
+      // History log entries
       state.history.push(`Character created: ${name}, ${race.name} ${profession.name}.`);
+      if (selectedStarterSkillId) {
+        state.history.push(`Starter skill selected: ${formatSkillName(selectedStarterSkillId)} Level 1.`);
+      }
     });
 
     // Reset temporary selections
     selectedRaceId = "";
     selectedProfessionId = "";
+    selectedStarterSkillId = "";
     if (elements.characterNameInput) elements.characterNameInput.value = "";
 
     // Redraw interface

@@ -90,6 +90,7 @@ window.IAG_STATE = (function() {
     rawState.history = rawState.history || [];
     rawState.combat = rawState.combat || null;
     rawState.sceneId = rawState.sceneId || "arrival";
+    rawState.lastSkillCheck = rawState.lastSkillCheck !== undefined ? rawState.lastSkillCheck : null;
 
     // Normalize and expand character object
     if (!rawState.character) {

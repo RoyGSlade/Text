@@ -1127,3 +1127,32 @@ body {
   line-height: 1.4;
 }
 
+/* Specialized Starter Skill Selection Styling */
+.badge-skill {
+  background: hsla(280, 80%, 40%, 0.15);
+  color: hsl(280, 100%, 75%);
+  border-color: hsl(280, 100%, 75%);
+}
+
+.selection-card.skill-card:hover {
+  border-color: hsl(280, 100%, 70%);
+  background: hsla(280, 50%, 15%, 0.3);
+}
+
+.selection-card.skill-card.selected {
+  border-color: hsl(280, 100%, 60%);
+  background: hsla(280, 100%, 10%, 0.15);
+  box-shadow: 0 0 15px hsla(280, 100%, 50%, 0.25), inset 0 0 15px hsla(280, 100%, 50%, 0.15);
+}
+
+.selection-card.skill-card.selected .card-header h4 {
+  color: hsl(280, 100%, 75%);
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+

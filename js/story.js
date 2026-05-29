@@ -56,6 +56,30 @@ window.IAG_STORY = (function() {
       A small terminal sits next to the door, showing a locked red icon. Without access permission or mechanics training, you cannot hope to force it.`,
       options: [
         {
+          label: "Study the relay access panel",
+          next: "relay_exterior",
+          effects: [
+            {
+              type: "skillCheck",
+              skill: "mechanics",
+              challenge: 10,
+              successFlag: "relay_panel_understood",
+              failureFlag: "relay_panel_failed_once",
+              successLog: "You successfully trace the power nodes and decipher the station's electrical flow grid.",
+              failureLog: "The security interface locks you out briefly and the circuit schematic remains incomprehensible."
+            }
+          ]
+        },
+        {
+          label: "Use your understanding to bypass the panel",
+          next: "locked_door",
+          requires: { worldFlag: "relay_panel_understood", errorMsg: "You must first study and successfully understand the relay panel's routing." },
+          effects: [
+            { type: "setQuestStatus", questId: "investigate_relay", value: "completed" },
+            { type: "log", value: "Using your deep mechanics understanding, you reroute the main diagnostics link and force the doors open!" }
+          ]
+        },
+        {
           label: "Attempt to hack the Locked Relay Door",
           next: "locked_door",
           // Requirements preview
@@ -160,6 +184,43 @@ window.IAG_STORY = (function() {
         break;
       case "addCredits":
         state.character.credits += effect.value;
+        break;
+      case "skillCheck":
+        if (!effect.skill || effect.challenge === undefined) {
+          console.error("skillCheck effect is missing 'skill' or 'challenge' property:", effect);
+          break;
+        }
+        
+        // Execute the skill check d20 roll
+        const checkResult = window.IAG_ENGINE.skillCheck(state, effect.skill, effect.challenge);
+        
+        // Store in state for inspector tracking
+        state.lastSkillCheck = {
+          skill: effect.skill,
+          challenge: effect.challenge,
+          roll: checkResult.finalRoll,
+          modifier: checkResult.modifier,
+          total: checkResult.total,
+          success: checkResult.success,
+          timestamp: Date.now()
+        };
+
+        // Apply flags and history log push
+        if (checkResult.success) {
+          if (effect.successFlag) {
+            state.worldFlags[effect.successFlag] = true;
+          }
+          const logMsg = `MECHANICS check vs DC ${effect.challenge}: Rolled ${checkResult.finalRoll} + ${checkResult.modifier} = ${checkResult.total}. SUCCESS! ${effect.successLog || ""}`;
+          state.history.push(logMsg);
+          if (state.history.length > 50) state.history.shift();
+        } else {
+          if (effect.failureFlag) {
+            state.worldFlags[effect.failureFlag] = true;
+          }
+          const logMsg = `MECHANICS check vs DC ${effect.challenge}: Rolled ${checkResult.finalRoll} + ${checkResult.modifier} = ${checkResult.total}. FAILURE. ${effect.failureLog || ""}`;
+          state.history.push(logMsg);
+          if (state.history.length > 50) state.history.shift();
+        }
         break;
       case "resetGame":
         window.IAG_STATE.initializeNewGame();

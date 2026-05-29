@@ -116,6 +116,11 @@
               <span class="stat-val" id="char-special">None</span>
             </div>
           </div>
+
+          <div class="section-divider">Specialized Skills</div>
+          <div class="skills-list" id="char-skills-container">
+            <div class="empty-card" id="char-skills-empty">No skills active</div>
+          </div>
         </div>
       </section>
 
@@ -155,6 +160,14 @@
         <div class="creation-group">
           <span class="section-divider">SELECT CRITICAL SUBSYSTEM PROFESSION</span>
           <div id="profession-card-list" class="selection-grid">
+            <!-- Populated dynamically via ui.js -->
+          </div>
+        </div>
+
+        <!-- Starter Skill Selection Grid -->
+        <div class="creation-group" id="starter-skill-selection-container" style="display: none;">
+          <span class="section-divider">SELECT STARTER SPECIALIZATION SKILL</span>
+          <div id="starter-skill-card-list" class="selection-grid selection-grid-skills">
             <!-- Populated dynamically via ui.js -->
           </div>
         </div>
@@ -268,6 +281,10 @@
           <div class="dev-meta-item">
             <span class="dev-meta-label">Last Executed Effect:</span>
             <span class="dev-meta-value" id="dev-last-effect">None</span>
+          </div>
+          <div class="dev-meta-item">
+            <span class="dev-meta-label">Last Skill Check:</span>
+            <span class="dev-meta-value" id="dev-last-skill-check">None</span>
           </div>
         </div>
       </section>

@@ -1,0 +1,222 @@
+{
+  "items": [
+    {
+      "id": "item.guild.bracelet-tracker",
+      "name": "Guild Bracelet (Tracker)",
+      "itemCategory": "equipment",
+      "description": "A slim band that broadcasts status to the Guild. Helpful. Creepy.",
+      "value": 0,
+      "tags": [
+        "legal",
+        "monitoring"
+      ],
+      "use": {
+        "type": "setFlag",
+        "flag": "br:braceletActive",
+        "op": "=",
+        "value": true
+      }
+    },
+    {
+      "id": "item.guild.permit.novice",
+      "name": "Adventurer Permit: Novice",
+      "itemCategory": "document",
+      "description": "Basic legal authorization for perimeter hunts.",
+      "value": 100,
+      "tags": [
+        "permit",
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.permit.advanced",
+      "name": "Adventurer Permit: Advanced",
+      "itemCategory": "document",
+      "description": "Expanded zones. Try not to brag.",
+      "value": 300,
+      "tags": [
+        "permit",
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.permit.expert",
+      "name": "Adventurer Permit: Expert",
+      "itemCategory": "document",
+      "description": "High-risk zones authorized.",
+      "value": 900,
+      "tags": [
+        "permit",
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.permit.legendary",
+      "name": "Adventurer Permit: Legendary",
+      "itemCategory": "document",
+      "description": "Stupid-dangerous zones. You asked for this.",
+      "value": 2700,
+      "tags": [
+        "permit",
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.permit.mythic",
+      "name": "Adventurer Permit: Mythic",
+      "itemCategory": "document",
+      "description": "Nightmare-tier access. Double pay at night.",
+      "value": 8100,
+      "tags": [
+        "permit",
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.commission",
+      "name": "Quest Commission",
+      "itemCategory": "document",
+      "description": "Defines target, payout window, and conditions.",
+      "value": 0,
+      "tags": [
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.stamp-cityhall",
+      "name": "Official Stamp: City Hall",
+      "itemCategory": "document",
+      "description": "Verification seal required for payouts.",
+      "value": 0,
+      "tags": [
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.forged-stamp",
+      "name": "Forged Stamp",
+      "itemCategory": "tool",
+      "description": "Suspiciously perfect. Don’t get caught.",
+      "value": 50,
+      "tags": [
+        "contraband",
+        "forgery"
+      ]
+    },
+    {
+      "id": "item.guild.permit-stamp-d17",
+      "name": "Permit Stamp: D-17",
+      "itemCategory": "document",
+      "description": "Expedites re-entry for the D-17 search.",
+      "value": 0,
+      "tags": [
+        "legal"
+      ]
+    },
+    {
+      "id": "item.guild.recovery-claim",
+      "name": "Recovery Claim Token",
+      "itemCategory": "token",
+      "description": "Redeem to retrieve a lost item via teleport recall.",
+      "value": 25,
+      "tags": [
+        "service"
+      ]
+    },
+    {
+      "id": "item.guild.clue-bootprint",
+      "name": "Bootprint Cast",
+      "itemCategory": "evidence",
+      "description": "Novice boot with uneven heel wear.",
+      "value": 1,
+      "tags": [
+        "clue"
+      ]
+    },
+    {
+      "id": "item.guild.clue-bandage",
+      "name": "Bloodied Bandage",
+      "itemCategory": "evidence",
+      "description": "Smells of cheap antiseptic.",
+      "value": 1,
+      "tags": [
+        "clue"
+      ]
+    },
+    {
+      "id": "item.guild.clue-watchlog",
+      "name": "Watch Log Fragment",
+      "itemCategory": "evidence",
+      "description": "Half-burned page noting a dusk departure.",
+      "value": 1,
+      "tags": [
+        "clue"
+      ]
+    },
+    {
+      "id": "item.guild.pelt-wolf",
+      "name": "Ravenous Wolf Pelt",
+      "itemCategory": "trophy",
+      "description": "Still twitching. That’s normal, right?",
+      "value": 15,
+      "tags": [
+        "beast"
+      ]
+    },
+    {
+      "id": "item.guild.gland-megaspider",
+      "name": "Mega Spider Gland",
+      "itemCategory": "trophy",
+      "description": "Volatile if heated.",
+      "value": 40,
+      "tags": [
+        "mutated-bug",
+        "contraband?"
+      ]
+    },
+    {
+      "id": "item.guild.residue-shadow",
+      "name": "Shadow Eater Residue",
+      "itemCategory": "trophy",
+      "description": "Coats the jar with non-light.",
+      "value": 120,
+      "tags": [
+        "magical",
+        "hazardous"
+      ]
+    },
+    {
+      "id": "item.guild.fang-feedem",
+      "name": "Feedem Fang",
+      "itemCategory": "trophy",
+      "description": "Venom traces sparkle wrong.",
+      "value": 280,
+      "tags": [
+        "supernatural",
+        "venom"
+      ]
+    },
+    {
+      "id": "item.guild.tooth-bolobear",
+      "name": "BoloBear Crown Tooth",
+      "itemCategory": "trophy",
+      "description": "Heavy as a brick and twice as stubborn.",
+      "value": 1200,
+      "tags": [
+        "huge",
+        "rare"
+      ]
+    },
+    {
+      "id": "item.guild.file-lantern-proof",
+      "name": "Dossier: Lantern-Proof Specimen",
+      "itemCategory": "document",
+      "description": "Notes hint at a creature that ignores Sunlight Lanterns.",
+      "value": 0,
+      "tags": [
+        "merchant-guild",
+        "evidence"
+      ]
+    }
+  ]
+}

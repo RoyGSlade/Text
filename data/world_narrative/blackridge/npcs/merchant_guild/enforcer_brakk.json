@@ -1,0 +1,30 @@
+{
+  "id": "mg_enforcer_brakk",
+  "town": "blackridge",
+  "roles": [
+    "enforcer"
+  ],
+  "buildingId": "merchant_guild_hq",
+  "name": "Brakk",
+  "demeanor": "placid, terrifying, literal",
+  "repFaction": "merchant_guild",
+  "repPersonal": false,
+  "greetings": [
+    {
+      "when": "true",
+      "text": "Androids don't blink. I do. Means I remember my orders better."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_leave",
+      "requires": {
+        "flagsAny": [
+          "br:mg.hq.access"
+        ]
+      },
+      "text": "Step away politely",
+      "leadsTo": "mg_front_hall"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "area": "general_store",
+  "scenes": [
+    {
+      "id": "gs_entry",
+      "title": "General Store Entrance",
+      "textBlocks": [
+        { "when": "!br:gs.unlocked", "text": "Bells jingle. Shelves lean under rope, tarps, filters, tins, tools." },
+        { "when": "br:gs.unlocked && br:econ.tight", "text": "Handwritten signs: 'Supply Tight. Blame Convoys.'" },
+        { "when": "br:econ.loose", "text": "A chalkboard boasts: 'Convoy Week Success. Specials Today.'" }
+      ],
+      "choices": [
+        {
+          "text": "Check in with Lessa",
+          "requires": { "flagsNot": ["br:gs.unlocked"] },
+          "actions": [
+            { "type": "setFlag", "flag": "br:gs.unlocked", "op": "=", "value": true },
+            { "type": "gotoScene", "sceneId": "gs_counter" }
+          ]
+        },
+        { "text": "Head to the counter", "actions": [ { "type": "gotoScene", "sceneId": "gs_counter" } ] },
+        { "text": "Browse the shelves", "actions": [ { "type": "gotoScene", "sceneId": "gs_shelves" } ] }
+      ]
+    },
+    {
+      "id": "gs_counter",
+      "title": "Counter",
+      "textBlocks": [
+        { "when": "true", "text": "Lessa taps a pencil against a ledger that pretends to be honest." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 14,
+          "text": "Negotiate today’s markup down a notch.",
+          "success": [
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Ask Jor about convoys", "actions": [ { "type": "gotoScene", "sceneId": "gs_runner_news" } ] },
+        { "text": "Back to entrance", "actions": [ { "type": "gotoScene", "sceneId": "gs_entry" } ] }
+      ]
+    },
+    {
+      "id": "gs_runner_news",
+      "title": "Jor’s Bulletin",
+      "textBlocks": [
+        { "when": "true", "text": "A runner’s map is more patch than paper. Lines redraw themselves when you blink." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Decode the week’s routes and likely choke points.",
+          "success": [
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.convoy_news", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Back to counter", "actions": [ { "type": "gotoScene", "sceneId": "gs_counter" } ] }
+      ]
+    },
+    {
+      "id": "gs_shelves",
+      "title": "Shelves",
+      "textBlocks": [
+        { "when": "true", "text": "Rows of rope, bedrolls, filters, kits. A sign: 'No refunds after the apocalypse'." }
+      ],
+      "choices": [
+        {
+          "text": "Buy Basic Survival Kit",
+          "requires": { "flagsAny": ["br:econ.loose", "br:econ.normal", "voucher.discount"] },
+          "actions": [ { "type": "addItem", "itemId": "kit.survival_basic", "qty": 1 } ]
+        },
+        {
+          "text": "Buy Water Filter",
+          "requires": { "flagsAny": ["br:econ.normal", "br:econ.loose"] },
+          "actions": [ { "type": "addItem", "itemId": "tool.water_filter", "qty": 1 } ]
+        },
+        {
+          "text": "Buy Tent (pricey during shortages)",
+          "requires": { "flagsAny": ["br:econ.loose", "voucher.discount"], "flagsNot": ["br:econ.tight"] },
+          "actions": [ { "type": "addItem", "itemId": "camp.tent", "qty": 1 } ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 13,
+          "text": "Collect a shelf tag (current price state).",
+          "success": [
+            { "type": "addItem", "itemId": "doc.shelf_tag.normal", "qty": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Back to entrance", "actions": [ { "type": "gotoScene", "sceneId": "gs_entry" } ] }
+      ]
+    },
+    {
+      "id": "gs_backroom",
+      "title": "Backroom",
+      "textBlocks": [
+        { "when": "true", "text": "Crates labeled 'Staples'. A lockbox that coughs when you look at it." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 15,
+          "text": "Audit inventory accurately (helps stabilize prices).",
+          "success": [
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Return to counter", "actions": [ { "type": "gotoScene", "sceneId": "gs_counter" } ] }
+      ]
+    }
+  ]
+}

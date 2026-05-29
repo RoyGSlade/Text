@@ -1,0 +1,400 @@
+{
+  "area": "arcanum",
+  "scenes": {
+    "arcanum_entry_choice1_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "quest.note.sticky_memory_hint",
+          "qty": 1
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.orientation.completed",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "arcanum_entry_choice1_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_entry": {
+      "title": "Arcanum Tower Threshold",
+      "textBlocks": [
+        {
+          "when": "!br:arcanum.unlocked",
+          "text": "The tower door is a rumor with hinges. Pleas for help echo from the street. The guards drag loiterers away. The key is a letter that recognizes your name."
+        },
+        {
+          "when": "br:arcanum.unlocked",
+          "text": "Inside is a fever dream: rotating floors, gravity second-guessing itself, light bulbs that argue about color temperature. Books follow you like guilt."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Present the pigeon-letter invitation.",
+          "requires": {
+            "flagsNot": [
+              "br:arcanum.unlocked"
+            ],
+            "have": [
+              {
+                "itemId": "letter.arcanum_invite",
+                "qty": 1
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:arcanum.unlocked",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:suspicion",
+              "value": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:rumor.arcanum_opened",
+              "value": 1
+            }
+          ],
+          "leadsTo": "arcanum_office"
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Catch a skittering book before it hides your memory.",
+          "onSuccess": "arcanum_entry_choice1_success",
+          "onFailure": "arcanum_entry_choice1_failure"
+        },
+        {
+          "text": "Leave quietly.",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "arcanum_office_choice1_success": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:arcanum.seer_trust",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_office_choice1_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_office": {
+      "title": "Valentar's Office",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Valentar calibrates a desk lamp that keeps forgetting it is a lamp. \"We won't always remember this conversation,\" he says, sticking a note to your forehead."
+        },
+        {
+          "when": "br:arcanum.seer_trust >= 2 && !br:arcanum.path.stage2_done",
+          "text": "“Do the fence task. Boredom protects futures. Unless bandits disagree.”"
+        },
+        {
+          "when": "br:arcanum.path.stage2_done && !br:arcanum.memories.hinted",
+          "text": "“My memories are lodged where they shouldn't be. Basement of City Hall. The Library stacks. Bring them.”"
+        }
+      ],
+      "choices": [
+        {
+          "text": "State your intent to help.",
+          "requires": {
+            "flagsAny": [
+              "br:arcanum.unlocked"
+            ],
+            "flagsNot": [
+              "br:arcanum.orientation.completed"
+            ]
+          },
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:arcanum.orientation.completed",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 13,
+          "text": "Argue for fewer secrets.",
+          "onSuccess": "arcanum_office_choice1_success",
+          "onFailure": "arcanum_office_choice1_failure"
+        },
+        {
+          "text": "Enter the lab",
+          "leadsTo": "arcanum_lab"
+        },
+        {
+          "text": "Check trades",
+          "leadsTo": "arcanum_trades"
+        }
+      ]
+    },
+    "arcanum_lab_choice0_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "component.rotating_floor_fragment",
+          "qty": 1
+        },
+        {
+          "type": "incFlag",
+          "flag": "br:arcanum.seer_trust",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_lab_choice0_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_lab_choice1_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "blueprint.jump_boots",
+          "qty": 1
+        }
+      ]
+    },
+    "arcanum_lab_choice1_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.lab.short",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "arcanum_lab": {
+      "title": "Spectrograph Lab (No Decoding Here)",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Devices hum, floors rotate, and a chalkboard redraws itself to argue with your handwriting."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Arcana",
+          "dc": 14,
+          "text": "Calibrate a stubborn lens array.",
+          "onSuccess": "arcanum_lab_choice0_success",
+          "onFailure": "arcanum_lab_choice0_failure"
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 16,
+          "text": "Rewire the lamp that forgets itself.",
+          "onSuccess": "arcanum_lab_choice1_success",
+          "onFailure": "arcanum_lab_choice1_failure"
+        },
+        {
+          "text": "Attempt drills with Valentar",
+          "requires": {
+            "flagsAny": [
+              "br:arcanum.training.ready"
+            ]
+          },
+          "leadsTo": "arcanum_lab_training"
+        },
+        {
+          "text": "Back to office",
+          "leadsTo": "arcanum_office"
+        }
+      ]
+    },
+    "arcanum_lab_training_choice0_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.training.passed",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "arcanum_lab_training_choice0_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.training.ready",
+          "op": "=",
+          "value": false
+        }
+      ]
+    },
+    "arcanum_lab_training_choice1_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.training.passed",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "arcanum_lab_training_choice1_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_lab_training": {
+      "title": "Radiant Drills",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "Valentar flips the room into a testing posture. Lines of force settle like grid paper over your vision."
+        }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Science",
+          "dc": 17,
+          "text": "Analyze a muttering filament.",
+          "onSuccess": "arcanum_lab_training_choice0_success",
+          "onFailure": "arcanum_lab_training_choice0_failure"
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 18,
+          "text": "Assemble an impossible junction.",
+          "onSuccess": "arcanum_lab_training_choice1_success",
+          "onFailure": "arcanum_lab_training_choice1_failure"
+        },
+        {
+          "text": "End drills",
+          "leadsTo": "arcanum_lab"
+        }
+      ]
+    },
+    "arcanum_trades_choice2_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "trinket.memory_bookmark",
+          "qty": 1
+        }
+      ]
+    },
+    "arcanum_trades_choice2_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "arcanum_trades": {
+      "title": "Contraband Exchange",
+      "textBlocks": [
+        {
+          "when": "true",
+          "text": "“No credits,” Valentar says. “Bring me teeth, fragments, and things the Mayor wishes didn't exist.”"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Trade 2 Rotating Floor Fragments for Mindweave Robes",
+          "requires": {
+            "have": [
+              {
+                "itemId": "component.rotating_floor_fragment",
+                "qty": 2
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "component.rotating_floor_fragment",
+              "qty": 2
+            },
+            {
+              "type": "addItem",
+              "itemId": "armor.mindweave_robes",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "text": "Trade 3 Goblin Teeth for Phantom Sabre",
+          "requires": {
+            "have": [
+              {
+                "itemId": "reagent.goblin_teeth",
+                "qty": 3
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "reagent.goblin_teeth",
+              "qty": 3
+            },
+            {
+              "type": "addItem",
+              "itemId": "weapon.phantom_sabre",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 15,
+          "text": "Haggle using a sticky memory note as leverage.",
+          "onSuccess": "arcanum_trades_choice2_success",
+          "onFailure": "arcanum_trades_choice2_failure"
+        },
+        {
+          "text": "Back to office",
+          "leadsTo": "arcanum_office"
+        }
+      ]
+    }
+  }
+}

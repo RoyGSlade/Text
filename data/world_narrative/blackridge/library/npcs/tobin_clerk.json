@@ -1,0 +1,21 @@
+{
+  "id": "tobin_clerk",
+  "town": "blackridge",
+  "roles": [
+    "clerk"
+  ],
+  "buildingId": "library",
+  "name": "Tobin",
+  "demeanor": "nervous, curious, riddle-mad",
+  "repFaction": "council",
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Quietly, please. Loud truths get shelved in iron."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Swap a riddle for a hint? I collect both."
+    }
+  ]
+}

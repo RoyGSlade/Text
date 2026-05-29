@@ -1,0 +1,96 @@
+{
+  "pack": "watch_upgrades",
+  "quests": [
+    {
+      "id": "br:watch:lens_upgrade",
+      "tags": ["town:blackridge","building:watchtowers","upgrade","siege"],
+      "title": "Brighten The Line",
+      "desc": "Install large lenses and mirror arrays to improve siege visibility.",
+      "requirements": { "flagsNot": ["br:watch:lenses_done"] },
+      "stages": [
+        {
+          "id": "s1_collect_optics",
+          "text": "Acquire 1 Large Polished Lens and 1 Signal Mirror Array.",
+          "completionCheck": { "have": [ { "itemId": "lens.polished_glass_large", "qty": 1 }, { "itemId": "kit.mirror_array", "qty": 1 } ] }
+        },
+        {
+          "id": "s2_visit_tower",
+          "text": "Visit any Watchtower to begin installation.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:watchtowers:hub"] }
+        },
+        {
+          "id": "s3_install",
+          "text": "Assist Mira Kestrel with calibration.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 2 },
+            { "type": "setFlag", "flag": "br:watch:lenses_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["br:watch:lenses_done"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "mira_kestrel_signalmaster" } },
+      "weight": 9
+    },
+    {
+      "id": "br:watch:fuel_supply",
+      "tags": ["town:blackridge","building:watchtowers","logistics","siege"],
+      "title": "Feed The Beacons",
+      "desc": "Deliver oil crates to restock night beacons and horns.",
+      "requirements": { "flagsNot": ["br:watch:fuel_done"] },
+      "stages": [
+        {
+          "id": "s1_get_fuel",
+          "text": "Obtain 2 Crates of Beacon Oil.",
+          "completionCheck": { "have": [ { "itemId": "fuel.lamp_oil_crate", "qty": 2 } ] }
+        },
+        {
+          "id": "s2_route",
+          "text": "Visit the quartermaster at the Watchtower Hub.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:watchtowers:hub"] }
+        },
+        {
+          "id": "s3_resupply",
+          "text": "Resupply two wall corners.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:morale", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:watch:fuel_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["br:watch:fuel_done"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "bren_oake_quartermaster" } },
+      "weight": 7
+    },
+    {
+      "id": "br:watch:scout_training",
+      "tags": ["town:blackridge","building:watchtowers","training"],
+      "title": "Eyes Before Teeth",
+      "desc": "Complete fieldcraft drills to lower surprise attacks during sieges.",
+      "requirements": { "flagsNot": ["br:watch:scout_done"] },
+      "stages": [
+        {
+          "id": "s1_manual",
+          "text": "Study the Fieldcraft Manual: Scout Basics.",
+          "completionCheck": { "flagsAny": ["br:training.scout_basic"] }
+        },
+        {
+          "id": "s2_course",
+          "text": "Run Sable’s rooftop course at dusk.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:watchtowers:roof_course"] }
+        },
+        {
+          "id": "s3_certify",
+          "text": "Pass the final observation check.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:ambush_risk", "op": "-", "value": 1 },
+            { "type": "setFlag", "flag": "br:watch:scout_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["br:watch:scout_done"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "sable_nyx_scout_trainer" } },
+      "weight": 8
+    }
+  ]
+}

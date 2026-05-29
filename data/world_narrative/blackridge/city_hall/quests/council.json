@@ -1,0 +1,80 @@
+{
+  "pack": "city_hall_council",
+  "quests": [
+    {
+      "id": "fal:council:dropin",
+      "tags": [
+        "council",
+        "town:blackridge"
+      ],
+      "title": "Weather The Storm",
+      "desc": "Attend a council session. Hear the refrain. Watch petitions die.",
+      "requirements": {
+        "flagsNot": [
+          "fal:council_seen"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:council"
+          },
+          "hint": "Witness the hearing."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:council_seen"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "pella_myre_scribe"
+        }
+      },
+      "weight": 6
+    },
+    {
+      "id": "fal:council:bill",
+      "tags": [
+        "evidence",
+        "town:blackridge"
+      ],
+      "title": "Hostile 'Rescue'",
+      "desc": "Catch the Treasurer's bill authorizing Guild receivership of 'failing' shops.",
+      "requirements": {
+        "flagsAny": [
+          "fal:council_seen"
+        ],
+        "flagsNot": [
+          "fal:bill_copied"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:council_bill"
+          },
+          "hint": "Copy the bill language or memorize the names."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:bill_copied"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "oris_kel_treasurer"
+        }
+      },
+      "weight": 7
+    }
+  ]
+}

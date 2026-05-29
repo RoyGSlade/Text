@@ -1,0 +1,218 @@
+{
+  "area": "clinic",
+  "scenes": [
+    {
+      "id": "clinic_entry",
+      "title": "Blackridge Clinic Entrance",
+      "textBlocks": [
+        { "when": "!br:clinic.unlocked", "text": "The waiting line moves like a glacier with stage fright. A slate reads: 'No miracles. Only medicine'." },
+        { "when": "br:clinic.unlocked && br:siege.level >= 2", "text": "Cots spill into the street. A bell rings twice for triage overflow." }
+      ],
+      "choices": [
+        {
+          "text": "Check in at the desk",
+          "requires": { "flagsNot": ["br:clinic.unlocked"] },
+          "actions": [
+            { "type": "setFlag", "flag": "br:clinic.unlocked", "op": "=", "value": true },
+            { "type": "gotoScene", "sceneId": "clinic_intake" }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 12,
+          "text": "Ask to be seen sooner.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.intake.priority", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Enter the ward", "actions": [ { "type": "gotoScene", "sceneId": "clinic_ward" } ] },
+        { "text": "Visit the dispensary", "actions": [ { "type": "gotoScene", "sceneId": "clinic_dispensary" } ] }
+      ]
+    },
+    {
+      "id": "clinic_intake",
+      "title": "Intake Desk",
+      "textBlocks": [
+        { "when": "!br:clinic.intake.done", "text": "Clipboards reproduce by mitosis. A nurse taps a quill like it owes her money." },
+        { "when": "br:clinic.intake.done", "text": "Files vanish into a cabinet that also makes tea." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 11,
+          "text": "Answer intake questions without lying to yourself.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.intake.done", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:status.drugged", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Return to entrance", "actions": [ { "type": "gotoScene", "sceneId": "clinic_entry" } ] }
+      ]
+    },
+    {
+      "id": "clinic_dispensary",
+      "title": "Dispensary",
+      "textBlocks": [
+        { "when": "true", "text": "Locked drawers, labeled neatly. A chalk tally shows antidote stock." },
+        { "when": "br:clinic.antidote.stock <= 0", "text": "The tally reads zero. Fen looks guilty. Mirelle looks tired." }
+      ],
+      "choices": [
+        {
+          "text": "Request antidote (ledgered)",
+          "requires": { "flagsAny": ["br:clinic.unlocked"], "flagsNot": ["br:clinic.antidote.shortage == true"] },
+          "actions": [
+            { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 1 },
+            { "type": "setFlag", "flag": "br:clinic.antidote.stock", "op": "+", "value": -1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 13,
+          "text": "Argue for a reduced dose cost.",
+          "success": [
+            { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 16,
+          "text": "Lift a vial when no one’s looking. Don’t.",
+          "success": [
+            { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 1 },
+            { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 2 },
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 2 }
+          ]
+        },
+        { "text": "Back to entrance", "actions": [ { "type": "gotoScene", "sceneId": "clinic_entry" } ] }
+      ]
+    },
+    {
+      "id": "clinic_ward",
+      "title": "Patient Ward",
+      "textBlocks": [
+        { "when": "true", "text": "Rows of cots. The ceiling counts to a hundred by fives." },
+        { "when": "br:siege.level >= 2", "text": "Overflow cots and a smell of iron. Casualty flags tick upward." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Science",
+          "dc": 14,
+          "text": "Diagnose a toxin case accurately.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.patients_tagged", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:clinic.misdiagnosed", "op": "=", "value": true }
+          ]
+        },
+        {
+          "text": "Administer antidote to a patient",
+          "requires": { "have": [{ "itemId": "dose.antidote_standard", "qty": 1 }] },
+          "actions": [
+            { "type": "removeItem", "itemId": "dose.antidote_standard", "qty": 1 },
+            { "type": "setFlag", "flag": "br:clinic.casualties", "op": "+", "value": -1 },
+            { "type": "setFlag", "flag": "br:clinic.casualty_stabilized", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Visit quarantine", "actions": [ { "type": "gotoScene", "sceneId": "clinic_quarantine" } ] },
+        { "text": "Back to entrance", "actions": [ { "type": "gotoScene", "sceneId": "clinic_entry" } ] }
+      ]
+    },
+    {
+      "id": "clinic_quarantine",
+      "title": "Quarantine Ward",
+      "textBlocks": [
+        { "when": "!br:clinic.quarantine.active", "text": "Quiet, sealed doors. A red lamp unlit." },
+        { "when": "br:clinic.quarantine.active", "text": "Warning bells stutter. Air tastes of tinctures and fear." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 15,
+          "text": "Engage the quarantine seals.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.quarantine.active", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 13,
+          "text": "Calm a panicked patient.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.rep", "op": "+", "value": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Back to ward", "actions": [ { "type": "gotoScene", "sceneId": "clinic_ward" } ] }
+      ]
+    },
+    {
+      "id": "clinic_training",
+      "title": "Emergency First Aid Training",
+      "textBlocks": [
+        { "when": "true", "text": "Mirelle’s voice is a scalpel that cuts excuses." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Science",
+          "dc": 16,
+          "text": "Apply a pressure wrap properly.",
+          "success": [
+            { "type": "addItem", "itemId": "kit.first_aid", "qty": 1 },
+            { "type": "setFlag", "flag": "br:clinic.training.passed", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:clinic.training.failed", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Back to entrance", "actions": [ { "type": "gotoScene", "sceneId": "clinic_entry" } ] }
+      ]
+    },
+    {
+      "id": "clinic_triage_tent",
+      "title": "Triage Tent",
+      "textBlocks": [
+        { "when": "true", "text": "Canvas, lantern glare, and a steady line of bad luck." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Prioritize the worst-off.",
+          "success": [
+            { "type": "setFlag", "flag": "br:clinic.supplies_delivered", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:clinic.misprioritized", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Return to entrance", "actions": [ { "type": "gotoScene", "sceneId": "clinic_entry" } ] }
+      ]
+    }
+  ]
+}

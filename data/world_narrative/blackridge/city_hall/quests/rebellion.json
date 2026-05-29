@@ -1,0 +1,150 @@
+{
+  "pack": "city_hall_rebellion",
+  "quests": [
+    {
+      "id": "fal:rebel:setup",
+      "tags": [
+        "rebel",
+        "town:blackridge"
+      ],
+      "title": "Quiet Promises",
+      "desc": "Win allies among guards, craftsmen, and couriers to prepare a clean strike.",
+      "requirements": {
+        "flagsNot": [
+          "fal:rebel_network"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:guard_station"
+          },
+          "hint": "Earn Hal Voss’s trust."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:blacksmith:rooftop_intro"
+          },
+          "hint": "Recruit the Blacksmith."
+        },
+        {
+          "id": 2,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:messengers"
+          },
+          "hint": "Secure Kett Bram’s forged writs."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:rebel_network"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "hal_voss_sergeant"
+        }
+      },
+      "weight": 10
+    },
+    {
+      "id": "fal:rebel:jailbreak",
+      "tags": [
+        "rebel",
+        "heist",
+        "town:blackridge"
+      ],
+      "title": "Open The Cells",
+      "desc": "Stage distractions, cut the wards, and extract the vanished protestors.",
+      "requirements": {
+        "flagsAny": [
+          "fal:rebel_network"
+        ],
+        "flagsNot": [
+          "fal:prisoners_freed"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "blackridge:rebel:distractions"
+          },
+          "hint": "Stage three citywide distractions."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "blackridge:rebel:prison_heist"
+          },
+          "hint": "Disable alarms and free prisoners."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:prisoners_freed"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "kett_bram_courier"
+        }
+      },
+      "weight": 9
+    },
+    {
+      "id": "fal:rebel:finale",
+      "tags": [
+        "boss",
+        "town:blackridge"
+      ],
+      "title": "Gold And Fire",
+      "desc": "Confront Sel Varyn in the Council Chamber and choose Blackridge’s future.",
+      "requirements": {
+        "flagsAny": [
+          "fal:prisoners_freed",
+          "fal:dossier_taken"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "blackridge:finale:intro"
+          },
+          "hint": "Rally your allies in the chamber."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "blackridge:finale:boss"
+          },
+          "hint": "Defeat Sel’s gilded form."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:ending:democracy"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "mayor"
+        }
+      },
+      "weight": 10
+    }
+  ]
+}

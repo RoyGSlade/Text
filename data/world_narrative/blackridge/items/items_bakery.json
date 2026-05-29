@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "item.bakery.snack-guard",
+      "name": "Night-Guard Snack",
+      "itemCategory": "food",
+      "description": "Dense bread, salted meat, and something sweet to keep eyes open.",
+      "value": 3,
+      "tags": [
+        "legal",
+        "morale"
+      ],
+      "use": {
+        "type": "incFlag",
+        "flag": "br:watchMorale",
+        "value": 1
+      }
+    },
+    {
+      "id": "item.bakery.ration-pack",
+      "name": "Ration Pack",
+      "itemCategory": "food",
+      "description": "Sealed loaf, broth pellet, dried fruit.",
+      "value": 6,
+      "tags": [
+        "legal",
+        "morale"
+      ]
+    },
+    {
+      "id": "item.bakery.voucher-guard",
+      "name": "Guard Voucher",
+      "itemCategory": "document",
+      "description": "Redeemable for bulk rations during curfew.",
+      "value": 0,
+      "tags": [
+        "legal"
+      ]
+    },
+    {
+      "id": "item.bakery.convoy-note",
+      "name": "Convoy Timing Notes",
+      "itemCategory": "document",
+      "description": "Scribbles of glow intensity and time intervals.",
+      "value": 0,
+      "tags": [
+        "evidence",
+        "merchant-guild"
+      ]
+    },
+    {
+      "id": "item.bakery.forged-stamp",
+      "name": "Forged Ration Stamp",
+      "itemCategory": "tool",
+      "description": "Looks official until it doesn’t.",
+      "value": 40,
+      "tags": [
+        "contraband",
+        "forgery"
+      ]
+    },
+    {
+      "id": "item.bakery.order-slips",
+      "name": "Order Slips (Lantern Crates)",
+      "itemCategory": "document",
+      "description": "Trail of deliveries linking bakery orders and glowing convoy manifests.",
+      "value": 0,
+      "tags": [
+        "merchant-guild",
+        "evidence"
+      ]
+    }
+  ]
+}

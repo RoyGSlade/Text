@@ -1,0 +1,115 @@
+{
+  "pack": "espionage",
+  "quests": [
+    {
+      "id": "espionage:loose_lips",
+      "tags": [
+        "story",
+        "town:blackridge",
+        "corruption"
+      ],
+      "title": "Loose Lips & Ledgers",
+      "desc": "Tella swears there's a secret ledger in Cale's office. Get it.",
+      "requirements": {
+        "flagsNot": [
+          "espionage_ledger_acquired"
+        ],
+        "flagsAny": [
+          "npc:clinic_reception.tier:known"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "coded_ledger",
+            "qty": 1
+          },
+          "hint": "Obtain the Guild's secret ledger."
+        }
+      ],
+      "rewards": {
+        "credits": 50,
+        "flagsSet": [
+          "espionage_ledger_acquired"
+        ]
+      }
+    },
+    {
+      "id": "espionage:the_cipher",
+      "tags": [
+        "story",
+        "town:blackridge",
+        "corruption"
+      ],
+      "title": "The Cipher",
+      "desc": "Take the coded ledger to Master Orim for decryption.",
+      "requirements": {
+        "have": [
+          {
+            "itemId": "coded_ledger",
+            "qty": 1
+          }
+        ],
+        "flagsNot": [
+          "espionage_stash_location_known"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "scene:arcanum_tower_decipher_ledger"
+          },
+          "hint": "Let Orim decipher the ledger."
+        }
+      ],
+      "rewards": {
+        "rep": [
+          {
+            "target": "npc:arcanum_magus",
+            "amount": 10
+          }
+        ],
+        "flagsSet": [
+          "espionage_stash_location_known"
+        ]
+      }
+    },
+    {
+      "id": "espionage:the_lever",
+      "tags": [
+        "story",
+        "town:blackridge",
+        "corruption"
+      ],
+      "title": "The Lever",
+      "desc": "Retrieve the dead-drop at the well and decide who to crush.",
+      "requirements": {
+        "flagsAny": [
+          "espionage_stash_location_known"
+        ],
+        "flagsNot": [
+          "corruption_plot_resolved"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "custom",
+            "id": "retrieve_package"
+          },
+          "hint": "Retrieve the package from the well and confront power."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "corruption_plot_resolved"
+        ]
+      }
+    }
+  ]
+}

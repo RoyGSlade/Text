@@ -1,0 +1,214 @@
+{
+  "buildings": [
+    {
+      "id": "barracks",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:barracks",
+      "npcs": [
+        "elara_rookie",
+        "joric_trainer",
+        "roric_quartermaster"
+      ]
+    },
+    {
+      "id": "city_hall",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:city_hall",
+      "npcs": [
+        "city_clerk",
+        "dara_flint_permits",
+        "mayor",
+        "toma_quill_clerk",
+        "vell_registrar",
+        "hal_voss_sergeant",
+        "jaxen_rook_auditor",
+        "kett_bram_courier",
+        "lysa_dorn_reception_guard",
+        "oris_kel_treasurer",
+        "rina_soot_advocate"
+      ]
+    },
+    {
+      "id": "library",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:library",
+      "npcs": [
+        "daron_scribe",
+        "lyrene_holt_chief",
+        "tobin_clerk",
+        "veyna_cartographer",
+        "old_vero_custodian",
+        "pella_myre_scribe",
+        "sister_illya_archivist"
+      ]
+    },
+    {
+      "id": "arcanum_tower",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:arcanum_tower",
+      "npcs": [
+        "valentar_seer",
+        "arcanum_magus"
+      ]
+    },
+    {
+      "id": "warm_loaf_bakery",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:warm_loaf_bakery",
+      "npcs": [
+        "npc.bakery.line-captain",
+        "npc.bakery.night-baker",
+        "npc.bakery.owner"
+      ]
+    },
+    {
+      "id": "clinic",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:clinic",
+      "npcs": [
+        "clinic_alchemist",
+        "clinic_doctor",
+        "clinic_reception",
+        "clinic_healer_mirelle",
+        "clinic_apprentice_fen",
+        "clinic_nurse_triage",
+        "clinic_orderly_marrow"
+      ]
+    },
+    {
+      "id": "guard_post",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:guard_post",
+      "npcs": [
+        "guard_captain"
+      ]
+    },
+    {
+      "id": "adventurer_guild",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:adventurer_guild",
+      "npcs": [
+        "npc.guild.head-clerk",
+        "npc.guild.inspector",
+        "npc.guild.runner"
+      ]
+    },
+    {
+      "id": "merchant_guild",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:merchant_guild",
+      "npcs": [
+        "guild_exec",
+        "guild_hawker",
+        "guild_honest"
+      ]
+    },
+    {
+      "id": "grimy_anvil",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:grimy_anvil",
+      "npcs": [
+        "kaelen_blacksmith",
+        "kaelen_rusk",
+        "lio_verren",
+        "rulda_hark"
+      ]
+    },
+    {
+      "id": "merchant_guild_store",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:merchant_guild_store",
+      "npcs": [
+        "mg_clerk_sellan",
+        "mg_custodian_nightjar",
+        "mg_engineer_pyra",
+        "mg_scheduler_tamsin"
+      ]
+    },
+    {
+      "id": "merchant_guild_hq",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:merchant_guild_hq",
+      "npcs": [
+        "mg_enforcer_brakk",
+        "mg_reception_marla"
+      ]
+    },
+    {
+      "id": "tavern",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:tavern",
+      "npcs": [
+        "tavern_barkeep",
+        "tavern_drunk_bill",
+        "tavern_drunk_rudy"
+      ]
+    },
+    {
+      "id": "general_store",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:general_store",
+      "npcs": [
+        "gs_shopkeeper_lessa",
+        "gs_runner_jor",
+        "gs_quartermaster_kett"
+      ]
+    },
+    {
+      "id": "outfitter",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:outfitter",
+      "npcs": [
+        "outfitter_proprietor_varra",
+        "outfitter_fitter_nila",
+        "outfitter_masker_sair"
+      ]
+    },
+    {
+      "id": "butcher",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:butcher",
+      "npcs": [
+        "butcher_kessa_brine",
+        "butcher_assistant_greeb",
+        "butcher_wallguard_jerrik"
+      ]
+    },
+    {
+      "id": "watchtowers",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:watchtowers",
+      "npcs": [
+        "mira_kestrel_signalmaster",
+        "bren_oake_quartermaster",
+        "rook_tal_lookout",
+        "sable_nyx_scout_trainer"
+      ]
+    },
+    {
+      "id": "gates",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:gates",
+      "npcs": [
+        "corin_hales_captain",
+        "jessa_quill_gateclerk",
+        "grey_finch_smuggler"
+      ]
+    },
+    {
+      "id": "gaol_blackridge",
+      "town": "blackridge",
+      "sceneId": "bldg:blackridge:gaol_blackridge",
+      "npcs": [
+        "warden_isola_garr",
+        "deputy_jor_veit",
+        "scribe_lyd_ink",
+        "gaoler_husk_bram",
+        "smuggler_knuck_sela",
+        "keeper_adept_lyrene",
+        "prisoner_maro_ink",
+        "prisoner_tams_vekh"
+      ]
+    }
+  ]
+}

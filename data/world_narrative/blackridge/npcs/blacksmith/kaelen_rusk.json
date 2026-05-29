@@ -1,0 +1,20 @@
+{
+  "id": "kaelen_rusk",
+  "town": "blackridge",
+  "roles": ["blacksmith"],
+  "buildingId": "grimy_anvil",
+  "name": "Kaelen Rusk",
+  "age": 38,
+  "demeanor": "stoic, stubborn, fair",
+  "factionLean": "independent",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "tier < friendly && !flag:br:smith.arrested", "text": "If it needs iron, say so. If it needs miracles, go to Church." },
+    { "when": "tier == friendly && !flag:br:smith.arrested", "text": "Back already? Show me what cracked." },
+    { "when": "tier >= respected && !flag:br:smith.arrested", "text": "You treat your gear like it matters. I notice." },
+    { "when": "flag:br:smith.arrested && !flag:br:smith.rescued", "text": "The anvil’s quiet. City Hall isn’t. Get me out or take your business to Rulda." },
+    { "when": "flag:br:smith.rescued && flag:br:smith.reinstated", "text": "Paperwork’s a shackle, but the forge is hot again. Keep it legal here; we can talk… elsewhere." },
+    { "when": "flag:br:smith.covert && !flag:br:smith.reinstated", "text": "Keep it quiet and keep it moving. Sparks travel faster than rumors." }
+  ]
+}

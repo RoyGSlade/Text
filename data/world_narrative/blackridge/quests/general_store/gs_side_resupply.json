@@ -1,0 +1,40 @@
+{
+  "pack": "general_store",
+  "quests": [
+    {
+      "id": "gs_resupply_run",
+      "tags": ["side", "supply"],
+      "title": "Resupply Run",
+      "desc": "Backroom’s thin. Fetch staples or raid your stash.",
+      "requirements": { "flagsAny": ["br:gs.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_collect",
+          "text": "Bring 2 Rope, 1 Tarp, and 1 Lantern Oil.",
+          "completionCheck": {
+            "have": [
+              { "itemId": "tool.rope", "qty": 2 },
+              { "itemId": "camp.tarp", "qty": 1 },
+              { "itemId": "fuel.lantern_oil", "qty": 1 }
+            ]
+          },
+          "onComplete": [
+            { "type": "removeItem", "itemId": "tool.rope", "qty": 2 },
+            { "type": "removeItem", "itemId": "camp.tarp", "qty": 1 },
+            { "type": "removeItem", "itemId": "fuel.lantern_oil", "qty": 1 },
+            { "type": "setFlag", "flag": "br:gs.resupply.delivered", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage2_price_relief",
+          "text": "Confirm price relief on shelves.",
+          "completionCheck": { "flagsAny": ["br:econ.loose"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 50 },
+        { "type": "item", "itemId": "kit.repair", "qty": 1 }
+      ]
+    }
+  ]
+}

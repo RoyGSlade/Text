@@ -126,12 +126,50 @@
 
       <section class="panel" id="inventory-panel">
         <div class="panel-header">
-          <h2>Inventory Gear</h2>
+          <h2>Active Equipment</h2>
         </div>
         <div class="panel-body">
-          <div class="inventory-list" id="inventory-list">
-            <!-- Populated dynamically via ui.js -->
+          <div class="equipment-grid">
+            <div class="equip-slot-container" data-slot="head" title="Head Armor">
+              <span class="equip-slot-label">HEAD</span>
+              <div class="equip-slot-box" id="slot-head">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="neck" title="Neck Item">
+              <span class="equip-slot-label">NECK</span>
+              <div class="equip-slot-box" id="slot-neck">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="ears" title="Ears Item">
+              <span class="equip-slot-label">EARS</span>
+              <div class="equip-slot-box" id="slot-ears">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="torso" title="Torso Armor/Clothing">
+              <span class="equip-slot-label">TORSO</span>
+              <div class="equip-slot-box" id="slot-torso">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="wrists" title="Wrists Item">
+              <span class="equip-slot-label">WRISTS</span>
+              <div class="equip-slot-box" id="slot-wrists">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="hands" title="Hands Tool/Weapon">
+              <span class="equip-slot-label">HANDS</span>
+              <div class="equip-slot-box" id="slot-hands">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="pants" title="Legs/Pants Armor">
+              <span class="equip-slot-label">PANTS</span>
+              <div class="equip-slot-box" id="slot-pants">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="shoes" title="Feet/Shoes Armor">
+              <span class="equip-slot-label">SHOES</span>
+              <div class="equip-slot-box" id="slot-shoes">Empty</div>
+            </div>
+            <div class="equip-slot-container" data-slot="pockets" title="Pockets Weapon/Item">
+              <span class="equip-slot-label">POCKET</span>
+              <div class="equip-slot-box" id="slot-pockets">Empty</div>
+            </div>
           </div>
+          <button class="sys-btn sys-btn-accent backpack-trigger-btn" id="backpack-trigger-btn" style="width: 100%; margin-top: 1rem; font-size: 0.85rem; padding: 0.6rem;">
+            🎒 Access Storage Backpack
+          </button>
         </div>
       </section>
     </aside>
@@ -331,12 +369,38 @@
     </div>
   </div>
 
-  <!-- App Core Modular Scripts -->
-  <script src="js/data.js"></script>
+  <!-- Unified Popout Modal Overlay for Skills, Progression, and Backpack categories -->
+  <div class="game-modal-overlay" id="game-modal-overlay" style="display: none;">
+    <div class="game-modal-box">
+      <div class="modal-close-btn" id="modal-close-btn">&times;</div>
+      <div class="game-modal-body" id="game-modal-body">
+        <!-- Dynamically populated via ui.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Modules -->
+  <script src="js/data/core.js"></script>
+  <script src="js/data/races.js"></script>
+  <script src="js/data/professions.js"></script>
+  <script src="js/data/skills.js"></script>
+  <script src="js/data/leveling.js"></script>
+  <script src="js/data/items.js"></script>
+  <script src="js/data/world.js"></script>
+
+  <!-- Engine & State -->
   <script src="js/engine.js"></script>
   <script src="js/state.js"></script>
   <script src="js/story.js"></script>
-  <script src="js/ui.js"></script>
+
+  <!-- UI Modules -->
+  <script src="js/ui/core.js"></script>
+  <script src="js/ui/character-creation.js"></script>
+  <script src="js/ui/inventory.js"></script>
+  <script src="js/ui/modals.js"></script>
+  <script src="js/ui/story.js"></script>
+
+  <!-- App Bootstrap -->
   <script src="js/app.js"></script>
 </body>
 </html>

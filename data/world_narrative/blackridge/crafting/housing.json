@@ -1,0 +1,145 @@
+{
+  "upgrades": [
+    {
+      "id": "house_cot_1",
+      "name": "Bedroll and Cot",
+      "desc": "A sack of straw on a rickety frame. Improves rest quality.",
+      "cost": [
+        {
+          "itemId": "scrap_cloth",
+          "qty": 5
+        },
+        {
+          "itemId": "credits",
+          "qty": 15
+        }
+      ],
+      "effects": [
+        {
+          "type": "setFlag",
+          "flag": "buff:rest_tier1",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "house_bed_2",
+      "name": "Feather Bed",
+      "desc": "Grants 'Well Rested': +10% stamina regen for 8 hours.",
+      "requirements": {
+        "flagsAny": [
+          "buff:rest_tier1"
+        ]
+      },
+      "cost": [
+        {
+          "itemId": "fine_cloth",
+          "qty": 8
+        },
+        {
+          "itemId": "scrap_wood",
+          "qty": 10
+        },
+        {
+          "itemId": "credits",
+          "qty": 75
+        }
+      ],
+      "effects": [
+        {
+          "type": "setFlag",
+          "flag": "buff:rest_tier2",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "house_workbench_1",
+      "name": "Sturdy Workbench",
+      "desc": "Unlocks basic tools and armor repair kits.",
+      "cost": [
+        {
+          "itemId": "scrap_wood",
+          "qty": 15
+        },
+        {
+          "itemId": "iron_fittings",
+          "qty": 6
+        },
+        {
+          "itemId": "credits",
+          "qty": 50
+        }
+      ],
+      "effects": [
+        {
+          "type": "setFlag",
+          "flag": "crafting:recipe:basic_tools",
+          "value": true
+        },
+        {
+          "type": "setFlag",
+          "flag": "crafting:recipe:armor_repair_kit",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "house_alchemy_1",
+      "name": "Alchemical Still",
+      "desc": "Unlocks Minor Healing Potion and Simple Antitoxin.",
+      "cost": [
+        {
+          "itemId": "glass_vial",
+          "qty": 5
+        },
+        {
+          "itemId": "copper_tubing",
+          "qty": 3
+        },
+        {
+          "itemId": "credits",
+          "qty": 100
+        }
+      ],
+      "effects": [
+        {
+          "type": "setFlag",
+          "flag": "crafting:recipe:potion_healing_minor",
+          "value": true
+        },
+        {
+          "type": "setFlag",
+          "flag": "crafting:recipe:potion_antitoxin_simple",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "house_door_1",
+      "name": "Reinforced Door",
+      "desc": "Slightly reduces negative night events while resting at home.",
+      "cost": [
+        {
+          "itemId": "scrap_wood",
+          "qty": 10
+        },
+        {
+          "itemId": "iron_fittings",
+          "qty": 8
+        },
+        {
+          "itemId": "credits",
+          "qty": 60
+        }
+      ],
+      "effects": [
+        {
+          "type": "setFlag",
+          "flag": "buff:home_defense",
+          "value": 5
+        }
+      ]
+    }
+  ]
+}

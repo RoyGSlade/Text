@@ -1,0 +1,31 @@
+{
+  "id": "roric_quartermaster",
+  "town": "blackridge",
+  "roles": [
+    "quartermaster",
+    "town_watch"
+  ],
+  "buildingId": "barracks",
+  "name": "Roric Stonehand",
+  "demeanor": "pragmatic, weary, meticulous",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "If it's not on the requisition form, it doesn't exist. Got a form?"
+    },
+    {
+      "when": "tier >= known",
+      "text": "Every scrap helps. Let's see what you've brought."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "town:blackridge",
+      "building:barracks",
+      "role:watch"
+    ],
+    "limitPerVisit": 1
+  }
+}

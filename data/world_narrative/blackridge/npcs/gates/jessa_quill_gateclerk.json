@@ -1,0 +1,13 @@
+{
+  "id": "jessa_quill_gateclerk",
+  "town": "blackridge",
+  "roles": ["clerk"],
+  "buildingId": "bldg:blackridge:gates",
+  "name": "Jessa Quill",
+  "demeanor": "brisk, by-the-book until the book catches fire",
+  "repFaction": "civic",
+  "greetings": [
+    { "when": "tier < known", "text": "Next. Present commission, permit, or patrol orders." },
+    { "when": "tier >= known", "text": "If this stamp goes on your papers, you’re on the hook to come back." }
+  ]
+}

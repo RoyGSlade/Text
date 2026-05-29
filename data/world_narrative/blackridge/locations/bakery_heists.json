@@ -1,0 +1,110 @@
+{
+  "heists": [
+    {
+      "id": "heist.bakery.backroom",
+      "title": "Backroom After Midnight",
+      "textBlocks": [
+        {
+          "text": "The flour room hums with ovens and a tiny office window. Ration stamp sits beside order slips."
+        }
+      ],
+      "choices": [
+        {
+          "id": "case-patrols",
+          "type": "skillCheck",
+          "skill": "Investigation",
+          "dc": 11,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.bakery.cased",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "incFlag",
+              "flag": "br:suspicion",
+              "value": 1
+            }
+          ],
+          "text": "Case patrols and oven cycles"
+        },
+        {
+          "id": "copy-ration-stamp",
+          "type": "skillCheck",
+          "skill": "Crafting",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.bakery.stampCopied",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.bakery.forged-stamp",
+              "qty": 1
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:pendingArrestMinutes",
+              "op": "=",
+              "value": 30
+            }
+          ],
+          "text": "Copy the ration stamp with wax melting"
+        },
+        {
+          "id": "lift-order-slips",
+          "type": "skillCheck",
+          "skill": "Thievery",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "addItem",
+              "itemId": "item.bakery.order-slips",
+              "qty": 1
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.bakery.alarmSoft",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "text": "Lift order slips tied to lantern crates"
+        },
+        {
+          "id": "exfiltrate",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.bakery.exfiltrated",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:pendingArrestMinutes",
+              "op": "=",
+              "value": 30
+            }
+          ],
+          "text": "Slip out along the alley"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "tavern_drunk_bill",
+  "town": "blackridge",
+  "roles": [
+    "informant"
+  ],
+  "buildingId": "tavern",
+  "name": "Bill",
+  "demeanor": "sleepy,ornery,observant",
+  "repFaction": "town_blackridge",
+  "repPersonal": false,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "My memory improves with ale."
+    },
+    {
+      "when": "tier == known",
+      "text": "Saw something last night. Might’ve been two things."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Tell no one I’m helpful."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "rumor",
+      "town:blackridge"
+    ],
+    "limitPerVisit": 1
+  }
+}

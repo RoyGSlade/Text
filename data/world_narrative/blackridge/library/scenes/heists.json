@@ -1,0 +1,83 @@
+{
+  "scenes": {
+    "bldg:blackridge:library:night_entry": {
+      "text": "Night Library. Lamps gutter. Footsteps echo like second thoughts.",
+      "choices": [
+        {
+          "text": "Slip in through the bindery window (Stealth DC 13)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:night_stacks",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Pick the rear lock (Mechanics DC 13)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:night_stacks",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Retreat",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:library:night_stacks": {
+      "text": "Between shelves, a draft. Books exhale dust and secrets.",
+      "choices": [
+        {
+          "text": "Search for banned histories (Investigation DC 12)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "book.banned_histories",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:night_stacks"
+        },
+        {
+          "text": "Find the cellar latch (Perception DC 12)",
+          "type": "skillCheck",
+          "leadsTo": "bldg:blackridge:library:secret_cellar"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "bldg:blackridge:library:secret_cellar": {
+      "text": "A narrow stair to a room that doesn’t exist on any plan. A desk. A cot. Daron’s world.",
+      "choices": [
+        {
+          "text": "Copy rebel routes (Literacy DC 12)",
+          "type": "skillCheck",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "lib:rebel_routes",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:secret_cellar"
+        },
+        {
+          "text": "Collect cipher scraps (gain Cipher Key: Alpha)",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "cipher.key.alpha",
+              "qty": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:library:secret_cellar"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:library:night_stacks"
+        }
+      ]
+    }
+  }
+}

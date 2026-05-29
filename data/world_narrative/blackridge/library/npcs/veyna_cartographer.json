@@ -1,0 +1,21 @@
+{
+  "id": "veyna_cartographer",
+  "town": "blackridge",
+  "roles": [
+    "cartographer"
+  ],
+  "buildingId": "library",
+  "name": "Veyna",
+  "demeanor": "precise, overworked, smuggling truth",
+  "repFaction": "council",
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Bring fragments. I stitch paths from tatters."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Maps that matter rarely survive censors."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+    "basic_patch": {
+      "station": "workbench",
+      "action": "craft",
+      "skill": "Mechanics",
+      "dc": 10,
+      "inputs": [{ "itemId": "scrap_cloth", "quantity": 1 }],
+      "success": { "item": "scrap_wood", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_cloth" }, "injury": "stunned" }
+    },
+    "repair_cloth": {
+      "station": "workbench",
+      "action": "repair",
+      "skill": "Mechanics",
+      "dc": 8,
+      "inputs": [{ "itemId": "scrap_cloth", "quantity": 1 }],
+      "success": { "durability": "full", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_cloth" }, "injury": "stunned" }
+    },
+    "attach_patch": {
+      "station": "workbench",
+      "action": "attach",
+      "skill": "Mechanics",
+      "dc": 12,
+      "inputs": [{ "itemId": "scrap_cloth", "quantity": 1 }],
+      "success": { "attachment": "scrap_cloth", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_wood" }, "injury": "poisoned" }
+    },
+    "cook_tonic": {
+      "station": "kitchen",
+      "action": "craft",
+      "skill": "Nutrition",
+      "dc": 10,
+      "inputs": [{ "itemId": "scrap_wood", "quantity": 1 }],
+      "success": { "item": "consumable.tonic_energizing", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_wood" } }
+    },
+    "forge_writ": {
+      "station": "forgery",
+      "action": "craft",
+      "skill": "Bureaucracy",
+      "dc": 12,
+      "inputs": [{ "itemId": "scrap_cloth", "quantity": 1 }],
+      "success": { "item": "doc.writ_forged", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_cloth" } }
+    },
+    "paint_small": {
+      "station": "studio",
+      "action": "craft",
+      "skill": "Artist",
+      "dc": 10,
+      "inputs": [{ "itemId": "scrap_wood", "quantity": 1 }, { "itemId": "scrap_cloth", "quantity": 1 }],
+      "success": { "item": "art.painting_small", "quality": "1d20" },
+      "failure": { "byproduct": { "itemId": "scrap_wood", "quantity": 1 } }
+    }
+  }

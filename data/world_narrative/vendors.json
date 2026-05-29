@@ -1,0 +1,62 @@
+{
+  "tuning": {
+    "repTiers": ["stranger", "ally"],
+    "tierThresholds": { "stranger": 0, "ally": 10 }
+  },
+  "repMultipliers": {
+    "merchants": { "stranger": 1, "ally": 0.9 },
+    "bakers": { "stranger": 1, "ally": 0.95 },
+    "smiths": { "stranger": 1, "ally": 0.85 },
+    "healers": { "stranger": 1, "ally": 0.9 },
+    "guild": { "stranger": 1, "ally": 0.8 }
+  },
+  "rarityMultipliers": {
+    "common": 1,
+    "uncommon": 1.2,
+    "rare": 1.5,
+    "legendary": 2
+  },
+  "vendors": {
+    "general_store": {
+      "name": "General Store",
+      "group": "merchants",
+      "items": [
+        { "id": "consumable.tonic_energizing", "price": 10 }
+      ]
+    },
+    "bakery": {
+      "name": "Bakery",
+      "group": "bakers",
+      "items": [
+        { "id": "consumable.tonic_energizing", "price": 8 },
+        { "id": "doc.commission", "price": 5 }
+      ]
+    },
+    "blacksmith": {
+      "name": "Blacksmith",
+      "group": "smiths",
+      "items": [
+        { "id": "weapon.training_sword", "price": 25 },
+        { "id": "armor.leather_vest", "price": 20 },
+        { "id": "reinforced_plate", "price": 15 }
+      ]
+    },
+    "clinic": {
+      "name": "Clinic",
+      "group": "healers",
+      "items": [
+        { "id": "consumable.tonic_energizing", "price": 12 },
+        { "id": "scrap_cloth", "price": 1 }
+      ]
+    },
+    "merchant_guild": {
+      "name": "Merchant Guild",
+      "group": "guild",
+      "items": [
+        { "id": "permit.commission", "price": 30 },
+        { "id": "receipt.guild_fee", "price": 2 },
+        { "id": "doc.commission_forged", "price": 25 }
+      ]
+    }
+  }
+}

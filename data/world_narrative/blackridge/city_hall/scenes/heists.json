@@ -1,0 +1,311 @@
+{
+  "scenes": {
+    "bldg:blackridge:city_hall:basement_entry": {
+      "text": "Sister Illya’s desk sits empty. Somewhere a child feigns tears about a lost ribbon. The vault door waits.",
+      "choices": [
+        {
+          "text": "Disarm the bell rune (Technology DC 12)",
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 12,
+          "onSuccess": "bldg:blackridge:city_hall:basement_search",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Pick the lock (Mechanics DC 13)",
+          "type": "skillCheck",
+          "skill": "Mechanics",
+          "dc": 13,
+          "onSuccess": "bldg:blackridge:city_hall:basement_search",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Back",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:basement_search": {
+      "text": "Rows of ledgers with years the city pretends to forget.",
+      "choices": [
+        {
+          "text": "Search for the old mayor’s file (Perception DC 12)",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "doc.old_mayor_memo",
+              "qty": 1
+            }
+          ],
+          "onSuccess": "bldg:blackridge:city_hall:basement_exit",
+          "onFailure": "bldg:blackridge:city_hall:basement_decoy"
+        },
+        {
+          "text": "Scan invoices for convoy schedules (Street DC 12)",
+          "type": "skillCheck",
+          "skill": "Street",
+          "dc": 12,
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:convoy_schedules",
+              "value": true
+            }
+          ],
+          "onSuccess": "bldg:blackridge:city_hall:basement_exit",
+          "onFailure": "bldg:blackridge:city_hall:basement_decoy"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:basement_decoy": {
+      "text": "A decoy ledger screams in silence only guards hear.",
+      "choices": [
+        {
+          "text": "Hide (Stealth DC 14)",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 14,
+          "onSuccess": "bldg:blackridge:city_hall:basement_exit",
+          "onFailure": "blackridge:prison:intake"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:basement_exit": {
+      "text": "You slip upstairs as the ‘renovations’ continue to be nothing.",
+      "choices": [
+        {
+          "text": "Back to City Hall",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:roof": {
+      "text": "Night wind. The roof door sulks behind a brass riddle lock.",
+      "choices": [
+        {
+          "text": "Use Rooftop Kit",
+          "requires": {
+            "have": [
+              {
+                "itemId": "gear.rooftop_kit",
+                "qty": 1
+              }
+            ]
+          },
+          "leadsTo": "bldg:blackridge:city_hall:office"
+        },
+        {
+          "text": "Pick the lock (Mechanics DC 15)",
+          "type": "skillCheck",
+          "skill": "Mechanics",
+          "dc": 15,
+          "onSuccess": "bldg:blackridge:city_hall:office",
+          "onFailure": "blackridge:prison:intake"
+        },
+        {
+          "text": "Leave",
+          "leadsTo": "bldg:blackridge:city_hall"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:office": {
+      "text": "Plush rugs. A portrait of Sel as a saint. A safe hums behind the desk.",
+      "choices": [
+        {
+          "text": "Solve the desk riddle: 'What stands when all kneel, warms without flame, and dies at noon?' (History DC 10)",
+          "type": "skillCheck",
+          "skill": "History",
+          "dc": 10,
+          "onSuccess": "bldg:blackridge:city_hall:safe_clean",
+          "onFailure": "bldg:blackridge:city_hall:trip"
+        },
+        {
+          "text": "Force the safe (Mechanics DC 16, noisy)",
+          "type": "skillCheck",
+          "skill": "Mechanics",
+          "dc": 16,
+          "onSuccess": "bldg:blackridge:city_hall:safe_noisy",
+          "onFailure": "blackridge:prison:intake"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:trip": {
+      "text": "A silk cord snaps taut. Somewhere, a bell rings where only guards hear.",
+      "choices": [
+        {
+          "text": "Hurry the safe anyway",
+          "leadsTo": "bldg:blackridge:city_hall:safe_noisy"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:safe_clean": {
+      "text": "The safe clicks. Inside: a bound Arcanum dossier, five maps, careful notes.",
+      "choices": [
+        {
+          "text": "Take the dossier",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "doc.arcanum_five_sources",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "fal:dossier_taken",
+              "value": true
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:roof_exit"
+        },
+        {
+          "text": "Leave it for now",
+          "leadsTo": "bldg:blackridge:city_hall:roof_exit"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:safe_noisy": {
+      "text": "Sparks hop. The safe coughs open. You have seconds.",
+      "choices": [
+        {
+          "text": "Grab the dossier",
+          "actions": [
+            {
+              "type": "addItem",
+              "itemId": "doc.arcanum_five_sources",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "fal:dossier_taken",
+              "value": true
+            },
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:roof_exit"
+        },
+        {
+          "text": "Bail",
+          "actions": [
+            {
+              "type": "incFlag",
+              "flag": "fal:suspicion",
+              "value": 1
+            }
+          ],
+          "leadsTo": "bldg:blackridge:city_hall:roof_exit"
+        }
+      ]
+    },
+    "bldg:blackridge:city_hall:roof_exit": {
+      "text": "Rooftop again. Breath burning. The city pretends to sleep.",
+      "choices": [
+        {
+          "text": "Disappear into the night",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "blackridge:rebel:distractions": {
+      "text": "The city jitters. Shop fires, staged arguments, and a suspicious parade of goats.",
+      "choices": [
+        {
+          "text": "Okay, that’s three. Move.",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "fal:rebel_distractions_done",
+              "value": true
+            }
+          ],
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "blackridge:rebel:prison_heist": {
+      "text": "Ward sigils hum like hornets. Cells echo with hollow breath.",
+      "choices": [
+        {
+          "text": "Cut the wards (Technology DC 14)",
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 14,
+          "onSuccess": "blackridge:rebel:exfil",
+          "onFailure": "blackridge:prison:intake"
+        }
+      ]
+    },
+    "blackridge:rebel:exfil": {
+      "text": "Doors open. Feet run. Your spine remembers it’s breakable.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:prisoners_freed",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Scatter to safehouses",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    },
+    "blackridge:finale:intro": {
+      "text": "Council benches groan under the weight of eyes and consequences.",
+      "choices": [
+        {
+          "text": "Call your allies to speak (Speech DC 12)",
+          "type": "skillCheck",
+          "skill": "Speech",
+          "dc": 12,
+          "onSuccess": "blackridge:finale:boss",
+          "onFailure": "bldg:blackridge:city_hall:council"
+        }
+      ]
+    },
+    "blackridge:finale:boss": {
+      "text": "Sel Varyn rises, gold spilling from her cuffs like molten arrogance.",
+      "choices": [
+        {
+          "text": "End it cleanly (Melee DC 14)",
+          "type": "skillCheck",
+          "skill": "Melee",
+          "dc": 14,
+          "onSuccess": "blackridge:finale:resolve",
+          "onFailure": "city_hall"
+        },
+        {
+          "text": "Expose the proof (Bureaucracy DC 12)",
+          "type": "skillCheck",
+          "skill": "Bureaucracy",
+          "dc": 12,
+          "onSuccess": "blackridge:finale:resolve",
+          "onFailure": "city_hall"
+        }
+      ]
+    },
+    "blackridge:finale:resolve": {
+      "text": "The chamber exhales. History rewrites itself in dry ink.",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "fal:ending:democracy",
+          "value": true
+        }
+      ],
+      "choices": [
+        {
+          "text": "Step into the square",
+          "leadsTo": "town:blackridge"
+        }
+      ]
+    }
+  }
+}

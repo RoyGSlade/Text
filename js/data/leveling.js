@@ -1,0 +1,35 @@
+window.IAG_DATA = window.IAG_DATA || {};
+window.IAG_DATA.leveling = [
+  { level: 1, total_skill_levels: 0, power_points: 2, hp: true, actions: "1A 1R", profession: 1 },
+  { level: 2, total_skill_levels: 8, power_points: 4, attribute: 1, actions: "1A 1R" },
+  { level: 3, total_skill_levels: 12, power_points: 6, actions: "1A 1R" },
+  { level: 4, total_skill_levels: 16, power_points: 8, hp: true, attribute: 1, actions: "1A 1R" },
+  { level: 5, total_skill_levels: 20, power_points: 10, profession: 2, actions: "1A 1R" },
+  { level: 6, total_skill_levels: 24, power_points: 12, attribute: 1, actions: "1A 1R" },
+  { level: 7, total_skill_levels: 28, power_points: 14, training: true, actions: "1A 1R" },
+  { level: 8, total_skill_levels: 32, power_points: 16, hp: true, attribute: 1, actions: "1A 1R" },
+  { level: 9, total_skill_levels: 36, power_points: 18, attribute: 1, actions: "1A 1R" },
+  { level: 10, total_skill_levels: 40, power_points: 20, attribute: 1, profession: 3, actions: "2A 1R" },
+  { level: 11, total_skill_levels: 44, power_points: 22, actions: "2A 1R" },
+  { level: 12, total_skill_levels: 48, power_points: 24, hp: true, attribute: 1, actions: "2A 1R" },
+  { level: 13, total_skill_levels: 52, power_points: 26, attribute: 1, actions: "2A 1R" },
+  { level: 14, total_skill_levels: 56, power_points: 28, attribute: 1, actions: "2A 1R" },
+  { level: 15, total_skill_levels: 60, power_points: 30, profession: 4, actions: "2A 1R" },
+  { level: 16, total_skill_levels: 64, power_points: 32, hp: true, attribute: 1, actions: "2A 1R" },
+  { level: 17, total_skill_levels: 68, power_points: 34, actions: "2A 1R" },
+  { level: 18, total_skill_levels: 72, power_points: 36, attribute: 1, actions: "2A 1R" },
+  { level: 19, total_skill_levels: 76, power_points: 38, actions: "2A 1R" },
+  { level: 20, total_skill_levels: 80, power_points: 40, hp: true, attribute: 1, profession: 2, actions: "3A 1R" },
+  { level: 21, total_skill_levels: 84, power_points: 42, actions: "3A 1R" },
+  { level: 22, total_skill_levels: 88, power_points: 44, attribute: 1, training: true, actions: "3A 1R" },
+  { level: 23, total_skill_levels: 92, power_points: 46, actions: "3A 1R" },
+  { level: 24, total_skill_levels: 96, power_points: 48, hp: true, attribute: 1, actions: "3A 1R" },
+  { level: 25, total_skill_levels: 100, power_points: 50, profession: 5, actions: "3A 1R" },
+  { level: 26, total_skill_levels: 104, power_points: 52, attribute: 1, actions: "3A 1R" },
+  { level: 27, total_skill_levels: 108, power_points: 54, actions: "3A 1R" },
+  { level: 28, total_skill_levels: 112, power_points: 56, hp: true, attribute: 1, training: true, actions: "3A 1R" },
+  { level: 29, total_skill_levels: 116, power_points: 58, actions: "3A 1R" },
+  { level: 30, total_skill_levels: 120, power_points: 60, attribute: 1, actions: "3A 2R" }
+];
+
+window.IAG_DATA.success_thresholds = [0, 5, 10, 20, 30, 50];

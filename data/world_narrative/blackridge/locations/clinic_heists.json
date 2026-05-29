@@ -1,0 +1,82 @@
+{
+  "heists": [
+    {
+      "id": "clinic_pharmacy_lockup",
+      "title": "Pharmacy Lockup",
+      "objectives": [
+        { "id": "obj_scope", "text": "Scope the lockup without spooking staff." },
+        { "id": "obj_secure_batch", "text": "Secure an antidote batch or recipe page without damaging relations." }
+      ],
+      "entryVectors": [
+        {
+          "id": "ev_fake_medpass",
+          "name": "Fake Medical Pass",
+          "requires": { "have": [{ "itemId": "badge.audit_fake", "qty": 1 }] },
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Diplomacy",
+              "dc": 14,
+              "text": "Talk your way past the orderly.",
+              "success": [],
+              "failure": [ { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 1 } ]
+            }
+          ]
+        },
+        {
+          "id": "ev_rear_window",
+          "name": "Rear Window",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 16,
+              "text": "Slip the latch, slide inside.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 2 },
+                { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        }
+      ],
+      "securityLayers": [
+        {
+          "id": "sec_cabinet_lock",
+          "name": "Cabinet Lock",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Technology",
+            "dc": 15,
+            "text": "Pick or shim the cabinet quietly.",
+            "success": [],
+            "failure": [ { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 1 } ]
+          }
+        },
+        {
+          "id": "sec_inventory_ledger",
+          "name": "Inventory Ledger",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Perception",
+            "dc": 13,
+            "text": "Notice the decoy ledger and sign the real one correctly.",
+            "success": [],
+            "failure": [ { "type": "setFlag", "flag": "br:clinic.heist.alert", "op": "+", "value": 1 } ]
+          }
+        }
+      ],
+      "payoff": {
+        "success": [
+          { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 2 }
+        ],
+        "failure": [
+          { "type": "setFlag", "flag": "br:clinic.ban.active", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 2 }
+        ]
+      }
+    }
+  ]
+}

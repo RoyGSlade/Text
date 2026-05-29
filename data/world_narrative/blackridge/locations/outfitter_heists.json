@@ -1,0 +1,84 @@
+{
+  "heists": [
+    {
+      "id": "outfitter_pattern_vault",
+      "title": "Pattern Vault",
+      "objectives": [
+        { "id": "obj_catalog", "text": "Catalog pattern stencils and measurement ledgers without alerting staff." },
+        { "id": "obj_copy", "text": "Copy a merchant pattern set for off-site tailoring." }
+      ],
+      "entryVectors": [
+        {
+          "id": "ev_skylight",
+          "name": "Skylight Drop",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 16,
+              "text": "Lower in on twine between hanging coats.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:outfit.heist.alert", "op": "+", "value": 2 },
+                { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ev_delivery_crate",
+          "name": "Delivery Crate",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Perception",
+              "dc": 12,
+              "text": "Ride the crate past the counter at shift change.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:outfit.heist.alert", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        }
+      ],
+      "securityLayers": [
+        {
+          "id": "sec_ledger_lock",
+          "name": "Measurements Ledger Lock",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Technology",
+            "dc": 15,
+            "text": "Pick the ledger clasp without creasing a page.",
+            "success": [],
+            "failure": [ { "type": "setFlag", "flag": "br:outfit.heist.alert", "op": "+", "value": 1 } ]
+          }
+        },
+        {
+          "id": "sec_dummy_mannequin",
+          "name": "Dummy Mannequin",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Arcana",
+            "dc": 14,
+            "text": "Disarm the warded mannequin that yells when touched.",
+            "success": [],
+            "failure": [ { "type": "setFlag", "flag": "br:outfit.heist.alert", "op": "+", "value": 2 } ]
+          }
+        }
+      ],
+      "payoff": {
+        "success": [
+          { "type": "addItem", "itemId": "livery.merchant", "qty": 1 },
+          { "type": "setFlag", "flag": "br:disguise.merchant", "op": "=", "value": true }
+        ],
+        "failure": [
+          { "type": "setFlag", "flag": "br:outfit.ban.active", "op": "=", "value": true }
+        ]
+      }
+    }
+  ]
+}

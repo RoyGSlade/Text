@@ -1,0 +1,39 @@
+{
+  "pack": "general_store",
+  "quests": [
+    {
+      "id": "gs_price_probe",
+      "tags": ["side", "investigation", "economy"],
+      "title": "Price Probe",
+      "desc": "Collect shelf tags and receipts to map the gouge.",
+      "requirements": { "flagsAny": ["br:gs.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_tags",
+          "text": "Collect 3 Shelf Tags during different economic states.",
+          "completionCheck": {
+            "have": [
+              { "itemId": "doc.shelf_tag.tight", "qty": 1 },
+              { "itemId": "doc.shelf_tag.normal", "qty": 1 },
+              { "itemId": "doc.shelf_tag.loose", "qty": 1 }
+            ]
+          }
+        },
+        {
+          "id": "stage2_file",
+          "text": "File the compiled report with the Keepers or City Hall.",
+          "completionCheck": { "flagsAny": ["br:report.library.filed", "br:report.cityhall.filed"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:econ.normal", "op": "=", "value": true },
+            { "type": "setFlag", "flag": "br:econ.tight", "op": "=", "value": false },
+            { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": false }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 60 },
+        { "type": "item", "itemId": "voucher.discount", "qty": 1 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "pack": "clinic",
+  "quests": [
+    {
+      "id": "clinic_outbreak_protocol",
+      "tags": ["side", "event", "disease"],
+      "title": "Outbreak Protocol",
+      "desc": "A cluster of cases hits the ward. Quarantine, treat, and report.",
+      "requirements": { "flagsAny": ["br:clinic.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_quarantine",
+          "text": "Raise quarantine and tag patients.",
+          "completionCheck": { "flagsAny": ["br:clinic.quarantine.active", "br:clinic.patients_tagged"] }
+        },
+        {
+          "id": "stage2_dose",
+          "text": "Administer three antidote doses.",
+          "completionCheck": { "have": [{ "itemId": "dose.antidote_standard", "qty": -3 }] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:clinic.casualties", "op": "+", "value": -3 },
+            { "type": "setFlag", "flag": "br:clinic.casualty_stabilized", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage3_report",
+          "text": "File a sealed report with the Library or City Hall.",
+          "completionCheck": { "flagsAny": ["br:report.library.filed", "br:report.cityhall.filed"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 90 },
+        { "type": "credits", "amount": 15 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "quest.guild.ledger-heist",
+  "title": "Quiet Corrections",
+  "tags": [
+    "adventurer_guild",
+    "heist",
+    "stealth",
+    "merchant-guild"
+  ],
+  "desc": "Infiltrate the back office, copy the inspector’s seal, alter ledgers, and pull records on lantern-proof creatures.",
+  "stages": [
+    {
+      "id": "case-the-hall",
+      "text": "Survey guard routes in the Guild at night.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.guild.cased"
+        ]
+      }
+    },
+    {
+      "id": "copy-seal",
+      "text": "Create a wax copy of the inspector’s seal.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.guild.sealCopied"
+        ]
+      }
+    },
+    {
+      "id": "alter-ledger",
+      "text": "Modify two ledger entries without tripping an alarm.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.guild.ledgerAltered"
+        ]
+      }
+    },
+    {
+      "id": "extract-files",
+      "text": "Steal notes on a creature unaffected by Sunlight Lanterns.",
+      "completionCheck": {
+        "have": [
+          {
+            "itemId": "item.guild.file-lantern-proof",
+            "qty": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "get-out",
+      "text": "Exit unseen or bribe your way through inspection.",
+      "completionCheck": {
+        "flagsAny": [
+          "br:heist.guild.exfiltrated"
+        ]
+      },
+      "rewards": [
+        {
+          "type": "incCredits",
+          "value": 200
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:repClerksFriendly",
+          "op": "=",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

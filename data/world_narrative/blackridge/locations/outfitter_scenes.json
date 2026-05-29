@@ -1,0 +1,207 @@
+{
+  "area": "outfitter",
+  "scenes": [
+    {
+      "id": "outfitter_entry",
+      "title": "Varra’s Outfitting & Disguise",
+      "textBlocks": [
+        { "when": "!br:outfit.unlocked", "text": "Racks of cloaks, boots, and lies that fit. A bell rings once for coin, twice for trouble." },
+        { "when": "br:outfit.unlocked && br:weather.stormActive", "text": "Stormliners drip by the door. The floor smells like wet travelers and relief." }
+      ],
+      "choices": [
+        {
+          "text": "Check in with Varra",
+          "requires": { "flagsNot": ["br:outfit.unlocked"] },
+          "actions": [
+            { "type": "setFlag", "flag": "br:outfit.unlocked", "op": "=", "value": true },
+            { "type": "gotoScene", "sceneId": "outfitter_counter" }
+          ]
+        },
+        { "text": "Go to counter", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_counter" }] },
+        { "text": "Browse shelves", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_shelves" }] }
+      ]
+    },
+    {
+      "id": "outfitter_counter",
+      "title": "Counter",
+      "textBlocks": [
+        { "when": "true", "text": "Varra’s measuring tape twitches like a pet snake." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 13,
+          "text": "Request a fitting demo to test penalties safely.",
+          "success": [
+            { "type": "setFlag", "flag": "br:outfit.demo.ready", "op": "=", "value": true },
+            { "type": "gotoScene", "sceneId": "outfitter_fitting_demo" }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Consult disguises", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_consult" }] },
+        { "text": "Back to entry", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_entry" }] }
+      ]
+    },
+    {
+      "id": "outfitter_shelves",
+      "title": "Shelves of Weather & Woe",
+      "textBlocks": [
+        { "when": "true", "text": "Stormliners, frostcloaks, goggles, hoods, boots. Mannequins judge you quietly." }
+      ],
+      "choices": [
+        {
+          "text": "Buy Stormliner Poncho",
+          "requires": { "flagsAny": ["br:outfit.unlocked"] },
+          "actions": [ { "type": "addItem", "itemId": "gear.stormliner", "qty": 1 } ]
+        },
+        {
+          "text": "Buy Frostcloak",
+          "requires": { "flagsAny": ["br:outfit.unlocked"] },
+          "actions": [ { "type": "addItem", "itemId": "gear.frostcloak", "qty": 1 } ]
+        },
+        {
+          "text": "Buy Sandveil Hood",
+          "requires": { "flagsAny": ["br:outfit.unlocked"] },
+          "actions": [ { "type": "addItem", "itemId": "gear.sandveil", "qty": 1 } ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Spot a discount tag (use voucher).",
+          "success": [
+            { "type": "addItem", "itemId": "voucher.tailor_discount", "qty": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Back to entry", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_entry" }] }
+      ]
+    },
+    {
+      "id": "outfitter_consult",
+      "title": "Disguise Consultation",
+      "textBlocks": [
+        { "when": "true", "text": "Sair lines up pins and powders. Varra circles with a critical squint." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 14,
+          "text": "Negotiate for livery without the surcharge.",
+          "success": [
+            { "type": "addItem", "itemId": "livery.merchant", "qty": 1 },
+            { "type": "setFlag", "flag": "br:disguise.merchant", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 15,
+          "text": "Practice the walk: less copper, more confidence.",
+          "success": [
+            { "type": "setFlag", "flag": "br:disguise.quality_good", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:disguise.tell", "op": "=", "value": true }
+          ]
+        },
+        { "text": "See the mask station", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_mask_station" }] },
+        { "text": "Back to counter", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_counter" }] }
+      ]
+    },
+    {
+      "id": "outfitter_mask_station",
+      "title": "Mask & Makeup",
+      "textBlocks": [
+        { "when": "true", "text": "Powders, wax, and enough dyes to repaint your history." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 14,
+          "text": "Fit a voice-dampening scarf into the livery.",
+          "success": [
+            { "type": "addItem", "itemId": "kit.disguise", "qty": 1 },
+            { "type": "setFlag", "flag": "br:disguise.quality_good", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:disguise.tell", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Back to consult", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_consult" }] }
+      ]
+    },
+    {
+      "id": "outfitter_mod_station",
+      "title": "Mod Station",
+      "textBlocks": [
+        { "when": "true", "text": "Nila lays out needles like lockpicks." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Technology",
+          "dc": 15,
+          "text": "Sew hidden pockets without ruining the seam.",
+          "success": [
+            { "type": "setFlag", "flag": "br:disguise.cache_ready", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:outfit.botched_mod", "op": "=", "value": true }
+          ]
+        },
+        { "text": "Back to Nila", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_shelves" }] }
+      ]
+    },
+    {
+      "id": "outfitter_fitting_demo",
+      "title": "Fitting Demo",
+      "textBlocks": [
+        { "when": "true", "text": "Three doors hum: Cold, Storm, Sand. Step through, step back, take notes." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Test cold door wearing Frostcloak.",
+          "success": [
+            { "type": "setFlag", "flag": "br:outfit.demo.passed", "op": "=", "value": true }
+          ],
+          "failure": []
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Test storm door wearing Stormliner.",
+          "success": [
+            { "type": "setFlag", "flag": "br:outfit.demo.passed", "op": "=", "value": true }
+          ],
+          "failure": []
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "text": "Test sand door wearing Sandveil.",
+          "success": [
+            { "type": "setFlag", "flag": "br:outfit.demo.passed", "op": "=", "value": true }
+          ],
+          "failure": []
+        },
+        { "text": "Back to counter", "actions": [{ "type": "gotoScene", "sceneId": "outfitter_counter" }] }
+      ]
+    }
+  ]
+}

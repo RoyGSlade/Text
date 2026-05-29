@@ -1,0 +1,93 @@
+{
+  "pack": "barracks_core",
+  "quests": [
+    {
+      "id": "brg:badge_earn",
+      "tags": [
+        "town_watch",
+        "town:blackridge",
+        "building:barracks",
+        "role:training"
+      ],
+      "title": "The Watchman's Mark",
+      "desc": "Prove your worth to the Watch by passing Joric's trial to earn a patrol badge.",
+      "requirements": {
+        "flagsNot": [
+          "brg:badge_acquired"
+        ]
+      },
+      "objectives": [
+        {
+          "type": "visit",
+          "sceneId": "bldg:blackridge:barracks:trial_success",
+          "text": "Pass Joric's trial in the training yard."
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "id": "permit.patrol",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "brg:badge_acquired"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "joric_trainer"
+        }
+      },
+      "weight": 10
+    },
+    {
+      "id": "brg:badge_forge",
+      "tags": [
+        "town_watch",
+        "forgery",
+        "town:blackridge",
+        "building:barracks"
+      ],
+      "title": "A Tin Star",
+      "desc": "If they won't grant a badge, make one. Study the design, then forge it.",
+      "requirements": {
+        "flagsNot": [
+          "brg:badge_acquired"
+        ]
+      },
+      "objectives": [
+        {
+          "type": "visit",
+          "sceneId": "bldg:blackridge:barracks:badge_design_learned",
+          "text": "Study an authentic badge to learn its design."
+        },
+        {
+          "type": "acquireItem",
+          "itemId": "permit.patrol_forged",
+          "qty": 1,
+          "text": "Forge a replica badge at the yard forge."
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "id": "permit.patrol_forged",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "brg:badge_acquired"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "joric_trainer"
+        }
+      },
+      "weight": 7
+    }
+  ]
+}

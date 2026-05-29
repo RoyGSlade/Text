@@ -1,0 +1,33 @@
+{
+  "id": "tavern_drunk_rudy",
+  "town": "blackridge",
+  "roles": [
+    "informant"
+  ],
+  "buildingId": "tavern",
+  "name": "Rudy",
+  "demeanor": "loud,cheerful,unreliable",
+  "repFaction": "town_blackridge",
+  "repPersonal": false,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Buy me a cup and I’ll sell you the truth."
+    },
+    {
+      "when": "tier == known",
+      "text": "Got a rumor so crisp you can shave with it."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You didn’t hear this from me. You heard it loudly from me."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "rumor",
+      "town:blackridge"
+    ],
+    "limitPerVisit": 1
+  }
+}

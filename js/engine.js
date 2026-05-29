@@ -60,35 +60,122 @@ window.IAG_ENGINE = (function() {
    * @param {string} skill - The skill ID
    * @param {number} challengeRating - The target number to meet or exceed
    * @param {Object} options - { advantage: boolean, disadvantage: boolean }
-   * @returns {Object} { success: boolean, roll1: number, roll2: number, finalRoll: number, modifier: number, total: number }
+   * @returns {Object} Rich result details
    */
   function skillCheck(state, skill, challengeRating, options = {}) {
-    const modifier = state.character.skills?.[skill] || 0;
+    const skillRank = getSkillRank(state, skill);
+    const attributeId = getAttributeIdForSkill(skill);
+    const attributeBonus = attributeId ? getAttributeBonus(state, attributeId) : 0;
+    const modifier = skillRank + attributeBonus;
     
+    // Advantage and Disadvantage cancellation rules
+    let isAdvantage = !!options.advantage;
+    let isDisadvantage = !!options.disadvantage;
+    if (isAdvantage && isDisadvantage) {
+      isAdvantage = false;
+      isDisadvantage = false;
+    }
+
     let roll1 = rollD20(state);
     let roll2 = null;
     let finalRoll = roll1;
 
-    if (options.advantage) {
+    if (isAdvantage) {
       roll2 = rollD20(state);
       finalRoll = Math.max(roll1, roll2);
-    } else if (options.disadvantage) {
+    } else if (isDisadvantage) {
       roll2 = rollD20(state);
       finalRoll = Math.min(roll1, roll2);
     }
 
     const total = finalRoll + modifier;
     const success = total >= challengeRating;
+    const def = getSkillDefinition(skill);
+    const skillName = def ? def.name : (skill.charAt(0).toUpperCase() + skill.slice(1));
 
     return {
       success,
+      skill,
+      skillName,
+      challengeRating,
       roll1,
       roll2,
       finalRoll,
+      skillRank,
+      attributeId,
+      attributeBonus,
       modifier,
       total,
-      challengeRating
+      advantage: isAdvantage,
+      disadvantage: isDisadvantage
     };
+  }
+
+  // Helper functions for attribute-aware calculations
+  function getSkillDefinition(skillId) {
+    if (!window.IAG_DATA || !window.IAG_DATA.skill_definitions) return null;
+    return window.IAG_DATA.skill_definitions[skillId] || null;
+  }
+
+  function getSkillRank(state, skillId) {
+    if (!state || !state.character || !state.character.skills) return 0;
+    return state.character.skills[skillId] || 0;
+  }
+
+  function getAttributeIdForSkill(skillId) {
+    const def = getSkillDefinition(skillId);
+    return def ? def.attribute : null;
+  }
+
+  function getAttributeBonus(state, attributeId) {
+    if (!state || !state.character || !state.character.attributes || !attributeId) return 0;
+    return state.character.attributes[attributeId] || 0;
+  }
+
+  function getSkillCheckModifier(state, skillId) {
+    const rank = getSkillRank(state, skillId);
+    const attrId = getAttributeIdForSkill(skillId);
+    const bonus = attrId ? getAttributeBonus(state, attrId) : 0;
+    return rank + bonus;
+  }
+
+  function checkCharacterLevelUp(state) {
+    if (!state || !state.character || !state.character.skills) return false;
+    const totalSkillLevels = Object.values(state.character.skills).reduce((sum, rank) => sum + rank, 0);
+    const levelingTable = window.IAG_DATA.leveling || [];
+    let newLevel = 1;
+    
+    // Find the highest level achieved based on total skill levels
+    for (let i = 0; i < levelingTable.length; i++) {
+      if (totalSkillLevels >= levelingTable[i].total_skill_levels) {
+        newLevel = levelingTable[i].level;
+      } else {
+        break;
+      }
+    }
+    
+    if (newLevel > state.character.level) {
+      state.character.level = newLevel;
+      state.history.push(`🎉 LEVEL UP! You reached Character Level ${newLevel}!`);
+      if (state.history.length > 50) state.history.shift();
+      
+      // Look up and apply benefits for the new level
+      const currentLevelData = levelingTable.find(l => l.level === newLevel);
+      if (currentLevelData) {
+        if (currentLevelData.hp) {
+          state.character.maxHp = (state.character.maxHp || 10) + 10;
+          state.character.hp = state.character.maxHp; // Fully heal on vital integrity upgrade
+          state.history.push(`💖 Vital Integrity (Max HP) upgraded to ${state.character.maxHp}.`);
+          if (state.history.length > 50) state.history.shift();
+        }
+        if (currentLevelData.attribute) {
+          state.history.push(`💡 Gained +1 Attribute point upgrade authority.`);
+          if (state.history.length > 50) state.history.shift();
+        }
+      }
+      return true;
+    }
+    return false;
   }
 
   return {
@@ -96,6 +183,12 @@ window.IAG_ENGINE = (function() {
     randomRange,
     rollDie,
     rollD20,
-    skillCheck
+    skillCheck,
+    getSkillDefinition,
+    getSkillRank,
+    getAttributeIdForSkill,
+    getAttributeBonus,
+    getSkillCheckModifier,
+    checkCharacterLevelUp
   };
 })();

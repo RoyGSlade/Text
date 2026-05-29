@@ -1,0 +1,36 @@
+{
+  "id": "clinic_apprentice_fen",
+  "town": "blackridge",
+  "roles": ["apprentice", "mixologist"],
+  "buildingId": "clinic",
+  "name": "Fen Corl",
+  "demeanor": "eager, messy, well-meaning",
+  "repFaction": "faction_clinic",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "true", "text": "If the vial is green, it’s safe. If it’s singing, don’t drink it." }
+  ],
+  "offers": [
+    {
+      "id": "offer_mix_antidote",
+      "label": "Help mix antidotes",
+      "requires": { "flagsAny": ["br:clinic.unlocked"], "have": [{ "itemId": "reagent.antitoxin_base", "qty": 1 }, { "itemId": "herb.nightbloom", "qty": 1 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "reagent.antitoxin_base", "qty": 1 },
+        { "type": "removeItem", "itemId": "herb.nightbloom", "qty": 1 },
+        { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 2 },
+        { "type": "setFlag", "flag": "br:clinic.antidote.stock", "op": "+", "value": 2 }
+      ]
+    },
+    {
+      "id": "offer_buy_quietly",
+      "label": "Acquire antidote off-ledger (contraband)",
+      "requires": { "flagsAny": ["br:clinic.unlocked"], "have": [{ "itemId": "chit.grease_money", "qty": 1 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "chit.grease_money", "qty": 1 },
+        { "type": "addItem", "itemId": "dose.antidote_standard", "qty": 1 },
+        { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+      ]
+    }
+  ]
+}

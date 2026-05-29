@@ -1,0 +1,90 @@
+{
+  "pack": "guard_post",
+  "quests": [
+    {
+      "id": "guard:papers_please",
+      "tags": [
+        "role:guard",
+        "story",
+        "town:blackridge",
+        "building:guard_post"
+      ],
+      "title": "Papers, Please",
+      "desc": "Secure a signed work order from any town authority to authorize travel.",
+      "requirements": {
+        "flagsNot": [
+          "fal:permit_granted"
+        ],
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "haveItem",
+            "itemId": "work_order_signed",
+            "qty": 1
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 0,
+        "rep": [
+          {
+            "target": "faction:red_guard",
+            "amount": 4
+          }
+        ],
+        "flagsSet": [
+          "fal:permit_granted"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_check",
+        "params": {}
+      },
+      "weight": 9
+    },
+    {
+      "id": "guard:arm_the_watch",
+      "tags": [
+        "role:guard",
+        "radiant",
+        "town:blackridge",
+        "building:guard_post"
+      ],
+      "title": "Arm The Watch",
+      "desc": "Deliver reinforced plates to bolster the gates.",
+      "requirements": {
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "deliver",
+            "itemId": "reinforced_plate",
+            "qty": 3
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 18,
+        "flagsSet": [
+          "town:guards_buffed"
+        ],
+        "rep": [
+          {
+            "target": "faction:red_guard",
+            "amount": 10
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_delivery",
+        "params": {}
+      },
+      "weight": 6
+    }
+  ]
+}

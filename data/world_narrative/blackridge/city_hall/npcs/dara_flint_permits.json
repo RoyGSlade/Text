@@ -1,0 +1,22 @@
+{
+  "id": "dara_flint_permits",
+  "town": "blackridge",
+  "roles": [
+    "permit_officer"
+  ],
+  "buildingId": "city_hall",
+  "name": "Dara Flint",
+  "demeanor": "rules-lawyer, adversarial",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Denied. Next."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Incomplete signatures. Next."
+    }
+  ]
+}

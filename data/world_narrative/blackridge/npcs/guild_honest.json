@@ -1,0 +1,38 @@
+{
+  "id": "guild_honest",
+  "town": "blackridge",
+  "roles": [
+    "merchant",
+    "honest"
+  ],
+  "buildingId": "merchant_guild",
+  "name": "Eben",
+  "demeanor": "soft-spoken,stubborn,decent",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "If it’s not fair, I won’t sell it."
+    },
+    {
+      "when": "tier == known",
+      "text": "I can’t get convoys. I can get you truth."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You deserve better prices. So does everyone."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:guild",
+      "town:blackridge",
+      "underdog"
+    ],
+    "minTierByTag": {
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

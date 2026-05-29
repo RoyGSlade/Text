@@ -1,0 +1,26 @@
+{
+  "scenes": {
+    "bldg:blackridge:gates:night_gatehouse": {
+      "text": "Night shift, thin and mean. Ledger open to a blank page that isn’t blank.",
+      "choices": [
+        { "text": "Lift the stamp ring (Stealth DC 13)", "type": "skillCheck", "leadsTo": "bldg:blackridge:gates:stamp_lift", "onFailure": "blackridge:prison:intake" },
+        { "text": "Copy shift roster (Technology DC 12)", "type": "skillCheck", "leadsTo": "bldg:blackridge:gates:roster_copy", "onFailure": "blackridge:prison:intake" },
+        { "text": "Back away", "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "bldg:blackridge:gates:stamp_lift": {
+      "text": "A velvet pocket yields a cold brass ring, carved with the city seal.",
+      "choices": [
+        { "text": "Pocket counterfeit ring", "actions": [ { "type": "addItem", "itemId": "stamp.ring.counterfeit", "qty": 1 } ], "leadsTo": "bldg:blackridge:gates" }
+      ]
+    },
+
+    "bldg:blackridge:gates:roster_copy": {
+      "text": "You lay a thin page and lift the marks by lamplight.",
+      "choices": [
+        { "text": "Take copied ledger page", "actions": [ { "type": "addItem", "itemId": "paper.gate_ledger_page", "qty": 1 }, { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:gates" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "items": [
+    {
+      "id": "gear.stormliner",
+      "name": "Stormliner Poncho",
+      "itemCategory": "armor",
+      "description": "Sealed seams. Laughs at rain, glares at wind.",
+      "value": 22,
+      "rarity": "common",
+      "tags": ["weather", "storm"],
+      "contraband": "none",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:biome.stormProtected", "op": "=", "value": true }
+        ]
+      }
+    },
+    {
+      "id": "gear.frostcloak",
+      "name": "Frostcloak",
+      "itemCategory": "armor",
+      "description": "Wool, oilcloth, and stubbornness.",
+      "value": 28,
+      "rarity": "uncommon",
+      "tags": ["weather", "cold"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:biome.coldProtected", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "gear.sandveil",
+      "name": "Sandveil Hood",
+      "itemCategory": "armor",
+      "description": "Filters grit and gossip.",
+      "value": 18,
+      "rarity": "common",
+      "tags": ["weather", "sand"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:biome.sandProtected", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "boots.snowstep",
+      "name": "Snowstep Boots",
+      "itemCategory": "armor",
+      "description": "Traction where hope slips.",
+      "value": 20,
+      "rarity": "uncommon",
+      "tags": ["boots", "cold"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:biome.coldProtected", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "goggles.outrider",
+      "name": "Outrider Goggles",
+      "itemCategory": "device",
+      "description": "Anti-fog lenses for when the horizon argues back.",
+      "value": 14,
+      "rarity": "common",
+      "tags": ["vision", "sand", "storm"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:biome.sandProtected", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "livery.merchant",
+      "name": "Merchant Livery",
+      "itemCategory": "disguise",
+      "description": "Silk that smells faintly of markup.",
+      "value": 40,
+      "rarity": "rare",
+      "tags": ["disguise", "merchant"],
+      "contraband": "medium",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:disguise.merchant", "op": "=", "value": true }
+        ]
+      }
+    },
+    {
+      "id": "uniform.watch_fake",
+      "name": "Watch Uniform (Fake)",
+      "itemCategory": "disguise",
+      "description": "Looks official until someone official looks at it.",
+      "value": 35,
+      "rarity": "rare",
+      "tags": ["disguise", "watch"],
+      "contraband": "high",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:disguise.guard", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "kit.disguise",
+      "name": "Disguise Kit",
+      "itemCategory": "tool",
+      "description": "Powders, wax, pigments, and plausible deniability.",
+      "value": 16,
+      "rarity": "uncommon",
+      "tags": ["disguise", "tool"],
+      "contraband": "low"
+    },
+    {
+      "id": "card.measurements",
+      "name": "Measurements Card",
+      "itemCategory": "key",
+      "description": "Your geometry, neatly weaponized for tailoring.",
+      "value": 0,
+      "rarity": "common",
+      "tags": ["paper", "tailor"],
+      "contraband": "none"
+    },
+    {
+      "id": "voucher.tailor_discount",
+      "name": "Tailor’s Voucher",
+      "itemCategory": "key",
+      "description": "One-time discount on weather gear.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": ["voucher"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "voucher.tailor_discount", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "mat.fur_bundle",
+      "name": "Fur Bundle",
+      "itemCategory": "material",
+      "description": "Warmth in a pile.",
+      "value": 10,
+      "rarity": "common",
+      "tags": ["material", "cold"],
+      "contraband": "none"
+    },
+    {
+      "id": "mat.bolt_cloth",
+      "name": "Bolt of Cloth",
+      "itemCategory": "material",
+      "description": "Future clothing in straight lines.",
+      "value": 6,
+      "rarity": "common",
+      "tags": ["material"],
+      "contraband": "none"
+    },
+    {
+      "id": "badge.brass_insignia",
+      "name": "Brass Insignia",
+      "itemCategory": "component",
+      "description": "Authority as a small shiny lie.",
+      "value": 8,
+      "rarity": "uncommon",
+      "tags": ["watch", "component"],
+      "contraband": "medium"
+    },
+    {
+      "id": "chem.anti_fog",
+      "name": "Lens Anti-Fog",
+      "itemCategory": "consumable",
+      "description": "Smells like mint, works like science.",
+      "value": 4,
+      "rarity": "common",
+      "tags": ["chem", "vision"],
+      "contraband": "none"
+    }
+  ]
+}

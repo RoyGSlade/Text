@@ -1,0 +1,196 @@
+{
+  "pack": "arcanum",
+  "quests": [
+    {
+      "id": "arcanum_path",
+      "tags": [
+        "main",
+        "tutorial",
+        "arcanum"
+      ],
+      "title": "Paths Through Forgetting",
+      "desc": "Valentar frames your arrival, tests your intent, and points you toward a city that remembers your face less each hour.",
+      "requirements": {},
+      "stages": [
+        {
+          "id": "stage1_orientation",
+          "text": "Meet Valentar in the Arcanum Tower and demonstrate willingness to help.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:arcanum.orientation.completed"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:arcanum.seer_trust",
+              "value": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:rumor.arcanum_opened",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "stage2_paint_fence",
+          "text": "Perform a petty errand outside town (paint the fence). Intervene if trouble finds innocents.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "quest.fence_painted_receipt",
+                "qty": 1
+              }
+            ],
+            "flagsAny": [
+              "br:event.bandits_rescued"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "setFlag",
+              "flag": "br:arcanum.path.stage2_done",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "addItem",
+              "itemId": "scroll.remembering",
+              "qty": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:arcanum.seer_trust",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "stage3_find_memories",
+          "text": "Recover Valentar's trapped memories: one from City Hall's basement, several from Library stacks.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "arcanum.memory.fragment.cityhall",
+                "qty": 1
+              },
+              {
+                "itemId": "arcanum.memory.fragment.library",
+                "qty": 3
+              }
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:arcanum.seer_trust",
+              "value": 1
+            },
+            {
+              "type": "addItem",
+              "itemId": "waypoint.catacombs",
+              "qty": 1
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:dungeon.catacombs.revealed",
+              "op": "=",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 100
+        },
+        {
+          "type": "credits",
+          "amount": 0
+        },
+        {
+          "type": "item",
+          "itemId": "trinket.memory_bookmark",
+          "qty": 1
+        }
+      ],
+      "instantiate": {
+        "template": "quest:linear_three_stage",
+        "params": {
+          "area": "arcanum"
+        }
+      }
+    },
+    {
+      "id": "arcanum_radiant_training",
+      "tags": [
+        "side",
+        "training",
+        "arcanum"
+      ],
+      "title": "Radiant Drills",
+      "desc": "Valentar can train advanced Science/Tech, but he charges in teeth and failure.",
+      "requirements": {
+        "flagsAny": [
+          "br:arcanum.unlocked"
+        ]
+      },
+      "stages": [
+        {
+          "id": "stage1_pay",
+          "text": "Bring Valentar 3 Goblin Teeth to attempt a high-DC drill.",
+          "completionCheck": {
+            "have": [
+              {
+                "itemId": "reagent.goblin_teeth",
+                "qty": 3
+              }
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "removeItem",
+              "itemId": "reagent.goblin_teeth",
+              "qty": 3
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:arcanum.training.ready",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "stage2_attempt",
+          "text": "Pass a high-DC Science or Technology skill test at the lab.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:arcanum.training.passed"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:skill.science",
+              "value": 1
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:skill.technology",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 50
+        }
+      ]
+    }
+  ]
+}

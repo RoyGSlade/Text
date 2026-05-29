@@ -1,0 +1,159 @@
+{
+  "pack": "city_hall_core",
+  "quests": [
+    {
+      "id": "fal:permit_real",
+      "tags": [
+        "role:authority",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Paper Cage Key",
+      "desc": "Secure a legitimate commission, pay the Guild fee, and obtain a travel permit.",
+      "requirements": {
+        "flagsNot": [
+          "fal:permit_granted"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "doc.commission",
+            "qty": 1
+          },
+          "hint": "Obtain a commission from a trusted business."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "receipt.guild_fee",
+            "qty": 1
+          },
+          "hint": "Pay the Adventurer Guild processing fee."
+        },
+        {
+          "id": 2,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:permit_lobby"
+          },
+          "hint": "File the papers at City Hall."
+        }
+      ],
+      "rewards": {
+        "credits": 0,
+        "items": [
+          {
+            "id": "permit.commission",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "fal:permit_granted"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "dara_flint_permits"
+        }
+      },
+      "weight": 10
+    },
+    {
+      "id": "fal:permit_forged",
+      "tags": [
+        "stealth",
+        "forgery",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Ink Over Chains",
+      "desc": "Plan and forge a commission, then beat Dara’s inspection or face prison.",
+      "requirements": {
+        "flagsNot": [
+          "fal:permit_granted"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "doc.commission_forged",
+            "qty": 1
+          },
+          "hint": "Craft a forged commission at a Writer’s Desk."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:permit_inspect"
+          },
+          "hint": "Present the forged papers and survive inspection."
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "id": "permit.commission",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "fal:permit_granted"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "dara_flint_permits"
+        }
+      },
+      "weight": 6
+    },
+    {
+      "id": "fal:prison_timeout",
+      "tags": [
+        "punishment",
+        "town:blackridge"
+      ],
+      "title": "Thirty Minutes To Think",
+      "desc": "You were caught. Serve time and read to gain a small skill benefit (engine update pending).",
+      "requirements": {
+        "flagsAny": [
+          "fal:prison_active"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "blackridge:prison:reading"
+          },
+          "hint": "Serve your sentence in the prison reading ward."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:prison_served"
+        ],
+        "flagsNot": [
+          "fal:prison_active"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "lysa_dorn_reception_guard"
+        }
+      },
+      "weight": 5
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "pack": "gates_access",
+  "quests": [
+    {
+      "id": "br:gates:legit_passage",
+      "tags": ["town:blackridge","building:gates","legal"],
+      "title": "Through The Gate, Properly",
+      "desc": "Leave Blackridge via a staffed gate using legitimate papers.",
+      "requirements": { "flagsNot": ["br:gates:legit_once"] },
+      "stages": [
+        {
+          "id": "s1_get_papers",
+          "text": "Carry a valid commission permit or patrol badge.",
+          "completionCheck": { "have": [ { "itemId": "permit.commission", "qty": 1 } ] }
+        },
+        {
+          "id": "s2_stamp",
+          "text": "Get stamped at the gate counter.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:gates:counter"] }
+        },
+        {
+          "id": "s3_exit",
+          "text": "Exit through any gate during daylight.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:gates:legit_once", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["player_visited:cell:any_biome"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "jessa_quill_gateclerk" } },
+      "weight": 8
+    },
+    {
+      "id": "br:gates:forged_passage",
+      "tags": ["town:blackridge","building:gates","forgery"],
+      "title": "Stamp And Run",
+      "desc": "Forge a day-stamp and slip past a distracted shift.",
+      "requirements": { "flagsNot": ["br:gates:forged_done"] },
+      "stages": [
+        {
+          "id": "s1_get_ring",
+          "text": "Obtain a Counterfeit Gate Stamp Ring.",
+          "completionCheck": { "have": [ { "itemId": "stamp.ring.counterfeit", "qty": 1 } ] }
+        },
+        {
+          "id": "s2_fake_stamp",
+          "text": "Apply the stamp at the counter or a copy desk.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:gates:copy_desk"] }
+        },
+        {
+          "id": "s3_depart",
+          "text": "Depart through any gate without challenge.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:gates:forged_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["player_visited:cell:any_biome"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "grey_finch_smuggler" } },
+      "weight": 7
+    },
+    {
+      "id": "br:gates:night_pass",
+      "tags": ["town:blackridge","building:gates","curfew"],
+      "title": "Curfew Is A Wall",
+      "desc": "Secure a Night Watch Writ and pass a gate after curfew.",
+      "requirements": { "flagsNot": ["br:gates:night_done"] },
+      "stages": [
+        {
+          "id": "s1_get_writ",
+          "text": "Acquire Night Watch Writ.",
+          "completionCheck": { "have": [ { "itemId": "permit.nightWatch", "qty": 1 } ] }
+        },
+        {
+          "id": "s2_present",
+          "text": "Present writ at a staffed gate during curfew.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:gates:counter"] }
+        },
+        {
+          "id": "s3_exit_night",
+          "text": "Exit a gate after curfew without raising alarm.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:gates:night_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["player_visited:cell:any_biome"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "corin_hales_captain" } },
+      "weight": 6
+    }
+  ]
+}

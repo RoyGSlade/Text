@@ -1,0 +1,38 @@
+{
+  "id": "clinic_doctor",
+  "town": "blackridge",
+  "roles": [
+    "healer",
+    "doctor"
+  ],
+  "buildingId": "clinic",
+  "name": "Irmund",
+  "demeanor": "stoic,practical,kind",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "If you’re not dying, someone else is. Be brief."
+    },
+    {
+      "when": "tier == known",
+      "text": "Bandages and boiling water fix most heroics."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You keep surviving. I’ll keep you stitched."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:healer",
+      "town:blackridge",
+      "building:clinic"
+    ],
+    "minTierByTag": {
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

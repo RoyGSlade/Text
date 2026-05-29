@@ -1,0 +1,170 @@
+{
+  "alpha_beast": {
+    "name": "Alpha Beast",
+    "region": "wilds",
+    "hp": 30,
+    "maxHp": 30,
+    "damage": "1d8",
+    "armorRating": 12,
+    "xp": 50,
+    "loot": {
+      "credits": 20,
+      "items": [
+        { "itemId": "art.painting_small", "chance": 0.15 }
+      ]
+    },
+    "abilities": [
+      { "name": "Ferocious Swipe", "damage": "1d6+2", "cooldown": 3 }
+    ],
+    "statusEffects": [
+      { "id": "poisoned", "chance": 0.2, "duration": 2 }
+    ]
+  },
+  "blackridge_mugger": {
+    "name": "Blackridge Mugger",
+    "region": "blackridge",
+    "hp": 18,
+    "maxHp": 18,
+    "damage": "1d6+1",
+    "armorRating": 10,
+    "xp": 25,
+    "loot": {
+      "credits": 12,
+      "items": [
+        { "itemId": "consumable.tonic_energizing", "chance": 0.3 }
+      ]
+    },
+    "abilities": [
+      { "name": "Cheap Shot", "damage": "1d4", "cooldown": 2 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.15, "duration": 1 }
+    ]
+  },
+  "emberfen_salamander": {
+    "name": "Emberfen Salamander",
+    "region": "emberfen",
+    "hp": 22,
+    "maxHp": 22,
+    "damage": "1d6+1",
+    "armorRating": 11,
+    "xp": 35,
+    "loot": {
+      "credits": 8,
+      "items": [
+        { "itemId": "armor.leather_vest", "chance": 0.2 }
+      ]
+    },
+    "abilities": [
+      { "name": "Fiery Spit", "damage": "1d6", "cooldown": 3 }
+    ],
+    "statusEffects": [
+      { "id": "poisoned", "chance": 0.1, "duration": 2 }
+    ]
+  },
+  "frostmarch_yeti": {
+    "name": "Frostmarch Yeti",
+    "region": "frostmarch",
+    "hp": 28,
+    "maxHp": 28,
+    "damage": "1d8",
+    "armorRating": 13,
+    "xp": 40,
+    "loot": {
+      "credits": 16,
+      "items": [
+        { "itemId": "consumable.tonic_energizing", "chance": 0.25 }
+      ]
+    },
+    "abilities": [
+      { "name": "Ice Slam", "damage": "1d8", "cooldown": 2 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.2, "duration": 1 }
+    ]
+  },
+  "mistwood_wisp": {
+    "name": "Mistwood Wisp",
+    "region": "mistwood",
+    "hp": 14,
+    "maxHp": 14,
+    "damage": "1d4",
+    "armorRating": 9,
+    "xp": 20,
+    "loot": {
+      "credits": 6,
+      "items": [
+        { "itemId": "consumable.tonic_energizing", "chance": 0.2 }
+      ]
+    },
+    "abilities": [
+      { "name": "Haunting Touch", "damage": "1d4", "cooldown": 1 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.1, "duration": 1 }
+    ]
+  },
+  "rogue_drone": {
+    "name": "Rogue Drone",
+    "region": "wasteland",
+    "hp": 15,
+    "maxHp": 15,
+    "damage": "1d6",
+    "armorRating": 11,
+    "xp": 10,
+    "loot": {
+      "credits": 5,
+      "items": [
+        { "itemId": "consumable.tonic_energizing", "chance": 0.2 }
+      ]
+    },
+    "abilities": [
+      { "name": "Shock Burst", "damage": "1d4", "cooldown": 2 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.1, "duration": 1 }
+    ]
+  },
+  "stormvale_raider": {
+    "name": "Stormvale Raider",
+    "region": "stormvale",
+    "hp": 20,
+    "maxHp": 20,
+    "damage": "1d6+1",
+    "armorRating": 12,
+    "xp": 30,
+    "loot": {
+      "credits": 14,
+      "items": [
+        { "itemId": "armor.leather_vest", "chance": 0.25 }
+      ]
+    },
+    "abilities": [
+      { "name": "Thunder Strike", "damage": "1d6+2", "cooldown": 3 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.15, "duration": 1 }
+    ]
+  },
+  "sunspire_scout": {
+    "name": "Sunspire Scout",
+    "region": "sunspire",
+    "hp": 16,
+    "maxHp": 16,
+    "damage": "1d6",
+    "armorRating": 10,
+    "xp": 22,
+    "loot": {
+      "credits": 10,
+      "items": [
+        { "itemId": "consumable.tonic_energizing", "chance": 0.25 }
+      ]
+    },
+    "abilities": [
+      { "name": "Spear Jab", "damage": "1d6", "cooldown": 2 }
+    ],
+    "statusEffects": [
+      { "id": "stunned", "chance": 0.15, "duration": 1 }
+    ]
+  }
+}

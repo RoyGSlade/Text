@@ -1,0 +1,52 @@
+{
+  "successThresholds": [0, 5, 10, 20, 30, 50],
+  "actionEconomy": {
+    "1": { "actions": 1, "reactions": 1 },
+    "5": { "actions": 2, "reactions": 1 }
+  },
+  "resourceRegen": {
+    "inCombat": { "stamina": 1, "focus": 1 },
+    "outOfCombat": { "stamina": 3, "focus": 2 }
+  },
+  "enums": {
+    "status": [
+      "angry",
+      "bleed",
+      "calm",
+      "cold",
+      "concentration",
+      "confused",
+      "drowsy",
+      "energized",
+      "hidden",
+      "ignited",
+      "injured",
+      "poisoned",
+      "stunned"
+    ]
+  },
+  "skillAttributes": {
+    "Athlete": "Constitution",
+    "Mechanics": "Wisdom",
+    "Medical": "Wisdom",
+    "Technology": "Intelligence",
+    "Science": "Intelligence",
+    "History": "Intelligence",
+    "Business": "Charisma",
+    "Bureaucracy": "Charisma",
+    "Speech": "Charisma",
+    "Perception": "Wisdom",
+    "Gunning": "Dexterity",
+    "Melee": "Constitution",
+    "Unarmed": "Constitution"
+  },
+  "limits": {
+    "attributeMin": 1,
+    "attributeMax": 30,
+    "levelMax": 30,
+    "hpMax": 9999,
+    "armorRatingMax": 1000,
+    "initiativeMax": 100,
+    "creditsMax": 1000000
+  }
+}

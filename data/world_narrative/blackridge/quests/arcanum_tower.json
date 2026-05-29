@@ -1,0 +1,92 @@
+{
+  "pack": "arcanum_tower",
+  "quests": [
+    {
+      "id": "arc:echo_of_anger",
+      "tags": [
+        "role:mage",
+        "story",
+        "town:blackridge",
+        "building:arcanum_tower"
+      ],
+      "title": "Echo of Anger",
+      "desc": "Bring the Magus a shard that hums with grief.",
+      "requirements": {
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "gather",
+            "itemId": "angry_shard",
+            "qty": 1
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 12,
+        "rep": [
+          {
+            "target": "npc:arcanum_magus",
+            "amount": 7
+          }
+        ],
+        "flagsSet": [
+          "lore:monsters_manifested"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_gather",
+        "params": {
+          "zone": "wilds"
+        }
+      },
+      "weight": 8
+    },
+    {
+      "id": "arc:key_and_crystal",
+      "tags": [
+        "role:mage",
+        "story",
+        "town:blackridge",
+        "building:arcanum_tower",
+        "dungeon:unlock"
+      ],
+      "title": "Key And Crystal",
+      "desc": "Solve the Magus’s sigil puzzle to locate the nearest dungeon.",
+      "requirements": {
+        "flagsAny": [
+          "lore:monsters_manifested"
+        ],
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "puzzle",
+            "puzzleId": "sigil_ring_1"
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 0,
+        "items": [
+          {
+            "id": "map_fragment",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "overworld:dungeon_1_revealed"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_puzzle",
+        "params": {}
+      },
+      "weight": 5
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "scenes": {
+    "enc:forest:ambush_goblins": {
+      "text": "Brush explodes. Goblins. Of course.",
+      "choices": [
+        {
+          "text": "Fight (Melee DC 12)",
+          "type": "skillCheck",
+          "skill": "Melee",
+          "dc": 12,
+          "onSuccess": "enc:forest:ambush_goblins:win",
+          "onFailure": "enc:forest:ambush_goblins:lose"
+        },
+        {
+          "text": "Flee (Athlete DC 11)",
+          "type": "skillCheck",
+          "skill": "Athlete",
+          "dc": 11,
+          "onSuccess": "cell:forest:2,0",
+          "onFailure": "enc:forest:ambush_goblins:lose"
+        }
+      ]
+    },
+    "enc:forest:ambush_goblins:win": {
+      "text": "You scatter them and scoop a few plates.",
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "monster_plate"
+        },
+        {
+          "type": "addItem",
+          "itemId": "monster_plate"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to the road",
+          "leadsTo": "cell:forest:2,0"
+        }
+      ]
+    },
+    "enc:forest:ambush_goblins:lose": {
+      "text": "They nick your gear and run.",
+      "actions": [
+        {
+          "type": "addCredits",
+          "amount": -5
+        }
+      ],
+      "choices": [
+        {
+          "text": "Back to the road",
+          "leadsTo": "cell:forest:2,0"
+        }
+      ]
+    },
+    "enc:forest:quiet": {
+      "text": "Wind in the pines. Nothing stirs.",
+      "choices": [
+        {
+          "text": "Keep moving",
+          "leadsTo": "cell:forest:2,0"
+        }
+      ]
+    }
+  }
+}

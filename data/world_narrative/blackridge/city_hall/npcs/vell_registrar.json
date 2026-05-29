@@ -1,0 +1,38 @@
+{
+  "id": "vell_registrar",
+  "town": "blackridge",
+  "roles": [
+    "registrar"
+  ],
+  "buildingId": "city_hall",
+  "name": "Vell",
+  "demeanor": "brisk,smug,calculating",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "State your business."
+    },
+    {
+      "when": "tier == known",
+      "text": "Back to file something? Make it quick."
+    },
+    {
+      "when": "tier >= friendly",
+      "text": "Ah, a helpful face. What brings you?"
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "building:city_hall",
+      "town:blackridge",
+      "npc:vell_registrar"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

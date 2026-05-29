@@ -1,0 +1,22 @@
+{
+  "id": "daron_scribe",
+  "town": "blackridge",
+  "roles": [
+    "scribe",
+    "night_watch"
+  ],
+  "buildingId": "library",
+  "name": "Daron",
+  "demeanor": "tired, meticulous, quietly defiant",
+  "repFaction": "town_watch",
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Restricted stacks after dusk are for ghosts and fools."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Some books grow teeth at night. We re-shelve them anyway."
+    }
+  ]
+}

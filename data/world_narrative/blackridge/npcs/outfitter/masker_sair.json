@@ -1,0 +1,35 @@
+{
+  "id": "outfitter_masker_sair",
+  "town": "blackridge",
+  "roles": ["masker", "makeup_artisan"],
+  "buildingId": "outfitter",
+  "name": "Sair Pomade",
+  "demeanor": "playful, ruthless about symmetry",
+  "repFaction": "faction_outfitter",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "true", "text": "Face first, lies second. Breathe in and hold the truth." }
+  ],
+  "offers": [
+    {
+      "id": "offer_merchant_livery",
+      "label": "Commission Merchant Livery (requires measurements)",
+      "requires": { "flagsAny": ["br:outfit.measurements_card"] },
+      "actions": [
+        { "type": "addItem", "itemId": "livery.merchant", "qty": 1 },
+        { "type": "setFlag", "flag": "br:disguise.merchant", "op": "=", "value": true }
+      ]
+    },
+    {
+      "id": "offer_watch_uniform_fake",
+      "label": "Assemble fake Watch uniform (contraband)",
+      "requires": { "have": [{ "itemId": "seal.counterfeit", "qty": 1 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "seal.counterfeit", "qty": 1 },
+        { "type": "addItem", "itemId": "uniform.watch_fake", "qty": 1 },
+        { "type": "setFlag", "flag": "br:disguise.guard", "op": "=", "value": true },
+        { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+      ]
+    }
+  ]
+}

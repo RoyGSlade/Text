@@ -1,0 +1,77 @@
+{
+  "scenes": {
+    "bldg:blackridge:watchtowers": {
+      "textBlocks": [
+        { "default": true, "text": "Corner towers rake the night with mirror flashes and horn calls. Wind tastes like metal and old fear." },
+        { "when": "flag:br:siege_visibility>=3", "text": "New lenses throw clean light; shadows peel away from the wall like wet paint." }
+      ],
+      "choices": [
+        { "text": "Watchtower Hub", "leadsTo": "bldg:blackridge:watchtowers:hub" },
+        { "text": "Parapet Overlook", "leadsTo": "bldg:blackridge:watchtowers:parapet" },
+        { "text": "Rooftop Course (Training)", "leadsTo": "bldg:blackridge:watchtowers:roof_course" },
+        { "text": "Signal Drill Yard", "leadsTo": "bldg:blackridge:watchtowers:signal_drill" },
+        { "text": "Leave", "leadsTo": "town:blackridge" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:hub": {
+      "text": "Mira checks angles; Bren counts oil and pretends not to worry.",
+      "choices": [
+        { "text": "Talk to Mira Kestrel", "leadsTo": "bldg:blackridge:watchtowers:mira" },
+        { "text": "Talk to Bren Oake", "leadsTo": "bldg:blackridge:watchtowers:bren" },
+        { "text": "Donate supplies (Fuel or Lenses)", "leadsTo": "bldg:blackridge:watchtowers:donate" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:mira": {
+      "text": "\u201cMirrors don\u2019t lie,\u201d Mira says. \u201cPeople do.\u201d",
+      "choices": [
+        { "text": "Offer to calibrate lenses (Technology DC 12)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:mira" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers:hub" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:bren": {
+      "text": "Bren\u2019s ledgers track oil like blood types.",
+      "choices": [
+        { "text": "Turn in oil (have 1 Crate)", "requires": { "have": [ { "itemId": "fuel.lamp_oil_crate", "qty": 1 } ] }, "actions": [ { "type": "addItem", "itemId": "fuel.lamp_oil_crate", "qty": -1 }, { "type": "setFlag", "flag": "br:morale", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:bren" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers:hub" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:donate": {
+      "text": "A battered crate waits for contributions.",
+      "choices": [
+        { "text": "Donate Mirror Array", "requires": { "have": [ { "itemId": "kit.mirror_array", "qty": 1 } ] }, "actions": [ { "type": "addItem", "itemId": "kit.mirror_array", "qty": -1 }, { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:hub" },
+        { "text": "Donate Large Lens", "requires": { "have": [ { "itemId": "lens.polished_glass_large", "qty": 1 } ] }, "actions": [ { "type": "addItem", "itemId": "lens.polished_glass_large", "qty": -1 }, { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:hub" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers:hub" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:parapet": {
+      "text": "The city\u2019s heartbeat lives up here, measured in horn blasts and held breath.",
+      "choices": [
+        { "text": "Meet Rook Tal (Insight DC 11)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:watch:rook_briefed", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:watchtowers:parapet" },
+        { "text": "Scan for movement (Perception DC 12)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:parapet" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:roof_course": {
+      "text": "Sable sets cones and chalk marks like a quiet sermon.",
+      "choices": [
+        { "text": "Run the course (Athletics DC 12)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:ambush_risk", "op": "-", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:roof_course" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:signal_drill": {
+      "text": "Horn stands and flash plates wait for rhythm and nerve.",
+      "choices": [
+        { "text": "Practice horn cadence (Performance DC 11)", "type": "skillCheck", "actions": [ { "type": "setFlag", "flag": "br:morale", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:signal_drill" },
+        { "text": "Back", "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "pack": "tavern",
+  "quests": [
+    {
+      "id": "tavern:cask_run",
+      "tags": [
+        "role:tavern",
+        "radiant",
+        "town:blackridge",
+        "building:tavern"
+      ],
+      "title": "Cask To The Line",
+      "desc": "Deliver a cask to the west gate and ask what they’ve seen.",
+      "requirements": {
+        "minNpcTier": "stranger"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:guard_post"
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 8,
+        "rep": [
+          {
+            "target": "npc:tavern_barkeep",
+            "amount": 4
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_visit",
+        "params": {}
+      },
+      "weight": 12
+    },
+    {
+      "id": "tavern:whisper_chain",
+      "tags": [
+        "role:tavern",
+        "story",
+        "town:blackridge",
+        "building:tavern"
+      ],
+      "title": "Whispers With Receipts",
+      "desc": "Grease Rudy and Bill for converging dungeon rumors.",
+      "requirements": {
+        "minNpcTier": "known"
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "flag",
+            "flag": "rumor:rudy:open",
+            "value": true
+          }
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "flag",
+            "flag": "rumor:bill:open",
+            "value": true
+          }
+        }
+      ],
+      "rewards": {
+        "credits": 0,
+        "items": [
+          {
+            "id": "map_fragment",
+            "qty": 1
+          }
+        ],
+        "rep": [
+          {
+            "target": "npc:tavern_barkeep",
+            "amount": 3
+          }
+        ]
+      },
+      "instantiate": {
+        "template": "quest_flag_chain",
+        "params": {}
+      },
+      "weight": 5
+    }
+  ]
+}

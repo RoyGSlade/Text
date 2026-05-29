@@ -1,0 +1,40 @@
+{
+  "pack": "outfitter",
+  "quests": [
+    {
+      "id": "outfitter_supply_chain",
+      "tags": ["side", "supply"],
+      "title": "Thread Count",
+      "desc": "Varra needs materials. Bring them or expect empty hooks.",
+      "requirements": { "flagsAny": ["br:outfit.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_gather",
+          "text": "Bring 1 Oilcloth Tarp, 1 Fur Bundle, and 1 Lens Anti-Fog.",
+          "completionCheck": {
+            "have": [
+              { "itemId": "camp.tarp", "qty": 1 },
+              { "itemId": "mat.fur_bundle", "qty": 1 },
+              { "itemId": "chem.anti_fog", "qty": 1 }
+            ]
+          },
+          "onComplete": [
+            { "type": "removeItem", "itemId": "camp.tarp", "qty": 1 },
+            { "type": "removeItem", "itemId": "mat.fur_bundle", "qty": 1 },
+            { "type": "removeItem", "itemId": "chem.anti_fog", "qty": 1 },
+            { "type": "setFlag", "flag": "br:outfit.stock_relief", "op": "=", "value": true }
+          ]
+        },
+        {
+          "id": "stage2_discount",
+          "text": "Confirm stock relief by seeing a discount on shelves.",
+          "completionCheck": { "flagsAny": ["br:outfit.stock_relief"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 50 },
+        { "type": "item", "itemId": "voucher.tailor_discount", "qty": 1 }
+      ]
+    }
+  ]
+}

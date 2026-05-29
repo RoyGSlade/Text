@@ -1,0 +1,44 @@
+{
+  "id": "mg_scheduler_tamsin",
+  "town": "blackridge",
+  "roles": [
+    "scheduler"
+  ],
+  "buildingId": "merchant_guild_store",
+  "name": "Tamsin Dore",
+  "demeanor": "harried, numbers-obsessed, twitchy",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "!br:mg.convoy.scheduleKnown",
+      "text": "Convoys are *weekly*. Routes are *confidential*. Stare at the board and you'll forget what day it is."
+    },
+    {
+      "when": "br:mg.convoy.scheduleKnown",
+      "text": "You again? Don’t say the route names out loud."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_schedule",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ],
+        "flagsNot": [
+          "br:mg.convoy.scheduleKnown"
+        ]
+      },
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:mg.convoy.scheduleKnown",
+          "op": "=",
+          "value": true
+        }
+      ],
+      "text": "Learn the convoy schedule (weekly)"
+    }
+  ]
+}

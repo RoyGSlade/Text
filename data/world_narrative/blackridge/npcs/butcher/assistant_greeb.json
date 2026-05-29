@@ -1,0 +1,33 @@
+{
+  "id": "butcher_assistant_greeb",
+  "town": "blackridge",
+  "roles": ["assistant", "smokehouse"],
+  "buildingId": "butcher",
+  "name": "Greeb",
+  "demeanor": "nervy, talkative when bribed with tea",
+  "repFaction": "faction_butcher",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "true", "text": "Hooks, cleavers, and rumors. Try not to mix them up." }
+  ],
+  "offers": [
+    {
+      "id": "offer_rumor_trade",
+      "label": "Trade a Guard’s Tea for a rumor",
+      "requires": { "have": [{ "itemId": "drink.guards_tea", "qty": 1 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "drink.guards_tea", "qty": 1 },
+        { "type": "setFlag", "flag": "br:rumor.wall_breach_east", "op": "=", "value": true }
+      ]
+    },
+    {
+      "id": "offer_smokehouse_pass",
+      "label": "Ask to see the smokehouse",
+      "requires": { "flagsAny": ["br:butcher.unlocked"], "flagsNot": ["br:butcher.smokehouse_access"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:butcher.smokehouse_access", "op": "=", "value": true },
+        { "type": "gotoScene", "sceneId": "butcher_smokehouse" }
+      ]
+    }
+  ]
+}

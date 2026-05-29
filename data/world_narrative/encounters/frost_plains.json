@@ -1,0 +1,39 @@
+{
+  "zone": "frost_plains",
+  "rollEverySteps": 2,
+  "chance": 0.25,
+  "tables": [
+    {
+      "time": "day",
+      "entries": [
+        {
+          "id": "enc:plains:drifts",
+          "weight": 4,
+          "when": "!status:heart_destroyed && !weather:rain",
+          "scene": "enc:forest:quiet"
+        },
+        {
+          "id": "enc:plains:raiders",
+          "weight": 6,
+          "scene": "enc:forest:ambush_goblins"
+        }
+      ]
+    },
+    {
+      "time": "night",
+      "entries": [
+        {
+          "id": "enc:plains:frostbite",
+          "weight": 5,
+          "when": "weather:storm",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:plains:quiet",
+          "weight": 5,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "guild_exec",
+  "town": "blackridge",
+  "roles": [
+    "merchant",
+    "executive"
+  ],
+  "buildingId": "merchant_guild",
+  "name": "Director Cale",
+  "demeanor": "polite, predatory, exacting",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Memberships require means. Do you have either?"
+    },
+    {
+      "when": "tier == known",
+      "text": "Every life is a ledger. Yours is in the red."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "At last, someone who appreciates margins and muscle."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:guild",
+      "town:blackridge",
+      "building:merchant_guild"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

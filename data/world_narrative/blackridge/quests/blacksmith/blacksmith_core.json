@@ -1,0 +1,93 @@
+{
+  "pack": "blacksmith_core",
+  "quests": [
+    {
+      "id": "smith_main_sparks",
+      "tags": ["blacksmith","main"],
+      "title": "Sparks in the Dark",
+      "desc": "Kaelen’s arrest left the forge under Guild thumb. Gather leverage, stabilize the shop, choose your path, settle the outcome.",
+      "requirements": {},
+      "objectives": [
+        {
+          "id": "evidence",
+          "title": "Gather evidence",
+          "desc": "Find blueprint scraps or get a ledger extract implicating licensing pressure.",
+          "completion": { "flagsAny": ["br:lantern.sunlight.parts", "have:doc.ledger_extract.smith"] },
+          "rewards": { "xp": 50, "flags": [{"key":"br:smith.arrestClock.started","value":true,"when":"!flag:br:smith.arrestClock.started"},{"key":"br:smith.arrestClock.ticks","value":0,"when":"!flag:br:smith.arrested"}] }
+        },
+        {
+          "id": "stabilize",
+          "title": "Stabilize the shop",
+          "desc": "Deliver a Watchtower Kit or complete two legal repairs.",
+          "completion": { "flagsAny": ["have:kit.watchtower", "flag:quest.smith.repairs2"] },
+          "rewards": { "xp": 50, "flags": [{"key":"br:smith.rep1","value":true}] }
+        },
+        {
+          "id": "choose_path",
+          "title": "Choose a path",
+          "desc": "File a Library appeal or open the tunnel route.",
+          "completion": { "flagsAny": ["flag:library_evidence.smith_case", "flag:br:tunnel.entry.smith"] },
+          "rewards": { "xp": 50, "flags": [{"key":"br:smith.path.appeal","value":true,"when":"flag:library_evidence.smith_case"},{"key":"br:smith.path.break","value":true,"when":"flag:br:tunnel.entry.smith"}] }
+        },
+        {
+          "id": "resolve",
+          "title": "Resolve it",
+          "desc": "Reinstate legally or flip the covert shop.",
+          "completion": { "flagsAny": ["flag:br:smith.reinstated", "flag:br:smith.covert"] },
+          "rewards": { "xp": 100, "items": [{"id":"kit.masterwork","qty":1}] }
+        }
+      ],
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    },
+    {
+      "id": "smith_side_forge_for_wall",
+      "tags": ["blacksmith","siege","rush"],
+      "title": "Forge for the Wall",
+      "desc": "During active siege, assemble and deliver a Watchtower Kit before curfew.",
+      "requirements": { "flagsAny": ["br:siege.level>=2"] },
+      "objectives": [
+        {
+          "id": "assemble",
+          "title": "Assemble Kit",
+          "desc": "Craft a kit from parts at the Barricade Rack.",
+          "completion": { "have": [{"id":"kit.watchtower","qty":1}] },
+          "rewards": { "xp": 40 }
+        },
+        {
+          "id": "deliver",
+          "title": "Deliver to Sgt. Hal Voss before 21:00",
+          "desc": "Turn in with sign-off.",
+          "completion": { "flagsAny": ["br:order.signed.voss"], "timeBefore": "21:00" },
+          "rewards": { "xp": 60, "flags": [{"key":"br:watch.morale","delta":1},{"key":"br:gate.defense","delta":1}] }
+        }
+      ],
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    },
+    {
+      "id": "smith_side_tool_for_a_thief",
+      "tags": ["blacksmith","moral"],
+      "title": "Tool for a Thief",
+      "desc": "A prison-side Smuggler Contact wants a covert pry tool.",
+      "requirements": {},
+      "objectives": [
+        {
+          "id": "decide",
+          "title": "Deliver clean, sabotage, or refuse",
+          "desc": "Your call, your consequences.",
+          "completion": { "flagsAny": ["flag:delivered.pry_tool","flag:delivered.pry_tool.sabotaged","flag:refused.pry_tool"] },
+          "rewards": {
+            "branch": [
+              { "when": "flag:delivered.pry_tool", "xp": 50, "flags": [{"key":"br:suspicion","delta":1}] },
+              { "when": "flag:delivered.pry_tool.sabotaged", "xp": 50, "flags": [{"key":"br:thief.job.sabotaged","value":true},{"key":"br:smith.rep","delta":1}] },
+              { "when": "flag:refused.pry_tool", "xp": 30, "flags": [{"key":"br:smith.rep","delta":1}] }
+            ]
+          }
+        }
+      ],
+      "instantiate": { "template": "standard", "params": {} },
+      "weight": 1
+    }
+  ]
+}

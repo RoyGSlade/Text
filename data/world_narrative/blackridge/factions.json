@@ -1,0 +1,32 @@
+{
+  "factions": [
+    {
+      "id": "merchant_guild",
+      "name": "Merchant’s Guild"
+    },
+    {
+      "id": "red_guard",
+      "name": "Red Guard"
+    },
+    {
+      "id": "town_blackridge",
+      "name": "Town of Blackridge"
+    },
+    {
+      "id": "adventurer_guild",
+      "name": "Adventurers' Guild"
+    },
+    {
+      "id": "town_watch",
+      "name": "Town Watch"
+    },
+    {
+      "id": "arcanum",
+      "name": "Arcanum"
+    },
+    {
+      "id": "council",
+      "name": "City Council"
+    }
+  ]
+}

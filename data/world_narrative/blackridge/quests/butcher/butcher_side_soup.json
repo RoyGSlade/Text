@@ -1,0 +1,36 @@
+{
+  "pack": "butcher",
+  "quests": [
+    {
+      "id": "butcher_soup_for_watch",
+      "tags": ["side", "morale", "clinic"],
+      "title": "Soup for the Watch",
+      "desc": "Cook a stamina soup for exhausted wall guards and deliver it to the barracks.",
+      "requirements": { "flagsAny": ["br:butcher.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_cook",
+          "text": "Bring 1 Monster Gland and 1 Nightbloom to the smokehouse to cook.",
+          "completionCheck": { "have": [{ "itemId": "monster.gland", "qty": 1 }, { "itemId": "herb.nightbloom", "qty": 1 }] },
+          "onComplete": [
+            { "type": "removeItem", "itemId": "monster.gland", "qty": 1 },
+            { "type": "removeItem", "itemId": "herb.nightbloom", "qty": 1 },
+            { "type": "addItem", "itemId": "food.stamina_stew", "qty": 1 }
+          ]
+        },
+        {
+          "id": "stage2_deliver",
+          "text": "Deliver the stew to the Barracks.",
+          "completionCheck": { "have": [{ "itemId": "food.stamina_stew", "qty": 0 }], "flagsAny": ["br:delivery.barracks.stew"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:watch.morale", "op": "+", "value": 1 }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 60 },
+        { "type": "item", "itemId": "drink.guards_tea", "qty": 1 }
+      ]
+    }
+  ]
+}

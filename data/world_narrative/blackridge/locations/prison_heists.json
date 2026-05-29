@@ -1,0 +1,29 @@
+{
+  "heists": [
+    {
+      "id": "prison_deputy_office_heist",
+      "title": "The Deputy's Ledger",
+      "objectives": [ { "id": "get_ledger", "text": "Infiltrate Deputy Veit's office and steal his coded ledger, the proof of his entire smuggling operation." } ],
+      "entryVectors": [],
+      "securityLayers": [],
+      "payoff": {
+        "success": [ { "type": "addItem", "itemId": "doc.deputy_ledger", "qty": 1 }, { "type": "setFlag", "flag": "br:prison.deputy.evidence", "op": "=", "value": true } ],
+        "failure": [ { "type": "setFlag", "flag": "br:prison.lockdown.active", "op": "=", "value": true } ]
+      }
+    },
+    {
+      "id": "prison_warden_safe_heist",
+      "title": "The Warden's Secret",
+      "objectives": [ { "id": "get_roster", "text": "Crack the safe in Warden Garr's private quarters and retrieve the Black Cells Roster." } ],
+      "entryVectors": [],
+      "securityLayers": [
+        { "id": "safe_lock_complex", "name": "Complex Safe Lock", "bypass": { "type": "skillCheck", "skill": "Skulduggery", "dc": 17 } },
+        { "id": "arcane_ward", "name": "Arcane Alarm Ward", "bypass": { "type": "skillCheck", "skill": "Arcanum", "dc": 15 } }
+      ],
+      "payoff": {
+        "success": [ { "type": "addItem", "itemId": "doc.blackcells_roster", "qty": 1 }, { "type": "setFlag", "flag": "br:prison.warden.evidence", "op": "=", "value": true } ],
+        "failure": [ { "type": "setFlag", "flag": "br:prison.lockdown.active", "op": "=", "value": true } ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "rina_soot_advocate",
+  "town": "blackridge",
+  "roles": [
+    "advocate"
+  ],
+  "buildingId": "city_hall",
+  "name": "Rina Soot",
+  "demeanor": "sharp, relentless",
+  "repFaction": "council",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "File your pain. They’ll shelve it."
+    },
+    {
+      "when": "tier >= known",
+      "text": "Names of the vanished. I keep them alive on paper."
+    }
+  ]
+}

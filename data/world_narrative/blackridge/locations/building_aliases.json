@@ -1,0 +1,13 @@
+{
+  "aliases": {
+    "guild": "adventurer_guild",
+    "dust_shelf": "library",
+    "bakery": "warm_loaf_bakery",
+    "bldg:blackridge:city_hall": "city_hall",
+    "bldg:blackridge:barracks": "barracks",
+    "bldg:blackridge:library": "library",
+    "bldg:blackridge:watchtowers": "watchtowers",
+    "bldg:blackridge:gates": "gates",
+    "bldg:blackridge:gaol_blackridge": "gaol_blackridge"
+  }
+}

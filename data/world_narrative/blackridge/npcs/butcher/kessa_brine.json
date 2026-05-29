@@ -1,0 +1,43 @@
+{
+  "id": "butcher_kessa_brine",
+  "town": "blackridge",
+  "roles": ["butcher", "buyer", "cook"],
+  "buildingId": "butcher",
+  "name": "Kessa Brine",
+  "demeanor": "competent, blunt, quietly compassionate with guards",
+  "repFaction": "faction_butcher",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:butcher.unlocked", "text": "Monster parts in the sack? If not, try the stew. It’s cheaper than dying tired." },
+    { "when": "br:butcher.unlocked && !br:butcher.trust", "text": "I buy parts, I sell stamina. No tab, no questions. You look new—don’t faint." },
+    { "when": "br:butcher.trust && !br:butcher.midnight_known", "text": "You keep your head in a fight. Come back after midnight. Quietly." },
+    { "when": "br:butcher.midnight_open", "text": "Back door, low light. Guards bring nightmares and meat. Keep your voice down." }
+  ],
+  "offers": [
+    {
+      "id": "offer_sell_parts",
+      "label": "Sell monster parts for food or chits",
+      "requires": { "flagsAny": ["br:butcher.unlocked"], "have": [{ "itemId": "monster.claw", "qty": 2 }] },
+      "actions": [
+        { "type": "removeItem", "itemId": "monster.claw", "qty": 2 },
+        { "type": "addItem", "itemId": "food.stamina_jerky", "qty": 1 },
+        { "type": "setFlag", "flag": "br:butcher.trust", "op": "=", "value": true }
+      ]
+    },
+    {
+      "id": "offer_buy_stew",
+      "label": "Buy Guard’s Broth (stamina)",
+      "requires": { "flagsAny": ["br:butcher.unlocked"] },
+      "actions": [ { "type": "addItem", "itemId": "food.guards_broth", "qty": 1 } ]
+    },
+    {
+      "id": "offer_midnight_hint",
+      "label": "Ask about late deliveries",
+      "requires": { "flagsAny": ["br:butcher.unlocked", "br:butcher.trust"], "flagsNot": ["br:butcher.midnight_known"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:butcher.midnight_known", "op": "=", "value": true },
+        { "type": "addItem", "itemId": "note.midnight_backdoor", "qty": 1 }
+      ]
+    }
+  ]
+}

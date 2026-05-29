@@ -1,0 +1,23 @@
+{
+  "id": "hal_voss_sergeant",
+  "town": "blackridge",
+  "roles": [
+    "sergeant_at_arms",
+    "guard"
+  ],
+  "buildingId": "city_hall",
+  "name": "Hal Voss",
+  "demeanor": "blunt, tired, loyal to people",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Curfew at eight. Don’t test it."
+    },
+    {
+      "when": "tier >= known",
+      "text": "I can move patrols for ten minutes. Use it."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "pack": "barracks_siege",
+  "quests": [
+    {
+      "id": "brg:siege:night_patrol",
+      "tags": [
+        "radiant",
+        "combat",
+        "town_watch",
+        "town:blackridge",
+        "building:barracks"
+      ],
+      "title": "Night Patrol",
+      "desc": "Night stirs beyond the wall. Complete a patrol and report back.",
+      "requirements": {},
+      "objectives": [
+        {
+          "type": "visit",
+          "sceneId": "bldg:blackridge:barracks:patrol_debrief",
+          "text": "Complete a patrol circuit and debrief before dawn."
+        }
+      ],
+      "rewards": {
+        "credits": 50,
+        "flagsSet": [
+          "brg:patrol_completed"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "roric_quartermaster"
+        }
+      },
+      "weight": 8
+    },
+    {
+      "id": "brg:siege:defense_contribution",
+      "tags": [
+        "repeatable",
+        "crafting",
+        "town_watch",
+        "town:blackridge",
+        "building:barracks"
+      ],
+      "title": "Bolstering the Defenses",
+      "desc": "Bundle materials into Defense Crates and turn them in.",
+      "requirements": {},
+      "objectives": [
+        {
+          "type": "visit",
+          "sceneId": "bldg:blackridge:barracks:turnin_crate_complete",
+          "text": "Deliver one Defense Crate to Roric."
+        }
+      ],
+      "rewards": {
+        "credits": 20
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "roric_quartermaster"
+        }
+      },
+      "weight": 6
+    }
+  ]
+}

@@ -71,12 +71,27 @@ window.IAG_STORY = (function() {
           ]
         },
         {
+          label: "Analyze the relay terminal firmware",
+          next: "relay_exterior",
+          effects: [
+            {
+              type: "skillCheck",
+              skill: "technology",
+              challenge: 11,
+              successFlag: "relay_firmware_understood",
+              failureFlag: "relay_firmware_failed_once",
+              successLog: "You bypass the terminal's code encryption and view the system schematic.",
+              failureLog: "The firmware is heavily obfuscated and your decryptor times out."
+            }
+          ]
+        },
+        {
           label: "Use your understanding to bypass the panel",
           next: "locked_door",
-          requires: { worldFlag: "relay_panel_understood", errorMsg: "You must first study and successfully understand the relay panel's routing." },
+          requires: { worldFlagAny: ["relay_panel_understood", "relay_firmware_understood"], errorMsg: "You must first study and successfully understand the relay panel or analyze its firmware." },
           effects: [
             { type: "setQuestStatus", questId: "investigate_relay", value: "completed" },
-            { type: "log", value: "Using your deep mechanics understanding, you reroute the main diagnostics link and force the doors open!" }
+            { type: "log", value: "Using your deep system understanding, you reroute the main diagnostics link and force the doors open!" }
           ]
         },
         {
@@ -194,30 +209,61 @@ window.IAG_STORY = (function() {
         // Execute the skill check d20 roll
         const checkResult = window.IAG_ENGINE.skillCheck(state, effect.skill, effect.challenge);
         
-        // Store in state for inspector tracking
+        // Store in state for richer inspector tracking
         state.lastSkillCheck = {
-          skill: effect.skill,
-          challenge: effect.challenge,
+          skill: checkResult.skill,
+          skillName: checkResult.skillName,
+          challenge: checkResult.challengeRating,
           roll: checkResult.finalRoll,
+          roll1: checkResult.roll1,
+          roll2: checkResult.roll2,
+          skillRank: checkResult.skillRank,
+          attributeId: checkResult.attributeId,
+          attributeBonus: checkResult.attributeBonus,
           modifier: checkResult.modifier,
           total: checkResult.total,
           success: checkResult.success,
+          advantage: checkResult.advantage,
+          disadvantage: checkResult.disadvantage,
           timestamp: Date.now()
         };
+
+        const attrName = checkResult.attributeId ? (checkResult.attributeId.charAt(0).toUpperCase() + checkResult.attributeId.slice(1)) : "";
+        const formula = `d20 ${checkResult.finalRoll} + skill ${checkResult.skillRank} + ${attrName} ${checkResult.attributeBonus} = ${checkResult.total}`;
 
         // Apply flags and history log push
         if (checkResult.success) {
           if (effect.successFlag) {
             state.worldFlags[effect.successFlag] = true;
           }
-          const logMsg = `MECHANICS check vs DC ${effect.challenge}: Rolled ${checkResult.finalRoll} + ${checkResult.modifier} = ${checkResult.total}. SUCCESS! ${effect.successLog || ""}`;
+          const logMsg = `${checkResult.skillName} check vs DC ${effect.challenge}: ${formula}. SUCCESS! ${effect.successLog || ""}`;
           state.history.push(logMsg);
           if (state.history.length > 50) state.history.shift();
+
+          // Increment successes and handle leveling
+          state.character.skillSuccesses = state.character.skillSuccesses || {};
+          const currentSuccesses = (state.character.skillSuccesses[effect.skill] || 0) + 1;
+          state.character.skillSuccesses[effect.skill] = currentSuccesses;
+
+          const currentRank = state.character.skills[effect.skill] || 0;
+          const thresholds = window.IAG_DATA.success_thresholds || [0, 5, 10, 20, 30, 50];
+          const nextRank = currentRank + 1;
+          if (nextRank < thresholds.length) {
+            const needed = thresholds[nextRank];
+            if (currentSuccesses >= needed) {
+              state.character.skills[effect.skill] = nextRank;
+              state.history.push(`🏆 SKILL UP! Your ${checkResult.skillName} skill leveled up to Rank ${nextRank}!`);
+              if (state.history.length > 50) state.history.shift();
+              
+              // Trigger character level calculation
+              window.IAG_ENGINE.checkCharacterLevelUp(state);
+            }
+          }
         } else {
           if (effect.failureFlag) {
             state.worldFlags[effect.failureFlag] = true;
           }
-          const logMsg = `MECHANICS check vs DC ${effect.challenge}: Rolled ${checkResult.finalRoll} + ${checkResult.modifier} = ${checkResult.total}. FAILURE. ${effect.failureLog || ""}`;
+          const logMsg = `${checkResult.skillName} check vs DC ${effect.challenge}: ${formula}. FAILURE. ${effect.failureLog || ""}`;
           state.history.push(logMsg);
           if (state.history.length > 50) state.history.shift();
         }
@@ -244,12 +290,17 @@ window.IAG_STORY = (function() {
       return { satisfied, errorMsg: requires.errorMsg };
     }
 
+    if (requires.worldFlagAny) {
+      const satisfied = requires.worldFlagAny.some(flag => !!state.worldFlags[flag]);
+      return { satisfied, errorMsg: requires.errorMsg };
+    }
+ 
     if (requires.questStatus) {
       const { questId, status } = requires.questStatus;
       const satisfied = state.questFlags[questId] === status;
       return { satisfied, errorMsg: requires.errorMsg };
     }
-
+ 
     // Backwards compatibility fallback for generic "flag" requirement
     if (requires.flag) {
       const satisfied = !!state.questFlags[requires.flag] || !!state.worldFlags[requires.flag];

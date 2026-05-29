@@ -1,0 +1,110 @@
+{
+  "id": "valentar_seer",
+  "town": "blackridge",
+  "roles": [
+    "seer",
+    "trainer",
+    "arcanum_member"
+  ],
+  "buildingId": "arcanum_tower",
+  "name": "Valentar",
+  "demeanor": "precise, weary, half-present; blunt kindness under clinical detachment",
+  "repFaction": "arcanum",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "!br:arcanum.unlocked",
+      "text": "You shouldn't be able to open that door. And yet, here we are."
+    },
+    {
+      "when": "br:arcanum.unlocked && br:arcanum.seer_trust < 1",
+      "text": "Names are slippery today. Call me Valentar. We don't have long before memory forgets us."
+    },
+    {
+      "when": "br:arcanum.seer_trust >= 1 && br:arcanum.seer_trust < 3",
+      "text": "Your presence quiets the tower. Let's get you oriented before it changes its mind."
+    },
+    {
+      "when": "br:arcanum.seer_trust >= 3",
+      "text": "Good. You're still you. I need fragments from City Hall's basement and the Library stacks."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_begin_path",
+      "requires": {
+        "flagsAny": [
+          "br:arcanum.unlocked"
+        ],
+        "flagsNot": [
+          "br:arcanum.path.started"
+        ]
+      },
+      "actions": [
+        {
+          "type": "startQuest",
+          "questId": "arcanum_path"
+        },
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.path.started",
+          "op": "=",
+          "value": true
+        }
+      ],
+      "text": "“Why am I here?”",
+      "leadsTo": "arcanum_office"
+    },
+    {
+      "id": "offer_train_science",
+      "requires": {
+        "flagsAny": [
+          "br:arcanum.unlocked"
+        ],
+        "have": [
+          {
+            "itemId": "reagent.goblin_teeth",
+            "qty": 3
+          }
+        ]
+      },
+      "text": "Training: Science & Technology drills (high DC)",
+      "leadsTo": "arcanum_lab_training"
+    },
+    {
+      "id": "offer_trade_blueprints",
+      "requires": {
+        "flagsAny": [
+          "br:arcanum.unlocked"
+        ]
+      },
+      "text": "Trade contraband for blueprints (no credits)",
+      "leadsTo": "arcanum_trades"
+    },
+    {
+      "id": "offer_memories_hint",
+      "requires": {
+        "flagsAny": [
+          "br:arcanum.path.stage2_done"
+        ],
+        "flagsNot": [
+          "br:arcanum.memories.hinted"
+        ]
+      },
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:arcanum.memories.hinted",
+          "op": "=",
+          "value": true
+        },
+        {
+          "type": "addItem",
+          "itemId": "quest.note.sticky_memory_hint",
+          "qty": 1
+        }
+      ],
+      "text": "Hint: where to find my memories"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "zone": "forest",
+  "rollEverySteps": 2,
+  "chance": 0.35,
+  "entries": [
+    {
+      "id": "enc:forest:ambush_goblins",
+      "weight": 6,
+      "when": "!dungeon:alpha:cleansed",
+      "scene": "enc:forest:ambush_goblins"
+    },
+    {
+      "id": "enc:forest:quiet",
+      "weight": 4,
+      "scene": "enc:forest:quiet"
+    }
+  ]
+}

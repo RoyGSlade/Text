@@ -1,0 +1,38 @@
+{
+  "id": "guild_hawker",
+  "town": "blackridge",
+  "roles": [
+    "merchant",
+    "hawker"
+  ],
+  "buildingId": "merchant_guild",
+  "name": "Slick Jon",
+  "demeanor": "oily,charming,fast-talking",
+  "repFaction": "merchant_guild",
+  "repPersonal": false,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Quality goods, quality lies. Kidding. Mostly."
+    },
+    {
+      "when": "tier == known",
+      "text": "Today’s sale: twice the price, half the shame."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "For you, a special markup. I mean discount."
+    },
+    {
+      "when": "guild_blackmailed",
+      "text": "Paperwork? Of course. Please don’t look at me like that."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:guild",
+      "town:blackridge"
+    ],
+    "limitPerVisit": 1
+  }
+}

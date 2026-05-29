@@ -1,0 +1,40 @@
+{
+  "id": "gs_shopkeeper_lessa",
+  "town": "blackridge",
+  "roles": ["shopkeeper", "buyer", "price_setter"],
+  "buildingId": "general_store",
+  "name": "Lessa Pike",
+  "demeanor": "cheerful, calculating, survivalist chic",
+  "repFaction": "faction_general_store",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:gs.unlocked", "text": "General Store’s open. If you can carry it, you can buy it." },
+    { "when": "br:gs.unlocked && br:econ.tight", "text": "Convoys late, siege loud. Prices reflect the weather." },
+    { "when": "br:econ.loose", "text": "Good week. Discounts if you don’t ask questions." }
+  ],
+  "offers": [
+    {
+      "id": "offer_browse",
+      "label": "Browse survival kits and tools",
+      "requires": { "flagsAny": ["br:gs.unlocked"] },
+      "actions": [{ "type": "gotoScene", "sceneId": "gs_shelves" }]
+    },
+    {
+      "id": "offer_ask_prices",
+      "label": "Ask why prices keep changing",
+      "requires": { "flagsAny": ["br:gs.unlocked"], "flagsNot": ["br:gs.price_lore_known"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:gs.price_lore_known", "op": "=", "value": true },
+        { "type": "startQuest", "questId": "gs_price_signal" }
+      ]
+    },
+    {
+      "id": "offer_sell_scavenged",
+      "label": "Sell scavenged materials (barter)",
+      "requires": { "flagsAny": ["br:gs.unlocked"] },
+      "actions": [
+        { "type": "gotoScene", "sceneId": "gs_counter_barter" }
+      ]
+    }
+  ]
+}

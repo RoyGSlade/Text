@@ -1,0 +1,26 @@
+{
+  "pack": "prison_side",
+  "quests": [
+    {
+      "id": "prison_side_chain_of_custody",
+      "tags": ["prison", "heist", "leverage"],
+      "title": "Chain of Custody",
+      "desc": "The records clerk, Lyd Marven, is the weak link in the prison's administration. Gain leverage over him to control the flow of paper.",
+      "stages": [
+        { "id": "s1_case", "text": "Case the Records Office and learn of Lyd's anxieties and habits.", "completionCheck": { "flagsAny": ["br:heist.records.cased"] } },
+        { "id": "s2_leverage", "text": "Find Lyd's hidden stash of Dreammilk or steal his personal journal.", "completionCheck": { "flagsAny": ["br:prison.lyd.leveraged"] } }
+      ],
+      "rewards": [ { "type": "xp", "amount": 80 }, { "type": "setFlag", "flag": "br:prison.records.compromised", "op": "=", "value": true } ]
+    },
+    {
+      "id": "prison_side_humane_conditions",
+      "tags": ["prison", "humane", "tension"],
+      "title": "A Crumb of Kindness",
+      "desc": "The inmates' tension is rising. Perform acts of kindness to lower the temperature, earning the trust of Gaoler Bram and the prisoners.",
+      "stages": [
+        { "id": "s1_act", "text": "Deliver an Unsent Family Letter, smuggle medicine to the infirmary, or provide extra food rations.", "completionCheck": { "flagsAny": ["br:prison.humane.act.done"] } }
+      ],
+      "rewards": [ { "type": "xp", "amount": 50 }, { "type": "setFlag", "flag": "br:prison.tension", "op": "+", "value": -1 } ]
+    }
+  ]
+}

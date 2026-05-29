@@ -1,0 +1,17 @@
+{
+  "id": "rulda_hark",
+  "town": "blackridge",
+  "roles": ["blacksmith", "merchant_subcontractor"],
+  "buildingId": "grimy_anvil",
+  "name": "Rulda Hark",
+  "age": 42,
+  "demeanor": "careful, compliant, tired",
+  "factionLean": "merchant_guild",
+  "repFaction": "merchant_guild",
+  "repPersonal": false,
+  "offers": [
+    { "when": "flag:br:smith.arrested && !flag:br:smith.rescued", "text": "Licensed repairs and standard fittings only. Don’t ask for trouble." },
+    { "when": "flag:br:disguise.merchant", "text": "Audit or order? If audit, present your authorization." },
+    { "when": "flag:br:permit.hardening || flag:br:disguise.guard", "text": "Tool hardening is available under permit or guard oversight." }
+  ]
+}

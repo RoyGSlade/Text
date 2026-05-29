@@ -1,0 +1,38 @@
+{
+  "id": "outfitter_proprietor_varra",
+  "town": "blackridge",
+  "roles": ["shopkeeper", "tailor", "disguiser"],
+  "buildingId": "outfitter",
+  "name": "Varra Loom",
+  "demeanor": "brisk, exacting, reads you like a receipt",
+  "repFaction": "faction_outfitter",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:outfit.unlocked", "text": "Travel far, don’t die. Buy the part where you don’t die here." },
+    { "when": "br:outfit.unlocked && br:weather.coldActive", "text": "You’re dressed for denial, not snow. Fix that." },
+    { "when": "br:disguise.merchant", "text": "Pin straight, hem even. Walk like you own the invoice." }
+  ],
+  "offers": [
+    {
+      "id": "offer_browse",
+      "label": "Browse travel gear and weather armor",
+      "requires": { "flagsAny": ["br:outfit.unlocked"] },
+      "actions": [{ "type": "gotoScene", "sceneId": "outfitter_shelves" }]
+    },
+    {
+      "id": "offer_consult_disguise",
+      "label": "Consult on disguises (merchant/watch)",
+      "requires": { "flagsAny": ["br:outfit.unlocked"] },
+      "actions": [{ "type": "gotoScene", "sceneId": "outfitter_consult" }]
+    },
+    {
+      "id": "offer_price_lesson",
+      "label": "Ask how clothing affects penalties",
+      "requires": { "flagsAny": ["br:outfit.unlocked"], "flagsNot": ["br:outfit.tutorial_done"] },
+      "actions": [
+        { "type": "startQuest", "questId": "outfitter_weather_or_not" },
+        { "type": "setFlag", "flag": "br:outfit.tutorial_done", "op": "=", "value": true }
+      ]
+    }
+  ]
+}

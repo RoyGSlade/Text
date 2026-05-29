@@ -1,0 +1,39 @@
+{
+  "zone": "northwood_forest",
+  "rollEverySteps": 2,
+  "chance": 0.35,
+  "tables": [
+    {
+      "time": "day",
+      "entries": [
+        {
+          "id": "enc:northwood:foragers",
+          "weight": 6,
+          "when": "!dungeon:alpha:heart_destroyed && !weather:rain",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:northwood:clear",
+          "weight": 4,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    },
+    {
+      "time": "night",
+      "entries": [
+        {
+          "id": "enc:northwood:prowlers",
+          "weight": 7,
+          "when": "!weather:storm",
+          "scene": "enc:forest:ambush_goblins"
+        },
+        {
+          "id": "enc:northwood:restless",
+          "weight": 3,
+          "scene": "enc:forest:quiet"
+        }
+      ]
+    }
+  ]
+}

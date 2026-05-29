@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "id": "dose.antidote_standard",
+      "name": "Standard Antidote Dose",
+      "itemCategory": "medicine",
+      "description": "Neutralizes common toxins and whatever you called ‘tea’.",
+      "value": 12,
+      "rarity": "common",
+      "tags": ["antidote", "clinic"],
+      "contraband": "low",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:clinic.drugged_cleared", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:status.drugged", "op": "=", "value": false }
+        ]
+      }
+    },
+    {
+      "id": "kit.first_aid",
+      "name": "First Aid Kit",
+      "itemCategory": "tool",
+      "description": "Bandages, tinctures, and a pamphlet that says ‘Don’t Panic’ six times.",
+      "value": 18,
+      "rarity": "common",
+      "tags": ["clinic", "aid"],
+      "contraband": "none",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:clinic.casualties", "op": "+", "value": -1 }
+        ]
+      }
+    },
+    {
+      "id": "herb.nightbloom",
+      "name": "Nightbloom",
+      "itemCategory": "reagent",
+      "description": "A flower that thinks it’s the moon.",
+      "value": 6,
+      "rarity": "uncommon",
+      "tags": ["herb", "antidote"],
+      "contraband": "none"
+    },
+    {
+      "id": "reagent.antitoxin_base",
+      "name": "Antitoxin Base",
+      "itemCategory": "reagent",
+      "description": "The boring part of every cure.",
+      "value": 8,
+      "rarity": "common",
+      "tags": ["antidote", "reagent"],
+      "contraband": "none"
+    },
+    {
+      "id": "mask.plague",
+      "name": "Plague Mask",
+      "itemCategory": "armor",
+      "description": "Filters particulates and hope.",
+      "value": 20,
+      "rarity": "uncommon",
+      "tags": ["mask", "quarantine"],
+      "contraband": "low",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:clinic.quarantine.protected", "op": "=", "value": true }
+        ]
+      }
+    },
+    {
+      "id": "voucher.antidote",
+      "name": "Antidote Voucher",
+      "itemCategory": "key",
+      "description": "Authorizes release of two doses from official stock.",
+      "value": 0,
+      "rarity": "uncommon",
+      "tags": ["paper", "clinic"],
+      "contraband": "none",
+      "use": { "actions": [ { "type": "setFlag", "flag": "br:clinic.voucher.obtained", "op": "=", "value": true } ] }
+    },
+    {
+      "id": "narcotic.dreammilk",
+      "name": "Dreammilk",
+      "itemCategory": "drug",
+      "description": "Popular, illegal, and everyone’s problem.",
+      "value": 25,
+      "rarity": "uncommon",
+      "tags": ["narcotic"],
+      "contraband": "high",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:status.drugged", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+        ]
+      }
+    },
+    {
+      "id": "bandage.bundle",
+      "name": "Bandage Bundle",
+      "itemCategory": "consumable",
+      "description": "Promises tidy outcomes to messy problems.",
+      "value": 5,
+      "rarity": "common",
+      "tags": ["aid"],
+      "contraband": "none",
+      "use": {
+        "actions": [
+          { "type": "setFlag", "flag": "br:clinic.casualties", "op": "+", "value": -1 }
+        ]
+      }
+    }
+  ]
+}

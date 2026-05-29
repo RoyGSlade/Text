@@ -1,0 +1,6 @@
+{
+  "materials": "materials.json",
+  "stations": "stations.json",
+  "blueprints": "blueprints.json",
+  "vendors": "vendors.json"
+}

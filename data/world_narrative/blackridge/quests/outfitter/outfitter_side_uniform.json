@@ -1,0 +1,36 @@
+{
+  "pack": "outfitter",
+  "quests": [
+    {
+      "id": "outfitter_uniform_swap",
+      "tags": ["side", "infiltration"],
+      "title": "Laundry Day",
+      "desc": "A uniform went missing from the Watch laundry. Replace it without starting a small war.",
+      "requirements": { "flagsAny": ["br:outfit.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_source_fabric",
+          "text": "Bring 2 Bolt Cloth and 1 Brass Insignia.",
+          "completionCheck": {
+            "have": [
+              { "itemId": "mat.bolt_cloth", "qty": 2 },
+              { "itemId": "badge.brass_insignia", "qty": 1 }
+            ]
+          }
+        },
+        {
+          "id": "stage2_sew",
+          "text": "Assist Nila in sewing a replacement (skill check).",
+          "completionCheck": { "flagsAny": ["br:outfit.uniform.sewn"] },
+          "onComplete": [
+            { "type": "addItem", "itemId": "uniform.watch_fake", "qty": 1 },
+            { "type": "setFlag", "flag": "br:disguise.guard", "op": "=", "value": true }
+          ]
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 60 }
+      ]
+    }
+  ]
+}

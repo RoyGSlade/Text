@@ -1,0 +1,13 @@
+{
+  "id": "bren_oake_quartermaster",
+  "town": "blackridge",
+  "roles": ["quartermaster","guard"],
+  "buildingId": "bldg:blackridge:watchtowers",
+  "name": "Bren Oake",
+  "demeanor": "gravel-dry humor, pragmatic",
+  "repFaction": "watch",
+  "greetings": [
+    { "when": "tier < known", "text": "Check the fuel, check the horns, check your ego." },
+    { "when": "tier >= known", "text": "You bring supplies, I make sure we live till dusk." }
+  ]
+}

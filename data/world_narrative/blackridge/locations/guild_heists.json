@@ -1,0 +1,162 @@
+{
+  "heists": [
+    {
+      "id": "heist.guild.ledger-room",
+      "title": "Back Office Quiet Hours",
+      "textBlocks": [
+        {
+          "text": "After midnight, the ledger room breathes ink and secrets. Two routes: air vent or clerk keys."
+        }
+      ],
+      "choices": [
+        {
+          "id": "vent-route",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 13,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.guild.inside",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "gotoScene",
+              "sceneId": "heist.guild.copy-seal"
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:pendingArrestMinutes",
+              "op": "=",
+              "value": 30
+            }
+          ],
+          "text": "Squeeze through the vent"
+        },
+        {
+          "id": "key-route",
+          "type": "skillCheck",
+          "skill": "Thievery",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "gotoScene",
+              "sceneId": "heist.guild.copy-seal"
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "incFlag",
+              "flag": "br:suspicion",
+              "value": 2
+            }
+          ],
+          "text": "Lift the clerk’s keys"
+        }
+      ]
+    },
+    {
+      "id": "heist.guild.copy-seal",
+      "title": "Inspector’s Seal",
+      "textBlocks": [
+        {
+          "text": "A wax-stained press sits in a velvet-lined drawer."
+        }
+      ],
+      "choices": [
+        {
+          "id": "copy-with-wax",
+          "type": "skillCheck",
+          "skill": "Crafting",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.guild.sealCopied",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "incFlag",
+              "flag": "br:suspicion",
+              "value": 2
+            }
+          ],
+          "text": "Copy the seal with wax melting"
+        },
+        {
+          "id": "search-ledgers",
+          "type": "skillCheck",
+          "skill": "Investigation",
+          "dc": 13,
+          "onSuccess": [
+            {
+              "type": "addItem",
+              "itemId": "item.guild.file-lantern-proof",
+              "qty": 1
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.guild.alarmSoft",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "text": "Search ledgers for lantern-proof creature notes"
+        },
+        {
+          "id": "alter-two-entries",
+          "type": "skillCheck",
+          "skill": "Forgery",
+          "dc": 14,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.guild.ledgerAltered",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "setFlag",
+              "flag": "br:pendingArrestMinutes",
+              "op": "=",
+              "value": 30
+            }
+          ],
+          "text": "Alter two ledger entries"
+        },
+        {
+          "id": "exfiltrate",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 12,
+          "onSuccess": [
+            {
+              "type": "setFlag",
+              "flag": "br:heist.guild.exfiltrated",
+              "op": "=",
+              "value": true
+            }
+          ],
+          "onFailure": [
+            {
+              "type": "incFlag",
+              "flag": "br:suspicion",
+              "value": 2
+            }
+          ],
+          "text": "Slip out during patrol change"
+        }
+      ]
+    }
+  ]
+}

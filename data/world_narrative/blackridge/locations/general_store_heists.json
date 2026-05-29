@@ -1,0 +1,75 @@
+{
+  "heists": [
+    {
+      "id": "gs_backroom_stash",
+      "title": "Backroom Stash",
+      "objectives": [
+        { "id": "obj_scope", "text": "Scope supply crates without spiking suspicion." },
+        { "id": "obj_adjust", "text": "Adjust stock to relieve shortages or pilfer a kit without a scene." }
+      ],
+      "entryVectors": [
+        {
+          "id": "ev_staff_door",
+          "name": "Staff Door",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Stealth",
+              "dc": 15,
+              "text": "Slip through during a customer rush.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:gs.heist.alert", "op": "+", "value": 1 },
+                { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ev_window_crate",
+          "name": "Loading Window",
+          "requires": {},
+          "steps": [
+            {
+              "type": "skillCheck",
+              "skill": "Perception",
+              "dc": 12,
+              "text": "Time your entrance between crate drops.",
+              "success": [],
+              "failure": [
+                { "type": "setFlag", "flag": "br:gs.heist.alert", "op": "+", "value": 1 }
+              ]
+            }
+          ]
+        }
+      ],
+      "securityLayers": [
+        {
+          "id": "sec_lockbox",
+          "name": "Lockbox",
+          "bypass": {
+            "type": "skillCheck",
+            "skill": "Technology",
+            "dc": 14,
+            "text": "Shim the lock quietly.",
+            "success": [],
+            "failure": [
+              { "type": "setFlag", "flag": "br:gs.heist.alert", "op": "+", "value": 1 }
+            ]
+          }
+        }
+      ],
+      "payoff": {
+        "success": [
+          { "type": "addItem", "itemId": "kit.survival_basic", "qty": 1 },
+          { "type": "setFlag", "flag": "br:econ.loose", "op": "=", "value": true }
+        ],
+        "failure": [
+          { "type": "setFlag", "flag": "br:gs.ban.active", "op": "=", "value": true },
+          { "type": "setFlag", "flag": "br:gs.heist.alert", "op": "+", "value": 2 }
+        ]
+      }
+    }
+  ]
+}

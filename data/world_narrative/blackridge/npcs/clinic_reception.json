@@ -1,0 +1,37 @@
+{
+  "id": "clinic_reception",
+  "town": "blackridge",
+  "roles": [
+    "gossip"
+  ],
+  "buildingId": "clinic",
+  "name": "Tella",
+  "demeanor": "bouncy,nosy,well-meaning",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Welcome! Don’t touch the jars. They touch back."
+    },
+    {
+      "when": "tier == known",
+      "text": "Heard you punched a ghoul. Is that true or can I make it truer?"
+    },
+    {
+      "when": "tier >= respected",
+      "text": "You’re trending. Want the latest whispers or the spiciest ones?"
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "gossip",
+      "town:blackridge",
+      "building:clinic"
+    ],
+    "minTierByTag": {
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

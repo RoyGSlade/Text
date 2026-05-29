@@ -1,0 +1,23 @@
+{
+  "id": "elara_rookie",
+  "town": "blackridge",
+  "roles": [
+    "guard_rookie",
+    "town_watch"
+  ],
+  "buildingId": "barracks",
+  "name": "Elara",
+  "demeanor": "earnest, nervous, observant",
+  "repFaction": "town_watch",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Just... trying to keep my spear steady. You?"
+    },
+    {
+      "when": "tier >= known",
+      "text": "Did you hear that noise last night? No one else seems to have..."
+    }
+  ]
+}

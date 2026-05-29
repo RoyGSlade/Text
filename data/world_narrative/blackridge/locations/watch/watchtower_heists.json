@@ -1,0 +1,27 @@
+{
+  "scenes": {
+    "bldg:blackridge:watchtowers:night_sabotage": {
+      "text": "Midnight. A mirror hangs crooked; oil reeks sweet and wrong.",
+      "choices": [
+        { "text": "Inspect mirror mount (Mechanics DC 12)", "type": "skillCheck", "leadsTo": "bldg:blackridge:watchtowers:fix_mirror", "onFailure": "blackridge:prison:intake" },
+        { "text": "Test oil for contaminants (Science DC 12)", "type": "skillCheck", "leadsTo": "bldg:blackridge:watchtowers:oil_findings", "onFailure": "blackridge:prison:intake" },
+        { "text": "Retreat into the dark", "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:fix_mirror": {
+      "text": "You re-seat the brackets and scrape a guild maker’s mark from the bolt head.",
+      "choices": [
+        { "text": "Report to Mira", "actions": [ { "type": "setFlag", "flag": "br:siege_visibility", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:hub" }
+      ]
+    },
+
+    "bldg:blackridge:watchtowers:oil_findings": {
+      "text": "Contaminated oil gels at low temp; perfect for sudden blackout.",
+      "choices": [
+        { "text": "Confront Bren with evidence", "actions": [ { "type": "setFlag", "flag": "br:morale", "op": "+", "value": 1 } ], "leadsTo": "bldg:blackridge:watchtowers:hub" },
+        { "text": "Leak to Library (set intel flag)", "actions": [ { "type": "setFlag", "flag": "lib:oil_sabotage_known", "op": "=", "value": true } ], "leadsTo": "bldg:blackridge:watchtowers" }
+      ]
+    }
+  }
+}

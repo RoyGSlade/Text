@@ -1,0 +1,33 @@
+{
+  "id": "butcher_wallguard_jerrik",
+  "town": "blackridge",
+  "roles": ["patron", "rumor_source"],
+  "buildingId": "butcher",
+  "name": "Jerrik of the Wall",
+  "demeanor": "haunted, jittery, grateful for hot food",
+  "repFaction": "faction_town_watch",
+  "repPersonal": true,
+  "greetings": [
+    { "when": "!br:butcher.midnight_open", "text": "If the broth is hot, the dream stays cold. That’s something." },
+    { "when": "br:butcher.midnight_open && !br:rumor.convoy_ambush", "text": "You didn’t hear it from me, but don’t travel the north road on 4th bell." },
+    { "when": "br:rumor.convoy_ambush", "text": "If you go anyway, carry a whistle. And run." }
+  ],
+  "offers": [
+    {
+      "id": "offer_midnight_open",
+      "label": "Invite you to midnight back door",
+      "requires": { "flagsAny": ["br:butcher.midnight_known"], "flagsNot": ["br:butcher.midnight_open"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:butcher.midnight_open", "op": "=", "value": true }
+      ]
+    },
+    {
+      "id": "offer_share_ambush",
+      "label": "Share convoy ambush rumor",
+      "requires": { "flagsAny": ["br:butcher.midnight_open"], "flagsNot": ["br:rumor.convoy_ambush"] },
+      "actions": [
+        { "type": "setFlag", "flag": "br:rumor.convoy_ambush", "op": "=", "value": true }
+      ]
+    }
+  ]
+}

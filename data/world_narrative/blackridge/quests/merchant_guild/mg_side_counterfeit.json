@@ -1,0 +1,58 @@
+{
+  "pack": "merchant_guild",
+  "quests": [
+    {
+      "id": "mg_side_counterfeit_seals",
+      "tags": [
+        "side",
+        "investigation"
+      ],
+      "title": "Seal of Approval",
+      "desc": "Counterfeit lantern seals are undercutting the Guild. Find the press or become it.",
+      "requirements": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "stages": [
+        {
+          "id": "stage1_find_press",
+          "text": "Track rumors to locate the counterfeit press.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.counterfeit.press_found"
+            ]
+          }
+        },
+        {
+          "id": "stage2_outcome",
+          "text": "Destroy the press or divert it for your own ends.",
+          "completionCheck": {
+            "flagsAny": [
+              "br:mg.counterfeit.destroyed",
+              "br:mg.counterfeit.coopted"
+            ]
+          },
+          "onComplete": [
+            {
+              "type": "incFlag",
+              "flag": "br:lantern.markup",
+              "value": -1
+            }
+          ]
+        }
+      ],
+      "rewards": [
+        {
+          "type": "xp",
+          "amount": 70
+        },
+        {
+          "type": "item",
+          "itemId": "seal.counterfeit",
+          "qty": 1
+        }
+      ]
+    }
+  ]
+}

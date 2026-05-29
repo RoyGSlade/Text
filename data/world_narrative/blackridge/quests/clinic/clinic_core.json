@@ -1,0 +1,40 @@
+{
+  "pack": "clinic",
+  "quests": [
+    {
+      "id": "clinic_detox",
+      "tags": ["main", "tutorial", "clinic"],
+      "title": "First, Do No Harm (To Yourself)",
+      "desc": "Admitted as a drugged traveler, you learn how treatment, flags, and items work. Get clean, then help someone else.",
+      "requirements": {},
+      "stages": [
+        {
+          "id": "stage1_admit",
+          "text": "Admit to the clinic and submit to intake checks.",
+          "completionCheck": { "flagsAny": ["br:clinic.intake.done"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:clinic.rep", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "id": "stage2_detox",
+          "text": "Obtain a standard antidote dose and use it.",
+          "completionCheck": { "have": [{ "itemId": "dose.antidote_standard", "qty": 0 }], "flagsAny": ["br:clinic.drugged_cleared"] },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": -1 }
+          ]
+        },
+        {
+          "id": "stage3_pay_it_forward",
+          "text": "Assist triage: stabilize one casualty or deliver supplies.",
+          "completionCheck": { "flagsAny": ["br:clinic.casualty_stabilized", "br:clinic.supplies_delivered"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 80 },
+        { "type": "item", "itemId": "kit.first_aid", "qty": 1 }
+      ],
+      "instantiate": { "template": "quest:linear_three_stage", "params": { "area": "clinic" } }
+    }
+  ]
+}

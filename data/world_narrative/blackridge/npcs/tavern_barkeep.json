@@ -1,0 +1,38 @@
+{
+  "id": "tavern_barkeep",
+  "town": "blackridge",
+  "roles": [
+    "tavernkeep"
+  ],
+  "buildingId": "tavern",
+  "name": "Hadrik",
+  "demeanor": "calm,old,lethal",
+  "repFaction": "town_blackridge",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "tier < known",
+      "text": "Coin on the counter, questions after."
+    },
+    {
+      "when": "tier == known",
+      "text": "Eat first. Hero later."
+    },
+    {
+      "when": "tier >= respected",
+      "text": "Don’t make me throw you. Or do. I miss practice."
+    }
+  ],
+  "offerRules": {
+    "questTags": [
+      "role:tavern",
+      "town:blackridge",
+      "building:tavern"
+    ],
+    "minTierByTag": {
+      "story": "known",
+      "radiant": "stranger"
+    },
+    "limitPerVisit": 1
+  }
+}

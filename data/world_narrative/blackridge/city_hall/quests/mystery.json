@@ -1,0 +1,163 @@
+{
+  "pack": "city_hall_mystery",
+  "quests": [
+    {
+      "id": "fal:lost_mayor:whispers",
+      "tags": [
+        "story",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "A City Without Elections",
+      "desc": "Attend a council session and learn what Blackridge refuses to say out loud.",
+      "requirements": {
+        "flagsNot": [
+          "fal:council_seen"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:council"
+          },
+          "hint": "Sit in a morning hearing."
+        }
+      ],
+      "rewards": {
+        "flagsSet": [
+          "fal:council_seen"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "pella_myre_scribe"
+        }
+      },
+      "weight": 9
+    },
+    {
+      "id": "fal:lost_mayor:vault",
+      "tags": [
+        "story",
+        "stealth",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Closed For Renovations",
+      "desc": "Exploit a distraction to enter the Records Vault and recover the old mayor’s files.",
+      "requirements": {
+        "flagsAny": [
+          "fal:council_seen"
+        ],
+        "flagsNot": [
+          "fal:old_mayor_file"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:basement_entry"
+          },
+          "hint": "Slip into the Lower Vault."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "doc.old_mayor_memo",
+            "qty": 1
+          },
+          "hint": "Find the old mayor’s memo."
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "id": "doc.old_mayor_memo",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "fal:old_mayor_file"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "sister_illya_archivist"
+        }
+      },
+      "weight": 8
+    },
+    {
+      "id": "fal:lost_mayor:dossier",
+      "tags": [
+        "story",
+        "heist",
+        "town:blackridge",
+        "building:city_hall"
+      ],
+      "title": "Five Sources",
+      "desc": "With Hal’s help and a rooftop kit, steal the Arcanum dossier from the Mayor’s office.",
+      "requirements": {
+        "flagsAny": [
+          "fal:hal_trusted"
+        ],
+        "flagsNot": [
+          "fal:dossier_taken"
+        ]
+      },
+      "stages": [
+        {
+          "id": 0,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "gear.rooftop_kit",
+            "qty": 1
+          },
+          "hint": "Craft a Rooftop Kit."
+        },
+        {
+          "id": 1,
+          "completionCheck": {
+            "type": "visit",
+            "sceneId": "bldg:blackridge:city_hall:roof"
+          },
+          "hint": "Enter via the roof during Hal’s window."
+        },
+        {
+          "id": 2,
+          "completionCheck": {
+            "type": "acquireItem",
+            "itemId": "doc.arcanum_five_sources",
+            "qty": 1
+          },
+          "hint": "Retrieve the dossier."
+        }
+      ],
+      "rewards": {
+        "items": [
+          {
+            "id": "doc.arcanum_five_sources",
+            "qty": 1
+          }
+        ],
+        "flagsSet": [
+          "fal:dossier_taken"
+        ]
+      },
+      "instantiate": {
+        "template": "quest_simple_turnin",
+        "params": {
+          "viaNpc": "hal_voss_sergeant"
+        }
+      },
+      "weight": 8
+    }
+  ]
+}

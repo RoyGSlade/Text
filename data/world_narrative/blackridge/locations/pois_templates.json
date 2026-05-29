@@ -1,0 +1,323 @@
+{
+  "poiTemplates": [
+    {
+      "id": "heart_forest",
+      "title": "Blighted Crypt",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "A hill-crypt exhales cold. Black veins pulse.",
+          "choices": [
+            {
+              "text": "Probe wards (Science DC 13)",
+              "type": "skillCheck",
+              "skill": "Science",
+              "dc": 13,
+              "onSuccess": "poi:{qid}:inner",
+              "onFailure": "poi:{qid}:ward_shock"
+            },
+            {
+              "text": "Retreat",
+              "leadsTo": "{returnScene}"
+            }
+          ]
+        },
+        "ward_shock": {
+          "id": "poi:{qid}:ward_shock",
+          "text": "The wards lash your fingers.",
+          "choices": [
+            {
+              "text": "Back",
+              "leadsTo": "poi:{qid}:entry"
+            }
+          ]
+        },
+        "inner": {
+          "id": "poi:{qid}:inner",
+          "text": "The inner seal yields. A heart-crystal thrums.",
+          "choices": [
+            {
+              "text": "Shatter (Melee DC 12)",
+              "type": "skillCheck",
+              "skill": "Melee",
+              "dc": 12,
+              "onSuccess": "poi:{qid}:cleansed",
+              "onFailure": "poi:{qid}:pulse"
+            }
+          ]
+        },
+        "pulse": {
+          "id": "poi:{qid}:pulse",
+          "text": "A hateful pulse throws you back.",
+          "choices": [
+            {
+              "text": "Back",
+              "leadsTo": "poi:{qid}:inner"
+            }
+          ]
+        },
+        "cleansed": {
+          "id": "poi:{qid}:cleansed",
+          "text": "The crystal splits. The air warms.",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "dungeon:{qid}:cleansed",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:dungeon:forest:heart_destroyed",
+              "value": true
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:fasttravel:forest_bridge",
+              "value": true
+            }
+          ],
+          "choices": [
+            {
+              "text": "Return",
+              "leadsTo": "{returnScene}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "heart_desert",
+      "title": "Searing Core",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "A dune cave breathes heat. Sand drips like glass.",
+          "choices": [
+            {
+              "text": "Brush aside runes (Science DC 13)",
+              "type": "skillCheck",
+              "skill": "Science",
+              "dc": 13,
+              "onSuccess": "poi:{qid}:inner",
+              "onFailure": "poi:{qid}:ward_scorch"
+            },
+            {
+              "text": "Retreat",
+              "leadsTo": "{returnScene}"
+            }
+          ]
+        },
+        "ward_scorch": {
+          "id": "poi:{qid}:ward_scorch",
+          "text": "Heat sigils sear your palm.",
+          "choices": [
+            {
+              "text": "Back",
+              "leadsTo": "poi:{qid}:entry"
+            }
+          ]
+        },
+        "inner": {
+          "id": "poi:{qid}:inner",
+          "text": "A molten heart pulses beneath glassy sand.",
+          "choices": [
+            {
+              "text": "Smash core (Melee DC 12)",
+              "type": "skillCheck",
+              "skill": "Melee",
+              "dc": 12,
+              "onSuccess": "poi:{qid}:cleansed",
+              "onFailure": "poi:{qid}:flare"
+            }
+          ]
+        },
+        "flare": {
+          "id": "poi:{qid}:flare",
+          "text": "A flare of sand blinds you.",
+          "choices": [
+            {
+              "text": "Back",
+              "leadsTo": "poi:{qid}:inner"
+            }
+          ]
+        },
+        "cleansed": {
+          "id": "poi:{qid}:cleansed",
+          "text": "The core cools to ash. Night winds sweep in.",
+          "actions": [
+            { "type": "setFlag", "flag": "dungeon:{qid}:cleansed", "value": true },
+            { "type": "setFlag", "flag": "br:dungeon:desert:heart_destroyed", "value": true },
+            { "type": "setFlag", "flag": "br:fasttravel:desert_oasis", "value": true }
+          ],
+          "choices": [
+            { "text": "Return", "leadsTo": "{returnScene}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "heart_jungle",
+      "title": "Rotting Canopy",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "Vines knot over a sinkhole. Rot steams up.",
+          "choices": [
+            {
+              "text": "Cut vines (Melee DC 12)",
+              "type": "skillCheck",
+              "skill": "Melee",
+              "dc": 12,
+              "onSuccess": "poi:{qid}:inner",
+              "onFailure": "poi:{qid}:lash"
+            },
+            { "text": "Retreat", "leadsTo": "{returnScene}" }
+          ]
+        },
+        "lash": {
+          "id": "poi:{qid}:lash",
+          "text": "Thorns lash your arms.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:entry" } ]
+        },
+        "inner": {
+          "id": "poi:{qid}:inner",
+          "text": "A fungus heart swells with sick light.",
+          "choices": [
+            {
+              "text": "Burn heart (Science DC 13)",
+              "type": "skillCheck",
+              "skill": "Science",
+              "dc": 13,
+              "onSuccess": "poi:{qid}:cleansed",
+              "onFailure": "poi:{qid}:spore"
+            }
+          ]
+        },
+        "spore": {
+          "id": "poi:{qid}:spore",
+          "text": "Spores choke your lungs.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:inner" } ]
+        },
+        "cleansed": {
+          "id": "poi:{qid}:cleansed",
+          "text": "The heart collapses. Fresh rain falls.",
+          "actions": [
+            { "type": "setFlag", "flag": "dungeon:{qid}:cleansed", "value": true },
+            { "type": "setFlag", "flag": "br:dungeon:jungle:heart_destroyed", "value": true },
+            { "type": "setFlag", "flag": "br:beacon:jungle_halo", "value": true }
+          ],
+          "choices": [ { "text": "Return", "leadsTo": "{returnScene}" } ]
+        }
+      }
+    },
+    {
+      "id": "heart_plains",
+      "title": "Buried Cairn",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "A mound of stones hums under grass.",
+          "choices": [
+            { "text": "Dig down (Science DC 11)", "type": "skillCheck", "skill": "Science", "dc": 11, "onSuccess": "poi:{qid}:inner", "onFailure": "poi:{qid}:collapse" },
+            { "text": "Retreat", "leadsTo": "{returnScene}" }
+          ]
+        },
+        "collapse": {
+          "id": "poi:{qid}:collapse",
+          "text": "Loose stones tumble around you.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:entry" } ]
+        },
+        "inner": {
+          "id": "poi:{qid}:inner",
+          "text": "A buried heart beats like distant drums.",
+          "choices": [
+            { "text": "Crush core (Melee DC 12)", "type": "skillCheck", "skill": "Melee", "dc": 12, "onSuccess": "poi:{qid}:cleansed", "onFailure": "poi:{qid}:rumble" }
+          ]
+        },
+        "rumble": {
+          "id": "poi:{qid}:rumble",
+          "text": "The mound rumbles threateningly.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:inner" } ]
+        },
+        "cleansed": {
+          "id": "poi:{qid}:cleansed",
+          "text": "The beat stops. Winds sweep the plains.",
+          "actions": [
+            { "type": "setFlag", "flag": "dungeon:{qid}:cleansed", "value": true },
+            { "type": "setFlag", "flag": "br:dungeon:plains:heart_destroyed", "value": true },
+            { "type": "setFlag", "flag": "br:recipe:plains_goulash", "value": true }
+          ],
+          "choices": [ { "text": "Return", "leadsTo": "{returnScene}" } ]
+        }
+      }
+    },
+    {
+      "id": "bridge_ruins",
+      "title": "Collapsed Bridge",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "Half a bridge dangles over a dark ravine.",
+          "choices": [
+            {
+              "text": "Search for path (Science DC 10)",
+              "type": "skillCheck",
+              "skill": "Science",
+              "dc": 10,
+              "onSuccess": "poi:{qid}:cross",
+              "onFailure": "poi:{qid}:slide"
+            },
+            { "text": "Retreat", "leadsTo": "{returnScene}" }
+          ]
+        },
+        "slide": {
+          "id": "poi:{qid}:slide",
+          "text": "Loose stones slide underfoot.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:entry" } ]
+        },
+        "cross": {
+          "id": "poi:{qid}:cross",
+          "text": "You find a narrow ledge to cross.",
+          "actions": [
+            { "type": "setFlag", "flag": "br:fasttravel:bridge_passage", "value": true }
+          ],
+          "choices": [ { "text": "Return", "leadsTo": "{returnScene}" } ]
+        }
+      }
+    },
+    {
+      "id": "chimney_stacks",
+      "title": "Sulfur Chimneys",
+      "scenes": {
+        "entry": {
+          "id": "poi:{qid}:entry",
+          "text": "Stone chimneys belch faint fumes.",
+          "choices": [
+            {
+              "text": "Inspect vents (Science DC 11)",
+              "type": "skillCheck",
+              "skill": "Science",
+              "dc": 11,
+              "onSuccess": "poi:{qid}:vent",
+              "onFailure": "poi:{qid}:cough"
+            },
+            { "text": "Retreat", "leadsTo": "{returnScene}" }
+          ]
+        },
+        "cough": {
+          "id": "poi:{qid}:cough",
+          "text": "Fumes choke your lungs.",
+          "choices": [ { "text": "Back", "leadsTo": "poi:{qid}:entry" } ]
+        },
+        "vent": {
+          "id": "poi:{qid}:vent",
+          "text": "You clear the vents, revealing a steady glow.",
+          "actions": [
+            { "type": "setFlag", "flag": "br:beacon:chimneys_lit", "value": true }
+          ],
+          "choices": [ { "text": "Return", "leadsTo": "{returnScene}" } ]
+        }
+      }
+    }
+  ]
+}

@@ -38,6 +38,18 @@ window.IAG_STATE = (function() {
       maxHp: 10,
       credits: 0,
       skills: {}, // e.g. { mechanics: 1, hacking: 0 }
+      skillSuccesses: {},
+      equipped: {
+        shoes: null,
+        pants: null,
+        torso: null,
+        head: null,
+        neck: null,
+        ears: null,
+        hands: null,
+        wrists: null,
+        pockets: null
+      },
       powers: [],
       professionPassive: "",
       professionBenefits: []
@@ -45,7 +57,9 @@ window.IAG_STATE = (function() {
     sceneId: "arrival",
     inventory: [
       "Worn Utility Knife",
-      "Cracked Data Chip"
+      "Cracked Data Chip",
+      "Standard Jumpsuit",
+      "Work Boots"
     ],
     questFlags: {
       investigate_relay: "active" // active, completed, failed
@@ -53,6 +67,7 @@ window.IAG_STATE = (function() {
     worldFlags: {},
     rngCounter: 0,
     combat: null,
+    lastSkillCheck: null,
     history: [
       "Awakened in the outer ring sector."
     ]
@@ -115,6 +130,8 @@ window.IAG_STATE = (function() {
       rawState.character.special = rawState.character.special !== undefined ? rawState.character.special : defChar.special;
       rawState.character.skillOptions = rawState.character.skillOptions || [];
       rawState.character.skills = rawState.character.skills || {};
+      rawState.character.skillSuccesses = rawState.character.skillSuccesses || {};
+      rawState.character.equipped = rawState.character.equipped || JSON.parse(JSON.stringify(defChar.equipped));
       rawState.character.powers = rawState.character.powers || [];
       rawState.character.professionPassive = rawState.character.professionPassive !== undefined ? rawState.character.professionPassive : defChar.professionPassive;
       rawState.character.professionBenefits = rawState.character.professionBenefits || [];

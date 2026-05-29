@@ -1,0 +1,37 @@
+{
+  "pack": "clinic",
+  "quests": [
+    {
+      "id": "clinic_supply_lines",
+      "tags": ["side", "supply", "merchant"],
+      "title": "Supply Lines",
+      "desc": "Antidote stocks are thin. Scrounge ingredients or pry a ration from the Guild.",
+      "requirements": { "flagsAny": ["br:clinic.unlocked"] },
+      "stages": [
+        {
+          "id": "stage1_ingr_or_bureaucracy",
+          "text": "Bring Nightbloom and Antitoxin Base OR secure a voucher from the Merchant Guild.",
+          "completionCheck": {
+            "flagsAny": ["br:clinic.voucher.obtained"],
+            "have": [
+              { "itemId": "herb.nightbloom", "qty": 1 },
+              { "itemId": "reagent.antitoxin_base", "qty": 1 }
+            ]
+          },
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:clinic.antidote.stock", "op": "+", "value": 2 }
+          ]
+        },
+        {
+          "id": "stage2_mix",
+          "text": "Help Fen mix a batch without blowing the bench.",
+          "completionCheck": { "flagsAny": ["br:clinic.batch.mixed"] }
+        }
+      ],
+      "rewards": [
+        { "type": "xp", "amount": 60 },
+        { "type": "item", "itemId": "dose.antidote_standard", "qty": 2 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "pack": "watch_operations",
+  "quests": [
+    {
+      "id": "br:watch:night_alerts",
+      "tags": ["town:blackridge","building:watchtowers","siege"],
+      "title": "Horns At Dusk",
+      "desc": "Coordinate beacon horns with lookout calls to reduce panic.",
+      "requirements": { "flagsNot": ["br:watch:alerts_done"] },
+      "stages": [
+        {
+          "id": "s1_meet_rook",
+          "text": "Meet Lookout Rook Tal on the parapet.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:watchtowers:parapet"] }
+        },
+        {
+          "id": "s2_sync_signals",
+          "text": "Practice horn cadence with beacon flashes.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:watchtowers:signal_drill"] }
+        },
+        {
+          "id": "s3_hold_the_line",
+          "text": "Run a live alert during a minor incursion.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:morale", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:watch:alerts_done", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["br:watch:alerts_done"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "rook_tal_lookout" } },
+      "weight": 6
+    }
+  ]
+}

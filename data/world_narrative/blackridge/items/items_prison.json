@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "id": "doc.prison_record_forged", "name": "Forged Prison Record", "itemCategory": "document", "description": "A doctored record to reassign or release an inmate. Requires Lyd's cooperation.", "value": 0, "rarity": "common", "contraband": "medium" },
+    { "id": "doc.deputy_ledger", "name": "Deputy's Ledger", "itemCategory": "document", "rarity": "rare", "description": "Proof of Veit's entire smuggling operation. The key to taking him down.", "value": 0, "contraband": "high" },
+    { "id": "doc.blackcells_roster", "name": "Black Cells Roster", "itemCategory": "document", "rarity": "epic", "description": "The official, off-the-books list of the 'disappeared'. The key to deposing the Warden.", "value": 0, "contraband": "high" },
+    { "id": "chit.prison_favor", "name": "Favor Chit", "itemCategory": "currency", "description": "A carved token representing a debt. Can be used to bypass skill checks or gain access.", "value": 0, "rarity": "common", "tags": ["favor"], "contraband": "none" },
+    { "id": "tool.shiv", "name": "Shiv", "itemCategory": "weapon", "description": "Crafted from a spoon and a stone. A symbol of inmate defiance. (Increases Tension when used).", "value": 0, "rarity": "common", "contraband": "high" },
+    { "id": "tool.lockpick_crude", "name": "Crude Lockpick", "itemCategory": "tool", "description": "A bent piece of wire. Might open a desk, might just break.", "value": 0, "rarity": "common", "contraband": "medium" },
+    { "id": "kit.contraband_stash", "name": "Contraband Stash", "itemCategory": "container", "description": "A hollowed-out book or loose brick. A safe place to store illegal items within the prison.", "value": 0, "rarity": "common", "contraband": "none" },
+    { "id": "uniform.guard_soiled", "name": "Soiled Guard Uniform", "itemCategory": "disguise", "description": "Stolen from the laundry. Not a perfect disguise, but it might get you past a quick glance.", "value": 0, "rarity": "common", "contraband": "medium" },
+    { "id": "letter.inmate_family", "name": "Unsent Family Letter", "itemCategory": "document", "description": "A desperate plea or a final goodbye. A powerful tool for persuading guards like Bram. (Lowers Tension).", "value": 0, "rarity": "common", "contraband": "none" }
+  ]
+}

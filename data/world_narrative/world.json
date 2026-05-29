@@ -1,0 +1,13 @@
+{
+  "time": 480,
+  "dayLength": 1440,
+  "season": "spring",
+  "temperature": 22,
+  "weather": {
+    "rain": false,
+    "storm": false
+  },
+  "flags": {
+    "festival": false
+  }
+}

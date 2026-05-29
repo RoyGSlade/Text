@@ -1,0 +1,6 @@
+{
+  "stations": [
+    { "id": "forge", "name": "Forge", "tags": ["metalworking"] },
+    { "id": "workbench", "name": "Workbench", "tags": ["woodworking"] }
+  ]
+}

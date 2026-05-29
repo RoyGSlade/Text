@@ -1,0 +1,160 @@
+{
+  "area": "butcher",
+  "scenes": [
+    {
+      "id": "butcher_entry",
+      "title": "Brine & Hook Butchery",
+      "textBlocks": [
+        { "when": "!br:butcher.unlocked", "text": "Red tiles, clean knives, steam on the windows. A sign: 'Walls fed here. Civilians welcome if you’re brave.'" },
+        { "when": "br:siege.heavy", "text": "The counter lists 'stamina only'. Guards sway on their feet, hollow-eyed." }
+      ],
+      "choices": [
+        {
+          "text": "Speak with Kessa",
+          "requires": { "flagsNot": ["br:butcher.unlocked"] },
+          "actions": [
+            { "type": "setFlag", "flag": "br:butcher.unlocked", "op": "=", "value": true },
+            { "type": "gotoScene", "sceneId": "butcher_counter" }
+          ]
+        },
+        { "text": "Approach the counter", "actions": [ { "type": "gotoScene", "sceneId": "butcher_counter" } ] },
+        { "text": "Slip to the smokehouse", "actions": [ { "type": "gotoScene", "sceneId": "butcher_smokehouse" } ] }
+      ]
+    },
+    {
+      "id": "butcher_counter",
+      "title": "Counter",
+      "textBlocks": [
+        { "when": "true", "text": "Steam rises from a pot labeled 'Guard’s Broth'. Hooks sway like metronomes for bad news." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 13,
+          "text": "Negotiate a better trade rate for monster parts.",
+          "success": [
+            { "type": "setFlag", "flag": "br:butcher.rate_bonus", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "text": "Sell Monster Hide for jerky",
+          "requires": { "have": [{ "itemId": "monster.hide", "qty": 1 }] },
+          "actions": [
+            { "type": "removeItem", "itemId": "monster.hide", "qty": 1 },
+            { "type": "addItem", "itemId": "food.stamina_jerky", "qty": 1 },
+            { "type": "setFlag", "flag": "br:butcher.trust", "op": "=", "value": true }
+          ]
+        },
+        {
+          "text": "Buy Guard’s Broth",
+          "requires": { "flagsAny": ["br:butcher.unlocked"] },
+          "actions": [ { "type": "addItem", "itemId": "food.guards_broth", "qty": 1 } ]
+        },
+        { "text": "Sit near the rumor table", "actions": [ { "type": "gotoScene", "sceneId": "butcher_rumor_table" } ] },
+        { "text": "Back to street", "actions": [ { "type": "gotoScene", "sceneId": "street_blackridge_central" } ] }
+      ]
+    },
+    {
+      "id": "butcher_rumor_table",
+      "title": "Rumor Table",
+      "textBlocks": [
+        { "when": "true", "text": "Two wall guards stare into stew like it could scry their nightmares." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 12,
+          "text": "Offer gentle words and tea.",
+          "success": [
+            { "type": "addItem", "itemId": "doc.rumor_scrap", "qty": 1 },
+            { "type": "setFlag", "flag": "br:rumor.wall_breach_east", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 13,
+          "text": "Read the duty ledger left on a chair.",
+          "success": [
+            { "type": "setFlag", "flag": "br:butcher.ledger.scrap", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Return to counter", "actions": [ { "type": "gotoScene", "sceneId": "butcher_counter" } ] }
+      ]
+    },
+    {
+      "id": "butcher_smokehouse",
+      "title": "Smokehouse",
+      "textBlocks": [
+        { "when": "true", "text": "Low fire, blackened racks, a smell that convinces tired legs to keep moving." }
+      ],
+      "choices": [
+        {
+          "type": "skillCheck",
+          "skill": "Science",
+          "dc": 14,
+          "text": "Refine a stamina stew batch.",
+          "success": [
+            { "type": "addItem", "itemId": "food.stamina_stew", "qty": 1 }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:butcher.spoiled_batch", "op": "=", "value": true }
+          ]
+        },
+        {
+          "text": "Cook quest stew with Nightbloom and Gland",
+          "requires": { "have": [{ "itemId": "monster.gland", "qty": 1 }, { "itemId": "herb.nightbloom", "qty": 1 }] },
+          "actions": [
+            { "type": "removeItem", "itemId": "monster.gland", "qty": 1 },
+            { "type": "removeItem", "itemId": "herb.nightbloom", "qty": 1 },
+            { "type": "addItem", "itemId": "food.stamina_stew", "qty": 1 }
+          ]
+        },
+        { "text": "Back to entry", "actions": [ { "type": "gotoScene", "sceneId": "butcher_entry" } ] }
+      ]
+    },
+    {
+      "id": "butcher_midnight",
+      "title": "Back Door, After Midnight",
+      "textBlocks": [
+        { "when": "true", "text": "Lantern low. Cart wheels grind. A bundle hits the hook with a wet punctuation mark." }
+      ],
+      "choices": [
+        {
+          "text": "Observe the delivery quietly",
+          "requires": { "flagsAny": ["br:butcher.midnight_known"], "timeBetween": "00:00-04:00" },
+          "actions": [
+            { "type": "setFlag", "flag": "br:butcher.midnight_seen", "op": "=", "value": true },
+            { "type": "addItem", "itemId": "doc.rumor_scrap", "qty": 1 }
+          ]
+        },
+        {
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 16,
+          "text": "Lift a ledger scrap during the drop.",
+          "success": [
+            { "type": "addItem", "itemId": "doc.rumor_scrap", "qty": 1 },
+            { "type": "setFlag", "flag": "br:butcher.ledger.scrap", "op": "=", "value": true }
+          ],
+          "failure": [
+            { "type": "setFlag", "flag": "br:butcher.heist.alert", "op": "+", "value": 2 },
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 }
+          ]
+        },
+        { "text": "Return to street", "actions": [ { "type": "gotoScene", "sceneId": "street_blackridge_central" } ] }
+      ]
+    }
+  ]
+}

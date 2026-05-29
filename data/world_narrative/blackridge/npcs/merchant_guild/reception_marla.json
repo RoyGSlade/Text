@@ -1,0 +1,71 @@
+{
+  "id": "mg_reception_marla",
+  "town": "blackridge",
+  "roles": [
+    "reception",
+    "gatekeep"
+  ],
+  "buildingId": "merchant_guild_hq",
+  "name": "Marla Venn",
+  "demeanor": "polite, predatory, unblinking",
+  "repFaction": "merchant_guild",
+  "repPersonal": true,
+  "greetings": [
+    {
+      "when": "!br:mg.unlocked",
+      "text": "Welcome to the Merchant Guild storefront. You were looking for the *Headquarters*? That's for people who can afford clocks that tell the future."
+    },
+    {
+      "when": "br:mg.unlocked && br:mg.rep < 1",
+      "text": "Shopping is public. Membership is a fairy tale. Try the contracts desk if you're feeling *useful*."
+    },
+    {
+      "when": "br:mg.rep >= 1 && br:mg.rep < 3",
+      "text": "Your coin smells acceptable today. Don't touch the gold inlay."
+    },
+    {
+      "when": "br:mg.rep >= 3",
+      "text": "Appointments upstairs are… possible. Don’t smudge the marble."
+    }
+  ],
+  "offers": [
+    {
+      "id": "offer_contracts",
+      "requires": {
+        "flagsAny": [
+          "br:mg.unlocked"
+        ]
+      },
+      "text": "Ask about contracts",
+      "leadsTo": "mg_contracts_counter"
+    },
+    {
+      "id": "offer_hq_visit",
+      "requires": {
+          "flagsAny": [
+            "br:mg.unlocked"
+          ],
+          "flagsNot": [
+            "br:mg.ban.active"
+          ],
+          "have": [
+            {
+              "itemId": "permit.hq_attire",
+              "qty": 1
+            }
+          ],
+          "requiresFlag": "br:mg.rep >= 3"
+        },
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:mg.hq.access",
+          "op": "=",
+          "value": true
+        }
+      ],
+      "text": "Request HQ appointment (well-dressed only)",
+      "leadsTo": "mg_hq_lobby"
+    }
+  ]
+}

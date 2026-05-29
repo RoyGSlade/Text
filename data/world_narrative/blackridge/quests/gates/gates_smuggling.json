@@ -1,0 +1,35 @@
+{
+  "pack": "gates_smuggling",
+  "quests": [
+    {
+      "id": "br:gates:smuggler_window",
+      "tags": ["town:blackridge","building:gates","smuggling"],
+      "title": "Between The Horns",
+      "desc": "Copy the shift ledger and use a horn window to slip a convoy.",
+      "requirements": { "flagsNot": ["br:gates:window_used"] },
+      "stages": [
+        {
+          "id": "s1_copy_ledger",
+          "text": "Obtain a copied gate ledger page.",
+          "completionCheck": { "have": [ { "itemId": "paper.gate_ledger_page", "qty": 1 } ] }
+        },
+        {
+          "id": "s2_brief_with_finch",
+          "text": "Meet Grey Finch at the gatehouse alcove.",
+          "completionCheck": { "flagsAny": ["player_visited:bldg:blackridge:gates:alcove"] }
+        },
+        {
+          "id": "s3_time_your_move",
+          "text": "Exit during a double-horn timing window.",
+          "onComplete": [
+            { "type": "setFlag", "flag": "br:suspicion", "op": "+", "value": 1 },
+            { "type": "setFlag", "flag": "br:gates:window_used", "op": "=", "value": true }
+          ],
+          "completionCheck": { "flagsAny": ["player_visited:cell:any_biome"] }
+        }
+      ],
+      "instantiate": { "template": "quest_dialogue_craft", "params": { "viaNpc": "grey_finch_smuggler" } },
+      "weight": 7
+    }
+  ]
+}

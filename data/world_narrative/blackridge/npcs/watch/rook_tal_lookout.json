@@ -1,0 +1,13 @@
+{
+  "id": "rook_tal_lookout",
+  "town": "blackridge",
+  "roles": ["lookout","guard"],
+  "buildingId": "bldg:blackridge:watchtowers",
+  "name": "Rook Tal",
+  "demeanor": "sharp-eyed, quietly rattled",
+  "repFaction": "watch",
+  "greetings": [
+    { "when": "tier < known", "text": "Counting shadows keeps you honest. And jumpy." },
+    { "when": "tier >= known", "text": "Wind’s wrong. Monsters smell it too." }
+  ]
+}

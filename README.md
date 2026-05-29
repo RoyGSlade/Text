@@ -73,8 +73,25 @@ Then navigate to `http://localhost:8000` in your web browser.
 - **Quest Branching Options**: Rewrote the Relay Exterior platform choices to support Mechanics checks that log roll totals deterministically, set success/failure world flags, and unlock bypass paths.
 - **Inspector Debugger**: Added d20 check history display panels to the developer notes drawer for quick testing.
 
+### Milestone 3A: Attribute-Aware Skill Checks & Cleaner Check Logging (Completed)
+- **Attribute-Aware Skill Checks**: Integrated character attribute bonuses directly into d20 calculations (Total = d20 roll + skill rank + attribute bonus) dynamically looked up from `window.IAG_DATA.skill_definitions`.
+- **Seeded d20 Roll Cancellation**: Implemented Advantage/Disadvantage cancellation rules (if both are active, they cancel out, returning to a standard 1d20 roll) while preserving Mulberry32 deterministic counter progress.
+- **Richer narrative check logging**: Refactored `{ type: "skillCheck" }` narrative effects to log detailed roll formulas directly to the action history (e.g., `Mechanics check vs DC 10: d20 [Roll] + skill [Rank] + [Attribute] [Bonus] = [Total]. SUCCESS!`).
+- **Interactive Alternate Checks**: Added a technology-based firmware-decryption check Option (`Analyze the relay terminal firmware`, Technology DC 11) alongside the Mechanics check.
+- **Multi-Flag Choice Gating**: Added support for `worldFlagAny` in choice requirements to allow alternate bypass paths (e.g., bypass the door if either `relay_panel_understood` OR `relay_firmware_understood` is true).
+- **Richer Developer Inspector Drawer**: Expanded `#dev-last-skill-check` to print complete dice pools, attribute modifiers, advantage/disadvantage statuses, and final formula breakdowns.
+- **Dynamic Descriptions**: Pulled localized skill descriptions directly from the static rulebook into onboarding cards.
+
+### Milestone 3B: Progression & Inventory Systems (Completed)
+- **Visual Equipment Slots**: Added visual grid representing body slots (`Head`, `Neck`, `Ears`, `Torso`, `Wrists`, `Hands`, `Pants`, `Shoes`, `Pockets`) in the left sidebar HUD.
+- **Categorized Expandable Backpack**: Designed an expandable backpack menu grouped into logical supply categories (`Gear`, `Utilities`, `Consumables`, `Materials`, `All`) with glowing rarity borders and detailed item properties.
+- **Interactive Equipment Actions**: Implemented context-sensitive actions (`Equip`, `Unequip`, `Use`, `Drop`) that transfer items seamlessly between backpack and slots, dynamically recalculating attributes and movement speed buffs.
+- **Skill Experience Popouts**: Bound click handlers to specialized skills in the HUD sidebar to launch glassmorphic detail popout panels tracking successes to the next rank (`0 / 10 successes`) with visual progress indicators and Level 1-5 perk trees.
+- **Profession & Leveling Popouts**: Integrated profession leveling and character progression popouts clickable from the sidebar HUD. Profession perks unlock dynamically based on leveling parameters.
+- **Deterministic Level-Up Triggers**: Programmed character level-ups to auto-recalculate upon skill upgrades, dynamically enhancing max HP vital integrity and outputting detailed notifications.
+
 ### Upcoming Milestones
-- **Milestone 3**: Skill checks based on attributes, advantage/disadvantage modifier calculations.
 - **Milestone 4**: Interactive gamebook story effects and quest flags.
 - **Milestone 5**: Full turn-based action grid combat.
 - **Milestone 6**: Superpowers integration (e.g. Neural Influence Mind Manipulation).
+

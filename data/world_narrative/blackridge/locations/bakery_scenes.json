@@ -1,0 +1,361 @@
+{
+  "scenes": {
+    "scene.bakery.entry_read-the-room_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:repBakersFriendly",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.bakery.entry_read-the-room_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.bakery.entry": {
+      "title": "Warm Loaf Bakery",
+      "textBlocks": [
+        {
+          "when": "br:curfewActive",
+          "text": "The windows sweat gold. A line of Watch and civilians coils into the alley."
+        },
+        {
+          "text": "Flour hangs in the air like a promise nobody signed."
+        }
+      ],
+      "choices": [
+        {
+          "id": "to-counter",
+          "text": "Approach the counter",
+          "leadsTo": "scene.bakery.counter"
+        },
+        {
+          "id": "join-breadline",
+          "text": "Join the pre-dawn breadline",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:bakery.queueJoined",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "read-the-room",
+          "type": "skillCheck",
+          "skill": "Insight",
+          "dc": 10,
+          "onSuccess": "scene.bakery.entry_read-the-room_success",
+          "onFailure": "scene.bakery.entry_read-the-room_failure",
+          "text": "Read the room"
+        }
+      ]
+    },
+    "scene.bakery.counter_haggle_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:bakery.bulkDeal",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.bakery.counter_haggle_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.bakery.counter": {
+      "title": "Bakery Counter",
+      "textBlocks": [
+        {
+          "text": "Mara Kestrel works two paddles and three conversations at once."
+        }
+      ],
+      "choices": [
+        {
+          "id": "buy-snack",
+          "requires": {
+            "credits": 3
+          },
+          "text": "Buy Night-Guard Snack (3 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -3
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.bakery.snack-guard",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "buy-ration",
+          "requires": {
+            "credits": 6
+          },
+          "text": "Buy Ration Pack (6 cr)",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": -6
+            },
+            {
+              "type": "addItem",
+              "itemId": "item.bakery.ration-pack",
+              "qty": 1
+            }
+          ]
+        },
+        {
+          "id": "haggle",
+          "type": "skillCheck",
+          "skill": "Barter",
+          "dc": 12,
+          "onSuccess": "scene.bakery.counter_haggle_success",
+          "onFailure": "scene.bakery.counter_haggle_failure",
+          "text": "Haggle for bulk discount"
+        },
+        {
+          "id": "ask-stakeout",
+          "text": "Ask about stakeout spots",
+          "leadsTo": "scene.bakery.stakeout"
+        }
+      ]
+    },
+    "scene.bakery.stakeout_watch-road_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:convoy.windowKnown",
+          "op": "=",
+          "value": true
+        },
+        {
+          "type": "addItem",
+          "itemId": "item.bakery.convoy-note",
+          "qty": 1
+        }
+      ]
+    },
+    "scene.bakery.stakeout_watch-road_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.bakery.stakeout_quiet-shift_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:bakery.stakeoutHidden",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.bakery.stakeout_quiet-shift_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:bakery.stakeoutBlown",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.bakery.stakeout": {
+      "title": "Bakery Rooftop: Stakeout",
+      "textBlocks": [
+        {
+          "when": "!br:curfewActive",
+          "text": "Daylight washes the rooftops; the glow won’t show until the dead hours."
+        },
+        {
+          "when": "br:curfewActive",
+          "text": "The eastern road hums with a low, wrong light."
+        },
+        {
+          "text": "A chimney offers cover and a narrow angle on the road to the Gates."
+        }
+      ],
+      "choices": [
+        {
+          "id": "choose-vantage",
+          "text": "Pick a vantage and wait",
+          "actions": [
+            {
+              "type": "setFlag",
+              "flag": "br:bakery.vantageChosen",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "watch-road",
+          "type": "skillCheck",
+          "skill": "Perception",
+          "dc": 12,
+          "onSuccess": "scene.bakery.stakeout_watch-road_success",
+          "onFailure": "scene.bakery.stakeout_watch-road_failure",
+          "text": "Scan the road for the glowing convoy"
+        },
+        {
+          "id": "quiet-shift",
+          "type": "skillCheck",
+          "skill": "Stealth",
+          "dc": 11,
+          "onSuccess": "scene.bakery.stakeout_quiet-shift_success",
+          "onFailure": "scene.bakery.stakeout_quiet-shift_failure",
+          "text": "Shift position silently"
+        }
+      ]
+    },
+    "scene.bakery.line-captain_request-voucher_success": {
+      "actions": [
+        {
+          "type": "addItem",
+          "itemId": "item.bakery.voucher-guard",
+          "qty": 1
+        }
+      ]
+    },
+    "scene.bakery.line-captain_request-voucher_failure": {
+      "actions": [
+        {
+          "type": "incFlag",
+          "flag": "br:suspicion",
+          "value": 1
+        }
+      ]
+    },
+    "scene.bakery.line-captain": {
+      "title": "Line Captain’s Post",
+      "textBlocks": [
+        {
+          "text": "Corin Bale eyes the queue like a ledger he’s tired of balancing."
+        }
+      ],
+      "choices": [
+        {
+          "id": "deliver-rations",
+          "requires": {
+            "have": [
+              {
+                "itemId": "item.bakery.ration-pack",
+                "qty": 3
+              }
+            ]
+          },
+          "text": "Deliver ration packs to the Watch",
+          "actions": [
+            {
+              "type": "removeItem",
+              "itemId": "item.bakery.ration-pack",
+              "qty": 3
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:bakery.rationsDelivered",
+              "op": "=",
+              "value": true
+            },
+            {
+              "type": "incFlag",
+              "flag": "br:watchMorale",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "id": "request-voucher",
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 11,
+          "onSuccess": "scene.bakery.line-captain_request-voucher_success",
+          "onFailure": "scene.bakery.line-captain_request-voucher_failure",
+          "text": "Request a guard voucher"
+        }
+      ]
+    },
+    "scene.bakery.mara-payment_thank-you_success": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:repBakersFriendly",
+          "op": "=",
+          "value": true
+        }
+      ]
+    },
+    "scene.bakery.mara-payment_thank-you_failure": {
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "br:repBakersFriendly",
+          "op": "=",
+          "value": false
+        }
+      ]
+    },
+    "scene.bakery.mara-payment": {
+      "title": "Back to Mara",
+      "textBlocks": [
+        {
+          "text": "Flour dusts the counter like snowfall. Mara counts vouchers and nods once."
+        }
+      ],
+      "choices": [
+        {
+          "id": "collect-pay",
+          "requires": {
+            "flagsAny": [
+              "br:bakery.rationsDelivered"
+            ]
+          },
+          "text": "Collect payment",
+          "actions": [
+            {
+              "type": "incCredits",
+              "value": 30
+            },
+            {
+              "type": "setFlag",
+              "flag": "br:bakery.maraPaid",
+              "op": "=",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "thank-you",
+          "type": "skillCheck",
+          "skill": "Diplomacy",
+          "dc": 10,
+          "onSuccess": "scene.bakery.mara-payment_thank-you_success",
+          "onFailure": "scene.bakery.mara-payment_thank-you_failure",
+          "text": "Share a word of thanks"
+        }
+      ]
+    }
+  }
+}

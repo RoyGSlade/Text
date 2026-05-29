@@ -1,0 +1,13 @@
+{
+  "id": "sable_nyx_scout_trainer",
+  "town": "blackridge",
+  "roles": ["scout_trainer","guard"],
+  "buildingId": "bldg:blackridge:watchtowers",
+  "name": "Sable Nyx",
+  "demeanor": "calm, surgical, teaches by doing",
+  "repFaction": "watch",
+  "greetings": [
+    { "when": "tier < known", "text": "You want to live? Learn to see before you’re seen." },
+    { "when": "tier >= known", "text": "I can shave two points off your surprise rate. Earn it." }
+  ]
+}

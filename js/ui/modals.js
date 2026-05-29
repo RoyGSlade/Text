@@ -191,7 +191,7 @@ window.IAG_UI.openProfessionModal = function() {
   }
 
 window.IAG_UI.openBackpackModal = function(category = "all") {
-    activeBackpackCategory = category;
+    window.IAG_UI.activeBackpackCategory = category;
     const state = window.IAG_STATE.get();
     if (!state) return;
 
@@ -208,7 +208,7 @@ window.IAG_UI.openBackpackModal = function(category = "all") {
 
     let tabsHtml = `<div class="backpack-tabs">`;
     categories.forEach(cat => {
-      const activeClass = cat.id === activeBackpackCategory ? "active" : "";
+      const activeClass = cat.id === window.IAG_UI.activeBackpackCategory ? "active" : "";
       tabsHtml += `
         <button class="backpack-tab-btn ${activeClass}" onclick="window.IAG_UI.switchBackpackCategory('${cat.id}')">
           ${cat.label}
@@ -224,12 +224,12 @@ window.IAG_UI.openBackpackModal = function(category = "all") {
       
       // Category filter check
       let matches = false;
-      if (activeBackpackCategory === "all") {
+      if (window.IAG_UI.activeBackpackCategory === "all") {
         matches = true;
-      } else if (activeBackpackCategory === "weapon_armor") {
+      } else if (window.IAG_UI.activeBackpackCategory === "weapon_armor") {
         matches = def.itemCategory === "weapon" || def.itemCategory === "armor";
       } else {
-        matches = def.itemCategory === activeBackpackCategory;
+        matches = def.itemCategory === window.IAG_UI.activeBackpackCategory;
       }
 
       if (matches) {

@@ -8,14 +8,14 @@
 
   // Cache DOM element selections
   window.IAG_UI = window.IAG_UI || {};
-window.IAG_UI.elements = {};
-window.IAG_UI.state = {};
-
-  // Local creation wizard state variables
-  window.IAG_UI.state.window.IAG_UI.state.selectedRaceId = "";
-  window.IAG_UI.state.window.IAG_UI.state.selectedProfessionId = "";
-  window.IAG_UI.state.window.IAG_UI.state.selectedHumanBonusAttr = "intelligence"; // Default attribute bonus for humans
-  window.IAG_UI.state.window.IAG_UI.state.selectedStarterSkillId = ""; // Track selected starter skill rank 1
+  window.IAG_UI.elements = window.IAG_UI.elements || {};
+  window.IAG_UI.state = window.IAG_UI.state || {
+    selectedRaceId: "",
+    selectedProfessionId: "",
+    selectedHumanBonusAttr: "intelligence",
+    selectedStarterSkillId: ""
+  };
+  window.IAG_UI.activeBackpackCategory = "all";
   
 
   // Renders the entire dashboard panel based on current state
@@ -48,7 +48,7 @@ window.IAG_UI.state = {};
   // Processes choice selection, updates state, executes effects, and changes scene
   
 
-  let activeBackpackCategory = "all";
+  // Backpack active category initialized at top level
 
   
 
@@ -69,20 +69,15 @@ window.IAG_UI.state = {};
 
   
 
-  return {
-    start,
-    renderAll,
-    switchBackpackCategory: (cat) => window.IAG_UI.openBackpackModal(cat),
-    backpackEquip: (name) => window.IAG_UI.handleEquipItem(name),
-    backpackUnequip: (slot) => window.IAG_UI.handleUnequipItem(slot),
-    backpackUse: (name) => window.IAG_UI.handleUseItem(name),
-    backpackDrop: (name) => window.IAG_UI.handleDropItem(name)
-  };
-})();
+  window.IAG_UI.switchBackpackCategory = (cat) => window.IAG_UI.openBackpackModal(cat);
+  window.IAG_UI.backpackEquip = (name) => window.IAG_UI.handleEquipItem(name);
+  window.IAG_UI.backpackUnequip = (slot) => window.IAG_UI.handleUnequipItem(slot);
+  window.IAG_UI.backpackUse = (name) => window.IAG_UI.handleUseItem(name);
+  window.IAG_UI.backpackDrop = (name) => window.IAG_UI.handleDropItem(name);
 
 
 window.IAG_UI.initCache = function() {
-    elements = {
+    window.IAG_UI.elements = {
       charName: document.getElementById("char-name"),
       charRace: document.getElementById("char-race"),
       charProfession: document.getElementById("char-profession"),
@@ -253,7 +248,7 @@ window.IAG_UI.renderAll = function() {
     // 2. Equipment Slots Render
     const slots = ["head", "neck", "ears", "torso", "wrists", "hands", "pants", "shoes", "pockets"];
     slots.forEach(slot => {
-      const slotEl = elements[`slot${slot.charAt(0).toUpperCase() + slot.slice(1)}`];
+      const slotEl = window.IAG_UI.elements[`slot${slot.charAt(0).toUpperCase() + slot.slice(1)}`];
       if (slotEl) {
         const equippedItem = state.character.equipped ? state.character.equipped[slot] : null;
         if (equippedItem) {
@@ -474,3 +469,31 @@ window.IAG_UI.bindEvents = function() {
       window.IAG_UI.renderAll();
     });
   }
+
+window.IAG_DEV_SMOKE = {
+  run() {
+    const checks = [
+      { name: "window.IAG_DATA exists", pass: !!window.IAG_DATA },
+      { name: "window.IAG_ENGINE exists", pass: !!window.IAG_ENGINE },
+      { name: "window.IAG_STATE exists", pass: !!window.IAG_STATE },
+      { name: "window.IAG_STORY exists", pass: !!window.IAG_STORY },
+      { name: "window.IAG_UI exists", pass: !!window.IAG_UI },
+      { name: "window.IAG_UI.start is a function", pass: typeof (window.IAG_UI && window.IAG_UI.start) === "function" },
+      { name: "window.IAG_UI.renderAll is a function", pass: typeof (window.IAG_UI && window.IAG_UI.renderAll) === "function" },
+      { name: "window.IAG_UI.elements exists", pass: !!(window.IAG_UI && window.IAG_UI.elements) },
+      { name: "DOM #char-name exists", pass: !!document.getElementById("char-name") },
+      { name: "DOM #character-creation-panel exists", pass: !!document.getElementById("character-creation-panel") },
+      { name: "DOM #story-title exists", pass: !!document.getElementById("story-title") },
+      { name: "DOM #story-choices exists", pass: !!document.getElementById("story-choices") },
+      { name: "DOM #action-logs exists", pass: !!document.getElementById("action-logs") },
+      { name: "DOM #dev-last-skill-check exists", pass: !!document.getElementById("dev-last-skill-check") },
+      { name: "DOM #backpack-trigger-btn exists", pass: !!document.getElementById("backpack-trigger-btn") },
+      { name: "DOM #game-modal-overlay exists", pass: !!document.getElementById("game-modal-overlay") }
+    ];
+
+    console.table(checks);
+    const allPassed = checks.every(c => c.pass);
+    console.log(`Smoke test execution: ${allPassed ? "PASSED" : "FAILED"}`);
+    return allPassed;
+  }
+};

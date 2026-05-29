@@ -28,7 +28,7 @@ window.IAG_UI.handleEquipItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(activeBackpackCategory);
+    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }
 
@@ -61,7 +61,7 @@ window.IAG_UI.handleUseItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(activeBackpackCategory);
+    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }
 
@@ -76,6 +76,6 @@ window.IAG_UI.handleDropItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(activeBackpackCategory);
+    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }

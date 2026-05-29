@@ -52,16 +52,69 @@
               <span class="stat-val" id="char-profession">Unchosen</span>
             </div>
             <div class="stat-item">
+              <span class="stat-label">System Level</span>
+              <span class="stat-val" id="char-level">1</span>
+            </div>
+            <div class="stat-item">
               <span class="stat-label">Nanite Credits</span>
               <span class="stat-val stat-val-cyan"><span id="char-credits">0</span> cr</span>
             </div>
           </div>
+          
           <div class="hp-container">
             <div class="stat-label">Vital Integrity (HP)</div>
             <div class="hp-bar-outer">
               <div class="hp-bar-inner" id="char-hp-bar" style="width: 100%;"></div>
             </div>
             <div class="stat-val" id="char-hp-val" style="font-size: 0.8rem; text-align: right;">10 / 10</div>
+          </div>
+
+          <div class="section-divider">Attributes</div>
+          <div class="attributes-grid" id="char-attributes-container">
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Strength">STR</span>
+              <span class="attr-val" id="char-str">0</span>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Dexterity">DEX</span>
+              <span class="attr-val" id="char-dex">0</span>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Constitution">CON</span>
+              <span class="attr-val" id="char-con">0</span>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Intelligence">INT</span>
+              <span class="attr-val" id="char-int">0</span>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Wisdom">WIS</span>
+              <span class="attr-val" id="char-wis">0</span>
+            </div>
+            <div class="attribute-box">
+              <span class="attr-lbl" title="Charisma">CHA</span>
+              <span class="attr-val" id="char-cha">0</span>
+            </div>
+          </div>
+
+          <div class="section-divider">Capabilities</div>
+          <div class="sub-stats-list">
+            <div class="stat-item">
+              <span class="stat-label">Movement</span>
+              <span class="stat-val"><span id="char-movement">0</span> ft</span>
+            </div>
+            <div class="stat-item stat-item-multiline">
+              <span class="stat-label">Vision</span>
+              <span class="stat-val" id="char-vision">Unchosen</span>
+            </div>
+            <div class="stat-item stat-item-multiline">
+              <span class="stat-label">Resistance</span>
+              <span class="stat-val" id="char-resistance">Unchosen</span>
+            </div>
+            <div class="stat-item stat-item-multiline" id="char-special-container" style="display: none;">
+              <span class="stat-label">Special Trait</span>
+              <span class="stat-val" id="char-special">None</span>
+            </div>
           </div>
         </div>
       </section>
@@ -77,6 +130,49 @@
         </div>
       </section>
     </aside>
+
+    <!-- Character Creation Wizard (Visible during onboarding) -->
+    <section class="panel character-creation-panel" id="character-creation-panel">
+      <div class="panel-header">
+        <h2>Character Initialization Protocols</h2>
+      </div>
+      <div class="panel-body creation-content">
+        <!-- Input section -->
+        <div class="creation-group">
+          <label class="section-divider" for="character-name-input">CODENAME IDENTIFICATION</label>
+          <input type="text" id="character-name-input" class="creation-input" placeholder="Type name / designation..." maxlength="24" required autocomplete="off">
+        </div>
+
+        <!-- Species Selection Grid -->
+        <div class="creation-group">
+          <span class="section-divider">SELECT BIOLOGICAL/SYNTHETIC SPECIES</span>
+          <div id="race-card-list" class="selection-grid">
+            <!-- Populated dynamically via ui.js -->
+          </div>
+        </div>
+
+        <!-- Profession Selection Grid -->
+        <div class="creation-group">
+          <span class="section-divider">SELECT CRITICAL SUBSYSTEM PROFESSION</span>
+          <div id="profession-card-list" class="selection-grid">
+            <!-- Populated dynamically via ui.js -->
+          </div>
+        </div>
+
+        <!-- Preview and Confirmation Area -->
+        <div class="creation-group">
+          <span class="section-divider">CHARACTER ONBOARDING PREVIEW</span>
+          <div id="character-preview" class="preview-panel">
+            <!-- Populated dynamically via ui.js -->
+          </div>
+        </div>
+
+        <!-- Confirm Button -->
+        <div class="confirm-container">
+          <button id="confirm-character-btn" class="sys-btn sys-btn-accent" disabled>Verify and Write Identity</button>
+        </div>
+      </div>
+    </section>
 
     <!-- Center Section: Narrative Prose and Choice Node -->
     <section class="panel story-panel" id="narrative-panel">

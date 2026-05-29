@@ -49,16 +49,23 @@ Then navigate to `http://localhost:8000` in your web browser.
 
 ---
 
-## Milestone 1 Overview & Roadmap
+## Milestone Roadmaps & Releases
 
-### Milestone 1 (Completed)
+### Milestone 1: Core Shell (Completed)
 - **Playable Story Shell**: Interactive choice progression across 5 starter scenes.
 - **Seeded RNG & Dice Roller**: Seed generation and reactive rolling.
 - **Robust Save Systems**: Auto-saving to browser storage + explicit JSON export/import.
-- **Interactive Cyberpunk Dashboard**: Gorgeous glassmorphic aesthetics.
+- **Interactive Cyberpunk Dashboard**: Immersive glassmorphic aesthetics.
+
+### Milestone 2.0B: Character Creation Onboarding & Migration (Completed)
+- **Rules Integration**: Fully dynamic Character Creation wizard reading live species and profession data from `window.IAG_DATA` in `js/data.js`.
+- **Character Attributes Grid**: Dynamic calculation of attributes, including Strength, Dexterity, Constitution, Intelligence, Wisdom, and Charisma, with live species-based bonuses.
+- **Human Specialization**: Polished attribute selector panel letting human players specialize by picking where their custom `+2` attribute bonus goes.
+- **Resilient Save Migration**: Robust `normalizeState(rawState)` middleware that automatically repairs, expands, and updates older saves or exported JSONs to the expanded character format upon load/import.
+- **Interactive Timeline Gating**: Strict story-choice locking and gating mechanism that blocks entry into the station story stream until the player verifies and confirms their character profile.
+- **Expanded Character HUD**: Re-designed left sidebar HUD displaying Level, Credits, HP, Attributes, Movement Speed, Vision Type, Resistance, and Special Traits.
 
 ### Upcoming Milestones
-- **Milestone 2**: Rulebook Character Creation Flow (Name, Species, Profession selection and Superpower activation).
 - **Milestone 3**: Skill checks based on attributes, advantage/disadvantage modifier calculations.
 - **Milestone 4**: Interactive gamebook story effects and quest flags.
 - **Milestone 5**: Full turn-based action grid combat.

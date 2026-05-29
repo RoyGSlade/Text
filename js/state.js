@@ -12,16 +12,35 @@ window.IAG_STATE = (function() {
   // Default fresh state
   const defaultState = {
     version: "0.1.0",
+    characterCreationComplete: false,
     seed: "",
     character: {
       name: "Unnamed Wanderer",
+      raceId: "",
       race: "Unchosen",
+      professionId: "",
       profession: "Unchosen",
+      level: 1,
+      attributes: {
+        strength: 0,
+        dexterity: 0,
+        constitution: 0,
+        intelligence: 0,
+        wisdom: 0,
+        charisma: 0
+      },
+      movement: 0,
+      vision: "",
+      resistance: "",
+      special: "",
+      skillOptions: [],
       hp: 10,
       maxHp: 10,
       credits: 0,
       skills: {}, // e.g. { mechanics: 1, hacking: 0 }
-      powers: []
+      powers: [],
+      professionPassive: "",
+      professionBenefits: []
     },
     sceneId: "arrival",
     inventory: [
@@ -47,12 +66,83 @@ window.IAG_STATE = (function() {
     return "IA-" + Math.floor(100000 + Math.random() * 900000);
   }
 
+  // Normalizes and migrates older/partial save objects to the new structure
+  function normalizeState(rawState) {
+    if (!rawState) return null;
+
+    // Ensure baseline game version
+    rawState.version = rawState.version || defaultState.version;
+
+    // Ensure characterCreationComplete exists
+    if (rawState.characterCreationComplete === undefined) {
+      // Smart check: if the save already had a chosen race/profession, mark creation as completed
+      const hasChosenRace = rawState.character && rawState.character.race && rawState.character.race !== "Unchosen" && rawState.character.race !== "";
+      const hasChosenProf = rawState.character && rawState.character.profession && rawState.character.profession !== "Unchosen" && rawState.character.profession !== "";
+      rawState.characterCreationComplete = !!(hasChosenRace && hasChosenProf);
+    }
+
+    // Ensure baseline top-level structures exist
+    rawState.seed = rawState.seed || generateSeed();
+    rawState.rngCounter = rawState.rngCounter || 0;
+    rawState.worldFlags = rawState.worldFlags || {};
+    rawState.questFlags = rawState.questFlags || {};
+    rawState.inventory = rawState.inventory || [];
+    rawState.history = rawState.history || [];
+    rawState.combat = rawState.combat || null;
+    rawState.sceneId = rawState.sceneId || "arrival";
+
+    // Normalize and expand character object
+    if (!rawState.character) {
+      rawState.character = JSON.parse(JSON.stringify(defaultState.character));
+    } else {
+      const defChar = defaultState.character;
+      
+      rawState.character.name = rawState.character.name || defChar.name;
+      rawState.character.raceId = rawState.character.raceId || "";
+      rawState.character.race = rawState.character.race || defChar.race;
+      rawState.character.professionId = rawState.character.professionId || "";
+      rawState.character.profession = rawState.character.profession || defChar.profession;
+      
+      if (rawState.character.level === undefined) rawState.character.level = defChar.level;
+      if (rawState.character.hp === undefined) rawState.character.hp = defChar.hp;
+      if (rawState.character.maxHp === undefined) rawState.character.maxHp = defChar.maxHp;
+      if (rawState.character.credits === undefined) rawState.character.credits = defChar.credits;
+      
+      rawState.character.movement = rawState.character.movement !== undefined ? rawState.character.movement : defChar.movement;
+      rawState.character.vision = rawState.character.vision !== undefined ? rawState.character.vision : defChar.vision;
+      rawState.character.resistance = rawState.character.resistance !== undefined ? rawState.character.resistance : defChar.resistance;
+      rawState.character.special = rawState.character.special !== undefined ? rawState.character.special : defChar.special;
+      rawState.character.skillOptions = rawState.character.skillOptions || [];
+      rawState.character.skills = rawState.character.skills || {};
+      rawState.character.powers = rawState.character.powers || [];
+      rawState.character.professionPassive = rawState.character.professionPassive !== undefined ? rawState.character.professionPassive : defChar.professionPassive;
+      rawState.character.professionBenefits = rawState.character.professionBenefits || [];
+
+      // Ensure attributes sub-object and its keys exist
+      if (!rawState.character.attributes) {
+        rawState.character.attributes = JSON.parse(JSON.stringify(defChar.attributes));
+      } else {
+        for (const attr in defChar.attributes) {
+          if (rawState.character.attributes[attr] === undefined) {
+            rawState.character.attributes[attr] = defChar.attributes[attr];
+          }
+        }
+      }
+    }
+
+    return rawState;
+  }
+
   // Initialize fresh new game state
   function initializeNewGame(customSeed) {
     currentGameState = JSON.parse(JSON.stringify(defaultState));
     currentGameState.seed = customSeed || generateSeed();
     currentGameState.rngCounter = 0;
     currentGameState.worldFlags = {};
+    
+    // Normalize to guarantee complete new structure compatibility
+    currentGameState = normalizeState(currentGameState);
+
     // Initialize RNG engine
     currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
     
@@ -73,15 +163,14 @@ window.IAG_STATE = (function() {
     const data = localStorage.getItem(SAVE_KEY);
     if (data) {
       try {
-        const parsed = JSON.parse(data);
-        if (parsed.version === defaultState.version) {
-          currentGameState = parsed;
-          currentGameState.rngCounter = currentGameState.rngCounter || 0;
-          currentGameState.worldFlags = currentGameState.worldFlags || {};
-          // Rebuild RNG engine with loaded seed and counter
-          currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
-          return true;
-        }
+        let parsed = JSON.parse(data);
+        // Normalize loaded state to safely support older version saves
+        parsed = normalizeState(parsed);
+        currentGameState = parsed;
+        
+        // Rebuild RNG engine with loaded seed and counter
+        currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
+        return true;
       } catch (e) {
         console.error("Failed to parse localStorage save data:", e);
       }
@@ -107,11 +196,13 @@ window.IAG_STATE = (function() {
   // Imports state from uploaded JSON content string
   function importSaveFromString(jsonString) {
     try {
-      const parsed = JSON.parse(jsonString);
+      let parsed = JSON.parse(jsonString);
       if (parsed.version && parsed.seed && parsed.character) {
+        // Normalize imported state
+        parsed = normalizeState(parsed);
         currentGameState = parsed;
-        currentGameState.rngCounter = currentGameState.rngCounter || 0;
-        currentGameState.worldFlags = currentGameState.worldFlags || {};
+        
+        // Rebuild RNG engine
         currentGameState.rng = window.IAG_ENGINE.createRandomGenerator(currentGameState.seed, currentGameState.rngCounter);
         saveToLocalStorage();
         addHistoryLog("Game state imported successfully.");

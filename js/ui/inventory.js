@@ -28,7 +28,7 @@ window.IAG_UI.handleEquipItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
+    window.IAG_UI.openInventoryModal("backpack", window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }
 
@@ -41,6 +41,8 @@ window.IAG_UI.handleUnequipItem = function(slot) {
       state.history.push(`🔄 Unequipped ${itemName} and returned it to backpack.`);
       if (state.history.length > 50) state.history.shift();
     });
+    // Refresh modal and hud
+    window.IAG_UI.openInventoryModal("equipped");
     window.IAG_UI.renderAll();
   }
 
@@ -61,7 +63,7 @@ window.IAG_UI.handleUseItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
+    window.IAG_UI.openInventoryModal("backpack", window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }
 
@@ -76,6 +78,6 @@ window.IAG_UI.handleDropItem = function(itemName) {
     });
     
     // Refresh modal and hud
-    window.IAG_UI.openBackpackModal(window.IAG_UI.activeBackpackCategory);
+    window.IAG_UI.openInventoryModal("backpack", window.IAG_UI.activeBackpackCategory);
     window.IAG_UI.renderAll();
   }

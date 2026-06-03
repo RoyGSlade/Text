@@ -1485,4 +1485,228 @@ body {
   font-style: italic;
 }
 
+/* ----------------------------------------------------
+   Modernized Layout Enhancements: Status Header, Inventory & Quest Log
+   ---------------------------------------------------- */
+
+.top-status-bar {
+  background: hsla(220, 20%, 8%, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-neon);
+  box-shadow: var(--shadow-neon);
+  padding: 0.65rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-header);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  box-sizing: border-box;
+}
+
+.top-status-bar .status-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.top-status-bar .status-lbl {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+.top-status-bar .status-val {
+  color: var(--text-cyan);
+  font-weight: 600;
+  text-shadow: 0 0 5px hsla(180, 100%, 45%, 0.5);
+}
+
+.top-status-bar .map-quadrant-mini {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 10px);
+  gap: 3px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-neon);
+  padding: 3px;
+  border-radius: 4px;
+  align-items: center;
+}
+
+.top-status-bar .map-cell {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.top-status-bar .map-cell.active {
+  background: var(--text-cyan);
+  box-shadow: 0 0 5px var(--text-cyan);
+}
+
+/* Journal Trigger Sidebar Controls */
+.trigger-modal-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trigger-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px hsla(180, 100%, 45%, 0.3);
+}
+
+/* Unified Modal Tabs */
+.inventory-main-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-neon);
+  padding-bottom: 0.75rem;
+}
+
+.inventory-main-tabs .backpack-tab-btn {
+  font-family: var(--font-header);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  transition: all var(--transition-smooth);
+}
+
+.inventory-main-tabs .backpack-tab-btn.active {
+  color: var(--text-cyan);
+  background: hsla(180, 100%, 45%, 0.1);
+  border-color: var(--border-neon-active);
+  text-shadow: 0 0 5px var(--text-cyan);
+}
+
+.inventory-main-tabs .backpack-tab-btn:hover:not(.active) {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Collapsible Quests styling */
+.quest-detail-card {
+  background: hsla(220, 20%, 6%, 0.5);
+  border: 1px solid var(--border-neon);
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.quest-detail-card:hover {
+  border-color: var(--border-neon-active);
+  box-shadow: 0 0 10px hsla(180, 100%, 45%, 0.15);
+}
+
+.quest-detail-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: hsla(220, 20%, 8%, 0.9);
+  user-select: none;
+}
+
+.quest-detail-header h3 {
+  margin: 0;
+  font-family: var(--font-header);
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.quest-detail-header h3.completed {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.quest-detail-header .quest-status-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quest-status-badge.active {
+  background: hsla(180, 100%, 45%, 0.15);
+  color: var(--text-cyan);
+  border: 1px solid var(--text-cyan);
+}
+
+.quest-status-badge.completed {
+  background: hsla(140, 70%, 45%, 0.15);
+  color: var(--accent-success);
+  border: 1px solid var(--accent-success);
+}
+
+.quest-detail-body {
+  padding: 1rem;
+  border-top: 1px solid var(--border-neon);
+  display: none; /* Toggled dynamically */
+  background: hsla(220, 20%, 4%, 0.3);
+}
+
+.quest-detail-body.expanded {
+  display: block;
+}
+
+.quest-detail-desc {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+.quest-objectives-title {
+  font-family: var(--font-header);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-cyan);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.quest-objectives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.quest-objective-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.quest-objective-item.completed {
+  color: hsla(140, 50%, 60%, 0.6);
+}
+
+.quest-objective-item.completed span {
+  text-decoration: line-through;
+}
+
+.quest-objective-chk {
+  color: var(--text-cyan);
+  font-weight: bold;
+}
+
+.quest-objective-chk.completed {
+  color: var(--accent-success);
+}
+
 

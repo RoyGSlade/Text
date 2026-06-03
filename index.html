@@ -28,6 +28,11 @@
     </div>
   </header>
 
+  <!-- Top Time & Location Status Bar -->
+  <div class="top-status-bar" id="top-status-bar">
+    <!-- Populated dynamically via ui/core.js -->
+  </div>
+
   <!-- Core Dashboard Grid -->
   <main class="dashboard-grid">
     
@@ -123,55 +128,7 @@
           </div>
         </div>
       </section>
-
-      <section class="panel" id="inventory-panel">
-        <div class="panel-header">
-          <h2>Active Equipment</h2>
-        </div>
-        <div class="panel-body">
-          <div class="equipment-grid">
-            <div class="equip-slot-container" data-slot="head" title="Head Armor">
-              <span class="equip-slot-label">HEAD</span>
-              <div class="equip-slot-box" id="slot-head">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="neck" title="Neck Item">
-              <span class="equip-slot-label">NECK</span>
-              <div class="equip-slot-box" id="slot-neck">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="ears" title="Ears Item">
-              <span class="equip-slot-label">EARS</span>
-              <div class="equip-slot-box" id="slot-ears">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="torso" title="Torso Armor/Clothing">
-              <span class="equip-slot-label">TORSO</span>
-              <div class="equip-slot-box" id="slot-torso">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="wrists" title="Wrists Item">
-              <span class="equip-slot-label">WRISTS</span>
-              <div class="equip-slot-box" id="slot-wrists">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="hands" title="Hands Tool/Weapon">
-              <span class="equip-slot-label">HANDS</span>
-              <div class="equip-slot-box" id="slot-hands">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="pants" title="Legs/Pants Armor">
-              <span class="equip-slot-label">PANTS</span>
-              <div class="equip-slot-box" id="slot-pants">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="shoes" title="Feet/Shoes Armor">
-              <span class="equip-slot-label">SHOES</span>
-              <div class="equip-slot-box" id="slot-shoes">Empty</div>
-            </div>
-            <div class="equip-slot-container" data-slot="pockets" title="Pockets Weapon/Item">
-              <span class="equip-slot-label">POCKET</span>
-              <div class="equip-slot-box" id="slot-pockets">Empty</div>
-            </div>
-          </div>
-          <button class="sys-btn sys-btn-accent backpack-trigger-btn" id="backpack-trigger-btn" style="width: 100%; margin-top: 1rem; font-size: 0.85rem; padding: 0.6rem;">
-            🎒 Access Storage Backpack
-          </button>
-        </div>
-      </section>
+      <!-- Inventory panel moved to unified modal -->
     </aside>
 
     <!-- Character Creation Wizard (Visible during onboarding) -->
@@ -245,14 +202,17 @@
 
     <!-- Right Sidebar: Quests & System Seed configuration -->
     <aside class="sidebar-right">
-      <section class="panel" id="quests-panel">
+      <section class="panel" id="journal-panel">
         <div class="panel-header">
-          <h2>Active Directives</h2>
+          <h2>Systems Journal</h2>
         </div>
-        <div class="panel-body">
-          <div class="quest-list" id="quest-list">
-            <!-- Populated dynamically via ui.js -->
-          </div>
+        <div class="panel-body sidebar-btn-container" style="display: flex; flex-direction: column; gap: 1rem; padding: 1.25rem;">
+          <button class="sys-btn sys-btn-accent trigger-modal-btn" id="inventory-trigger-btn" style="width: 100%; padding: 0.8rem; font-size: 0.85rem; letter-spacing: 1px;">
+            🎒 Inventory & Gear
+          </button>
+          <button class="sys-btn sys-btn-accent trigger-modal-btn" id="quests-trigger-btn" style="width: 100%; padding: 0.8rem; font-size: 0.85rem; letter-spacing: 1px;">
+            📜 Directives Journal
+          </button>
         </div>
       </section>
 

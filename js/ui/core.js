@@ -112,7 +112,9 @@ window.IAG_UI.initCache = function() {
       charSkillsContainer: document.getElementById("char-skills-container"),
       charSkillsEmpty: document.getElementById("char-skills-empty"),
       
-      backpackTriggerBtn: document.getElementById("backpack-trigger-btn"),
+      topStatusBar: document.getElementById("top-status-bar"),
+      inventoryTriggerBtn: document.getElementById("inventory-trigger-btn"),
+      questsTriggerBtn: document.getElementById("quests-trigger-btn"),
       gameModalOverlay: document.getElementById("game-modal-overlay"),
       modalCloseBtn: document.getElementById("modal-close-btn"),
       gameModalBody: document.getElementById("game-modal-body"),
@@ -161,6 +163,9 @@ window.IAG_UI.initCache = function() {
 window.IAG_UI.renderAll = function() {
     const state = window.IAG_STATE.get();
     if (!state) return;
+
+    // Render Time & Location Top Header
+    window.IAG_UI.renderTopStatusBar();
 
     // 0. Character Creation Wizard Gating
     if (window.IAG_UI.elements.characterCreationPanel) {
@@ -439,10 +444,17 @@ window.IAG_UI.bindEvents = function() {
       });
     }
 
-    // Backpack trigger popout modal binder
-    if (window.IAG_UI.elements.backpackTriggerBtn) {
-      window.IAG_UI.elements.backpackTriggerBtn.addEventListener("click", () => {
-        window.IAG_UI.openBackpackModal("all");
+    // Inventory & Gear modal trigger
+    if (window.IAG_UI.elements.inventoryTriggerBtn) {
+      window.IAG_UI.elements.inventoryTriggerBtn.addEventListener("click", () => {
+        window.IAG_UI.openInventoryModal("backpack", "all");
+      });
+    }
+
+    // Directives Journal modal trigger
+    if (window.IAG_UI.elements.questsTriggerBtn) {
+      window.IAG_UI.elements.questsTriggerBtn.addEventListener("click", () => {
+        window.IAG_UI.openQuestsModal();
       });
     }
 
@@ -470,6 +482,67 @@ window.IAG_UI.bindEvents = function() {
     });
   }
 
+window.IAG_UI.renderTopStatusBar = function() {
+  const container = document.getElementById("top-status-bar");
+  if (!container) return;
+
+  const state = window.IAG_STATE.get();
+  if (!state) return;
+
+  const seed = state.seed || "IA-000000";
+  const sceneId = state.sceneId || "arrival";
+  
+  const scene = window.IAG_STORY.getScene(sceneId);
+  const locationName = scene ? scene.title : "Marrow Station Outer Ring";
+
+  // Deterministically hash the sceneId to grid coordinates (0 to 2)
+  let sum = 0;
+  for (let i = 0; i < sceneId.length; i++) {
+    sum += sceneId.charCodeAt(i);
+  }
+  const gridX = sum % 3;
+  const gridY = (sum >> 2) % 3;
+
+  // Deterministically hash seed to get a sector descriptor
+  let seedSum = 0;
+  for (let i = 0; i < seed.length; i++) {
+    seedSum += seed.charCodeAt(i);
+  }
+  const sectors = ["Alpha", "Beta", "Gamma", "Epsilon", "Sigma", "Omega"];
+  const sectorName = sectors[seedSum % sectors.length];
+  const sectorNum = (seedSum * 7) % 99 + 1;
+  const quadrantLabel = `Quadrant ${sectorName}-${sectorNum} (Grid [${gridX}, ${gridY}])`;
+
+  // Draw 3x3 quadrant mini map
+  let mapHtml = `<div class="map-quadrant-mini" title="${quadrantLabel}">`;
+  for (let y = 0; y < 3; y++) {
+    for (let x = 0; x < 3; x++) {
+      const activeClass = (x === gridX && y === gridY) ? "active" : "";
+      mapHtml += `<div class="map-cell ${activeClass}"></div>`;
+    }
+  }
+  mapHtml += `</div>`;
+
+  const baseCycle = 3842.10;
+  const currentCycle = (baseCycle + (state.rngCounter || 0) * 0.15).toFixed(2);
+
+  container.innerHTML = `
+    <div class="status-item">
+      <span class="status-lbl">📍 Location:</span>
+      <span class="status-val">${locationName}</span>
+    </div>
+    <div class="status-item">
+      <span class="status-lbl">🌍 Spatial Sector:</span>
+      <span class="status-val" style="margin-right: 0.5rem;">${sectorName}-${sectorNum}</span>
+      ${mapHtml}
+    </div>
+    <div class="status-item">
+      <span class="status-lbl">⏳ System Cycle:</span>
+      <span class="status-val">${currentCycle}</span>
+    </div>
+  `;
+};
+
 window.IAG_DEV_SMOKE = {
   run() {
     const checks = [
@@ -487,7 +560,8 @@ window.IAG_DEV_SMOKE = {
       { name: "DOM #story-choices exists", pass: !!document.getElementById("story-choices") },
       { name: "DOM #action-logs exists", pass: !!document.getElementById("action-logs") },
       { name: "DOM #dev-last-skill-check exists", pass: !!document.getElementById("dev-last-skill-check") },
-      { name: "DOM #backpack-trigger-btn exists", pass: !!document.getElementById("backpack-trigger-btn") },
+      { name: "DOM #inventory-trigger-btn exists", pass: !!document.getElementById("inventory-trigger-btn") },
+      { name: "DOM #quests-trigger-btn exists", pass: !!document.getElementById("quests-trigger-btn") },
       { name: "DOM #game-modal-overlay exists", pass: !!document.getElementById("game-modal-overlay") }
     ];
 
